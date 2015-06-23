@@ -629,3 +629,9 @@ table.ptresults tr.ptresheader th, table.ptresults tr.ptresheader td {
 		width:280px;
 	}
 }
+
+.t3-footer {
+    border-top: 1px solid red;
+    color: #555555;
+    position: relative;
+}
