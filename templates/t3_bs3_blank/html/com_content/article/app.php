@@ -20,6 +20,9 @@ $user    = JFactory::getUser();
 $info    = $params->get('info_block_position', 0);
 JHtml::_('behavior.caption');
 ?>
+<div class="rp-file">
+    <a href="#">Give this report a name </a>
+</div>
 <div class="step-process">
     <span class="ico-step"></span>
     <ul>

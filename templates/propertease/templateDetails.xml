@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE install PUBLIC "-//Joomla! 3.3//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/3.3/template-install.dtd">
 <extension version="3.3" type="template" client="site">
-	<name>PropertEase Template</name>
+	<name>propertease</name>
 	<creationDate>28 January 2015</creationDate>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<version>1.0.0</version>
