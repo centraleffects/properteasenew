@@ -502,6 +502,9 @@ input[type="text"] {
 .reports {
     .article-header {
         h1 {
+            background:#87CB00;
+            color:#fff;
+            padding-left:10px;
             i {
                 background:url('@{t3-image-path}/ico-report.png') no-repeat top left;
                 border-right: 1px solid #92d50d;
@@ -1234,6 +1237,76 @@ input[type="text"] {
     }
 
 }
+/******************** connect *********************/
+.Connect #t3-mainbody #t3-content header h1 {  background: #87cb00;color:#fff; padding-left: 10px;}
+.Connect #t3-mainbody #t3-content header h1 i {
+    background: #87cb00 url("@{t3-image-path}/ico-pin.png") no-repeat scroll left center;
+    border-right: 1px solid #92d50d;
+    line-height: 43px;
+    margin-right: 10px;
+    padding-right: 25px;
+}
+/******************* get started ****************/
+.price-start {
+    margin-top:20px;
+    ul {
+        border:1px solid #fbcf4d;
+        width:100%;
+        padding:0;
+        margin:0;
+        float:left;
+        border-top-left-radius:6px;
+        border-top-right-radius:6px;
+        background:#fafafa;
+        li {
+            list-style:none;
+            width:50%;
+            font-size:35px;
+            color:#000;
+            float:left;
+            padding-top:30px;
+            text-align:center;
+            padding-bottom:20px;
+            &:first-child {
+                border-top-left-radius:6px;
+
+            }
+            &:nth-child(2) {
+                border-top-right-radius:6px;
+                background:#fff;
+                -webkit-box-shadow:inset 0 1px 5px 1px #d1d1d1;
+                box-shadow:inset 0 1px 5px 1px #d1d1d1;
+            }
+            .green {
+                font-size:19px;
+                color:#7ebc02;
+            }
+            p {
+                margin-bottom:0;
+            }
+            .award {
+                background:  url("@{t3-image-path}/ico-award.png") no-repeat scroll 85% top;
+            }
+        }
+    }
+    a {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        background-image: -moz-linear-gradient( 90deg, rgb(251,191,14) 0%, rgb(255,215,96) 100%);
+        background-image: -webkit-linear-gradient( 90deg, rgb(251,191,14) 0%, rgb(255,215,96) 100%);
+        background-image: -ms-linear-gradient( 90deg, rgb(251,191,14) 0%, rgb(255,215,96) 100%);
+        width: 100%;
+        height: 60px;
+        float:left;
+        font-size:18px;
+        color:#385400;
+        text-align:center;
+        line-height:60px;
+        &:hover {
+            text-decoration:none;
+        }
+    }
+}
 
 @media screen and (min-width: 768px) {
     .head-top::after {
@@ -1499,7 +1572,7 @@ input[type="text"] {
         }
     }
     .item-gr {
-        display:block !important;
+        display:block;
         font-size:18px;
         background:url('@{t3-image-path}/ico-arrow-right.png') no-repeat center bottom;
         padding-bottom:20px;
@@ -1630,6 +1703,13 @@ input[type="text"] {
         .t3-content {
             padding-top:0;
             margin-top:-30px;
+        }
+    }
+    /************ get started ************/
+    .left-get-started {
+        .block-left-started {
+        background:url('@{t3-image-path}/ico-arrow-up-white.png') no-repeat right center;
+        padding-right:70px;
         }
     }
 }
@@ -1777,9 +1857,6 @@ input[type="text"] {
                         }
                     }
                 }
-            }
-            .item-gr {
-                display:none;
             }
             #accordion {
                 font-family: 'Conv_Brandon_reg';
@@ -2217,7 +2294,8 @@ body {
     }#slider87 li img {
         display: none;
     }
-
+    .item-gr {display:none;}
+    .price .t3-content .article-content .block-price .block .plus {font-size: 15px;}
 }
 
 .slide-text {
@@ -2385,5 +2463,9 @@ body {
             }
         }
     }
+}
+@media screen and (max-width:360px) {
+    .resource .t3-content .article-content .ytb-help ul li a i {display:none;}
+    .resource .t3-content .article-content #accordion .panel-body ul.list li {font-size: 15px;}
 }
 
