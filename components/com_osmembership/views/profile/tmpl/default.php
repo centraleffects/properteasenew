@@ -84,7 +84,7 @@ $selectedState = '';
 				foreach ($fields as $field)
 			    {    	
 			    	echo $field->getControlGroup();    						    										
-			    }														
+			    }									
 			?>								
 			<div class="form-actions">
 				<input type="submit" class="btn btn-primary" value="<?php echo JText::_('OSM_UPDATE'); ?>"/>	
