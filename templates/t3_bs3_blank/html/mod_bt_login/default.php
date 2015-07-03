@@ -21,9 +21,14 @@ defined('_JEXEC') or die('Restricted access');
 		<?php if($type == 'logout') : ?>
 		<!-- Profile button -->
 		<span id="btl-panel-profile" class="btl-dropdown">
-			
 			<?php
-			echo JText::_("BTL_WELCOME").", ";
+			$avatar =  OSMembershipHelper::getAvatar(); 
+			 if($avatar){
+			 	?>
+			 	<img class="profile-avatar-h" src="<?php echo $avatar?>">
+			 	<?php
+			 }
+
 			if($params->get('name')) : {
 				echo $user->get('name');
 			} else : {
@@ -254,6 +259,6 @@ if(btlOpt.ALIGN == "center"){
 	BTLJ(".btl-panel").css('float',btlOpt.ALIGN);
 }
 BTLJ("input.btl-buttonsubmit,button.btl-buttonsubmit").css({"color":btlOpt.TEXT_COLOR,"background":btlOpt.BG_COLOR});
-BTLJ("#btl .btl-panel > span").css({"color":btlOpt.TEXT_COLOR,"background-color":btlOpt.BG_COLOR,"border":btlOpt.TEXT_COLOR});
+//BTLJ("#btl .btl-panel > span").css({"color":btlOpt.TEXT_COLOR,"background-color":btlOpt.BG_COLOR,"border":btlOpt.TEXT_COLOR});
 /*]]>*/
 </script>

@@ -20,6 +20,18 @@
 h1.osm-page-title {
     margin: 0 0 10px 0 !important;
 }
+.profile-avatar-h{
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    float: left;
+    border-radius: 20px;
+    margin-right: 5px;
+    border:2px solid #ddd;
+}
+#btl .btl-panel > #btl-panel-profile{
+    text-transform: capitalize;
+}
 .osm-container .osm-item-wrapper
 {
     margin-bottom: 20px;

@@ -66,7 +66,7 @@
 	
 }
 #btl .btl-panel > #btl-panel-profile{
-	background:url(../images/btl-panel-bg.png) top right no-repeat;
+	background:url(../images/btl-panel-bg-grey.png) top right no-repeat;
 	padding-right:30px;
 }
 button::-moz-focus-inner {
@@ -82,8 +82,8 @@ padding:0; border: none;
 	width: auto;	
 }
 #btl .btl-panel > span{
-	margin:2px 0px;
-	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+	margin: 3px 0px;
+	z-index: 9999;
 }
 #btl .btl-panel > span,button.btl-buttonsubmit,input.btl-buttonsubmit{
 	border-radius:3px;
