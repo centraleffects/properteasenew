@@ -23,6 +23,7 @@ $selectedState = '';
 		<li class="active"><a href="#profile-page" data-toggle="tab"><?php echo JText::_('OSM_EDIT_PROFILE');?></a></li>
 		<li><a href="#my-subscriptions-page" data-toggle="tab"><?php echo JText::_('OSM_MY_SUBSCRIPTIONS');?></a></li>
 		<li><a href="#subscription-history-page" data-toggle="tab"><?php echo JText::_('OSM_SUBSCRIPTION_HISTORY');?></a></li>
+		<li><a href="#upgrade-page" data-toggle="tab"><?php echo JText::_('OSM_UPGRADE_PROFILE_BUTTON');?></a></li>	
 		<?php 
 			if (count($this->plugins)) 
 			{
@@ -36,7 +37,8 @@ $selectedState = '';
 				<?php							
 				}
 			}
-		?>							
+		?>
+								
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane active" id="profile-page">
@@ -268,7 +270,122 @@ $selectedState = '';
 					<?php			
 				?>					
 			</table>			
-		</div>					
+		</div>	
+		<div class="tab-pane" id="upgrade-page">
+			<?php 
+				if ($this->canRenew)
+				{
+				?>
+				<form action="<?php echo JText::_('index.php?option=com_osmembership&task=process_renew_membership&Itemid='.$this->Itemid); ?>" method="post" name="osm_form_renew" id="osm_form_renew" autocomplete="off" class="form form-horizontal">
+					<h2 class="osm-form-heading"><?php echo JText::_('OSM_RENEW_MEMBERSHIP'); ?></h2>			
+					<ul class="osm-renew-options">
+						<?php 
+							$renewOptionCount = 0;			
+							foreach ($this->planIds as $planId)
+							{
+								$sql = 'SELECT * FROM #__osmembership_plans WHERE id='.$planId;
+								$db->setQuery($sql);
+								$plan = $db->loadObject();
+								if ($plan->recurring_subscription || !$plan->enable_renewal)
+								{
+									continue;
+								}				
+								$sql = 'SELECT * FROM #__osmembership_renewrates WHERE plan_id='.$planId;
+								$db->setQuery($sql);
+								$renewOptions = $db->loadObjectList();									
+								if (count($renewOptions))
+								{										
+									foreach ($renewOptions as $renewOption)
+									{
+										$renewOptionCount++;
+									?>
+										<li class="osm-renew-option">
+											<input type="radio" class="validate[required] inputbox" id="renew_option_id_<?php echo $renewOptionCount; ?>" name="renew_option_id" value="<?php echo $planId.'|'.$renewOption->id; ?>" />												
+											<label for="renew_option_id_<?php echo $renewOptionCount; ?>"><?php JText::printf('OSM_RENEW_OPTION_TEXT', $plan->title, $renewOption->number_days.' '. JText::_('OSM_DAYS'), OSMembershipHelper::formatCurrency($renewOption->price, $this->config)); ?></label>
+										</li>
+									<?php	
+									}	
+								}
+								else 
+								{
+									$renewOptionCount++;
+									$length = $plan->subscription_length;
+									switch ($plan->subscription_length_unit) {
+										case 'D':
+											$text = $length > 1 ? JText::_('OSM_DAYS') : JText::_('OSM_DAY');
+											break ;
+										case 'W' :
+											$text = $length > 1 ? JText::_('OSM_WEEKS') : JText::_('OSM_WEEK');
+											break ;
+										case 'M' :
+											$text = $length > 1 ? JText::_('OSM_MONTHS') : JText::_('OSM_MONTH');
+											break ;
+										case 'Y' :
+											$text = $length > 1 ? JText::_('OSM_YEARS') : JText::_('OSM_YEAR');
+											break ;
+									}					
+								?>
+									<li class="osm-renew-option">
+										<input type="radio" class="validate[required] inputbox" id="renew_option_id_<?php echo $renewOptionCount; ?>" name="renew_option_id" value="<?php echo $planId;?>" />												
+										<label for="renew_option_id_<?php echo $renewOptionCount; ?>"><?php JText::printf('OSM_RENEW_OPTION_TEXT', $plan->title, $length.' '.$text, OSMembershipHelper::formatCurrency($plan->price, $this->config)); ?></label>
+									</li>
+								<?php	
+								}
+							}
+						?>	
+					</ul>						
+					<div class="form-actions">
+						<input type="submit" class="btn btn-primary" value="<?php echo JText::_('OSM_PROCESS_RENEW'); ?>"/>
+					</div>
+					<input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
+				</form>
+				<?php	
+				}
+				?>
+				<form action="<?php echo JRoute::_('index.php?option=com_osmembership&task=process_upgrade_membership&Itemid='.$this->Itemid); ?>" method="post" name="osm_form_update_membership" id="osm_form_update_membership" autocomplete="off" class="form form-horizontal">
+					<?php
+						//We should only allow upgrading from active membership		
+						$sql = 'SELECT DISTINCT plan_id FROM #__osmembership_subscribers WHERE profile_id='.$this->item->id.' AND published=1';
+						$db->setQuery($sql);
+						$planIds = $db->loadColumn();
+						if (!count($planIds))
+						{
+							$planIds = array(0);
+						}
+						$sql = 'SELECT * FROM #__osmembership_upgraderules WHERE from_plan_id IN ('.implode(',', $planIds).') ORDER BY from_plan_id';
+						$db->setQuery($sql);
+						$upgradeRules = $db->loadObjectList();
+						if (count($upgradeRules))
+						{
+							$sql = 'SELECT * FROM #__osmembership_plans WHERE published = 1';
+							$db->setQuery($sql);
+							$plans = $db->loadObjectList('id');
+						?>
+						<h2 class="osm-form-heading"><?php echo JText::_('OSM_UPGRADE_MEMBERSHIP'); ?></h2>						
+							<ul class="osm-upgrade-options">
+								<?php 
+									$upgradeOptionCount = 0;
+									foreach ($upgradeRules as $rule)
+									{
+										$upgradeOptionCount++;
+									?>
+										<li class="osm-upgrade-option">
+											<input type="radio" class="validate[required]" id="upgrade_option_id_<?php echo $upgradeOptionCount; ?>" name="upgrade_option_id" value="<?php echo $rule->id; ?>" />												
+											<label for="upgrade_option_id_<?php echo $upgradeOptionCount; ?>"><?php JText::printf('OSM_UPGRADE_OPTION_TEXT', $plans[$rule->from_plan_id]->title, $plans[$rule->to_plan_id]->title, OSMembershipHelper::formatCurrency($rule->price, $this->config)); ?></label>
+										</li>
+									<?php											
+									}
+								?>	
+							</ul>												
+							<div class="form-actions">
+								<input type="submit" class="btn btn-primary" value="<?php echo JText::_('OSM_PROCESS_UPGRADE'); ?>"/>
+							</div>							
+						<?php	
+						}
+					?>
+					<input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
+				</form>
+		</div>				
 		<?php 
 			if (count($this->plugins)) 
 			{
@@ -296,119 +413,7 @@ $selectedState = '';
 	<input type="hidden" name="Itemid" value="<?php echo $this->Itemid; ?>" />			
 	<?php echo JHtml::_( 'form.token' ); ?>				
 </form>
-<?php 
-if ($this->canRenew)
-{
-?>
-<form action="<?php echo JText::_('index.php?option=com_osmembership&task=process_renew_membership&Itemid='.$this->Itemid); ?>" method="post" name="osm_form_renew" id="osm_form_renew" autocomplete="off" class="form form-horizontal">
-	<h2 class="osm-form-heading"><?php echo JText::_('OSM_RENEW_MEMBERSHIP'); ?></h2>			
-	<ul class="osm-renew-options">
-		<?php 
-			$renewOptionCount = 0;			
-			foreach ($this->planIds as $planId)
-			{
-				$sql = 'SELECT * FROM #__osmembership_plans WHERE id='.$planId;
-				$db->setQuery($sql);
-				$plan = $db->loadObject();
-				if ($plan->recurring_subscription || !$plan->enable_renewal)
-				{
-					continue;
-				}				
-				$sql = 'SELECT * FROM #__osmembership_renewrates WHERE plan_id='.$planId;
-				$db->setQuery($sql);
-				$renewOptions = $db->loadObjectList();									
-				if (count($renewOptions))
-				{										
-					foreach ($renewOptions as $renewOption)
-					{
-						$renewOptionCount++;
-					?>
-						<li class="osm-renew-option">
-							<input type="radio" class="validate[required] inputbox" id="renew_option_id_<?php echo $renewOptionCount; ?>" name="renew_option_id" value="<?php echo $planId.'|'.$renewOption->id; ?>" />												
-							<label for="renew_option_id_<?php echo $renewOptionCount; ?>"><?php JText::printf('OSM_RENEW_OPTION_TEXT', $plan->title, $renewOption->number_days.' '. JText::_('OSM_DAYS'), OSMembershipHelper::formatCurrency($renewOption->price, $this->config)); ?></label>
-						</li>
-					<?php	
-					}	
-				}
-				else 
-				{
-					$renewOptionCount++;
-					$length = $plan->subscription_length;
-					switch ($plan->subscription_length_unit) {
-						case 'D':
-							$text = $length > 1 ? JText::_('OSM_DAYS') : JText::_('OSM_DAY');
-							break ;
-						case 'W' :
-							$text = $length > 1 ? JText::_('OSM_WEEKS') : JText::_('OSM_WEEK');
-							break ;
-						case 'M' :
-							$text = $length > 1 ? JText::_('OSM_MONTHS') : JText::_('OSM_MONTH');
-							break ;
-						case 'Y' :
-							$text = $length > 1 ? JText::_('OSM_YEARS') : JText::_('OSM_YEAR');
-							break ;
-					}					
-				?>
-					<li class="osm-renew-option">
-						<input type="radio" class="validate[required] inputbox" id="renew_option_id_<?php echo $renewOptionCount; ?>" name="renew_option_id" value="<?php echo $planId;?>" />												
-						<label for="renew_option_id_<?php echo $renewOptionCount; ?>"><?php JText::printf('OSM_RENEW_OPTION_TEXT', $plan->title, $length.' '.$text, OSMembershipHelper::formatCurrency($plan->price, $this->config)); ?></label>
-					</li>
-				<?php	
-				}
-			}
-		?>	
-	</ul>						
-	<div class="form-actions">
-		<input type="submit" class="btn btn-primary" value="<?php echo JText::_('OSM_PROCESS_RENEW'); ?>"/>
-	</div>
-	<input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
-</form>
-<?php	
-}
-?>
-<form action="<?php echo JRoute::_('index.php?option=com_osmembership&task=process_upgrade_membership&Itemid='.$this->Itemid); ?>" method="post" name="osm_form_update_membership" id="osm_form_update_membership" autocomplete="off" class="form form-horizontal">
-	<?php
-		//We should only allow upgrading from active membership		
-		$sql = 'SELECT DISTINCT plan_id FROM #__osmembership_subscribers WHERE profile_id='.$this->item->id.' AND published=1';
-		$db->setQuery($sql);
-		$planIds = $db->loadColumn();
-		if (!count($planIds))
-		{
-			$planIds = array(0);
-		}
-		$sql = 'SELECT * FROM #__osmembership_upgraderules WHERE from_plan_id IN ('.implode(',', $planIds).') ORDER BY from_plan_id';
-		$db->setQuery($sql);
-		$upgradeRules = $db->loadObjectList();
-		if (count($upgradeRules))
-		{
-			$sql = 'SELECT * FROM #__osmembership_plans WHERE published = 1';
-			$db->setQuery($sql);
-			$plans = $db->loadObjectList('id');
-		?>
-		<h2 class="osm-form-heading"><?php echo JText::_('OSM_UPGRADE_MEMBERSHIP'); ?></h2>						
-			<ul class="osm-upgrade-options">
-				<?php 
-					$upgradeOptionCount = 0;
-					foreach ($upgradeRules as $rule)
-					{
-						$upgradeOptionCount++;
-					?>
-						<li class="osm-upgrade-option">
-							<input type="radio" class="validate[required]" id="upgrade_option_id_<?php echo $upgradeOptionCount; ?>" name="upgrade_option_id" value="<?php echo $rule->id; ?>" />												
-							<label for="upgrade_option_id_<?php echo $upgradeOptionCount; ?>"><?php JText::printf('OSM_UPGRADE_OPTION_TEXT', $plans[$rule->from_plan_id]->title, $plans[$rule->to_plan_id]->title, OSMembershipHelper::formatCurrency($rule->price, $this->config)); ?></label>
-						</li>
-					<?php											
-					}
-				?>	
-			</ul>												
-			<div class="form-actions">
-				<input type="submit" class="btn btn-primary" value="<?php echo JText::_('OSM_PROCESS_UPGRADE'); ?>"/>
-			</div>							
-		<?php	
-		}
-	?>
-	<input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
-</form>
+
 <script type="text/javascript">
 	OSM.jQuery(function($){
 		$(document).ready(function(){
