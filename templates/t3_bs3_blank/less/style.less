@@ -84,9 +84,21 @@ h4, .h4, h5, .h5, h6, .h6 {
     font-weight: 300;
 }
 
+a:hover{
+    text-decoration: none;
+}
+
 .t3-header {
     padding-top: @t3-global-padding;
     padding-bottom: @t3-global-padding;
+
+    .nav-pills{
+             li{
+                a{
+                    text-transform: capitalize;
+                 }
+             } 
+        }
 }
 
 
@@ -193,7 +205,17 @@ h4, .h4, h5, .h5, h6, .h6 {
 
 }
 
-
+#btl-panel-login-y{
+  background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #8ccf07 0%, #83c304 47%, #7bb801 100%) repeat scroll 0 0 !important;
+    border: 1px solid #7cba01 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    font-size: 11px;
+    height: auto !important;
+    margin: 2px 0;
+    padding: 0 8px !important;
+    text-transform: uppercase;
+}
 
 // ---------------------------------------------------------
 // SPOTLIGHTS
@@ -788,6 +810,7 @@ input[type="text"] {
             width:100%;
             display:block;
             height:60px;
+            text-transform: uppercase;
             border-bottom-left-radius:6px;
             border-bottom-right-radius:6px;
             line-height:60px;
@@ -898,6 +921,7 @@ input[type="text"] {
                         width: 113%;
                         font-size:18px;
                         color:#fff;
+                        text-transform:uppercase;
                     }
                     .last-group {
                         margin-bottom:0;
@@ -1095,6 +1119,7 @@ input[type="text"] {
                         height: 59px;
                         margin-left: -20px;
                         width: 113.2%;
+                        text-transform:uppercase;
                         font-size:18px;
                         color:#fff;
                     }

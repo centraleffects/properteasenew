@@ -41,7 +41,7 @@ defined('_JEXEC') or die('Restricted access');
 			<?php
 			if($params->get('enabled_login_tab', 1)){
 			?>
-			<span id="btl-panel-login" class="<?php echo $effect;?>"><?php echo JText::_('JLOGIN');?></span>
+			<span id="btl-panel-login-y" onclick="jQuery('#login-popup').modal('show');setTimeout(function(){jQuery('.modal-backdrop, .simplemodal-container .modalCloseImg:not(\'.second\')').remove();},900);" class="<?php //echo $effect;?>btn-login" data-toggle="modal" data-target="#login-popup"><?php echo JText::_('JLOGIN');?></span>
 			<?php }?>
 			<!-- Registration button -->
 			<?php
@@ -82,64 +82,48 @@ defined('_JEXEC') or die('Restricted access');
 		</div>
 		<?php }else{ ?>	
 		<!-- Form login -->	
-		<div id="btl-content-login" class="btl-content-block">
+		<div id="btl-content-login-y" class="btl-content-block">
 			<?php if(JPluginHelper::isEnabled('authentication', 'openid')) : ?>
 				<?php JHTML::_('script', 'openid.js'); ?>
 			<?php endif; ?>
 			
 			<!-- if not integrated any component -->
 			<?php if($integrated_com==''|| $moduleRender == ''){?>
-			<form name="btl-formlogin" class="btl-formlogin" action="<?php echo JRoute::_('index.php', true, $params->get('usesecure')); ?>" method="post">
-				<div id="btl-login-in-process"></div>	
-				<h3><?php echo JText::_('LOGIN_TO_YOUR_ACCOUNT') ?></h3>
-				<?php if ($enabledRegistration) : ?>
-					<div id="register-link">
-						<?php echo sprintf(JText::_('DONT_HAVE_AN_ACCOUNT_YET'),'<a href="'.JRoute::_('index.php?option=com_users&view=registration').'">','</a>');?>
-					</div>
-				<?php else: ?>
-					<div class="spacer"></div>
-				<?php endif; ?>
+				<div id="login-popup" class="modal fade" tabindex="-1">
+				<div class="modal-dialog">
+				<div class="modal-content">
+					<a title="Close" class="modalCloseImg second simplemodal-close"></a>
+				<div class="modal-header">
+				<div class="normal-logo"> </div>
+				<button class="btn btn-register">Don`t have an <b>account?</b></button></div>
+				<div class="modal-body">
+				<h3><span class="green blk">Log in</span> to your account</h3>
+				<form>
 				<div class="btl-error" id="btl-login-error"></div>
-				<div class="btl-field">
-					<div class="btl-input">
-                                            <input id="btl-input-username" type="text" name="username" placeholder="User name" 	/>
-					</div>
-				</div>
-				<div class="btl-field">
-					<div class="btl-input">
-						<input id="btl-input-password" type="password" name="password" alt="password" placeholder="Password" />
-					</div>
-				</div>
-				<div class="clear"></div>
-				<?php if (JPluginHelper::isEnabled('system', 'remember')) : ?>
-				<div class="btl-field">				
-					
-					<div class="btl-input" id="btl-input-remember">
-						<input id="btl-checkbox-remember"  type="checkbox" name="remember"
+				<div class="form-group"><input class="form-control" id="btl-input-username" type="text" name="username"placeholder=" Enter your Username " /></div>
+				<div class="form-group"><input class="form-control" id="btl-input-password" type="password" name="password"  placeholder="<?php echo JText::_('MOD_BT_LOGIN_PASSWORD') ?>" /></div>
+				<div class="form-group">
+				<div class="radio"><label> <input id="btl-checkbox-remember"  type="checkbox" name="remember"
 							value="yes" />
-							<?php echo JText::_('BT_REMEMBER_ME'); ?>
-					</div>	
+							<?php echo JText::_('BT_REMEMBER_ME'); ?> </label><!-- <a href="#">Forgot?</a> -->
+					<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
+					<?php echo JText::_('BT_FORGOT_YOUR_PASSWORD'); ?></a>
 				</div>
-				<div class="clear"></div>
-				<?php endif; ?>
-				<div class="btl-buttonsubmit">
-					<input type="submit" name="Submit" class="btl-buttonsubmit" onclick="return loginAjax()" value="<?php echo JText::_('JLOGIN') ?>" /> 
+				</div>
+				<div class="form-group">
+				<p>By logging in, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Use.</a></p>
+				</div>
+				<div class="form-group last-group">
+					<button class="btn btn-sbm" type="submit" onclick="return loginAjax()" ><?php echo JText::_('JLOGIN') ?></button>
 					<input type="hidden" name="option" value="com_users" />
 					<input type="hidden" name="task" value="user.login" /> 
 					<input type="hidden" name="return" id="btl-return"	value="<?php echo $return; ?>" />
 					<?php echo JHtml::_('form.token');?>
 				</div>
-			</form>	
-			<ul id ="bt_ul">
-				<li>
-					<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
-					<?php echo JText::_('BT_FORGOT_YOUR_PASSWORD'); ?></a>
-				</li>
-				<li>
-					<a href="<?php echo JRoute::_('index.php?option=com_users&view=remind'); ?>">
-					<?php echo JText::_('BT_FORGOT_YOUR_USERNAME'); ?></a>
-				</li>				
-			</ul>
+				</form></div>
+				</div>
+				</div>
+				</div>
 			
 		<!-- if integrated with one component -->
 			<?php }else{ ?>

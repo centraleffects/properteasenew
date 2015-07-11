@@ -18,7 +18,7 @@ $selectedState = '';
 </script>
 <div id="osm-profile-page" class="row-fluid osm-container">
 <h1 class="osm_title"><?php echo JText::_('OSM_USER_PROFILE'); ?></h1>
-<form action="index.php" method="post" name="osm_form" id="osm_form" autocomplete="off" enctype="multipart/form-data" class="form form-horizontal">
+<form action="" method="post" name="osm_form" id="osm_form" autocomplete="off" enctype="multipart/form-data" class="form form-horizontal">
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#profile-page" data-toggle="tab"><?php echo JText::_('OSM_EDIT_PROFILE');?></a></li>
 		<li><a href="#my-subscriptions-page" data-toggle="tab"><?php echo JText::_('OSM_MY_SUBSCRIPTIONS');?></a></li>
