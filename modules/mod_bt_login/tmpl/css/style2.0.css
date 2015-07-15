@@ -306,3 +306,57 @@ div.btl-buttonsubmit{
     padding: 0 8px !important;
     text-transform: uppercase;
 }*/
+
+
+
+
+/* =========================
+Custom CSS Here : Added by fred
+   =========================*/
+.container{ max-width:1170px !important; }
+span.reg{ font-family:"Conv_Brandon_reg","Helvetica Neue",Helvetica,Arial,sans-serif; }
+input.form-control {
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 20px;
+    height: 40px;
+    line-height: 20px;
+    padding: 10px 10px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus{
+	background-color: #fff;
+  border-color: rgba(232, 232, 232, 0.8);
+  outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(232, 232, 232, 0.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(232, 232, 232, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(232, 232, 232, 0.6);
+}
+#column-content {
+  display: inline-block;
+}
+img {
+  vertical-align: middle;
+}
+input.form-control.username{
+	
+	background: url("../images/user.png");
+    background-repeat: no-repeat;
+	background-position: right;
+	
+}
+input.form-control.password{
+	
+	background: url("../images/padlock.png");
+    background-repeat: no-repeat;
+	background-position: right;
+	
+}

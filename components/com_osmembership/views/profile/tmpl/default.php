@@ -14,83 +14,104 @@ OSMembershipHelperJquery::validateForm();
 $selectedState = '';
 ?>
 <style>
-input.form-control {
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-    color: #555;
-    display: block;
-    font-size: 14px;
-    height: 34px;
-    line-height: 1.42857;
-    padding: 6px 12px;
-    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-    width: 100%;
-}
-/* enable absolute positioning */
-.inner-addon { 
-    position: relative; 
-}
-
-/* style icon */
-.inner-addon .glyphicon {
-  position: absolute;
-  padding: 10px;
-  pointer-events: none;
-}
-
-/* align icon */
-.left-addon .glyphicon  { left:  0px;}
-.right-addon .glyphicon { right: 0px;}
-
-/* add padding  */
-.left-addon input  { padding-left:  30px; }
-.right-addon input { padding-right: 30px; }
 
 </style>
 <script type="text/javascript">
 	var siteUrl = '<?php echo OSMembershipHelper::getSiteUrl();  ?>';
 </script>
-<section>
-<!--Bootstrap 3 Scaffolding-->
-  <div class="page-header">
-    <h1><span class="med">Account</span> Basics</h1>
-    <p class="lead">Bootstrap 3 scaffolding has changed for improved display on mobile devices</p>
-  </div>
-  
-<div class="container">
-<div class="row">
-	<div class="col-lg-4">
-        <div class="inner-addon right-addon">
-            <i class="glyphicon glyphicon-user"></i>
-            <input type="text" class="form-control" />
-        </div>
-    </div>
-</div>
-<div class="row">
-  	<div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
-	<div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
-	<div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
-</div>
-<div class="row">
-	<div class="col-lg-6 col-sm-6"><div class="well"><p>col-lg-6</p></div></div>
-	<div class="col-lg-6 col-sm-6"><div class="well"><p>col-lg-6</p></div></div>
-</div>
-<div class="row">
-	<div class="col-lg-9 col-sm-6"><div class="well">col-lg-9 / col-sm-6</div></div>
-	<div class="col-lg-3 col-sm-6"><div class="well">col-lg-3 / col-sm-6</div></div>
-</div>  
-</div>
-</section>
+
 <div id="osm-profile-page" class="row-fluid osm-container">
 
-<div class="row">
-</div>
-
+<section>
 <h1 class="osm_title"><?php echo JText::_('OSM_USER_PROFILE'); ?></h1>
 <form action="index.php" method="post" name="osm_form" id="osm_form" autocomplete="off" enctype="multipart/form-data" class="form form-horizontal">
+<!--Bootstrap 3 Scaffolding-->
+  <div class="page-header">
+    <h1><span class="reg">Account</span> Basics</h1>
+    <!--<p class="lead">Bootstrap 3 scaffolding has changed for improved display on mobile devices</p>-->
+  </div>
+  
+    <div class="container">
+    	<?php 
+		if ($this->item->user_id) 
+		{
+		?>
+        <div class="row">
+            <div class="col-lg-3">
+            	
+                    
+                        <div class="inner-addon right-addon">
+                        	<p>
+                            <input type="text" class="form-control username" placeholder="Enter your Username" value="<?php echo $this->item->username; ?>" disabled="disabled" />
+                            </p>
+                        </div>
+                    	<div class="inner-addon right-addon">
+                        	<p>
+                            <input type="password" id="password" name="password"  class="form-control password" placeholder="Password"  />
+                            </p>
+                        </div>
+                    
+                
+            </div>
+            <div class="col-lg-1">
+            		<div id="column-content">
+
+                      	<img src="../images/user.png">
+                      
+                    </div>
+            </div>
+            <div class="col-lg-3">
+            	
+                    
+                        <div class="inner-addon right-addon">
+                        	<p>
+                            <input type="text" class="form-control username" placeholder="Enter your Username" value="<?php echo $this->item->username; ?>" disabled="disabled" />
+                            </p>
+                        </div>
+                    
+                    
+                    <p>
+                        <div class="inner-addon right-addon">
+                            <input type="password" id="password" name="password"  class="form-control password" placeholder="Password"  />
+                        </div>
+                    </p>
+                
+            </div>
+            <div class="col-lg-1">
+            		<p>
+                    
+                    </p>
+            </div>
+            <div class="col-lg-4">
+            		<p>
+                    
+                    </p>
+            </div>
+        </div>
+        <?php	
+		} #end of user_id if condition
+		?>
+        
+        <div class="row">
+            <div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
+            <div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
+            <div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-6 col-sm-6"><div class="well"><p>col-lg-6</p></div></div>
+            <div class="col-lg-6 col-sm-6"><div class="well"><p>col-lg-6</p></div></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-9 col-sm-6"><div class="well">col-lg-9 / col-sm-6</div></div>
+            <div class="col-lg-3 col-sm-6"><div class="well">col-lg-3 / col-sm-6</div></div>
+        </div>  
+        
+    </div>
+</section>
+
+
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#profile-page" data-toggle="tab"><?php echo JText::_('OSM_EDIT_PROFILE');?></a></li>
 		<li><a href="#my-subscriptions-page" data-toggle="tab"><?php echo JText::_('OSM_MY_SUBSCRIPTIONS');?></a></li>
@@ -115,7 +136,7 @@ input.form-control {
 	<div class="tab-content">
 		<div class="tab-pane active" id="profile-page">
 			<h2 class="osm-form-heading"><?php echo JText::_('OSM_PROFILE_DATA'); ?></h2>											
-			<?php 
+				<?php 
 				if ($this->item->user_id) 
 				{
 				?>
@@ -151,12 +172,18 @@ input.form-control {
 				<?php	
 				}				
 				$fields = $this->form->getFields();
+				
 				if (isset($fields['state']))
 				{
 					$selectedState = $fields['state']->value;
 				}
 				foreach ($fields as $field)
-			    {    	
+			    {  
+				
+				echo'<pre>';
+				print_r($field);
+				echo'</pre>';
+				  	
 			    	echo $field->getControlGroup();    						    										
 			    }									
 			?>								
