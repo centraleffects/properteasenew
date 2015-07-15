@@ -13,10 +13,82 @@ $db = JFactory::getDbo();
 OSMembershipHelperJquery::validateForm();
 $selectedState = '';
 ?>
+<style>
+input.form-control {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+</style>
 <script type="text/javascript">
 	var siteUrl = '<?php echo OSMembershipHelper::getSiteUrl();  ?>';
 </script>
+<section>
+<!--Bootstrap 3 Scaffolding-->
+  <div class="page-header">
+    <h1><span class="med">Account</span> Basics</h1>
+    <p class="lead">Bootstrap 3 scaffolding has changed for improved display on mobile devices</p>
+  </div>
+  
+<div class="container">
+<div class="row">
+	<div class="col-lg-4">
+        <div class="inner-addon right-addon">
+            <i class="glyphicon glyphicon-user"></i>
+            <input type="text" class="form-control" />
+        </div>
+    </div>
+</div>
+<div class="row">
+  	<div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
+	<div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
+	<div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
+</div>
+<div class="row">
+	<div class="col-lg-6 col-sm-6"><div class="well"><p>col-lg-6</p></div></div>
+	<div class="col-lg-6 col-sm-6"><div class="well"><p>col-lg-6</p></div></div>
+</div>
+<div class="row">
+	<div class="col-lg-9 col-sm-6"><div class="well">col-lg-9 / col-sm-6</div></div>
+	<div class="col-lg-3 col-sm-6"><div class="well">col-lg-3 / col-sm-6</div></div>
+</div>  
+</div>
+</section>
 <div id="osm-profile-page" class="row-fluid osm-container">
+
+<div class="row">
+</div>
+
 <h1 class="osm_title"><?php echo JText::_('OSM_USER_PROFILE'); ?></h1>
 <form action="" method="post" name="osm_form" id="osm_form" autocomplete="off" enctype="multipart/form-data" class="form form-horizontal">
 	<ul class="nav nav-tabs">
