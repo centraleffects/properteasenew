@@ -169,6 +169,24 @@ a:hover {
   padding: 0 8px !important;
   text-transform: uppercase;
 }
+.profile-avatar-h {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  float: left;
+  border-radius: 20px;
+  margin-right: 5px;
+  border: 2px solid #ddd;
+}
+#btl .btl-panel > #btl-panel-profile {
+  text-transform: capitalize;
+}
+#btl .btl-panel > span {
+  height: 30px !important;
+}
+.t3-header .nav-pills li a {
+  text-transform: capitalize;
+}
 .t3-sl {
   padding-bottom: 40px;
   padding-top: 40px;
@@ -336,11 +354,11 @@ input[type="text"] {
   font-size: 17px;
 }
 
-.price .t3-content .article-content .block-price {
+.t3-content .article-content .block-price {
   width: 100%;
   font-size: 19px;
 }
-.price .t3-content .article-content .block-price .block {
+.t3-content .article-content .block-price .block {
   border: 1px solid #ececec;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -351,22 +369,22 @@ input[type="text"] {
   text-align: center;
   width: 100%;
 }
-.price .t3-content .article-content .block-price .block h3 {
+ .t3-content .article-content .block-price .block h3 {
   font-family: "Conv_Brandon_blk";
   font-size: 28px;
   color: #7ab700;
   margin-bottom: 30px;
 }
-.price .t3-content .article-content .block-price .block .pay-month {
+.t3-content .article-content .block-price .block .pay-month {
   font-size: 44px;
   padding-top: 30px;
   color: #7ab700;
 }
-.price .t3-content .article-content .block-price .block .pay-month i {
+ .t3-content .article-content .block-price .block .pay-month i {
   font-size: 20px;
   font-style: normal;
 }
-.price .t3-content .article-content .block-price .block .plus {
+ .t3-content .article-content .block-price .block .plus {
   background: #f1f1f1;
   border-top: 1px solid #e4e4e4;
   border-bottom: 1px solid #e4e4e4;
@@ -376,51 +394,51 @@ input[type="text"] {
   padding-left: 15px;
   font-size: 15px;
 }
-.price .t3-content .article-content .block-price .block .through-line {
+ .t3-content .article-content .block-price .block .through-line {
   text-decoration: line-through;
   color: #d9d9d9;
 }
-.price .t3-content .article-content .block-price .block .arrow-down {
+ .t3-content .article-content .block-price .block .arrow-down {
   background: url('../../templates/t3_bs3_blank/images/ico-arrow-down-yellow.png') no-repeat bottom right;
   text-align: center;
 }
-.price .t3-content .article-content .block-price .standard {
+ .t3-content .article-content .block-price .standard {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.price .t3-content .article-content .block-price .standard h3 {
+ .t3-content .article-content .block-price .standard h3 {
   color: #009bb7;
 }
-.price .t3-content .article-content .block-price .standard .pay-month {
+ .t3-content .article-content .block-price .standard .pay-month {
   color: #009bb7;
 }
-.price .t3-content .article-content .block-price .standard .plus {
+ .t3-content .article-content .block-price .standard .plus {
   background: url('../../templates/t3_bs3_blank/images/ico-plus-green.png') no-repeat 20px 10px;
   padding-left: 15px;
   margin-bottom: 0;
 }
-.price .t3-content .article-content .block-price .standard .none-border {
+ .t3-content .article-content .block-price .standard .none-border {
   border: none;
 }
-.price .t3-content .article-content .block-price .corporate {
+ .t3-content .article-content .block-price .corporate {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.price .t3-content .article-content .block-price .corporate h3 {
+ .t3-content .article-content .block-price .corporate h3 {
   color: #fbc013;
 }
-.price .t3-content .article-content .block-price .corporate .pay-month {
+ .t3-content .article-content .block-price .corporate .pay-month {
   color: #fbc013;
 }
-.price .t3-content .article-content .block-price .corporate .plus {
+ .t3-content .article-content .block-price .corporate .plus {
   background: url('../../templates/t3_bs3_blank/images/ico-plus-green.png') no-repeat 20px 10px;
   padding-left: 15px;
   margin-bottom: 0;
 }
-.price .t3-content .article-content .block-price .corporate .none-border {
+.t3-content .article-content .block-price .corporate .none-border {
   border: none;
 }
-.price .t3-content .article-content .block-price .sbm-btn {
+ .t3-content .article-content .block-price .sbm-btn {
   background-image: -moz-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
   background-image: -webkit-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
   background-image: -ms-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
@@ -434,7 +452,7 @@ input[type="text"] {
   text-align: center;
   width: 100%;
 }
-.price .t3-content .article-content .block-price .sbm-btn:hover {
+ .t3-content .article-content .block-price .sbm-btn:hover {
   text-decoration: none;
 }
 

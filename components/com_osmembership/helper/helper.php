@@ -2919,7 +2919,12 @@ class OSMembershipHelper
 			$avatar = explode("_", $rows->avatar);
 			array_shift($avatar);
 			$avatar = implode("_",$avatar);
-			return JURI::base().'media/com_osmembership/upload/'.$avatar;
+			if($avatar<>""){
+				return JURI::base().'media/com_osmembership/upload/'.$avatar;
+			}else{
+				return JURI::base().'media/com_osmembership/user.png';
+			}
+			
 		}
 
 		
