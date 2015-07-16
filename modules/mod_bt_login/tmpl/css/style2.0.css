@@ -310,9 +310,29 @@ div.btl-buttonsubmit{
 
 
 
+
+   
+   
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+.row-eq-height {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display:         flex;
+	border-bottom: 1px solid #eeeeee;
+	display: flex;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+}
+
+
 /* =========================
 Custom CSS Here : Added by fred
    =========================*/
+.page-header{ border-bottom:0; }
 .container{ max-width:1170px !important; }
 span.reg{ font-family:"Conv_Brandon_reg","Helvetica Neue",Helvetica,Arial,sans-serif; }
 input.form-control {
@@ -343,8 +363,14 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 #column-content {
   display: inline-block;
 }
-img {
-  vertical-align: middle;
+div.arrow_pointer {
+	background: url("../images/arrow-up.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: block;
+    height: 31px;
+    margin: 32px auto 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 28px;
 }
 input.form-control.username{
 	
@@ -359,4 +385,31 @@ input.form-control.password{
     background-repeat: no-repeat;
 	background-position: right;
 	
+}
+input#first_name{
+	
+	background: url("../images/userimage.png");
+    background-repeat: no-repeat;
+	background-position: right;
+}
+input#last_name{
+	
+	background: url("../images/userimage.png");
+    background-repeat: no-repeat;
+	background-position: right;
+}
+h1.change-avatar{ display: inline-block;
+    background: url("../images/arrow-up.png") no-repeat scroll right center rgba(0, 0, 0, 0);
+    display: inline-block;
+    padding-right: 35px;
+    position: absolute;
+    top: 22%;
+    width: auto;
+}
+div.avatar{
+	border-radius: 50%;
+    height: 100px;
+    position: absolute;
+    right: 25px;
+    width: 100px;
 }

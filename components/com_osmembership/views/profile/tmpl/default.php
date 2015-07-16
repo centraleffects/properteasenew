@@ -13,89 +13,164 @@ $db = JFactory::getDbo();
 OSMembershipHelperJquery::validateForm();
 $selectedState = '';
 ?>
-<style>
 
-</style>
 <script type="text/javascript">
 	var siteUrl = '<?php echo OSMembershipHelper::getSiteUrl();  ?>';
+	
+	jQuery(document).ready(function(){
+		jQuery( "input" ).addClass( "form-control" );
+	});
 </script>
 
 <div id="osm-profile-page" class="row-fluid osm-container">
 
 <section>
-<h1 class="osm_title"><?php echo JText::_('OSM_USER_PROFILE'); ?></h1>
+<!--<h1 class="osm_title"><?php #echo JText::_('OSM_USER_PROFILE'); ?></h1>-->
 <form action="index.php" method="post" name="osm_form" id="osm_form" autocomplete="off" enctype="multipart/form-data" class="form form-horizontal">
 <!--Bootstrap 3 Scaffolding-->
-  <div class="page-header">
-    <h1><span class="reg">Account</span> Basics</h1>
-    <!--<p class="lead">Bootstrap 3 scaffolding has changed for improved display on mobile devices</p>-->
-  </div>
+  
   
     <div class="container">
-    	<?php 
-		if ($this->item->user_id) 
-		{
-		?>
-        <div class="row">
+    	<div class="page-header">
+            <h1><span class="reg">Account</span> Basics</h1>
+            <!--<p class="lead">Bootstrap 3 scaffolding has changed for improved display on mobile devices</p>-->
+        </div>
+        <div class="row row-eq-height">
+        	<?php 
+			if ($this->item->user_id) 
+			{
+			?> 
             <div class="col-lg-3">
             	
                     
                         <div class="inner-addon right-addon">
                         	<p>
-                            <input type="text" class="form-control username" placeholder="Enter your Username" value="<?php echo $this->item->username; ?>" disabled="disabled" />
+                            <input type="text" class="username" placeholder="Enter your Username" value="<?php echo $this->item->username; ?>" disabled="disabled" />
                             </p>
                         </div>
                     	<div class="inner-addon right-addon">
                         	<p>
-                            <input type="password" id="password" name="password"  class="form-control password" placeholder="Password"  />
+                            <input type="password" id="password" name="password"  class="password" placeholder="Password"  />
                             </p>
                         </div>
                     
                 
             </div>
             <div class="col-lg-1">
-            		<div id="column-content">
-
-                      	<img src="../images/user.png">
-                      
+            		<div class="arrow_pointer"></div>
+            </div>
+            <?php	
+			}#end of user_id if condition	
+			
+			$fields = $this->form->getFields();
+			?>
+            <div class="col-lg-3">
+            		<div class="inner-addon right-addon">
+                    <?php
+                    if (isset($fields['first_name']))
+					{
+						echo "<p>".$fields['first_name']->input."</p>";
+					}
+					?>
+                    </div>
+                    <div class="inner-addon right-addon">
+                     <?php
+                    if (isset($fields['first_name']))
+					{
+						echo "<p>".$fields['last_name']->input."</p>";
+					}
+					?>
+                    </div>
+                    
+            </div>
+            <div class="col-lg-1">
+            		<div class="arrow_pointer"></div>
+            </div>
+            
+            
+            <div class="col-lg-4">
+            		<div class="inner-addon right-addon">
+                    	<h1 class="change-avatar"><span class="reg">Change Avatar</span></h1>
+                        <?php
+						if (isset($fields['osm_avatar']))
+						{
+							echo $fields['osm_avatar']->input;
+						}
+						?>
                     </div>
             </div>
-            <div class="col-lg-3">
-            	
+        </div>
+        
+        
+        <div class="page-header">
+            <h1><span class="reg">Here's your</span> Profile</h1>
+            <!--<p class="lead">Bootstrap 3 scaffolding has changed for improved display on mobile devices</p>-->
+        </div>
+        
+        <div class="row row-eq-height">
+           <div class="col-lg-3">
+            		<div class="inner-addon right-addon">
+                    <?php
+                    if (isset($fields['organization']))
+					{
+						echo "<p>".$fields['organization']->input."</p>";
+					}
+					?>
+                    </div>
+                    <div class="inner-addon right-addon">
+                     <?php
+                    if (isset($fields['address']))
+					{
+						echo "<p>".$fields['address']->input."</p>";
+					}
+					?>
+                    </div>
                     
-                        <div class="inner-addon right-addon">
-                        	<p>
-                            <input type="text" class="form-control username" placeholder="Enter your Username" value="<?php echo $this->item->username; ?>" disabled="disabled" />
-                            </p>
-                        </div>
-                    
-                    
-                    <p>
-                        <div class="inner-addon right-addon">
-                            <input type="password" id="password" name="password"  class="form-control password" placeholder="Password"  />
-                        </div>
-                    </p>
-                
             </div>
             <div class="col-lg-1">
-            		<p>
-                    
-                    </p>
+            		<div class="arrow_pointer"></div>
             </div>
-            <div class="col-lg-4">
-            		<p>
+            <div class="col-lg-3">
+            		<div class="inner-addon right-addon">
+                    <?php
+                    if (isset($fields['city']))
+					{
+						echo "<p>".$fields['city']->input."</p>";
+					}
+					?>
+                    </div>
+                    <div class="inner-addon right-addon">
+                     <?php
+                    if (isset($fields['zip']))
+					{
+						echo "<p>".$fields['zip']->input."</p>";
+					}
+					?>
+                    </div>
                     
-                    </p>
             </div>
-        </div>
-        <?php	
-		} #end of user_id if condition
-		?>
-        
-        <div class="row">
-            <div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
-            <div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
-            <div class="col-lg-4"><div class="well"><p>col-lg-4</p></div></div>
+            <div class="col-lg-1">
+            		<div class="arrow_pointer"></div>
+            </div>
+            <div class="col-lg-3">
+            		<div class="inner-addon right-addon">
+                    <?php
+                    if (isset($fields['country']))
+					{
+						echo "<p>".$fields['country']->input."</p>";
+					}
+					?>
+                    </div>
+                    <div class="inner-addon right-addon">
+                     <?php
+                    if (isset($fields['state']))
+					{
+						echo "<p>".$fields['state']->input."</p>";
+					}
+					?>
+                    </div>
+                    
+            </div>
         </div>
         
         <div class="row">
@@ -133,6 +208,8 @@ $selectedState = '';
 		?>
 								
 	</ul>
+    
+    
 	<div class="tab-content">
 		<div class="tab-pane active" id="profile-page">
 			<h2 class="osm-form-heading"><?php echo JText::_('OSM_PROFILE_DATA'); ?></h2>											
@@ -177,12 +254,21 @@ $selectedState = '';
 				{
 					$selectedState = $fields['state']->value;
 				}
+				
+				if (isset($fields['osm_avatar']))
+				{
+					echo $fields['osm_avatar']->value;
+					
+					echo $fields['osm_avatar']->input;
+				}
+				
+				
 				foreach ($fields as $field)
 			    {  
 				
-				echo'<pre>';
+				/*echo'<pre>';
 				print_r($field);
-				echo'</pre>';
+				echo'</pre>';*/
 				  	
 			    	echo $field->getControlGroup();    						    										
 			    }									
