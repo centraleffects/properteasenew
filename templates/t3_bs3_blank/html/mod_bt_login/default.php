@@ -22,19 +22,19 @@ defined('_JEXEC') or die('Restricted access');
 		<!-- Profile button -->
 		<span id="btl-panel-profile" class="btl-dropdown">
 			<?php
-			//$OSMembershdfdipHelper = asdfJvieasdasw::loadHelper('OSMembershipHelper');
-			//echo $avatar =  $OSMembershipHelper->getAvatar();
-			if(property_exists('OSMembershipHelper', 'getAvatar')){
-				$avatar =  OSMembershipHelper::getAvatar(); 
-				 if($avatar){
-				 	?>
-				 	<img class="profile-avatar-h" src="<?php echo $avatar?>">
-				 	<?php
-				 }
-				}else{
-					//echo'not';
-				}
-			
+
+			if (!class_exists('OSMembershipController')) {
+				JLoader::register('OSMembershipHelper', JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_osmembership'.DIRECTORY_SEPARATOR.'helper'.DIRECTORY_SEPARATOR.'helper.php');
+			}
+
+			$avatar = OSMembershipHelper::getAvatar();
+
+			if($avatar){
+			 	?>
+			 	<img class="profile-avatar-h" src="<?php echo $avatar?>">
+			 	<?php
+			}
+	
 
 			if($params->get('name')) : {
 				echo $user->get('name');

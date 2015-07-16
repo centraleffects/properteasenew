@@ -10,7 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 //Require the controller
-error_reporting(0);
+
 jimport('joomla.filesystem.file');
 require_once JPATH_ROOT . '/components/com_osmembership/libraries/rad/bootstrap.php';
 //OS Framework
