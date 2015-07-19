@@ -181,7 +181,7 @@ class modbt_loginHelper
 			{ 
 				$document->addScript(JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/js/jquery.min.js');
 			}
-			$document->addScript(JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/js/jquery.simplemodal.js');
+			//$document->addScript(JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/js/jquery.simplemodal.js');
 			$document->addScript(JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/js/default.js');	
 		}
 		else{
@@ -189,7 +189,7 @@ class modbt_loginHelper
 			{ 
 				$document->addScript(JURI::root(true).'/modules/mod_bt_login/tmpl/js/jquery.min.js');
 			}
-			$document->addScript(JURI::root(true).'/modules/mod_bt_login/tmpl/js/jquery.simplemodal.js');	
+			//$document->addScript(JURI::root(true).'/modules/mod_bt_login/tmpl/js/jquery.simplemodal.js');	
 			$document->addScript(JURI::root(true).'/modules/mod_bt_login/tmpl/js/default.js');	
 		}
 		

@@ -402,8 +402,4 @@ class OSMembershipController extends JControllerLegacy
 
 		return $data;
 	}
-	public function get_avatar(){
-		return "test";
-	}
-
 }

@@ -17,7 +17,26 @@
     </image>
     <language>en-GB</language>
     <generator>SobiPro 1.1</generator>
-    <pubDate>2015-06-08T13:20:47+02:00</pubDate>
+    <pubDate>2015-07-03T17:49:22+02:00</pubDate>
+    <item>
+      <title>Update of Aggregation Field</title>
+      <guid>https://www.sigsiu.net/news/1082-update-of-aggregation-field</guid>
+      <author>Sigrid Suski</author>
+      <enclosure url="https://www.sigsiu.net/images/sobipro/news/SobiPro-News-mod-field.png" length="18000" type="image/png"/>
+      <link>https://www.sigsiu.net/news/1082-update-of-aggregation-field</link>
+      <description>An update of the Aggregation Field is available with some great new features added, like the tags management.&#13;
+</description>
+      <pubDate>2015-07-03T17:49:22+02:00</pubDate>
+    </item>
+    <item>
+      <title>SobiPro goes e-commerce</title>
+      <guid>https://www.sigsiu.net/news/1049-sobipro-goes-e-commerce</guid>
+      <author>Radek Suski</author>
+      <enclosure url="https://www.sigsiu.net/images/sobipro/news/vc/mod_sp-shoppingcart-2.png" length="18000" type="image/png"/>
+      <link>https://www.sigsiu.net/news/1049-sobipro-goes-e-commerce</link>
+      <description>Finally you can use SobiPro now also as a shop due to the integration of SobiPro with the J2Store shopping cart extension!</description>
+      <pubDate>2015-06-11T13:20:07+02:00</pubDate>
+    </item>
     <item>
       <title>JaB15 - Recap</title>
       <guid>https://www.sigsiu.net/news/1046-jab15-recap</guid>
@@ -90,25 +109,6 @@ It is recommended to update SobiPro to version 1.1.13!</description>
       <link>https://www.sigsiu.net/news/916-export-your-data-from-sobi2</link>
       <description>We have released a version of our Sobi2 Export plugin for our club members to export data from a Sobi2 directory to import it into SobiPro.</description>
       <pubDate>2015-03-27T15:12:04+01:00</pubDate>
-    </item>
-    <item>
-      <title>Installation Services available</title>
-      <guid>https://www.sigsiu.net/news/708-installation-services-available</guid>
-      <author>Sigrid Suski</author>
-      <enclosure url="https://www.sigsiu.net/images/sobipro/news/vc/mod_vCard_installation.png" length="18000" type="image/png"/>
-      <link>https://www.sigsiu.net/news/708-installation-services-available</link>
-      <description>As requested by many of our users, we now offer an installation and configuration service for SobiPro and its applications.</description>
-      <pubDate>2015-03-09T19:18:09+01:00</pubDate>
-    </item>
-    <item>
-      <title>SobiPro 1.1.12 stable released</title>
-      <guid>https://www.sigsiu.net/news/688-sobipro-1-1-12-stable-released</guid>
-      <author>Sigrid Suski</author>
-      <enclosure url="https://www.sigsiu.net/images/sobipro/news/SobiPro-News-mod-component.png" length="18000" type="image/png"/>
-      <link>https://www.sigsiu.net/news/688-sobipro-1-1-12-stable-released</link>
-      <description>SobiPro now supports dependencies lists, a long awaited feature, for free!&#13;
-As it is a maintenance release, it is recommended to update SobiPro to version 1.1.12!</description>
-      <pubDate>2015-02-28T19:58:55+01:00</pubDate>
     </item>
   </channel>
 </rss>
