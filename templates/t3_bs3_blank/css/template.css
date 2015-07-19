@@ -2340,6 +2340,7 @@ a.list-group-item.active:focus .list-group-item-text {
 .t3-footnav:after {
   clear: both;
 }
+
 @media screen and (min-width: 768px) {
   .t3-footnav {
     padding: 40px 0;
@@ -2400,6 +2401,7 @@ a.list-group-item.active:focus .list-group-item-text {
 .poweredby:after {
   clear: both;
 }
+
 @media screen and (min-width: 991px) {
   .poweredby {
     text-align: right;
@@ -2410,3 +2412,16 @@ a.list-group-item.active:focus .list-group-item-text {
   opacity: .8;
   display: inline-block;
 }
+
+
+/*---------------------------------------------------------------------------------------------
+
+    NEW DESIGN 
+
+------------------------------------------------------------------------------------------------*/
+
+/* plan page */
+#osm-plans-list-columns h1.osm-page-title{
+  display: none;
+}
+/*end of plan page */

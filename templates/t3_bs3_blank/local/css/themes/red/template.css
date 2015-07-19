@@ -5304,8 +5304,9 @@ body #next87 {
     font-size: 15px;
   }
 }
-.rex {
-  font-weight: bold;
+
+#osm-plans-list-columns h1.osm-page-title {
+  display: none;
 }
 .home .t3-sl-1 .jumbotron .btn,
 .home .t3-sl-5 .jumbotron .btn {

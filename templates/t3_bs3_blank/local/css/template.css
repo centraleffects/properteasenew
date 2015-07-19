@@ -5304,6 +5304,7 @@ body #next87 {
     font-size: 15px;
   }
 }
-.rex {
-  font-weight: bold;
+
+#osm-plans-list-columns h1.osm-page-title {
+  display: none;
 }
