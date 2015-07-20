@@ -177,4 +177,3 @@ JHtml::_('behavior.caption');
 	<?php endif; ?>
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </div>
-

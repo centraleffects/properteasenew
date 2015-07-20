@@ -29,7 +29,7 @@ defined('_JEXEC') or die;
 		}
 		//]]>
 	</script>
-<?php endif; ?>
+<?php endif ?>
 <meta name="HandheldFriendly" content="true"/>
 <meta name="apple-mobile-web-app-capable" content="YES"/>
 <!-- //META FOR IOS & HANDHELD -->
@@ -53,7 +53,6 @@ if (is_file(T3_TEMPLATE_PATH . '/css/custom.css')) {
 <?php
 // CUSTOM CSS
 	$this->addStyleSheet(T3_TEMPLATE_URL . '/css/animate.css');
-	
 
 ?>
 
@@ -64,4 +63,3 @@ if (is_file(T3_TEMPLATE_PATH . '/css/custom.css')) {
 <![endif]-->
 
 <!-- You can add Google Analytics here or use T3 Injection feature -->
-<link rel="stylesheet" href="<?php echo JURI::base(true). '/modules/mod_bt_login/tmpl/css/custom-override.css'; ?>" type="text/css" />

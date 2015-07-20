@@ -35,31 +35,6 @@ defined('_JEXEC') or die;
      <!--  <!?php $this->loadBlock('mainnav') ?> -->
     </div>
   </div>
-  <nav class="tabs-top">
-  	<div class="container">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#profile-page" data-toggle="tab"><?php echo JText::_('OSM_EDIT_PROFILE');?></a></li>
-            <li><a href="#my-subscriptions-page" data-toggle="tab"><?php echo JText::_('OSM_MY_SUBSCRIPTIONS');?></a></li>
-            <li><a href="#subscription-history-page" data-toggle="tab"><?php echo JText::_('OSM_SUBSCRIPTION_HISTORY');?></a></li>
-            <li><a href="#upgrade-page" data-toggle="tab"><?php echo JText::_('OSM_UPGRADE_PROFILE_BUTTON');?></a></li>	
-            <?php 
-                if (count($this->plugins)) 
-                {
-                    $count = 0 ;
-                    foreach ($this->plugins as $plugin) 
-                    {
-                        $title  = $plugin['title'] ;
-                        $count++ ;
-                    ?>
-                        <li><a href="#<?php echo 'tab_'.$count;  ?>" data-toggle="tab"><?php echo $title;?></a></li>
-                    <?php							
-                    }
-                }
-            ?>
-                                    
-        </ul>
-    </div>
-  </nav>
   <?php if ($this->countModules('slideshow')) : ?>
   <!-- slideshow -->
   <div id="slideshow" class="slideshow">

@@ -10,3 +10,9 @@ google886c18846fd595c9.html
 /*.ftpquota
 tmp
 /bin
+/templates/t3_bs3_blank/local/css/template.css
+/templates/t3_bs3_blank/local/css/themes/dark/template.css
+/templates/t3_bs3_blank/local/css/themes/red/template.css
+/t3-assets/dev/t3/acc908594241882862f702c0565c9c12-cache-t3-2367cc2ebfb3f382a0fe44fdb7d56563.php
+/t3-assets/dev/t3/acc908594241882862f702c0565c9c12-cache-t3-6ccd82c80a54c71438a9a293ced954f9.php
+/t3-assets/dev/t3/acc908594241882862f702c0565c9c12-cache-t3-debe22c516ecd93a700d01df70ea0d7d.php

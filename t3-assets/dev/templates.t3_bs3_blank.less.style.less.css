@@ -354,11 +354,11 @@ input[type="text"] {
   font-size: 17px;
 }
 
-.t3-content .article-content .block-price {
+.price .t3-content .article-content .block-price {
   width: 100%;
   font-size: 19px;
 }
-.t3-content .article-content .block-price .block {
+.price .t3-content .article-content .block-price .block {
   border: 1px solid #ececec;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -369,22 +369,22 @@ input[type="text"] {
   text-align: center;
   width: 100%;
 }
- .t3-content .article-content .block-price .block h3 {
+.price .t3-content .article-content .block-price .block h3 {
   font-family: "Conv_Brandon_blk";
   font-size: 28px;
   color: #7ab700;
   margin-bottom: 30px;
 }
-.t3-content .article-content .block-price .block .pay-month {
+.price .t3-content .article-content .block-price .block .pay-month {
   font-size: 44px;
   padding-top: 30px;
   color: #7ab700;
 }
- .t3-content .article-content .block-price .block .pay-month i {
+.price .t3-content .article-content .block-price .block .pay-month i {
   font-size: 20px;
   font-style: normal;
 }
- .t3-content .article-content .block-price .block .plus {
+.price .t3-content .article-content .block-price .block .plus {
   background: #f1f1f1;
   border-top: 1px solid #e4e4e4;
   border-bottom: 1px solid #e4e4e4;
@@ -394,51 +394,51 @@ input[type="text"] {
   padding-left: 15px;
   font-size: 15px;
 }
- .t3-content .article-content .block-price .block .through-line {
+.price .t3-content .article-content .block-price .block .through-line {
   text-decoration: line-through;
   color: #d9d9d9;
 }
- .t3-content .article-content .block-price .block .arrow-down {
+.price .t3-content .article-content .block-price .block .arrow-down {
   background: url('../../templates/t3_bs3_blank/images/ico-arrow-down-yellow.png') no-repeat bottom right;
   text-align: center;
 }
- .t3-content .article-content .block-price .standard {
+.price .t3-content .article-content .block-price .standard {
   margin-top: 10px;
   margin-bottom: 10px;
 }
- .t3-content .article-content .block-price .standard h3 {
+.price .t3-content .article-content .block-price .standard h3 {
   color: #009bb7;
 }
- .t3-content .article-content .block-price .standard .pay-month {
+.price .t3-content .article-content .block-price .standard .pay-month {
   color: #009bb7;
 }
- .t3-content .article-content .block-price .standard .plus {
+.price .t3-content .article-content .block-price .standard .plus {
   background: url('../../templates/t3_bs3_blank/images/ico-plus-green.png') no-repeat 20px 10px;
   padding-left: 15px;
   margin-bottom: 0;
 }
- .t3-content .article-content .block-price .standard .none-border {
+.price .t3-content .article-content .block-price .standard .none-border {
   border: none;
 }
- .t3-content .article-content .block-price .corporate {
+.price .t3-content .article-content .block-price .corporate {
   margin-top: 10px;
   margin-bottom: 10px;
 }
- .t3-content .article-content .block-price .corporate h3 {
+.price .t3-content .article-content .block-price .corporate h3 {
   color: #fbc013;
 }
- .t3-content .article-content .block-price .corporate .pay-month {
+.price .t3-content .article-content .block-price .corporate .pay-month {
   color: #fbc013;
 }
- .t3-content .article-content .block-price .corporate .plus {
+.price .t3-content .article-content .block-price .corporate .plus {
   background: url('../../templates/t3_bs3_blank/images/ico-plus-green.png') no-repeat 20px 10px;
   padding-left: 15px;
   margin-bottom: 0;
 }
-.t3-content .article-content .block-price .corporate .none-border {
+.price .t3-content .article-content .block-price .corporate .none-border {
   border: none;
 }
- .t3-content .article-content .block-price .sbm-btn {
+.price .t3-content .article-content .block-price .sbm-btn {
   background-image: -moz-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
   background-image: -webkit-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
   background-image: -ms-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
@@ -452,7 +452,7 @@ input[type="text"] {
   text-align: center;
   width: 100%;
 }
- .t3-content .article-content .block-price .sbm-btn:hover {
+.price .t3-content .article-content .block-price .sbm-btn:hover {
   text-decoration: none;
 }
 
@@ -2410,4 +2410,8 @@ body #next87 {
   .resource .t3-content .article-content #accordion .panel-body ul.list li {
     font-size: 15px;
   }
+}
+
+#osm-plans-list-columns h1.osm-page-title {
+  display: none;
 }
