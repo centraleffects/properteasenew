@@ -1,6 +1,6 @@
 <?php
 /**
- * @version: $Id: select.php 4395 2015-02-27 16:16:15Z Radek Suski $
+ * @version: $Id: select.php 4404 2015-03-12 09:31:45Z Radek Suski $
  * @package: SobiPro Component for Joomla!
  * @author
  * Name: Sigrid Suski & Radek Suski, Sigsiu.NET GmbH
@@ -11,8 +11,8 @@
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation, and under the additional terms according section 7 of GPL v3.
  * See http://www.gnu.org/licenses/gpl.html and http://sobipro.sigsiu.net/licenses.
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
- * $Date: 2015-02-27 17:16:15 +0100 (Fri, 27 Feb 2015) $
- * $Revision: 4395 $
+ * $Date: 2015-03-12 10:31:45 +0100 (Thu, 12 Mar 2015) $
+ * $Revision: 4404 $
  * $Author: Radek Suski $
  * $HeadURL: file:///opt/svn/SobiPro/Component/branches/SobiPro-1.1/Site/opt/fields/select.php $
  */
@@ -74,6 +74,8 @@ class SPField_Select extends SPFieldType implements SPFieldInterface
 	protected $itemprop = '';
 	/** @var bool */
 	protected $dependency = false;
+	/** @var bool */
+	protected $allowParents = true;
 	/** @var string */
 	protected $dependencyDefinition = '';
 
@@ -320,12 +322,12 @@ class SPField_Select extends SPFieldType implements SPFieldInterface
 	 */
 	protected function getAttr()
 	{
-		return array( 'width', 'size', 'selectLabel', 'searchMethod', 'swidth', 'ssize', 'itemprop', 'dependencyDefinition', 'dependency' );
+		return array( 'width', 'size', 'selectLabel', 'searchMethod', 'swidth', 'ssize', 'itemprop', 'dependencyDefinition', 'dependency', 'allowParents' );
 	}
 
 	protected function fetchData( $data, $request = 'post' )
 	{
-		if ( $data && strlen( $data ) ) {
+		if ( $data && strlen( $data ) || $this->dependency ) {
 			if ( $this->dependency ) {
 				$path = json_decode( Sobi::Clean( SPRequest::string( $this->nid . '_path', null, false, $request ) ), true );
 				if ( count( $path ) ) {
@@ -339,11 +341,14 @@ class SPField_Select extends SPFieldType implements SPFieldInterface
 							throw new SPException( SPLang::e( 'FIELD_NO_SUCH_OPT', $data, $this->name ) );
 						}
 					}
+					if ( count( $selected ) && !( $this->allowParents ) ) {
+						throw new SPException( SPLang::e( 'SELECT_FIELD_NO_PARENT', $this->name ) );
+					}
 				}
 				return $path;
 			}
 			/* check if such option exist at all */
-			elseif ( !( isset( $this->optionsById[ $data ] ) ) ) {
+			elseif ( $data && strlen( $data ) && !( isset( $this->optionsById[ $data ] ) ) ) {
 				throw new SPException( SPLang::e( 'FIELD_NO_SUCH_OPT', $data, $this->name ) );
 			}
 			return array( $data );
@@ -651,7 +656,7 @@ class SPField_Select extends SPFieldType implements SPFieldInterface
 			$hidden = $this->travelDependencyPath( $request, $params );
 			$this->_selected = $request[ 1 ];
 			$hiddenValue = str_replace( '"', "'", json_encode( (object)$request ) );
-			$hidden .= SPHtml_Input::hidden( $this->nid . '_path', $hiddenValue, null, array( 'data' => array( 'selected' => '' ) ) );
+			$hidden .= SPHtml_Input::hidden( $this->nid . '_path', $hiddenValue, null, array( 'data' => array( 'selected' => '', 'section' => Sobi::Section() ) ) );
 			$params[ 'data' ] = array( 'order' => '1' );
 		}
 		return SPHtml_Input::select( $this->nid, $data, $this->_selected, ( $this->searchMethod == 'mselect' ), $params ) . $hidden;

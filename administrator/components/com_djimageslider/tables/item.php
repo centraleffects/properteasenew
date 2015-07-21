@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Id: item.php 5 2013-01-11 10:22:28Z szymon $
+ * @version $Id: item.php 22 2015-02-20 18:43:26Z szymon $
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -53,4 +53,13 @@ class DJImageSliderTableItem extends JTable
 		return parent::bind($array, $ignore);
 	}
 	
+	public function store($updateNulls = false)
+	{
+		$isNew = ($this->id==0 ? true : false);
+		$success = parent::store($updateNulls);
+		if($isNew && $success && JRequest::getVar('view') == 'item') {
+			$this->reorder('catid = '.$this->catid);
+		}
+		return $success;
+	}
 }

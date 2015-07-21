@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Id: item.php 5 2013-01-11 10:22:28Z szymon $
+ * @version $Id: item.php 22 2015-02-20 18:43:26Z szymon $
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -93,7 +93,7 @@ class DJImageSliderModelItem extends JModelAdmin
 		if (empty($table->alias)) {
 			$table->alias = JApplication::stringURLSafe($table->title);
 		}
-
+		/*
 		if (empty($table->id)) {
 
 			// Set ordering to the last item if not set
@@ -105,6 +105,7 @@ class DJImageSliderModelItem extends JModelAdmin
 				$table->ordering = $max+1;
 			}
 		}
+		*/
 	}
 	
 	protected function getReorderConditions($table)

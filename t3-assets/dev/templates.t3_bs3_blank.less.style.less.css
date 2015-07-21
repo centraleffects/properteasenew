@@ -2415,3 +2415,14 @@ body #next87 {
 #osm-plans-list-columns h1.osm-page-title {
   display: none;
 }
+
+.step-process {
+  float: right;
+  margin-top: -65px;
+  position: absolute;
+  right: 0;
+  z-index: 999999;
+}
+.rp-file {
+  margin-top: -83px !important;
+}

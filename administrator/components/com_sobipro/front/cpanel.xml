@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- @version: $Id: cpanel.xml 4387 2015-02-19 12:24:35Z Radek Suski $
+ @version: $Id: cpanel.xml 4421 2015-03-28 14:13:21Z Radek Suski $
  @package: SobiPro Component for Joomla!
 
  @author
@@ -17,8 +17,8 @@
  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
- $Date: 2015-02-19 13:24:35 +0100 (Thu, 19 Feb 2015) $
- $Revision: 4387 $
+ $Date: 2015-03-28 15:13:21 +0100 (Sat, 28 Mar 2015) $
+ $Revision: 4421 $
  $Author: Radek Suski $
  File location: administrator/components/com_sobipro/front/cpanel.xml $
 -->
@@ -267,12 +267,12 @@
 						<div id="collapseOne" class="accordion-body collapse in">
 							<div class="accordion-inner spPanelSobiPro">
 								<div style="float: right; margin: 10px 0 0 10px;">
-									<a href="http://www.Sigsiu.NET" target="_blank" title="Sigsiu.NET Software Development">
+									<a href="https://www.Sigsiu.NET" target="_blank" title="Sigsiu.NET Software Development">
 										<img src="../media/sobipro/sigsiu.png" alt="Sigsiu.NET Software Development" />
 									</a>
 								</div>
 								<div style="float: left; margin: 0 10px 0 0;">
-									<a href="http://www.Sigsiu.NET" target="_blank" title="Sigsiu.NET Software Development">
+									<a href="https://www.Sigsiu.NET" target="_blank" title="Sigsiu.NET Software Development">
 										<img src="../media/sobipro/logo.png" alt="Sigsiu.NET Software Development" />
 									</a>
 								</div>
@@ -293,9 +293,9 @@
 								<p class="spText">
 									<text value="ABOUT.SP_CLUBDESC">
 										<param>
-											<![CDATA[<a href="http://SobiPro.Sigsiu.NET" target="_blank" >SobiPro Club</a>]]></param>
+											<![CDATA[<a href="https://www.sigsiu.net/subscribe/levels" target="_blank" >SobiPro Club</a>]]></param>
 										<param>
-											<![CDATA[<a href="https://forum.Sigsiu.NET" target="_blank">SobiPro Forum</a>]]></param>
+											<![CDATA[<a href="https://www.Sigsiu.NET/support" target="_blank">SobiPro Support System</a>]]></param>
 									</text>
 								</p>
 								<a href="http://SobiPro.Sigsiu.NET" target="_blank" title="The SobiPro Club - Support, Documentation, Applications and much more .... ">
@@ -328,11 +328,15 @@
 								</text>
 							</a>
 						</div>
+
 						<div id="SobiProNewsPane" class="accordion-body collapse">
 							<div class="accordion-inner">
 								<div class="spNews">
 									<loop subject="news.feeds" table="false">
 										<cell class="SpCellContainer">
+                                            <cell type="image" value="title" class="SpCellNewsImage">
+                                                <url type="extern" host="image" />
+                                            </cell>
 											<cell type="link" value="title" class="SpCellNewsTitle">
 												<url type="extern" host="url" />
 											</cell>

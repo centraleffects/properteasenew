@@ -1,6 +1,6 @@
 <?php 
 /**
- * @version $Id: default.php 6 2013-01-22 15:31:03Z szymon $
+ * @version $Id: default.php 25 2015-06-29 19:45:38Z szymon $
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -30,6 +30,15 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php if (version_compare(JVERSION, '3.0', '>=')) { ?>
 
+<?php if(!empty( $this->sidebar)): ?>
+<div id="j-sidebar-container" class="span2">
+	<?php echo $this->sidebar; ?>
+</div>
+<div id="j-main-container" class="span10">
+<?php else: ?>
+<div id="j-main-container">
+<?php endif;?>
+	
 <div class="row-fluid">
 		<div class="cpanel-left span8">
 			<div id="cpanel" class="cpanel well">
@@ -89,6 +98,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 			</div>
 		</div>
 
+</div>
 </div>
 
 <?php } else { ?>
@@ -152,4 +162,5 @@ defined('_JEXEC') or die('Restricted access'); ?>
 </table>
 <?php } ?>
 
+<div class="clr" style="clear: both"></div>
 <?php echo DJIMAGESLIDERFOOTER; ?>

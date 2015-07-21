@@ -11,7 +11,7 @@
 	<license>GNU/GPL 3 http://www.gnu.org/licenses/gpl.html</license>
 	<authorEmail>ced1870@gmail.com</authorEmail>
 	<authorUrl>http://www.joomlack.fr</authorUrl>
-	<version>1.4.10</version>
+	<version>1.4.17</version>
 	<description>MOD_SLIDESHOWCK_XML_DESCRIPTION</description>
 	<files>
 		<filename module="mod_slideshowck">mod_slideshowck.php</filename>
@@ -601,6 +601,52 @@
 				</field>
 			</fieldset>
 			<fieldset name="captionstyles" label="MOD_SLIDESHOWCK_CAPTIONSTYLES">
+				<field
+					name="captionresponsiveckspacer"
+					type="ckspacer"
+					label="MOD_SLIDESHOWCK_SPACER_RESPONSIVE"
+					style="title"
+				/>
+				<field
+					name="usecaptionresponsive"
+					type="ckradio"
+					label="MOD_SLIDESHOWCK_USERESPONSIVECAPTION_LABEL"
+					description="MOD_SLIDESHOWCK_USERESPONSIVECAPTION_DESC"
+					icon="ipod.png"
+					class="btn-group"
+					default="1"
+					>
+						<option value="1">JYES</option>
+						<option value="0">JNO</option>
+				</field>
+				<field
+					name="captionresponsiveresolution"
+					type="cktext"
+					label="MOD_SLIDESHOWCK_RESPONSIVERESOLUTION_LABEL"
+					description="MOD_SLIDESHOWCK_RESPONSIVERESOLUTION_DESC"
+					icon="width.png"
+					default="480"
+				/>
+				<field
+					name="captionresponsivefontsize"
+					type="cktext"
+					label="MOD_SLIDESHOWCK_RESPONSIVEFONTSIZE_LABEL"
+					description="MOD_SLIDESHOWCK_RESPONSIVEFONTSIZE_DESC"
+					icon="style.png"
+					default="0.6em"
+				/>
+				<field
+					name="captionresponsivehidecaption"
+					type="ckradio"
+					label="MOD_SLIDESHOWCK_RESPONSIVEHIDECAPTION_LABEL"
+					description="MOD_SLIDESHOWCK_RESPONSIVEHIDECAPTION_DESC"
+					icon="style_delete.png"
+					class="btn-group"
+					default="0"
+					>
+						<option value="1">JYES</option>
+						<option value="0">JNO</option>
+				</field>
 				<field
 					name="captionstylesfontckspacer"
 					type="ckspacer"

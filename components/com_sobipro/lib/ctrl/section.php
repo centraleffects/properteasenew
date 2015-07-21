@@ -1,6 +1,6 @@
 <?php
 /**
- * @version: $Id: section.php 4391 2015-02-26 11:57:09Z Radek Suski $
+ * @version: $Id: section.php 4420 2015-03-26 09:09:27Z Radek Suski $
  * @package: SobiPro Library
  * @author
  * Name: Sigrid Suski & Radek Suski, Sigsiu.NET GmbH
@@ -11,8 +11,8 @@
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License version 3 as published by the Free Software Foundation, and under the additional terms according section 7 of GPL v3.
  * See http://www.gnu.org/licenses/lgpl.html and http://sobipro.sigsiu.net/licenses.
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * $Date: 2015-02-26 12:57:09 +0100 (Thu, 26 Feb 2015) $
- * $Revision: 4391 $
+ * $Date: 2015-03-26 10:09:27 +0100 (Thu, 26 Mar 2015) $
+ * $Revision: 4420 $
  * $Author: Radek Suski $
  * $HeadURL: file:///opt/svn/SobiPro/Component/branches/SobiPro-1.1/Site/lib/ctrl/section.php $
  */
@@ -232,7 +232,10 @@ class SPSectionCtrl extends SPController
 		if ( !( Sobi::Can( 'entry.access.*' ) ) ) {
 			if ( Sobi::Can( 'entry.access.unpublished_own' ) ) {
 				$conditions[ ] = $db->argsOr( array( $oPrefix . 'state' => '1', $oPrefix . 'owner' => Sobi::My( 'id' ) ) );
-				if ( !( Sobi::Can( 'entry.access.unapproved_own' ) || Sobi::Can( 'entry.access.unapproved_any' ) ) ) {
+				if ( Sobi::Can( 'entry.access.unapproved_own' ) ) {
+					$conditions[ ] = $db->argsOr( array( $oPrefix . 'approved' => '1', $oPrefix . 'owner' => Sobi::My( 'id' ) ) );
+				}
+				elseif ( !( Sobi::Can( 'entry.access.unapproved_own' ) || Sobi::Can( 'entry.access.unapproved_any' ) ) ) {
 					$conditions[ $oPrefix . 'approved' ] = '1';
 				}
 			}
@@ -248,12 +251,12 @@ class SPSectionCtrl extends SPController
 			else {
 				// conflicts with "entry.access.unpublished_own" See #521
 				//$conditions[ 'state' ] = '1';
-				if ( ( Sobi::Can( 'entry.access.unpublished_own' ) ) ) {
-					$conditions[ '@VALID' ] = $db->argsOr( array( $db->valid( $oPrefix . 'validUntil', $oPrefix . 'validSince' ), 'owner' => Sobi::My( 'id' ) ) );
-				}
-				elseif ( !( Sobi::Can( 'entry.access.unpublished_any' ) ) ) {
-					$conditions[ '@VALID' ] = $db->valid( $oPrefix . 'validUntil', $oPrefix . 'validSince' );
-				}
+//				if ( false && ( Sobi::Can( 'entry.access.unpublished_own' ) ) ) {
+//					$conditions[ '@VALID' ] = $db->valid( $oPrefix . 'validUntil', $oPrefix . 'validSince', null, array( 'owner' => Sobi::My( 'id' ) ) );
+//				}
+//				elseif ( !( Sobi::Can( 'entry.access.unpublished_any' ) ) ) {
+				$conditions[ '@VALID' ] = $db->valid( $oPrefix . 'validUntil', $oPrefix . 'validSince' );
+//				}
 
 			}
 		}

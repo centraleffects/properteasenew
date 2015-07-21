@@ -46,7 +46,7 @@ class JFormFieldCktestslideshowparamsplugin extends JFormField {
             $icon = $this->element['icon'];
 
             // Build the class for the label.
-            $class = !empty($this->description) ? 'hasTip' : '';
+            $class = !empty($this->description) ? 'hasTip hasTooltip' : '';
             $class = $this->required == true ? $class . ' required' : $class;
 
             // Add the opening label tag and main attributes attributes.
@@ -54,7 +54,7 @@ class JFormFieldCktestslideshowparamsplugin extends JFormField {
 
             // If a description is specified, use it to build a tooltip.
             if (!empty($this->description)) {
-                $label .= ' title="' . htmlspecialchars(trim($text, ':') . '::' .
+                $label .= ' title="' . htmlspecialchars(trim($text, ':') . '<br />' .
                     ($this->translateDescription ? JText::_($this->description) : $this->description), ENT_COMPAT, 'UTF-8') . '"';
             }
 

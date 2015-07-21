@@ -1,6 +1,6 @@
 <?php
 /**
- * @version: $Id: acl.php 4387 2015-02-19 12:24:35Z Radek Suski $
+ * @version: $Id: acl.php 4404 2015-03-12 09:31:45Z Radek Suski $
  * @package: SobiPro Library
 
  * @author
@@ -15,8 +15,8 @@
 
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
- * $Date: 2015-02-19 13:24:35 +0100 (Thu, 19 Feb 2015) $
- * $Revision: 4387 $
+ * $Date: 2015-03-12 10:31:45 +0100 (Thu, 12 Mar 2015) $
+ * $Revision: 4404 $
  * $Author: Radek Suski $
  * $HeadURL: file:///opt/svn/SobiPro/Component/branches/SobiPro-1.1/Site/lib/ctrl/adm/acl.php $
  */
@@ -238,8 +238,8 @@ final class SPAclCtrl extends SPConfigAdmCtrl
 		}
 		$vs = SPRequest::timestamp( 'set_validSince' );
 		$vu = SPRequest::timestamp( 'set_validUntil' );
-		$vs = $vs ? date( Sobi::Cfg( 'db.date_format', 'Y-m-d H:i:s' ), $vs ) : null;
-		$vu = $vu ? date( Sobi::Cfg( 'db.date_format', 'Y-m-d H:i:s' ), $vu ) : null;
+		$vs = $vs ? gmdate( Sobi::Cfg( 'db.date_format', 'Y-m-d H:i:s' ), $vs ) : null;
+		$vu = $vu ? gmdate( Sobi::Cfg( 'db.date_format', 'Y-m-d H:i:s' ), $vu ) : null;
 
 		$name = SPRequest::string( 'set_name' );
 		$nid = SPRequest::cmd( 'set_nid' );
@@ -443,8 +443,8 @@ final class SPAclCtrl extends SPConfigAdmCtrl
 		}
 		else {
 			$rule = array(
-				'validUntil' => $db->getNullDate(),
-				'validSince' => $db->getNullDate(),
+				'validUntil' => null,
+				'validSince' => null,
 				'name' => '',
 				'nid' => '',
 				'note' => '',
