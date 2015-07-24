@@ -46,10 +46,8 @@ class PlgQuickiconJoomlaupdate extends JPlugin
 		JHtml::_('jquery.framework');
 
 		$cur_template = JFactory::getApplication()->getTemplate();
-
-		$token    = JSession::getFormToken() . '=' . 1;
 		$url = JUri::base() . 'index.php?option=com_joomlaupdate';
-		$ajax_url = JUri::base() . 'index.php?option=com_installer&view=update&task=update.ajax&' . $token;
+		$ajax_url = JUri::base() . 'index.php?option=com_installer&view=update&task=update.ajax';
 		$script = array();
 		$script[] = 'var plg_quickicon_joomlaupdate_url = \'' . $url . '\';';
 		$script[] = 'var plg_quickicon_joomlaupdate_ajax_url = \'' . $ajax_url . '\';';

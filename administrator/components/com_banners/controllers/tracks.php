@@ -84,13 +84,9 @@ class BannersControllerTracks extends JControllerLegacy
 		{
 			JError::raiseWarning(500, $model->getError());
 		}
-		elseif (count > 0)
-		{
-			$this->setMessage(JText::plural('COM_BANNERS_TRACKS_N_ITEMS_DELETED', $count));
-		}
 		else
 		{
-			$this->setMessage(JText::_('COM_BANNERS_TRACKS_NO_ITEMS_DELETED'));
+			$this->setMessage(JText::plural('COM_BANNERS_TRACKS_N_ITEMS_DELETED', $count));
 		}
 
 		$this->setRedirect('index.php?option=com_banners&view=tracks');

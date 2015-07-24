@@ -151,11 +151,6 @@ class TemplatesViewTemplate extends JViewLegacy
 
 		$this->addToolbar();
 
-		if (!JFactory::getUser()->authorise('core.admin'))
-		{
-			$this->setLayout('readonly');
-		}
-
 		return parent::display($tpl);
 	}
 
@@ -169,11 +164,17 @@ class TemplatesViewTemplate extends JViewLegacy
 	protected function addToolbar()
 	{
 		$app   = JFactory::getApplication();
-		$user  = JFactory::getUser();
 		$app->input->set('hidemainmenu', true);
+		$canDo = JHelperContent::getActions('com_templates');
 
-		// User is global SuperUser
-		$isSuperUser = $user->authorise('core.admin');
+		if ($canDo->get('core.edit') && $canDo->get('core.create') && $canDo->get('core.admin'))
+		{
+			$showButton = true;
+		}
+		else
+		{
+			$showButton = false;
+		}
 
 		// Get the toolbar object instance
 		$bar = JToolBar::getInstance('toolbar');
@@ -182,29 +183,38 @@ class TemplatesViewTemplate extends JViewLegacy
 
 		JToolbarHelper::title(JText::_('COM_TEMPLATES_MANAGER_VIEW_TEMPLATE'), 'eye thememanager');
 
-		// Only show file edit buttons for global SuperUser
-		if ($isSuperUser)
+		// Add a Apply and save button
+		if ($this->type == 'file')
 		{
-			// Add a Apply and save button
-			if ($this->type == 'file')
+			if ($showButton)
 			{
 				JToolbarHelper::apply('template.apply');
 				JToolbarHelper::save('template.save');
 			}
-			// Add a Crop and Resize button
-			elseif ($this->type == 'image')
+		}
+		// Add a Crop and Resize button
+		elseif ($this->type == 'image')
+		{
+			if ($showButton)
 			{
 				JToolbarHelper::custom('template.cropImage', 'move', 'move', 'COM_TEMPLATES_BUTTON_CROP', false, false);
+
 				JToolbarHelper::modal('resizeModal', 'icon-refresh', 'COM_TEMPLATES_BUTTON_RESIZE');
 			}
-			// Add an extract button
-			elseif ($this->type == 'archive')
+		}
+		// Add an extract button
+		elseif ($this->type == 'archive')
+		{
+			if ($showButton)
 			{
 				JToolbarHelper::custom('template.extractArchive', 'arrow-down', 'arrow-down', 'COM_TEMPLATES_BUTTON_EXTRACT_ARCHIVE', false, false);
 			}
+		}
 
-			// Add a copy template button (Hathor override doesn't need the button)
-			if ($app->getTemplate() != 'hathor')
+		// Add a copy template button (Hathor override doesn't need the button)
+		if ($app->getTemplate() != 'hathor')
+		{
+			if ($showButton)
 			{
 				JToolbarHelper::modal('collapseModal', 'icon-copy', 'COM_TEMPLATES_BUTTON_COPY_TEMPLATE');
 			}
@@ -213,31 +223,39 @@ class TemplatesViewTemplate extends JViewLegacy
 		// Add a Template preview button
 		if ($this->preview->client_id == 0)
 		{
-			$bar->appendButton('Popup', 'picture', 'COM_TEMPLATES_BUTTON_PREVIEW', JUri::root() . 'index.php?tp=1&templateStyle=' . $this->preview->id, 800, 520);
+			$bar->appendButton('Link', 'picture', 'COM_TEMPLATES_BUTTON_PREVIEW', JUri::root() . 'index.php?tp=1&templateStyle=' . $this->preview->id);
 		}
 
-		// Only show file manage buttons for global SuperUser
-		if ($isSuperUser)
+		// Add Manage folders button
+		if ($showButton)
 		{
-			// Add Manage folders button
 			JToolbarHelper::modal('folderModal', 'icon-folder icon white', 'COM_TEMPLATES_BUTTON_FOLDERS');
+		}
 
-			// Add a new file button
+		// Add a new file button
+		if ($showButton)
+		{
 			JToolbarHelper::modal('fileModal', 'icon-file', 'COM_TEMPLATES_BUTTON_FILE');
+		}
 
-			// Add a Rename file Button (Hathor override doesn't need the button)
-			if ($app->getTemplate() != 'hathor' && $this->type != 'home')
+		// Add a Rename file Button (Hathor override doesn't need the button)
+		if ($app->getTemplate() != 'hathor')
+		{
+			if ($showButton && $this->type != 'home')
 			{
 				JToolbarHelper::modal('renameModal', 'icon-refresh', 'COM_TEMPLATES_BUTTON_RENAME_FILE');
 			}
+		}
 
-			// Add a Delete file Button
-			if ($this->type != 'home')
-			{
-				JToolbarHelper::modal('deleteModal', 'icon-remove', 'COM_TEMPLATES_BUTTON_DELETE_FILE');
-			}
+		// Add a Delete file Button
+		if ($showButton && $this->type != 'home')
+		{
+			JToolbarHelper::modal('deleteModal', 'icon-remove', 'COM_TEMPLATES_BUTTON_DELETE_FILE');
+		}
 
-			// Add a Compile Button
+		// Add a Compile Button
+		if ($showButton)
+		{
 			if ($ext == 'less')
 			{
 				JToolbarHelper::custom('template.less', 'play', 'play', 'COM_TEMPLATES_BUTTON_LESS', false, false);

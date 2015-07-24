@@ -1,6 +1,6 @@
 <?php
 /**
- * @version: $Id: front.php 4421 2015-03-28 14:13:21Z Radek Suski $
+ * @version: $Id: front.php 4398 2015-02-28 10:34:12Z Radek Suski $
  * @package: SobiPro Library
  * @author
  * Name: Sigrid Suski & Radek Suski, Sigsiu.NET GmbH
@@ -11,8 +11,8 @@
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License version 3 as published by the Free Software Foundation, and under the additional terms according section 7 of GPL v3.
  * See http://www.gnu.org/licenses/lgpl.html and http://sobipro.sigsiu.net/licenses.
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * $Date: 2015-03-28 15:13:21 +0100 (Sat, 28 Mar 2015) $
- * $Revision: 4421 $
+ * $Date: 2015-02-28 11:34:12 +0100 (Sat, 28 Feb 2015) $
+ * $Revision: 4398 $
  * $Author: Radek Suski $
  * $HeadURL: file:///opt/svn/SobiPro/Component/branches/SobiPro-1.1/Site/lib/ctrl/adm/front.php $
  */
@@ -176,53 +176,26 @@ class SPAdminPanel extends SPController
 		}
 		try {
 			$news = new DOMXPath( DOMDocument::loadXML( $content ) );
-
-			$atom = false;
-			if ( $atom ) {    //Atom
-				$news->registerNamespace( 'atom', 'http://www.w3.org/2005/Atom' );
-				$out[ 'title' ] = $news->query( '/atom:feed/atom:title' )->item( 0 )->nodeValue;
-				$items = $news->query( '/atom:feed/atom:entry[*]' );
-				$c = 5;
-				$open = false;
-				foreach ( $items as $item ) {
-					$date = $item->getElementsByTagName( 'updated' )->item( 0 )->nodeValue;
-					if ( !( $open ) && time() - strtotime( $date ) < ( 60 * 60 * 24 ) ) {
-						$open = true;
-					}
-					$feed = array(
-							'url' => $item->getElementsByTagName( 'link' )->item( 0 )->nodeValue,
-							'title' => $item->getElementsByTagName( 'title' )->item( 0 )->nodeValue,
-							'content' => $item->getElementsByTagName( 'content' )->item( 0 )->nodeValue
-					);
-					if ( !( $c-- ) ) {
-						break;
-					}
-					$out[ 'feeds' ][ ] = $feed;
+			$news->registerNamespace( 'atom', 'http://www.w3.org/2005/Atom' );
+			$out[ 'title' ] = $news->query( '/atom:feed/atom:title' )->item( 0 )->nodeValue;
+			$items = $news->query( '/atom:feed/atom:entry[*]' );
+			$c = 5;
+			$open = false;
+			foreach ( $items as $item ) {
+				$date = $item->getElementsByTagName( 'updated' )->item( 0 )->nodeValue;
+				if ( !( $open ) && time() - strtotime( $date ) < ( 60 * 60 * 24 ) ) {
+					$open = true;
 				}
-			}
-			else {  //RSS
-				$out[ 'title' ] = $news->query( '/rss/channel/title' )->item( 0 )->nodeValue;
-				$items = $news->query( '/rss/channel/item[*]' );
-				$c = 5;
-				$open = false;
-				foreach ( $items as $item ) {
-					$date = $item->getElementsByTagName( 'pubDate' )->item( 0 )->nodeValue;
-					if ( !( $open ) && time() - strtotime( $date ) < ( 60 * 60 * 24 ) ) {
-						$open = true;
-					}
-					$feed = array(
-							'url' => $item->getElementsByTagName( 'link' )->item( 0 )->nodeValue,
-							'title' => $item->getElementsByTagName( 'title' )->item( 0 )->nodeValue,
-							'content' => $item->getElementsByTagName( 'description' )->item( 0 )->nodeValue,
-							'image' => $item->getElementsByTagName( 'enclosure' )->item( 0 )->attributes->getNamedItem( 'url' )->nodeValue,
-					);
-					if ( !( $c-- ) ) {
-						break;
-					}
-					$out[ 'feeds' ][ ] = $feed;
+				$feed = array(
+						'url' => $item->getElementsByTagName( 'link' )->item( 0 )->nodeValue,
+						'title' => $item->getElementsByTagName( 'title' )->item( 0 )->nodeValue,
+						'content' => $item->getElementsByTagName( 'content' )->item( 0 )->nodeValue
+				);
+				if ( !( $c-- ) ) {
+					break;
 				}
+				$out[ 'feeds' ][ ] = $feed;
 			}
-
 			if ( $open ) {
 				SPFactory::header()->addJsCode( 'SobiPro.jQuery( document ).ready( function () { SobiPro.jQuery( \'#SobiProNews\' ).trigger(\'click\'); } );' );
 			}

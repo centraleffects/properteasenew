@@ -16,12 +16,12 @@ JHtml::_('bootstrap.tooltip');
 ?>
 <a href="#" onclick="return false;" class="js-stools-column-order hasTooltip" data-order="<?php echo $data->order; ?>" data-direction="<?php echo strtoupper($data->direction); ?>" data-name="<?php echo JText::_($data->title); ?>" title="<?php echo $metatitle; ?>">
 	<?php if (!empty($data->icon)) : ?>
-		<span class="<?php echo $data->icon; ?>"></span>
+		<i class="<?php echo $data->icon; ?>"></i>
 	<?php endif; ?>
 	<?php if (!empty($data->title)) : ?>
 		<?php echo JText::_($data->title); ?>
 	<?php endif; ?>
 	<?php if ($data->order == $data->selected) : ?>
-		<span class="<?php echo $data->orderIcon; ?>"></span>
+		<i class="<?php echo $data->orderIcon; ?>"></i>
 	<?php endif; ?>
 </a>

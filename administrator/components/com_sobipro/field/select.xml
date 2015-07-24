@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
- @version: $Id: select.xml 4404 2015-03-12 09:31:45Z Radek Suski $
+ @version: $Id: select.xml 4387 2015-02-19 12:24:35Z Radek Suski $
  @package: SobiPro Component for Joomla!
 
  @author
@@ -14,8 +14,8 @@
 
  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
- $Date: 2015-03-12 10:31:45 +0100 (Thu, 12 Mar 2015) $
- $Revision: 4404 $
+ $Date: 2015-02-19 13:24:35 +0100 (Thu, 19 Feb 2015) $
+ $Revision: 4387 $
  $Author: Radek Suski $
  File location: administrator/components/com_sobipro/field/select.xml $
 -->
@@ -61,7 +61,6 @@
 								<fieldset label="FM.SEL.LIST_DEPENDENCY" id="dependency">
 									<field type="select" name="field.dependencyDefinition" selected="field.dependencyDefinition" values="dependencyDefinition" label="FMN.LIST_DEPENDENCY_FILE" class="input-medium"/>
 									<field type="fileUpload" name="select-list-dependency" label="FM.UPLOAD_DEPENDENCY_FILE" accept="application/zip|text/xml"/>
-									<field type="toggle" name="field.allowParents" value="field.allowParents" label="FM.UPLOAD_DEPENDENCY_PREVENT_PARENTS" prefix="yes_no" />
 								</fieldset>
 								<fieldset label="FM.SEL.LIST_OPTIONS" id="regular">
 

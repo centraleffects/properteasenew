@@ -13,19 +13,18 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 $saveHistory = $this->state->get('params')->get('save_history', 0);
 
-JHtml::_('behavior.formvalidator');
-
-JFactory::getDocument()->addScriptDeclaration("
+JHtml::_('behavior.formvalidation');
+?>
+<script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
 		if (task == 'weblink.cancel' || document.formvalidator.isValid(document.id('weblink-form')))
 		{
-			" . $this->form->getField('description')->save() . "
+			<?php echo $this->form->getField('description')->save(); ?>
 			Joomla.submitform(task, document.getElementById('weblink-form'));
 		}
 	}
-");
-?>
+</script>
 <div class="weblink-edit">
 
 <form action="<?php echo JRoute::_('index.php?option=com_weblinks&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="weblink-form" class="form-validate">

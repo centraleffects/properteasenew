@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
-JHtml::_('behavior.formvalidator');
+JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
 
 // Create shortcut to parameters.
@@ -45,17 +45,19 @@ endif;
 
 $assoc = JLanguageAssociations::isEnabled();
 
-JFactory::getDocument()->addScriptDeclaration("
+?>
+
+<script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
-		if (task == 'article.cancel' || document.formvalidator.isValid(document.getElementById('item-form')))
+		if (task == 'article.cancel' || document.formvalidator.isValid(document.id('item-form')))
 		{
-			" . $this->form->getField('articletext')->save() . "
+			<?php echo $this->form->getField('articletext')->save(); ?>
 			Joomla.submitform(task, document.getElementById('item-form'));
 		}
 	}
-");
-?>
+</script>
+
 <div class="article-edit">
 
 <form action="<?php echo JRoute::_('index.php?option=com_content&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">

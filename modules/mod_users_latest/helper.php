@@ -53,16 +53,8 @@ class ModUsersLatestHelper
 		}
 
 		$db->setQuery($query, 0, $params->get('shownumber'));
+		$result = $db->loadObjectList();
 
-		try
-		{
-			return (array) $db->loadObjectList();
-		}
-		catch (RuntimeException $e)
-		{
-			JFactory::getApplication()->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
-
-			return array();
-		}
+		return (array) $result;
 	}
 }

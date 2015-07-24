@@ -53,7 +53,7 @@ class JSessionStorageWincache extends JSessionStorage
 	 *
 	 * @since   12.1
 	 */
-	public static function isSupported()
+	static public function isSupported()
 	{
 		return (extension_loaded('wincache') && function_exists('wincache_ucache_get') && !strcmp(ini_get('wincache.ucenabled'), "1"));
 	}

@@ -171,7 +171,7 @@ class JInstallerAdapterFile extends JInstallerAdapter
 	 */
 	public function loadLanguage($path)
 	{
-		$extension = 'files_' . strtolower(str_replace('files_', '', $this->getElement()));
+		$extension = 'files_' . strtolower(str_replace('files_', '', $this->name));
 
 		$this->doLoadLanguage($extension, $path, JPATH_SITE);
 	}

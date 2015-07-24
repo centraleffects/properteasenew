@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
-JHtml::_('behavior.formvalidator');
+JHtml::_('behavior.formvalidation');
 
 $app = JFactory::getApplication();
 $input = $app->input;
@@ -21,17 +21,18 @@ $saveHistory = $this->state->get('params')->get('save_history', 0);
 
 $assoc = JLanguageAssociations::isEnabled();
 
-JFactory::getDocument()->addScriptDeclaration("
+?>
+<script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
-		if (task == 'contact.cancel' || document.formvalidator.isValid(document.getElementById('contact-form')))
+		if (task == 'contact.cancel' || document.formvalidator.isValid(document.id('contact-form')))
 		{
-			" . $this->form->getField('misc')->save() . "
+			<?php echo $this->form->getField('misc')->save(); ?>
 			Joomla.submitform(task, document.getElementById('contact-form'));
 		}
 	}
-");
-?>
+</script>
+
 <form action="<?php echo JRoute::_('index.php?option=com_contact&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="contact-form" class="form-validate">
 	<div class="col main-section">
 		<fieldset class="adminform">

@@ -14,14 +14,13 @@ $input = JFactory::getApplication()->input;
 // Checking if loaded via index.php or component.php
 $tmpl = ($input->getCmd('tmpl') != '') ? '1' : '';
 
-JHtml::_('behavior.core');
 JFactory::getDocument()->addScriptDeclaration('
 		setmenutype = function(type) {
 			var tmpl = ' . json_encode($tmpl) . ';
 			if (tmpl)
 			{
 				window.parent.Joomla.submitbutton("item.setType", type);
-				window.parent.jQuery("#menuTypeModal").modal("hide");
+				window.parent.jModalClose();
 			}
 			else
 			{

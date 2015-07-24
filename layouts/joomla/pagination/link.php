@@ -43,7 +43,7 @@ switch ((string) $item->text)
 
 if ($icon !== null)
 {
-	$display = '<span class="' . $icon . '"></span>';
+	$display = '<i class="' . $icon . '"></i>';
 }
 
 if ($displayData['active'])

@@ -1,4 +1,0 @@
-extKey=t3
-version=2.4.8
-createDate=2015-07-21 14:16:38
-comment=Upgrade to version 2.4.9 - Dated 7/21/2015, 8:16:26 PM

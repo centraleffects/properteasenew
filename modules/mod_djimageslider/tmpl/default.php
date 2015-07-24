@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Id: default.php 23 2015-05-11 11:23:25Z szymon $
+ * @version 2.0.0.stable
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -28,38 +28,27 @@
 // no direct access
 defined('_JEXEC') or die ('Restricted access'); ?>
 <div style="border: 0px !important;">
-<div id="djslider-loader<?php echo $mid; ?>" class="djslider-loader djslider-loader-<?php echo $theme ?>" data-animation='<?php echo $animationOptions ?>' data-djslider='<?php echo $moduleSettings ?>'>
-    <div id="djslider<?php echo $mid; ?>" class="djslider djslider-<?php echo $theme; echo $params->get('image_centering', 0) ? ' img-vcenter':'' ?>" style="<?php echo $style['slider'] ?>">
+<div id="djslider-loader<?php echo $mid; ?>" class="djslider-loader">
+    <div id="djslider<?php echo $mid; ?>" class="djslider">
         <div id="slider-container<?php echo $mid; ?>" class="slider-container">
-        	<ul id="slider<?php echo $mid; ?>" class="djslider-in">
+        	<ul id="slider<?php echo $mid; ?>">
           		<?php foreach ($slides as $slide) { ?>
-          			<li style="<?php echo $style['slide'] ?>">
-          				<?php if($slide->image) { 
-          					$action = $params->get('link_image',1);
-          					$attr = '';
-          					if($action > 1) {
-	          					if($jquery) {
-	          						$attr = 'class="image-link"';
-	          					} else {
-	          						$attr = 'rel="lightbox-slider'.$mid.'"';
-	          					}
-	          					if($params->get('show_desc')) $attr.= ' title="'.(!empty($slide->title) ? htmlspecialchars($slide->title.' ') : '').htmlspecialchars('<small>'.strip_tags($slide->description,"<p><a><b><strong><em><i><u>").'</small>').'"';
-							}				
-          					?>
-	            			<?php if (($slide->link && $action==1) || $action>1) { ?>
-								<a <?php echo $attr; ?> href="<?php echo ($action>1 ? $slide->image : $slide->link); ?>" target="<?php echo $slide->target; ?>">
+          			<li>
+          				<?php if($slide->image) { ?>
+	            			<?php if (($slide->link && $params->get('link_image',1)==1) || $params->get('link_image',1)==2) { ?>
+								<a <?php echo ($params->get('link_image',1)==2 ? 'class="djmodal"' : ''); ?> href="<?php echo ($params->get('link_image',1)==2 ? $slide->image : $slide->link); ?>" target="<?php echo $slide->target; ?>">
 							<?php } ?>
-								<img class="dj-image" src="<?php echo $slide->image; ?>" alt="<?php echo $slide->alt; ?>" style="<?php echo $style['image'] ?>"/>
-							<?php if (($slide->link && $action==1) || $action>1) { ?>
+								<img src="<?php echo $slide->image; ?>" alt="<?php echo $slide->alt; ?>" />
+							<?php if (($slide->link && $params->get('link_image',1)==1) || $params->get('link_image',1)==2) { ?>
 								</a>
 							<?php } ?>
 						<?php } ?>
-						<?php if($params->get('slider_source') && ($params->get('show_title') || ($params->get('show_desc') && !empty($slide->description) || ($params->get('show_readmore') && $slide->link)))) { ?>
+						<?php if($params->get('slider_source') && ($params->get('show_title') || ($params->get('show_desc') && !empty($slide->description)))) { ?>
 						<!-- Slide description area: START -->
-						<div class="slide-desc" style="<?php echo $style['desc'] ?>">
+						<div class="slide-desc">
 						  <div class="slide-desc-in">	
-							<div class="slide-desc-bg slide-desc-bg-<?php echo $theme ?>"></div>
-							<div class="slide-desc-text slide-desc-text-<?php echo $theme ?>">
+							<div class="slide-desc-bg"></div>
+							<div class="slide-desc-text">
 							<?php if($params->get('show_title')) { ?>
 								<div class="slide-title">
 									<?php if($params->get('link_title') && $slide->link) { ?><a href="<?php echo $slide->link; ?>" target="<?php echo $slide->target; ?>"><?php } ?>
@@ -94,23 +83,23 @@ defined('_JEXEC') or die ('Restricted access'); ?>
                 <?php } ?>
         	</ul>
         </div>
-        <?php if($show->arr || $show->btn) { ?>
-        <div id="navigation<?php echo $mid; ?>" class="navigation-container" style="<?php echo $style['navi'] ?>">
-        	<?php if($show->arr) { ?>
-        	<img id="prev<?php echo $mid; ?>" class="prev-button <?php echo $show->arr==1 ? 'showOnHover':'' ?>" src="<?php echo $navigation->prev; ?>" alt="<?php echo $direction == 'rtl' ? JText::_('MOD_DJIMAGESLIDER_NEXT') : JText::_('MOD_DJIMAGESLIDER_PREVIOUS'); ?>" />
-			<img id="next<?php echo $mid; ?>" class="next-button <?php echo $show->arr==1 ? 'showOnHover':'' ?>" src="<?php echo $navigation->next; ?>" alt="<?php echo $direction == 'rtl' ? JText::_('MOD_DJIMAGESLIDER_PREVIOUS') : JText::_('MOD_DJIMAGESLIDER_NEXT'); ?>" />
+        <?php if($params->get('show_arrows') || $params->get('show_buttons')) { ?>
+        <div id="navigation<?php echo $mid; ?>" class="navigation-container">
+        	<?php if($params->get('show_arrows')) { ?>
+        	<img id="prev<?php echo $mid; ?>" class="prev-button" src="<?php echo $navigation->prev; ?>" alt="<?php echo JText::_('MOD_DJIMAGESLIDER_PREVIOUS'); ?>" />
+			<img id="next<?php echo $mid; ?>" class="next-button" src="<?php echo $navigation->next; ?>" alt="<?php echo JText::_('MOD_DJIMAGESLIDER_NEXT'); ?>" />
 			<?php } ?>
-			<?php if($show->btn) { ?>
-			<img id="play<?php echo $mid; ?>" class="play-button <?php echo $show->btn==1 ? 'showOnHover':'' ?>" src="<?php echo $navigation->play; ?>" alt="<?php echo JText::_('MOD_DJIMAGESLIDER_PLAY'); ?>" />
-			<img id="pause<?php echo $mid; ?>" class="pause-button <?php echo $show->btn==1 ? 'showOnHover':'' ?>" src="<?php echo $navigation->pause; ?>" alt="<?php echo JText::_('MOD_DJIMAGESLIDER_PAUSE'); ?>" />
+			<?php if($params->get('show_buttons')) { ?>
+			<img id="play<?php echo $mid; ?>" class="play-button" src="<?php echo $navigation->play; ?>" alt="<?php echo JText::_('MOD_DJIMAGESLIDER_PLAY'); ?>" />
+			<img id="pause<?php echo $mid; ?>" class="pause-button" src="<?php echo $navigation->pause; ?>" alt="<?php echo JText::_('MOD_DJIMAGESLIDER_PAUSE'); ?>" />
 			<?php } ?>
         </div>
         <?php } ?>
-        <?php if($show->idx) { ?>
-		<div id="cust-navigation<?php echo $mid; ?>" class="<?php echo $params->get('idx_style', 0) ? 'navigation-numbers' : 'navigation-container-custom' ?> <?php echo $show->idx==2 ? 'showOnHover':'' ?>">
+        <?php if($params->get('show_custom_nav')) { ?>
+		<div id="cust-navigation<?php echo $mid; ?>" class="navigation-container-custom">
 			<?php $i = 0; foreach ($slides as $slide) { 
-				?><span class="load-button<?php if ($i == 0) echo ' load-button-active'; ?>"><?php if($params->get('idx_style')) echo ($i+1) ?></span><?php 
-			$i++; } ?>
+				?><span class="load-button<?php if ($i == 0) echo ' load-button-active'; ?>"><?php //echo ($i+1) ?></span><?php 
+				if(count($slides) == $i + $count) break; else $i++; } ?>
         </div>
         <?php } ?>
     </div>

@@ -30,7 +30,7 @@ JToolBarHelper::title(JText::_('OSM_DASHBOARD'), 'generic.png');
 					$this->quickiconButton('index.php?option=com_osmembership&task=subscribers.export', 'icon-48-export.png', JText::_('OSM_EXPORT_SUBSCRIBERS'));
 					$this->quickiconButton('index.php?option=com_osmembership&view=countries', 'icon-48-countries.png', JText::_('OSM_COUNTRIES'));
 					$this->quickiconButton('index.php?option=com_osmembership&view=states', 'icon-48-states.png', JText::_('OSM_STATES'));
-                    /*$this->quickiconButton('index.php?option=com_osmembership', 'icon-48-download.png', JText::_('OSM_UPDATE_CHECKING'), 'update-check');*/
+                    $this->quickiconButton('index.php?option=com_osmembership', 'icon-48-download.png', JText::_('OSM_UPDATE_CHECKING'), 'update-check');
 				?>
 			</div>
 		</td>
@@ -39,8 +39,8 @@ JToolBarHelper::title(JText::_('OSM_DASHBOARD'), 'generic.png');
 				echo JHtml::_('sliders.start', 'statistics_pane');
 				echo JHtml::_('sliders.panel', JText::_('OSM_LASTEST_SUBSCRIPTIONS'), 'subscriptions');
 				echo $this->loadTemplate('subscriptions');
-				//echo JHtml::_('sliders.panel', JText::_('OSM_USEFUL_LINKS'), 'links_panel');
-				//echo $this->loadTemplate('useful_links');					
+				echo JHtml::_('sliders.panel', JText::_('OSM_USEFUL_LINKS'), 'links_panel');
+				echo $this->loadTemplate('useful_links');					
 				echo JHtml::_('sliders.end');
 			?>
 		</td>

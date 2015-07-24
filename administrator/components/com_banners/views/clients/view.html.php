@@ -94,7 +94,7 @@ class BannersViewClients extends JViewLegacy
 			JToolbarHelper::trash('clients.trash');
 		}
 
-		if ($canDo->get('core.admin') || $canDo->get('core.options'))
+		if ($canDo->get('core.admin'))
 		{
 			JToolbarHelper::preferences('com_banners');
 		}

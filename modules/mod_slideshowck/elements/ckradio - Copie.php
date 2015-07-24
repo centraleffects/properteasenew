@@ -99,13 +99,13 @@ class JFormFieldCkradio extends JFormField {
         $text = JText::_($text);
 
         // Build the class for the label.
-        $class = !empty($this->description) ? 'hasTip hasTooltip' : '';
+        $class = !empty($this->description) ? 'hasTip' : '';
 
         $label .= '<label id="' . $this->id . '-lbl" for="' . $this->id . '" class="' . $class . '"';
 
         // If a description is specified, use it to build a tooltip.
         if (!empty($this->description)) {
-            $label .= ' title="' . htmlspecialchars(trim($text, ':') . '<br />' .
+            $label .= ' title="' . htmlspecialchars(trim($text, ':') . '::' .
                             JText::_($this->description), ENT_COMPAT, 'UTF-8') . '"';
         }
 

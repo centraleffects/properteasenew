@@ -50,12 +50,6 @@ class InstallerControllerUpdate extends JControllerLegacy
 		$app          = JFactory::getApplication();
 		$redirect_url = $app->getUserState('com_installer.redirect_url');
 
-		// Don't redirect to an external URL.
-		if (!JUri::isInternal($redirect_url))
-		{
-			$redirect_url = '';
-		}
-
 		if (empty($redirect_url))
 		{
 			$redirect_url = JRoute::_('index.php?option=com_installer&view=update', false);
@@ -80,7 +74,8 @@ class InstallerControllerUpdate extends JControllerLegacy
 	 */
 	public function find()
 	{
-		(JSession::checkToken() or JSession::checkToken('get')) or jexit(JText::_('JINVALID_TOKEN'));
+		// Check for request forgeries.
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get the caching duration.
 		$component     = JComponentHelper::getComponent('com_installer');
@@ -140,16 +135,11 @@ class InstallerControllerUpdate extends JControllerLegacy
 	 */
 	public function ajax()
 	{
-		$app = JFactory::getApplication();
-
-		if (!JSession::checkToken('get'))
-		{
-			JResponse::setHeader('status', 403, true);
-			$app->sendHeaders();
-			echo JText::_('JINVALID_TOKEN');
-			$app->close();
-		}
-
+		/*
+		 * Note: we don't do a token check as we're fetching information
+		 * asynchronously. This means that between requests the token might
+		 * change, making it impossible for AJAX to work.
+		 */
 		$eid               = $this->input->getInt('eid', 0);
 		$skip              = $this->input->get('skip', array(), 'array');
 		$cache_timeout     = $this->input->getInt('cache_timeout', 0);
@@ -199,6 +189,6 @@ class InstallerControllerUpdate extends JControllerLegacy
 
 		echo json_encode($updates);
 
-		$app->close();
+		JFactory::getApplication()->close();
 	}
 }

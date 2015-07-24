@@ -1,13 +1,13 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  com_config
+ * @package     Joomla.Administrator
+ * @subpackage  Joomla.Libraries
  *
  * @copyright   Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access');
 
 /**
  * Base Display Controller
@@ -34,7 +34,7 @@ class ConfigControllerCmsbase extends JControllerBase
 	public function execute()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken() or jexit(JText::_('JInvalid_Token'));
 
 		// Get the application
 		$this->app = $this->getApplication();

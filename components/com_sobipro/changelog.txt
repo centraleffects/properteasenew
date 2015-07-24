@@ -1,6 +1,6 @@
 Changelog for SobiPro Component
 ===================================================
-@version: $Id: changelog.txt 4422 2015-03-31 11:13:13Z Radek Suski $
+@version: $Id: changelog.txt 4398 2015-02-28 10:34:12Z Radek Suski $
 @package: SobiPro Component for Joomla!
 
 @author
@@ -17,7 +17,7 @@ See http://www.gnu.org/licenses/gpl.html and http://sobipro.sigsiu.net/licenses.
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-$Date: 2015-03-31 13:13:13 +0200 (Tue, 31 Mar 2015) $
+$Date: 2015-02-28 11:34:12 +0100 (Sat, 28 Feb 2015) $
 
 Legend:
  (*) - Security Fix
@@ -25,19 +25,6 @@ Legend:
  (+) - Addition
  (-) - Removed
  (!) - Change
-
--------------------
-1.1.13 (31 March 2015)
--------------------
-
-    (#) Valid since / valid until time issues while creating new ACL rule (Issue #1415)
-    (#) Dependency field don't work in search view (Issue #1417)
-    (#) Notices in function fixTimes() (Issue #1423)
-    (#) Access own unpublished rule hide other users entries (Issue #1419)
-
-    (+) Possibility to prevent choosing parent options in the select field with dependency list (Related to #1421)
-
-    (!) Showing the fields in default2 template moved to a separate template
 
 
 -------------------

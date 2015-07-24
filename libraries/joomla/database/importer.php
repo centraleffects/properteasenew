@@ -161,7 +161,7 @@ abstract class JDatabaseImporter
 	 * @since   13.1
 	 * @throws  RuntimeException on error.
 	 */
-	public function mergeStructure()
+	protected function mergeStructure()
 	{
 		$prefix = $this->db->getPrefix();
 		$tables = $this->db->getTableList();

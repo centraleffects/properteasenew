@@ -1,6 +1,6 @@
 /**
  * @package		Hathor
- * @copyright	Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -12,8 +12,9 @@
  * Set focus to username on the login screen
  */
 function setFocus() {
-	if (jQuery("#login-page").length) {
-		jQuery('#form-login').find('input[name="username"]').focus()
+	if (document.id("login-page")) {
+		document.id("form-login").username.select();
+		document.id("form-login").username.focus();
 	}
 }
 
@@ -22,16 +23,13 @@ function setFocus() {
  * Opera
  */
 function setSkip() {
-	var $ = jQuery.noConflict();
-	var browser = $.browser;
-	if (browser.chrome || browser.safari || browser.opera) {
-		var $target = $('#skiptarget');
-		$target.attr('href',"#skiptarget");
-		$target.text("Start of main content");
-		$target.attr("tabindex", "0");
-		$('#skiplink').on("click", function(){
-			$('#skiptarget').focus();
-		});
+	if (Browser.chrome || Browser.safari || Browser.opera) {
+		var target = document.id('skiptarget');
+		target.href = "#skiptarget";
+		target.innerText = "Start of main content";
+		target.setAttribute("tabindex", "0");
+		document.id('skiplink').setAttribute("onclick",
+				"document.id('skiptarget').focus();");
 	}
 }
 
@@ -43,8 +41,8 @@ function setSkip() {
  * @return
  */
 function setRoleAttribute(id, rolevalue) {
-	if (jQuery('#' + id).length) {
-		jQuery('#'+ id).attr("role", rolevalue);
+	if (document.id(id)) {
+		document.id(id).setAttribute("role", rolevalue);
 	}
 }
 
@@ -72,8 +70,8 @@ function setAriaRoleElementsById() {
  * @return
  */
 function setPropertyAttribute(el, prop) {
-	if (jQuery(el).length) {
-		jQuery(el).attr(prop, "true");
+	if (document.getElements(el)) {
+		document.getElements(el).set(prop, "true");
 	}
 }
 
@@ -101,32 +99,32 @@ function setAriaProperties() {
  * mootooled by Bill Tomczak
  */
 
-jQuery(function($){
-	var $menu = $('#menu');
-	if ($menu.length && !$menu.hasClass('disabled')) {
-		$menu.find('li').each(function(){
-			$(this).on('mouseenter', function(){
-				$(this).addClass('sfhover');
-			});
-			$(this).on('mouseleave', function() {
-				$(this).removeClass('sfhover');
-			});
-		});
+window.addEvent('domready', function(){
+	  var menu = document.id('menu');
+	  if (menu && !menu.hasClass('disabled')) {
+	    menu.getElements('li').each(function(cel){
+	      cel.addEvent('mouseenter', function(){
+	        this.addClass('sfhover');
+	      });
+	      cel.addEvent('mouseleave', function() {
+					this.removeClass('sfhover');
+				});
+	    });
 
-		$menu.find('a').each(function() {
-			$(this).on('focus', function() {
-				$(this).addClass('sffocus');
-				$(this).closest('li').addClass('sfhover');
+	  	menu.getElements('a').each(function(ael) {
+				ael.addEvent('focus', function() {
+					this.addClass('sffocus');
+					this.getParents('li').addClass('sfhover');
+				});
+				ael.addEvent('blur', function() {
+					this.removeClass('sffocus');
+					this.getParents('li').removeClass('sfhover');
+				});
 			});
-			$(this).on('blur', function() {
-				$(this).removeClass('sffocus');
-				$(this).closest('li').removeClass('sfhover');
-			});
-		});
-	}
-});
+		}
+	});
 
-jQuery(function() {
+window.addEvent('domready', function() {
 	setFocus();
 	setSkip();
 	setAriaRoleElementsById();

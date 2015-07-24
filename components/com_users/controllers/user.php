@@ -27,7 +27,7 @@ class UsersControllerUser extends UsersController
 	 */
 	public function login()
 	{
-		JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken('post') or jexit(JText::_('JInvalid_Token'));
 
 		$app    = JFactory::getApplication();
 		$input  = $app->input;
@@ -40,12 +40,6 @@ class UsersControllerUser extends UsersController
 		$data['username']  = $input->$method->get('username', '', 'USERNAME');
 		$data['password']  = $input->$method->get('password', '', 'RAW');
 		$data['secretkey'] = $input->$method->get('secretkey', '', 'RAW');
-
-		// Don't redirect to an external URL.
-		if (!JUri::isInternal($data['return']))
-		{
-			$data['return'] = '';
-		}
 
 		// Set the return URL if empty.
 		if (empty($data['return']))
@@ -97,7 +91,7 @@ class UsersControllerUser extends UsersController
 	 */
 	public function logout()
 	{
-		JSession::checkToken('request') or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken('request') or jexit(JText::_('JInvalid_Token'));
 
 		$app = JFactory::getApplication();
 

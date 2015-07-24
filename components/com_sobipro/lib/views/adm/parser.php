@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version: $Id: parser.php 4421 2015-03-28 14:13:21Z Radek Suski $
+ * @version: $Id: parser.php 4387 2015-02-19 12:24:35Z Radek Suski $
  * @package: SobiPro Library
  * @author
  * Name: Sigrid Suski & Radek Suski, Sigsiu.NET GmbH
@@ -12,8 +12,8 @@
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License version 3 as published by the Free Software Foundation, and under the additional terms according section 7 of GPL v3.
  * See http://www.gnu.org/licenses/lgpl.html and http://sobipro.sigsiu.net/licenses.
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * $Date: 2015-03-28 15:13:21 +0100 (Sat, 28 Mar 2015) $
- * $Revision: 4421 $
+ * $Date: 2015-02-19 13:24:35 +0100 (Thu, 19 Feb 2015) $
+ * $Revision: 4387 $
  * $Author: Radek Suski $
  * $HeadURL: file:///opt/svn/SobiPro/Component/branches/SobiPro-1.1/Site/lib/views/adm/parser.php $
  */
@@ -199,7 +199,7 @@ class SPTplParser
 				break;
 			case 'url':
 				if ( isset( $element[ 'attributes' ][ 'image' ] ) ) {
-					$this->_out[ ] = "<img src=\"{$element['attributes']['image']}\" alt=\"{$element['attributes']['label']}\" />";
+					$this->_out[ ] = "<img src=\"{$element[ 'attributes' ]['image']}\" alt=\"{$element[ 'attributes' ]['label']}\" />";
 					$this->closeElement( $element );
 					$this->openElement( $element );
 				}
@@ -482,10 +482,10 @@ class SPTplParser
 					$class = null;
 					$target = null;
 					if ( $this->istSet( $cell[ 'attributes' ], 'link-class' ) ) {
-						$class = "class=\"{$cell['attributes']['link-class']}\" ";
+						$class = "class=\"{$cell[ 'attributes' ]['link-class']}\" ";
 					}
 					if ( $this->istSet( $cell[ 'attributes' ], 'target' ) ) {
-						$target = "target=\"{$cell['attributes']['target']}\" ";
+						$target = "target=\"{$cell[ 'attributes' ]['target']}\" ";
 					}
 					$this->_out[ ] = "<a href=\"{$cell['link']}\"{$class}{$target} >";
 				}
@@ -498,7 +498,7 @@ class SPTplParser
 				if ( $this->istSet( $cell, 'label' ) ) {
 					$class = null; //if label in cell directly (with optional class) add a span as it could be a label/value pair
 					if ( $this->istSet( $cell[ 'attributes' ], 'class' ) ) {
-						$class = "class=\"{$cell['attributes']['class']}Label\"";
+						$class = "class=\"{$cell[ 'attributes' ]['class']}Label\"";
 					}
 					$this->_out[ ] = "<span {$class}>{$cell['label']}</span>";
 				}
@@ -512,9 +512,6 @@ class SPTplParser
 				if ( $type == 'link' ) {
 					$this->_out[ ] = "</a>";
 				}
-				break;
-			case 'image':
-				$this->_out[ ] = "<img src=\"{$cell['link']}\" />";
 				break;
 			case 'ordering':
 				if ( isset( $cell[ 'attributes' ][ 'label' ] ) ) {

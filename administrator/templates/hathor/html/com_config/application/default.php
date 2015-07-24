@@ -9,21 +9,21 @@
 
 defined('_JEXEC') or die;
 
-JHtml::_('behavior.formvalidator');
+JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.switcher');
 
 // Load submenu template, using element id 'submenu' as needed by behavior.switcher
 $this->document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submenu');
 
-JFactory::getDocument()->addScriptDeclaration("
+?>
+<script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
-		if (task == 'application.cancel' || document.formvalidator.isValid(document.getElementById('application-form'))) {
+		if (task == 'application.cancel' || document.formvalidator.isValid(document.id('application-form'))) {
 			Joomla.submitform(task, document.getElementById('application-form'));
 		}
 	}
-");
-?>
+</script>
 
 <form action="<?php echo JRoute::_('index.php?option=com_config'); ?>" id="application-form" method="post" name="adminForm" class="form-validate">
 	<?php if ($this->ftp) : ?>

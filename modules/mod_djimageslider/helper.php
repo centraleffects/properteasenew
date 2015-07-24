@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Id: helper.php 25 2015-06-29 19:45:38Z szymon $
+ * @version $Id: helper.php 5 2013-01-11 10:22:28Z szymon $
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -157,14 +157,11 @@ class modDJImageSliderHelper
 		}
 		
 		$desc = strip_tags($slide->description);
-		
-		if($limit && $limit - strlen($desc) < 0) {
-			// don't cut in the middle of the word unless it's longer than 20 chars
-			if($pos = strpos($desc, ' ', $limit)) $limit = ($pos - $limit > 20) ? $limit : $pos;
-			// cut text and add dots
+		if($limit && $limit < strlen($desc)) {
+			$limit = strpos($desc, ' ', $limit);
 			$desc = substr($desc, 0, $limit);
-			if(preg_match('/[a-zA-Z0-9]$/', $desc)) $desc.='&hellip;';
-			$desc = '<p>'.nl2br($desc).'</p>';
+			if(preg_match('/[A-Za-z0-9]$/', $desc)) $desc.=' ...';
+			$desc = nl2br($desc);
 		} else { // no limit or limit greater than description
 			$desc = $slide->description;
 		}
@@ -172,140 +169,46 @@ class modDJImageSliderHelper
 		return $desc;
 	}
 
-	private function truncateDescription($text, $limit) {
-	
-		$text = preg_replace('/{djmedia\s*(\d*)}/i', '', $text);
-	
-		$desc = strip_tags($text);
-	
-		if($limit - strlen($desc) < 0) {
-			// don't cut in the middle of the word unless it's longer than 20 chars
-			if($pos = strpos($desc, ' ', $limit)) $limit = ($pos - $limit > 20) ? $limit : $pos;
-			// cut text and add dots
-			$desc = substr($desc, 0, $limit);
-			if(preg_match('/[a-zA-Z0-9]$/', $desc)) $desc.='&hellip;';
-			$desc = '<p>'.nl2br($desc).'</p>';
-		} else { // no limit or limit greater than description
-			$desc = $text;
-		}
-	
-		return $desc;
-	}
-	
 	static function getAnimationOptions(&$params) {
-		$transition = $params->get('effect');
-		$easing = $params->get('effect_type');
+		$effect = $params->get('effect');
+		$effect_type = $params->get('effect_type');
 		if(!is_numeric($duration = $params->get('duration'))) $duration = 0;
 		if(!is_numeric($delay = $params->get('delay'))) $delay = 3000;
 		$autoplay = $params->get('autoplay');
 		if($params->get('slider_type')==2 && !$duration) {
-			$transition = 'Sine';
-			$easing = 'easeInOut';
-			$duration = 400;
-		} else switch($transition){
+			$transition = 'linear';
+			$duration = 600;
+		} else switch($effect){
 			case 'Linear':
-				$easing = '';
 				$transition = 'linear';
-				if(!$duration) $duration = 400;
+				if(!$duration) $duration = 600;
 				break;
+			case 'Circ':
+			case 'Expo':
 			case 'Back':
-				if(!$easing) $easing = 'easeIn';
-				if(!$duration) $duration = 400;
-				break;
-			case 'Bounce':
-				if(!$easing) $easing = 'easeOut';
-				if(!$duration) $duration = 800;
-				break;
-			case 'Elastic':
-				if(!$easing) $easing = 'easeOut';
+				if(!$effect_type) $transition = $effect.'.easeInOut';
+				else $transition = $effect.'.'.$effect_type;
 				if(!$duration) $duration = 1000;
 				break;
+			case 'Bounce':
+				if(!$effect_type) $transition = $effect.'.easeOut';
+				else $transition = $effect.'.'.$effect_type;
+				if(!$duration) $duration = 1200;
+				break;
+			case 'Elastic':
+				if(!$effect_type) $transition = $effect.'.easeOut';
+				else $transition = $effect.'.'.$effect_type;
+				if(!$duration) $duration = 1500;
+				break;
+			case 'Cubic':
 			default: 
-				if(!$easing) $easing = 'easeInOut';
-				if(!$duration) $duration = 400;
+				if(!$effect_type) $transition = 'Cubic.easeInOut';
+				else $transition = 'Cubic.'.$effect_type;
+				if(!$duration) $duration = 800;
 		}
-		// add transition duration to delay
 		$delay = $delay + $duration;
-		$css3transition = $params->get('css3') ? modDJImageSliderHelper::getCSS3Transition($transition, $easing) : '';
-		
-		$version = new JVersion;
-		if (version_compare($version->getShortVersion(), '3.0.0', '<')) { // Joomla!2.5 - Mootools
-			if($transition=='ease') $transition = 'Sine';
-			$transition = $transition.(!empty($easing) ? '.'.$easing : '');
-			$transition = modDJImageSliderHelper::getMooTransition($transition);
-		} else { // Joomla!3 - jQuery
-			if($transition=='ease') {
-				$transition = 'swing';
-				$easing = '';
-			}
-			$transition = $easing.$transition;
-		}
-		
-		$options = json_encode(array('auto' => $autoplay, 'transition' => $transition, 'css3transition' => $css3transition, 'duration' => $duration, 'delay' => $delay));
-		
+		$options = "{auto: $autoplay, transition: Fx.Transitions.$transition, duration: $duration, delay: $delay}";
 		return $options;
-	}
-	
-	static function getMooTransition($transition) {
-		
-		$parts = explode('.', $transition);
-		
-		$easing = '';
-		if(isset($parts[1])) {
-			switch($parts[1]) {
-				case 'easeIn': $easing = ':in'; break;
-				case 'easeOut': $easing = ':out'; break;
-				default: $easing = ':in:out'; break;
-			}
-		}
-		
-		return strtolower($parts[0]).$easing;
-		
-	}
-	
-	static function getCSS3Transition($transition, $easing) {
-		
-		switch($easing) {
-			
-			case '': return 'linear';
-			case 'easeInOut':
-				switch($transition) {
-					case 'Quad': 	return 'cubic-bezier(0.455, 0.030, 0.515, 0.955)';
-					case 'Cubic': 	return 'cubic-bezier(0.645, 0.045, 0.355, 1.000)';
-					case 'Quart':	return 'cubic-bezier(0.645, 0.045, 0.355, 1.000)';
-					case 'Quint': 	return 'cubic-bezier(0.860, 0.000, 0.070, 1.000)';
-					case 'Sine': 	return 'cubic-bezier(0.445, 0.050, 0.550, 0.950)';
-					case 'Expo': 	return 'cubic-bezier(1.000, 0.000, 0.000, 1.000)';
-					case 'Circ': 	return 'cubic-bezier(0.785, 0.135, 0.150, 0.860)';
-					case 'Back': 	return 'cubic-bezier(0.680, -0.550, 0.265, 1.550)';
-					default: 		return 'ease-in-out';
-				}
-			case 'easeOut':
-				switch($transition) {
-					case 'Quad': 	return 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
-					case 'Cubic': 	return 'cubic-bezier(0.215, 0.610, 0.355, 1.000)';
-					case 'Quart':	return 'cubic-bezier(0.165, 0.840, 0.440, 1.000)';
-					case 'Quint': 	return 'cubic-bezier(0.230, 1.000, 0.320, 1.000)';
-					case 'Sine': 	return 'cubic-bezier(0.390, 0.575, 0.565, 1.000)';
-					case 'Expo': 	return 'cubic-bezier(0.190, 1.000, 0.220, 1.000)';
-					case 'Circ': 	return 'cubic-bezier(0.075, 0.820, 0.165, 1.000)';
-					case 'Back': 	return 'cubic-bezier(0.175, 0.885, 0.320, 1.275)';
-					default: 		return 'ease-out';
-				}
-			case 'easeIn':
-				switch($transition) {
-					case 'Quad': 	return 'cubic-bezier(0.550, 0.085, 0.680, 0.530)';
-					case 'Cubic': 	return 'cubic-bezier(0.550, 0.055, 0.675, 0.190)';
-					case 'Quart':	return 'cubic-bezier(0.895, 0.030, 0.685, 0.220)';
-					case 'Quint': 	return 'cubic-bezier(0.755, 0.050, 0.855, 0.060)';
-					case 'Sine': 	return 'cubic-bezier(0.470, 0.000, 0.745, 0.715)';
-					case 'Expo': 	return 'cubic-bezier(0.950, 0.050, 0.795, 0.035)';
-					case 'Circ': 	return 'cubic-bezier(0.600, 0.040, 0.980, 0.335)';
-					case 'Back': 	return 'cubic-bezier(0.600, -0.280, 0.735, 0.045)';
-					default: 		return 'ease-in';
-				}
-			default: return 'ease';
-		}
 	}
 	
 	static function getSlideTarget($link) {
@@ -326,24 +229,22 @@ class modDJImageSliderHelper
 		$play = $params->get('play_button');
 		$pause = $params->get('pause_button');
 		
-		$theme = $params->set('theme', 'default');
-		
 		if($params->get('slider_type')==1) {			
-			if(empty($prev) || !file_exists(JPATH_ROOT.DS.$prev)) $prev = 'modules/mod_djimageslider/themes/'.$theme.'/images/up.png';			
-			if(empty($next) || !file_exists(JPATH_ROOT.DS.$next)) $next = 'modules/mod_djimageslider/themes/'.$theme.'/images/down.png';
+			if(empty($prev) || !file_exists(JPATH_ROOT.DS.$prev)) $prev = JURI::base().'/modules/mod_djimageslider/assets/up.png';			
+			if(empty($next) || !file_exists(JPATH_ROOT.DS.$next)) $next = JURI::base().'/modules/mod_djimageslider/assets/down.png';
 		} else {			
-			if(empty($prev) || !file_exists(JPATH_ROOT.DS.$prev)) $prev = 'modules/mod_djimageslider/themes/'.$theme.'/images/prev.png';			
-			if(empty($next) || !file_exists(JPATH_ROOT.DS.$next)) $next = 'modules/mod_djimageslider/themes/'.$theme.'/images/next.png';
+			if(empty($prev) || !file_exists(JPATH_ROOT.DS.$prev)) $prev = JURI::base().'/modules/mod_djimageslider/assets/prev.png';			
+			if(empty($next) || !file_exists(JPATH_ROOT.DS.$next)) $next = JURI::base().'/modules/mod_djimageslider/assets/next.png';
 		}
-		if(empty($play) || !file_exists(JPATH_ROOT.DS.$play)) $play = 'modules/mod_djimageslider/themes/'.$theme.'/images/play.png';
-		if(empty($pause) || !file_exists(JPATH_ROOT.DS.$pause)) $pause = 'modules/mod_djimageslider/themes/'.$theme.'/images/pause.png';
+		if(empty($play) || !file_exists(JPATH_ROOT.DS.$play)) $play = JURI::base().'/modules/mod_djimageslider/assets/play.png';
+		if(empty($pause) || !file_exists(JPATH_ROOT.DS.$pause)) $pause = JURI::base().'/modules/mod_djimageslider/assets/pause.png';
 		
 		$navi = (object) array('prev'=>$prev,'next'=>$next,'play'=>$play,'pause'=>$pause);
 		
 		return $navi;
 	}
 	
-	static function getStyles($params) {
+	static function getStyleSheet(&$params, &$mid) {
 		if(!is_numeric($slide_width = $params->get('image_width'))) $slide_width = 240;
 		if(!is_numeric($slide_height = $params->get('image_height'))) $slide_height = 160;
 		if(!is_numeric($max = $params->get('max_images'))) $max = 20;
@@ -397,21 +298,117 @@ class modDJImageSliderHelper
 			$image_width = 'width: auto';
 			$image_height = 'height: 100%';
 		}
-		
-		$style = array();
-		$style['slider'] = 'height: '.$slider_height.'px; width: '.$slider_width.'px;';
-		if(!$params->get('full_width', 0)) $style['slider'].= ' max-width: '.$slider_width.'px;';
-		$style['image'] = $image_width.'; '.$image_height.';';		
-		$style['navi'] = 'top: '.$arrows_top.'%; margin: 0 '.$arrows_horizontal.'px;';
-		$style['desc'] = 'bottom: '.$desc_bottom.'%; left: '.$desc_left.'%; width: '.$desc_width.'%;';
-		if($params->get('direction') == 'rtl') {
-			$style['slide'] = 'margin: 0 0 '.$padding_bottom.'px '.$padding_right.'px !important; height: '.$slide_height.'px; width: '.$slide_width.'px;';
-		} else {
-			$style['slide'] = 'margin: 0 '.$padding_right.'px '.$padding_bottom.'px 0 !important; height: '.$slide_height.'px; width: '.$slide_width.'px;';
-			
+				
+		$css = '
+		/* Styles for DJ Image Slider with module id '.$mid.' */
+		#djslider-loader'.$mid.' {
+			margin: 0 auto;
+			position: relative;
+		}
+		#djslider'.$mid.' {
+			margin: 0 auto;
+			position: relative;
+			height: '.$slider_height.'px; 
+			width: '.$slider_width.'px;
+			max-width: '.$slider_width.'px;
+		}
+		#slider-container'.$mid.' {
+			position: absolute;
+			overflow:hidden;
+			left: 0; 
+			top: 0;
+			height: 100%;
+			width: 100%;
+		}
+		#djslider'.$mid.' ul#slider'.$mid.' {
+			margin: 0 !important;
+			padding: 0 !important;
+			border: 0 !important;
+		}
+		#djslider'.$mid.' ul#slider'.$mid.' li {
+			list-style: none outside !important;
+			float: left;
+			margin: 0 !important;
+			border: 0 !important;
+			padding: 0 '.$padding_right.'px '.$padding_bottom.'px 0 !important;
+			position: relative;
+			height: '.$slide_height.'px;
+			width: '.$slide_width.'px;
+			background: none;
+			overflow: hidden;
 		}
 		
-		return $style;
+		#slider'.$mid.' li a img, #slider'.$mid.' li a:hover img {
+			border: 0 !important;
+		}
+		';
+		if($params->get('slider_source') && ($params->get('show_title') || ($params->get('show_desc')))) $css.= '
+		/* Slide description area */
+		#slider'.$mid.' .slide-desc {
+			position: absolute;
+			bottom: '.$desc_bottom.'%;
+			left: '.$desc_left.'%;
+			width: '.$desc_width.'%;
+		}
+		#slider'.$mid.' .slide-desc-in {
+			position: relative;
+			margin: 0 '.$padding_right.'px '.$padding_bottom.'px 0 !important;
+		}
+		#slider'.$mid.' .slide-desc-bg {
+			position:absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+		#slider'.$mid.' .slide-desc-text {
+			position: relative;
+		}
+		#slider'.$mid.' .slide-desc-text h3 {
+			display: block !important;
+		}
+		';
+		if($params->get('show_buttons') || $params->get('show_arrows')) $css .= '
+		/* Navigation buttons */
+		#navigation'.$mid.' {
+			position: relative;
+			top: '.$arrows_top.'%; 
+			margin: 0 '.$arrows_horizontal.'px;
+			text-align: center !important;
+		}
+		';
+		if($params->get('show_arrows')) $css .= '
+		#prev'.$mid.' {
+			cursor: pointer;
+			display: block;
+			position: absolute;
+			left: 0;
+		}
+		#next'.$mid.' {
+			cursor: pointer;
+			display: block;
+			position: absolute;
+			right: 0;
+		}
+		';
+		if($params->get('show_buttons')) $css .= '
+		#play'.$mid.', 
+		#pause'.$mid.' {
+			cursor: pointer;
+			display: block;
+			position: absolute;
+			left: 50%;
+		}
+		';
+		if($params->get('show_custom_nav')) $css .= '
+		#cust-navigation'.$mid.' {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+		}
+		';
+		
+		return $css;
 	}
 
 }

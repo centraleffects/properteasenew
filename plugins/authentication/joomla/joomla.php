@@ -23,7 +23,7 @@ class PlgAuthenticationJoomla extends JPlugin
 	 * @param   array   $options      Array of extra options
 	 * @param   object  &$response    Authentication response object
 	 *
-	 * @return  void
+	 * @return  boolean
 	 *
 	 * @since   1.5
 	 */
@@ -37,7 +37,7 @@ class PlgAuthenticationJoomla extends JPlugin
 			$response->status        = JAuthentication::STATUS_FAILURE;
 			$response->error_message = JText::_('JGLOBAL_AUTH_EMPTY_PASS_NOT_ALLOWED');
 
-			return;
+			return false;
 		}
 
 		// Get a database object
@@ -178,7 +178,7 @@ class PlgAuthenticationJoomla extends JPlugin
 						// Two factor authentication is not enabled on this account.
 						// Any string is assumed to be a valid OTEP.
 
-						return;
+						return true;
 					}
 					else
 					{
@@ -187,7 +187,7 @@ class PlgAuthenticationJoomla extends JPlugin
 						 * user has used them all up. Therefore anything he enters is
 						 * an invalid OTEP.
 						 */
-						return;
+						return false;
 					}
 				}
 

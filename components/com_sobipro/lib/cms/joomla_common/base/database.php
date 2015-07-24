@@ -1,6 +1,6 @@
 <?php
 /**
- * @version: $Id: database.php 4404 2015-03-12 09:31:45Z Radek Suski $
+ * @version: $Id: database.php 4387 2015-02-19 12:24:35Z Radek Suski $
  * @package: SobiPro Library
  * @author
  * Name: Sigrid Suski & Radek Suski, Sigsiu.NET GmbH
@@ -11,8 +11,8 @@
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License version 3 as published by the Free Software Foundation, and under the additional terms according section 7 of GPL v3.
  * See http://www.gnu.org/licenses/lgpl.html and http://sobipro.sigsiu.net/licenses.
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * $Date: 2015-03-12 10:31:45 +0100 (Thu, 12 Mar 2015) $
- * $Revision: 4404 $
+ * $Date: 2015-02-19 13:24:35 +0100 (Thu, 19 Feb 2015) $
+ * $Revision: 4387 $
  * $Author: Radek Suski $
  * $HeadURL: file:///opt/svn/SobiPro/Component/branches/SobiPro-1.1/Site/lib/cms/joomla_common/base/database.php $
  */
@@ -95,7 +95,7 @@ class SPJoomlaDb
 			$Args = array();
 			// http://www.php.net/manual/en/function.call-user-func-array.php#91503
 			foreach ( $args as $k => &$arg ) {
-				$Args[ $k ] = &$arg;
+				$Args[ $k ] = & $arg;
 			}
 			return call_user_func_array( array( $this->db, $method ), $Args );
 		}
@@ -1096,10 +1096,10 @@ class SPJoomlaDb
 					if ( $c > 0 ) {
 						if ( isset( $table[ 'key' ] ) ) {
 							if ( is_array( $table[ 'key' ] ) ) {
-								$join .= " ON {$table['key'][0]} =  {$table['key'][1]} ";
+								$join .= " ON {$table[ 'key' ][0]} =  {$table[ 'key' ][1]} ";
 							}
 							else {
-								$join .= " ON {$params[0]['as']}.{$table['key']} =  {$table['as']}.{$table['key']} ";
+								$join .= " ON {$params[ 0 ]['as']}.{$table['key']} =  {$table['as']}.{$table['key']} ";
 							}
 						}
 					}
@@ -1114,7 +1114,7 @@ class SPJoomlaDb
 					( isset( $params[ 0 ][ 'table' ] ) && isset( $params[ 0 ][ 'as' ] ) && isset( $params[ 0 ][ 'key' ] ) ) &&
 					( isset( $params[ 1 ][ 'table' ] ) && isset( $params[ 1 ][ 'as' ] ) && isset( $params[ 1 ][ 'key' ] ) )
 			) {
-				$join = " {$params[0]['table']} AS {$params[0]['as']} {$through} JOIN {$params[1]['table']} AS {$params[1]['as']} ON {$params[0]['as']}.{$params[0]['key']} =  {$params[1]['as']}.{$params[1]['key']}";
+				$join = " {$params[ 0 ]['table']} AS {$params[ 0 ]['as']} {$through} JOIN {$params[ 1 ]['table']} AS {$params[ 1 ]['as']} ON {$params[ 0 ]['as']}.{$params[ 0 ]['key']} =  {$params[ 1 ]['as']}.{$params[ 1 ]['key']}";
 			}
 		}
 		return $join;
@@ -1125,10 +1125,9 @@ class SPJoomlaDb
 	 * @param string $until - row name where the expiration date is stored
 	 * @param string $since - row name where the start date is stored
 	 * @param string $pub - row name where the state is stored (e.g. 'published')
-	 * @param array $exception
 	 * @return string
 	 */
-	public function valid( $until, $since = null, $pub = null, $exception = null )
+	public function valid( $until, $since = null, $pub = null )
 	{
 		$null = $this->getNullDate();
 		$pub = $pub ? " AND {$pub} = 1 " : null;
@@ -1137,15 +1136,7 @@ class SPJoomlaDb
 			//			$since = "AND ( {$since} < '{$now}' OR {$since} IN( '{$null}', '{$stamp}' ) ) ";
 			$since = "AND ( {$since} < NOW() OR {$since} IN( '{$null}', '{$stamp}' ) ) ";
 		}
-		if ( $exception && is_array( $exception ) ) {
-			$ex = array();
-			foreach ( $exception as $subject => $value ) {
-				$ex[ ] = "{$subject} = '{$value}'";
-			}
-			$exception = implode( 'OR', $ex );
-			$exception = 'OR '.$exception;
-		}
 		//		return " ( ( {$until} > '{$now}' OR {$until} IN ( '{$null}', '{$stamp}' ) ) {$since} {$pub} ) ";
-		return "( ( {$until} > NOW() OR {$until} IN ( '{$null}', '{$stamp}' ) ) {$since} {$pub} ) {$exception} ";
+		return "( ( {$until} > NOW() OR {$until} IN ( '{$null}', '{$stamp}' ) ) {$since} {$pub} ) ";
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Id: djimageslider.php 22 2015-02-20 18:43:26Z szymon $
+ * @version $Id: djimageslider.php 11 2013-06-21 11:07:50Z szymon $
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -37,7 +37,7 @@ $db->setQuery("SELECT manifest_cache FROM #__extensions WHERE element='com_djima
 $version = json_decode($db->loadResult());
 $version = $version->version;
 
-define('DJIMAGESLIDERFOOTER', '<div style="text-align: center; margin: 10px 0;">DJ-ImageSlider (version '.$version.'), &copy; 2010-'.JFactory::getDate()->format('Y').' Copyright by <a target="_blank" href="http://dj-extensions.com">DJ-Extensions.com</a>, All Rights Reserved.<br /><a target="_blank" href="http://dj-extensions.com"><img src="'.JURI::base().'components/com_djimageslider/assets/logo.png" alt="DJ-Extensions.com" style="margin: 20px 0 0;" /></a></div>');
+define('DJIMAGESLIDERFOOTER', '<div style="text-align: center; margin: 10px 0;">DJ-ImageSlider (version '.$version.'), &copy; 2010-2013 Copyright by <a target="_blank" href="http://dj-extensions.com">DJ-Extensions.com</a>, All Rights Reserved.<br /><a target="_blank" href="http://dj-extensions.com"><img src="'.JURI::base().'components/com_djimageslider/assets/logo.png" alt="DJ-Extensions.com" style="margin: 20px 0 0;" /></a></div>');
 
 $controller	= JControllerLegacy::getInstance('djimageslider');
 

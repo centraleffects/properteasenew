@@ -581,13 +581,6 @@ abstract class JHtmlBootstrap
 	 *                                                 collapsible item is shown. (similar to traditional accordion behavior)
 	 *                             - toggle  boolean   Toggles the collapsible element on invocation
 	 *                             - active  string    Sets the active slide during load
-	 * 
-	 *                             - onShow    function  This event fires immediately when the show instance method is called.
-	 *                             - onShown   function  This event is fired when a collapse element has been made visible to the user 
-	 *                                                   (will wait for css transitions to complete).
-	 *                             - onHide    function  This event is fired immediately when the hide method has been called.
-	 *                             - onHidden  function  This event is fired when a collapse element has been hidden from the user 
-	 *                                                   (will wait for css transitions to complete).
 	 *
 	 * @return  string  HTML for the accordian
 	 *
@@ -595,58 +588,33 @@ abstract class JHtmlBootstrap
 	 */
 	public static function startAccordion($selector = 'myAccordian', $params = array())
 	{
-		if (!isset(static::$loaded[__METHOD__][$selector]))
+		$sig = md5(serialize(array($selector, $params)));
+
+		if (!isset(static::$loaded[__METHOD__][$sig]))
 		{
 			// Include Bootstrap framework
 			static::framework();
 
 			// Setup options object
-			$opt['parent'] = isset($params['parent']) ? ($params['parent'] == true ? '#' . $selector : $params['parent']) : false;
-			$opt['toggle'] = isset($params['toggle']) ? (boolean) $params['toggle'] : ($opt['parent'] === false || isset($params['active']) ? false : true);
-			$onShow = isset($params['onShow']) ? (string) $params['onShow'] : null;
-			$onShown = isset($params['onShown']) ? (string) $params['onShown'] : null;
-			$onHide = isset($params['onHide']) ? (string) $params['onHide'] : null;
-			$onHidden = isset($params['onHidden']) ? (string) $params['onHidden'] : null;
+			$opt['parent'] = isset($params['parent']) ? (boolean) $params['parent'] : false;
+			$opt['toggle'] = isset($params['toggle']) ? (boolean) $params['toggle'] : true;
+			$opt['active'] = isset($params['active']) ? (string) $params['active'] : '';
 
 			$options = JHtml::getJSObject($opt);
 
-			$opt['active'] = isset($params['active']) ? (string) $params['active'] : '';
-
-			// Build the script.
-			$script = array();
-			$script[] = "jQuery(document).ready(function($){";
-			$script[] = "\t$('#" . $selector . "').collapse(" . $options . ")";
-
-			if ($onShow)
-			{
-				$script[] = "\t.on('show', " . $onShow . ")";
-			}
-
-			if ($onShown)
-			{
-				$script[] = "\t.on('shown', " . $onShown . ")";
-			}
-
-			if ($onHide)
-			{
-				$script[] = "\t.on('hideme', " . $onHide . ")";
-			}
-
-			if ($onHidden)
-			{
-				$script[] = "\t.on('hidden', " . $onHidden . ")";
-			}
-
-			$script[] = "});";
-
 			// Attach accordion to document
-			JFactory::getDocument()->addScriptDeclaration(implode("\n", $script));
+			JFactory::getDocument()->addScriptDeclaration(
+				"(function($){
+					$('#$selector').collapse($options);
+				})(jQuery);"
+			);
 
 			// Set static array
-			static::$loaded[__METHOD__][$selector] = $opt;
-
-			return '<div id="' . $selector . '" class="accordion">';
+			static::$loaded[__METHOD__][$sig] = true;
+			static::$loaded[__METHOD__]['active'] = $opt['active'];
 		}
+
+		return '<div id="' . $selector . '" class="accordion">';
 	}
 
 	/**
@@ -675,14 +643,12 @@ abstract class JHtmlBootstrap
 	 */
 	public static function addSlide($selector, $text, $id, $class = '')
 	{
-		$in = (static::$loaded[__CLASS__ . '::startAccordion'][$selector]['active'] == $id) ? ' in' : '';
-		$parent = static::$loaded[__CLASS__ . '::startAccordion'][$selector]['parent'] ?
-			' data-parent="' . static::$loaded[__CLASS__ . '::startAccordion'][$selector]['parent'] . '"' : '';
+		$in = (static::$loaded['JHtmlBootstrap::startAccordion']['active'] == $id) ? ' in' : '';
 		$class = (!empty($class)) ? ' ' . $class : '';
 
 		$html = '<div class="accordion-group' . $class . '">'
 			. '<div class="accordion-heading">'
-			. '<strong><a href="#' . $id . '" data-toggle="collapse"' . $parent . ' class="accordion-toggle">'
+			. '<strong><a href="#' . $id . '" data-parent="#' . $selector . '" data-toggle="collapse" class="accordion-toggle">'
 			. $text
 			. '</a></strong>'
 			. '</div>'

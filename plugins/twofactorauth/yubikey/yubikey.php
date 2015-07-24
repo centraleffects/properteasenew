@@ -63,7 +63,8 @@ class PlgTwofactorauthYubikey extends JPlugin
 	 */
 	public function onUserTwofactorIdentify()
 	{
-		$section         = (int) $this->params->get('section', 3);
+		$section = (int) $this->params->get('section', 3);
+
 		$current_section = 0;
 
 		try
@@ -185,7 +186,8 @@ class PlgTwofactorauthYubikey extends JPlugin
 		{
 			try
 			{
-				JFactory::getApplication()->enqueueMessage(JText::_('PLG_TWOFACTORAUTH_YUBIKEY_ERR_VALIDATIONFAILED'), 'error');
+				$app = JFactory::getApplication();
+				$app->enqueueMessage(JText::_('PLG_TWOFACTORAUTH_YUBIKEY_ERR_VALIDATIONFAILED'), 'error');
 			}
 			catch (Exception $exc)
 			{
@@ -201,7 +203,8 @@ class PlgTwofactorauthYubikey extends JPlugin
 
 		if (!$check)
 		{
-			JFactory::getApplication()->enqueueMessage(JText::_('PLG_TWOFACTORAUTH_YUBIKEY_ERR_VALIDATIONFAILED'), 'error');
+			$app = JFactory::getApplication();
+			$app->enqueueMessage(JText::_('PLG_TWOFACTORAUTH_YUBIKEY_ERR_VALIDATIONFAILED'), 'error');
 
 			// Check failed. Do not change two factor authentication settings.
 			return false;
@@ -212,11 +215,11 @@ class PlgTwofactorauthYubikey extends JPlugin
 
 		// Check succeedeed; return an OTP configuration object
 		$otpConfig = (object) array(
-			'method'  => $this->methodName,
-			'config'  => array(
-				'yubikey'  => $yubikey
+			'method'	=> $this->methodName,
+			'config'	=> array(
+				'yubikey'	=> $yubikey
 			),
-			'otep'  => array()
+			'otep'		=> array()
 		);
 
 		return $otpConfig;
@@ -258,7 +261,7 @@ class PlgTwofactorauthYubikey extends JPlugin
 
 		// Check if the Yubikey starts with the configured Yubikey user string
 		$yubikey_valid = $otpConfig->config['yubikey'];
-		$yubikey       = substr($credentials['secretkey'], 0, -32);
+		$yubikey = substr($credentials['secretkey'], 0, -32);
 
 		$check = $yubikey == $yubikey_valid;
 
@@ -282,26 +285,25 @@ class PlgTwofactorauthYubikey extends JPlugin
 	public function validateYubikeyOTP($otp)
 	{
 		$server_queue = array(
-			'api.yubico.com',
-			'api2.yubico.com',
-			'api3.yubico.com',
-			'api4.yubico.com',
-			'api5.yubico.com',
+			'api.yubico.com', 'api2.yubico.com', 'api3.yubico.com',
+			'api4.yubico.com', 'api5.yubico.com'
 		);
 
 		shuffle($server_queue);
 
 		$gotResponse = false;
-		$check       = false;
+		$check = false;
 
-		$http  = JHttpFactory::getHttp();
+		$http = JHttpFactory::getHttp();
+
 		$token = JSession::getFormToken();
 		$nonce = md5($token . uniqid(rand()));
 
 		while (!$gotResponse && !empty($server_queue))
 		{
 			$server = array_shift($server_queue);
-			$uri    = new JUri('https://' . $server . '/wsapi/2.0/verify');
+
+			$uri = new JUri('https://' . $server . '/wsapi/2.0/verify');
 
 			// I don't see where this ID is used?
 			$uri->setVar('id', 1);
@@ -348,11 +350,12 @@ class PlgTwofactorauthYubikey extends JPlugin
 
 		// Parse response
 		$lines = explode("\n", $response->body);
-		$data  = array();
+		$data = array();
 
 		foreach ($lines as $line)
 		{
-			$line  = trim($line);
+			$line = trim($line);
+
 			$parts = explode('=', $line, 2);
 
 			if (count($parts) < 2)

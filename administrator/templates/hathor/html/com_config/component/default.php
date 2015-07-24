@@ -12,18 +12,17 @@ defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 $template = $app->getTemplate();
 
-JHtml::_('behavior.formvalidator');
+JHtml::_('behavior.formvalidation');
 JHtml::_('bootstrap.framework');
-
-JFactory::getDocument()->addScriptDeclaration("
+?>
+<script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
-		if (document.formvalidator.isValid(document.getElementById('component-form'))) {
+		if (document.formvalidator.isValid(document.id('component-form'))) {
 			Joomla.submitform(task, document.getElementById('component-form'));
 		}
 	}
-");
-?>
+</script>
 <form action="<?php echo JRoute::_('index.php?option=com_config'); ?>" id="component-form" method="post" name="adminForm" autocomplete="off" class="form-validate">
 	<?php
 	echo JHtml::_('tabs.start', 'config-tabs-' . $this->component->option . '_configuration', array('useCookie' => 1));

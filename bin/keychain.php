@@ -75,7 +75,6 @@ class KeychainManager extends JApplicationCli
 				break;
 			case 'change':
 				$this->change();
-				break;
 			case 'delete':
 				$this->delete();
 				break;

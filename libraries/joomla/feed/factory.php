@@ -64,13 +64,12 @@ class JFeedFactory
 		try
 		{
 			// Skip ahead to the root node.
-			while ($reader->read())
+			do
 			{
-				if ($reader->nodeType == XMLReader::ELEMENT)
-				{
-					break;
-				}
+				$reader->read();
 			}
+
+			while ($reader->nodeType !== XMLReader::ELEMENT);
 		}
 		catch (Exception $e)
 		{

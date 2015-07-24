@@ -81,7 +81,7 @@ class FinderViewIndex extends JViewLegacy
 			JToolbarHelper::unpublishList('index.unpublish');
 		}
 
-		if ($canDo->get('core.admin') || $canDo->get('core.options'))
+		if ($canDo->get('core.admin'))
 		{
 			JToolbarHelper::preferences('com_finder');
 		}

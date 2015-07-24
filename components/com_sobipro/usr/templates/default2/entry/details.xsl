@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!--
- @version: $Id: details.xsl 4420 2015-03-26 09:09:27Z Radek Suski $
+ @version: $Id: details.xsl 4387 2015-02-19 12:24:35Z Radek Suski $
  @package: SobiPro Component for Joomla!
 
  @author
@@ -16,8 +16,8 @@
  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
- $Date: 2015-03-26 10:09:27 +0100 (Thu, 26 Mar 2015) $
- $Revision: 4420 $
+ $Date: 2015-02-19 13:24:35 +0100 (Thu, 19 Feb 2015) $
+ $Revision: 4387 $
  $Author: Radek Suski $
  File location: components/com_sobipro/usr/templates/default2/entry/details.xsl $
 -->
@@ -50,9 +50,36 @@
 				</h1>
 
 				<xsl:for-each select="entry/fields/*">
-                    <xsl:call-template name="showfield">
-                        <xsl:with-param name="fieldname" select="." />
-                    </xsl:call-template>
+					<div class="{@css_class}">
+						<xsl:if test="string-length(@itemprop)">
+							<xsl:attribute name="itemprop"><xsl:value-of select="@itemprop"/></xsl:attribute>
+						</xsl:if>
+						<xsl:if test="count(data/*) or string-length(data)">
+							<xsl:if test="label/@show = 1">
+								<strong>
+									<xsl:value-of select="label" /><xsl:text>: </xsl:text>
+								</strong>
+							</xsl:if>
+						</xsl:if>
+
+						<xsl:choose>
+							<xsl:when test="count(data/*)">
+								<xsl:copy-of select="data/*" />
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:if test="string-length(data)">
+									<xsl:value-of select="data" disable-output-escaping="yes" />
+								</xsl:if>
+							</xsl:otherwise>
+						</xsl:choose>
+
+						<xsl:if test="count(data/*) or string-length(data)">
+							<xsl:if test="string-length(@suffix)">
+								<xsl:text> </xsl:text>
+								<xsl:value-of select="@suffix" />
+							</xsl:if>
+						</xsl:if>
+					</div>
 				</xsl:for-each>
 
 				<xsl:if test="count(entry/categories)">
@@ -71,39 +98,5 @@
 			</div>
 			<div class="clearfix" />
 		</div>
-	</xsl:template>
-
-	<xsl:template name="showfield">
-        <xsl:param name="fieldname" />
-        <div class="{$fieldname/@css_class}">
-            <xsl:if test="string-length($fieldname/@itemprop)">
-                <xsl:attribute name="itemprop"><xsl:value-of select="$fieldname/@itemprop"/></xsl:attribute>
-            </xsl:if>
-            <xsl:if test="count($fieldname/data/*) or string-length($fieldname/data)">
-                <xsl:if test="$fieldname/label/@show = 1">
-                    <strong>
-                        <xsl:value-of select="$fieldname/label" /><xsl:text>: </xsl:text>
-                    </strong>
-                </xsl:if>
-            </xsl:if>
-
-            <xsl:choose>
-                <xsl:when test="count($fieldname/data/*)">
-                    <xsl:copy-of select="$fieldname/data/*" />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:if test="string-length($fieldname/data)">
-                        <xsl:value-of select="$fieldname/data" disable-output-escaping="yes" />
-                    </xsl:if>
-                </xsl:otherwise>
-            </xsl:choose>
-
-            <xsl:if test="count($fieldname/data/*) or string-length($fieldname/data)">
-                <xsl:if test="string-length($fieldname/@suffix)">
-                    <xsl:text> </xsl:text>
-                    <xsl:value-of select="$fieldname/@suffix" />
-                </xsl:if>
-            </xsl:if>
-        </div>
 	</xsl:template>
 </xsl:stylesheet>

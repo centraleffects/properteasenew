@@ -260,7 +260,7 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 	 * @param   string  $prefix  An optional prefix for the table class name.
 	 * @param   array   $config  An optional array of configuration values for the JTable object.
 	 *
-	 * @return  JTable|boolean   A JTable object if found or boolean false on failure.
+	 * @return  mixed    A JTable object if found or boolean false if one could not be found.
 	 *
 	 * @link    https://docs.joomla.org/JTable/getInstance
 	 * @since   11.1
@@ -441,7 +441,7 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 
 			$pk = (object) $pk;
 
-			foreach ($this->_tbl_keys as $k)
+			foreach ($this->_tbl_keys AS $k)
 			{
 				$query->where($this->_db->quoteName($k) . ' = ' . $this->_db->quote($pk->$k));
 			}
@@ -1520,18 +1520,11 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 	 */
 	public function publish($pks = null, $state = 1, $userId = 0)
 	{
-		// Sanitize input
-		$userId = (int) $userId;
-		$state  = (int) $state;
+		$k = $this->_tbl_keys;
 
 		if (!is_null($pks))
 		{
-			if (!is_array($pks))
-			{
-				$pks = array($pks);
-			}
-
-			foreach ($pks as $key => $pk)
+			foreach ($pks AS $key => $pk)
 			{
 				if (!is_array($pk))
 				{
@@ -1539,6 +1532,9 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 				}
 			}
 		}
+
+		$userId = (int) $userId;
+		$state  = (int) $state;
 
 		// If there are no primary keys set check to see if the instance key is set.
 		if (empty($pks))
@@ -1549,13 +1545,11 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 			{
 				if ($this->$key)
 				{
-					$pk[$key] = $this->$key;
+					$pk[$this->$key] = $this->$key;
 				}
 				// We don't have a full primary key - return false
 				else
 				{
-					$this->setError(JText::_('JLIB_DATABASE_ERROR_NO_ROWS_SELECTED'));
-
 					return false;
 				}
 			}
@@ -1563,7 +1557,7 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 			$pks = array($pk);
 		}
 
-		foreach ($pks as $pk)
+		foreach ($pks AS $pk)
 		{
 			// Update the publishing state for rows with the given primary keys.
 			$query = $this->_db->getQuery(true)
@@ -1585,17 +1579,7 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 			$this->appendPrimaryKeys($query, $pk);
 
 			$this->_db->setQuery($query);
-
-			try
-			{
-				$this->_db->execute();
-			}
-			catch (RuntimeException $e)
-			{
-				$this->setError($e->getMessage());
-
-				return false;
-			}
+			$this->_db->execute();
 
 			// If checkin is supported and all rows were adjusted, check them in.
 			if ($checkin && (count($pks) == $this->_db->getAffectedRows()))
@@ -1603,7 +1587,6 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 				$this->checkin($pk);
 			}
 
-			// If the JTable instance value is in the list of primary keys that were set, set the instance.
 			$ours = true;
 
 			foreach ($this->_tbl_keys AS $key)
@@ -1616,8 +1599,7 @@ abstract class JTable extends JObject implements JObservableInterface, JTableInt
 
 			if ($ours)
 			{
-				$publishedField = $this->getColumnAlias('published');
-				$this->$publishedField = $state;
+				$this->published = $state;
 			}
 		}
 

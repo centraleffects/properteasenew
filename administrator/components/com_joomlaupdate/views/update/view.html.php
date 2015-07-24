@@ -36,9 +36,7 @@ class JoomlaupdateViewUpdate extends JViewLegacy
 		JToolBarHelper::help('JHELP_COMPONENTS_JOOMLA_UPDATE');
 
 		// Add toolbar buttons.
-		$user = JFactory::getUser();
-
-		if ($user->authorise('core.admin', 'com_joomlaupdate') || $user->authorise('core.options', 'com_joomlaupdate'))
+		if (JFactory::getUser()->authorise('core.admin', 'com_joomlaupdate'))
 		{
 			JToolbarHelper::preferences('com_joomlaupdate');
 		}

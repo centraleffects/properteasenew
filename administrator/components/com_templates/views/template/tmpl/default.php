@@ -13,18 +13,14 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
 JHtml::_('bootstrap.tooltip');
+JHtml::_('behavior.modal');
 JHtml::_('formbehavior.chosen', 'select');
+
 JHtml::_('behavior.formvalidator');
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tabstate');
 
 $input = JFactory::getApplication()->input;
-
-// No access if not global SuperUser
-if (!JFactory::getUser()->authorise('core.admin'))
-{
-	JFactory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
-}
 
 if ($this->type == 'image')
 {
@@ -213,10 +209,10 @@ if($this->type == 'font')
 							<?php foreach ($this->archive as $file): ?>
 								<li>
 									<?php if (substr($file, -1) === DIRECTORY_SEPARATOR): ?>
-										<span class="icon-folder"></span>&nbsp;<?php echo $file; ?>
+										<i class="icon-folder"></i>&nbsp;<?php echo $file; ?>
 									<?php endif; ?>
 									<?php if (substr($file, -1) != DIRECTORY_SEPARATOR): ?>
-										<span class="icon-file"></span>&nbsp;<?php echo $file; ?>
+										<i class="icon-file"></i>&nbsp;<?php echo $file; ?>
 									<?php endif; ?>
 								</li>
 							<?php endforeach; ?>
@@ -302,15 +298,10 @@ if($this->type == 'font')
 			<div class="span4">
 				<legend><?php echo JText::_('COM_TEMPLATES_OVERRIDES_MODULES');?></legend>
 				<ul class="nav nav-list">
-					<?php $token = JSession::getFormToken() . '=' . 1; ?>
 					<?php foreach($this->overridesList['modules'] as $module): ?>
 						<li>
-							<?php
-							$overrideLinkUrl = 'index.php?option=com_templates&view=template&task=template.overrides&folder=' . $module->path
-								. '&id=' . $input->getInt('id') . '&file=' . $this->file . '&' . $token;
-							?>
-							<a href="<?php echo JRoute::_($overrideLinkUrl); ?>">
-								<span class="icon-copy"></span>&nbsp;<?php echo $module->name; ?>
+							<a href="<?php echo JRoute::_('index.php?option=com_templates&view=template&task=template.overrides&folder=' . $module->path . '&id=' . $input->getInt('id') . '&file=' . $this->file); ?>">
+								<i class="icon-copy"></i>&nbsp;<?php echo $module->name; ?>
 							</a>
 						</li>
 					<?php endforeach; ?>
@@ -319,21 +310,16 @@ if($this->type == 'font')
 			<div class="span4">
 				<legend><?php echo JText::_('COM_TEMPLATES_OVERRIDES_COMPONENTS');?></legend>
 				<ul class="nav nav-list">
-					<?php $token = JSession::getFormToken() . '=' . 1; ?>
 					<?php foreach ($this->overridesList['components'] as $key => $value): ?>
 						<li class="component-folder">
 							<a href="#" class="component-folder-url">
-								<span class="icon-folder"></span>&nbsp;<?php echo $key; ?>
+								<i class="icon-folder"></i>&nbsp;<?php echo $key; ?>
 							</a>
 							<ul class="nav nav-list">
 								<?php foreach ($value as $view): ?>
 									<li>
-										<?php
-										$overrideLinkUrl = 'index.php?option=com_templates&view=template&task=template.overrides&folder=' . $view->path
-											. '&id=' . $input->getInt('id') . '&file=' . $this->file . '&' . $token;
-										?>
-										<a class="component-file-url" href="<?php echo JRoute::_($overrideLinkUrl); ?>">
-											<span class="icon-copy"></span>&nbsp;<?php echo $view->name; ?>
+										<a class="component-file-url" href="<?php echo JRoute::_('index.php?option=com_templates&view=template&task=template.overrides&folder=' . $view->path . '&id=' . $input->getInt('id') . '&file=' . $this->file); ?>">
+											<i class="icon-copy"></i>&nbsp;<?php echo $view->name; ?>
 										</a>
 									</li>
 								<?php endforeach; ?>
@@ -345,15 +331,10 @@ if($this->type == 'font')
 			<div class="span4">
 				<legend><?php echo JText::_('COM_TEMPLATES_OVERRIDES_LAYOUTS');?></legend>
 				<ul class="nav nav-list">
-					<?php $token = JSession::getFormToken() . '=' . 1; ?>
 					<?php foreach($this->overridesList['layouts'] as $layout): ?>
 						<li>
-							<?php
-							$overrideLinkUrl = 'index.php?option=com_templates&view=template&task=template.overrides&folder=' . $layout->path
-								. '&id=' . $input->getInt('id') . '&file=' . $this->file . '&' . $token;
-							?>
-							<a href="<?php echo JRoute::_($overrideLinkUrl); ?>">
-								<span class="icon-copy"></span>&nbsp;<?php echo $layout->name; ?>
+							<a href="<?php echo JRoute::_('index.php?option=com_templates&view=template&task=template.overrides&folder=' . $layout->path . '&id=' . $input->getInt('id') . '&file=' . $this->file); ?>">
+								<i class="icon-copy"></i>&nbsp;<?php echo $layout->name; ?>
 							</a>
 						</li>
 					<?php endforeach; ?>
@@ -428,13 +409,7 @@ if($this->type == 'font')
 		</div>
 		<div class="modal-footer">
 			<a href="#" class="btn" data-dismiss="modal"><?php echo JText::_('COM_TEMPLATES_TEMPLATE_CLOSE'); ?></a>
-			<?php
-				$token = JSession::getFormToken() . '=1';
-				$deleteLinkUrl = 'index.php?option=com_templates&task=template.delete'
-					. '&id=' . $input->getInt('id') . '&file=' . $this->file . '&' . $token;
-				$deleteLink = JRoute::_($deleteLinkUrl);
-			?>
-			<a href="<?php echo $deleteLink; ?>" class="btn btn-danger"><?php echo JText::_('COM_TEMPLATES_BUTTON_DELETE');?></a>
+			<a href="<?php echo JRoute::_('index.php?option=com_templates&task=template.delete&id=' . $input->getInt('id') . '&file=' . $this->file); ?>" class="btn btn-danger"><?php echo JText::_('COM_TEMPLATES_BUTTON_DELETE');?></a>
 		</div>
 	</div>
 <?php endif; ?>
@@ -466,7 +441,7 @@ if($this->type == 'font')
 					<label><?php echo JText::_('COM_TEMPLATES_FILE_NAME');?></label>
 					<input type="text" name="name" required />
 					<input type="hidden" class="address" name="address" />
-					<?php echo JHtml::_('form.token'); ?>
+
 					<input type="submit" value="<?php echo JText::_('COM_TEMPLATES_BUTTON_CREATE');?>" class="btn btn-primary" />
 				</fieldset>
 			</form>
@@ -475,7 +450,6 @@ if($this->type == 'font')
 				<fieldset>
 					<input type="hidden" class="address" name="address" />
 					<input type="file" name="files" required />
-					<?php echo JHtml::_('form.token'); ?>
 					<input type="submit" value="<?php echo JText::_('COM_TEMPLATES_BUTTON_UPLOAD');?>" class="btn btn-primary" />
 				</fieldset>
 			</form>
@@ -490,7 +464,6 @@ if($this->type == 'font')
 								<input type="text" id="new_name" name="new_name" required />
 							</div>
 						</div>
-						<?php echo JHtml::_('form.token'); ?>
 						<input type="submit" value="<?php echo JText::_('COM_TEMPLATES_BUTTON_COPY_FILE');?>" class="btn btn-primary" />
 					</fieldset>
 				</form>
@@ -517,7 +490,7 @@ if($this->type == 'font')
 					<label><?php echo JText::_('COM_TEMPLATES_FOLDER_NAME');?></label>
 					<input type="text" name="name" required />
 					<input type="hidden" class="address" name="address" />
-					<?php echo JHtml::_('form.token'); ?>
+
 					<input type="submit" value="<?php echo JText::_('COM_TEMPLATES_BUTTON_CREATE');?>" class="btn btn-primary" />
 				</fieldset>
 			</form>
@@ -528,7 +501,6 @@ if($this->type == 'font')
 			<fieldset>
 				<a href="#" class="btn" data-dismiss="modal"><?php echo JText::_('COM_TEMPLATES_TEMPLATE_CLOSE'); ?></a>
 				<input type="hidden" class="address" name="address" />
-				<?php echo JHtml::_('form.token'); ?>
 				<input type="submit" value="<?php echo JText::_('COM_TEMPLATES_BUTTON_DELETE');?>" class="btn btn-danger" />
 			</fieldset>
 		</form>

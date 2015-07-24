@@ -49,8 +49,6 @@ class JFormFieldCkslidesmanager extends JFormField {
 		$document = JFactory::getDocument();
 		$document->addScriptDeclaration("JURI='" . JURI::root() . "';");
 		$path = 'modules/mod_slideshowck/elements/ckslidesmanager/';
-		JHtml::_('jquery.framework');
-		JHtml::_('jquery.ui', array('core', 'sortable'));
 		JHTML::_('behavior.modal');
 		JHTML::_('script', $path . 'ckslidesmanager.js');
 		JHTML::_('script', $path . 'FancySortable.js');

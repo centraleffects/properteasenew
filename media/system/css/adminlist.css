@@ -209,10 +209,15 @@ button:hover {
 	border: 1px solid #aaa;
 }
 
+.clearfix {
+	overflow: hidden;
+}
+
 fieldset input,
 fieldset textarea,
 fieldset select,
-fieldset img {
+fieldset img,
+fieldset button {
 	float: left;
 	width: auto;
 	margin: 5px 5px 5px 0;

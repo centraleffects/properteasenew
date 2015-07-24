@@ -15,9 +15,7 @@ $moduleHtml   =& $displayData['moduleHtml'];
 $mod          = $displayData['module'];
 $position     = $displayData['position'];
 $menusEditing = $displayData['menusediting'];
-$parameters   = JComponentHelper::getParams('com_modules');
-$redirectUri  = '&return=' . urlencode(base64_encode(JUri::getInstance()->toString()));
-$target       = '_blank';
+$redirectUri = '&return='. urlencode(base64_encode(JUri::getInstance()->toString()));
 
 if (preg_match('/<(?:div|span|nav|ul|ol|h\d) [^>]*class="[^"]* jmoddiv"/', $moduleHtml))
 {
@@ -26,13 +24,7 @@ if (preg_match('/<(?:div|span|nav|ul|ol|h\d) [^>]*class="[^"]* jmoddiv"/', $modu
 }
 
 // Add css class jmoddiv and data attributes for module-editing URL and for the tooltip:
-$editUrl = JURI::base() . 'administrator/index.php?option=com_modules&view=module&layout=edit&id=' . (int) $mod->id;
-
-if ($parameters->get('redirect_edit', 'site') == 'site')
-{
-	$editUrl = JUri::base() . 'index.php?option=com_config&controller=config.display.modules&id=' . (int) $mod->id . $redirectUri;
-	$target  = '_self';
-}
+$editUrl = JUri::base() . 'index.php?option=com_config&controller=config.display.modules&id=' . (int) $mod->id . $redirectUri;
 
 // Add class, editing URL and tooltip, and if module of type menu, also the tooltip for editing the menu item:
 $count = 0;
@@ -40,7 +32,7 @@ $moduleHtml = preg_replace(
 	// Replace first tag of module with a class
 	'/^(\s*<(?:div|span|nav|ul|ol|h\d) [^>]*class="[^"]*)"/',
 	// By itself, adding class jmoddiv and data attributes for the url and tooltip:
-	'\\1 jmoddiv" data-jmodediturl="' . $editUrl . '" data-target="' . $target . '" data-jmodtip="'
+	'\\1 jmoddiv" data-jmodediturl="' . $editUrl . '" data-jmodtip="'
 	.	JHtml::tooltipText(
 			JText::_('JLIB_HTML_EDIT_MODULE'),
 			htmlspecialchars($mod->title) . '<br />' . sprintf(JText::_('JLIB_HTML_EDIT_MODULE_IN_POSITION'), htmlspecialchars($position)),

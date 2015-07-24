@@ -1,20 +1,24 @@
 <?php
 /**
- * @version: $Id: template.php 4420 2015-03-26 09:09:27Z Radek Suski $
+ * @version: $Id: template.php 4387 2015-02-19 12:24:35Z Radek Suski $
  * @package: SobiPro Component for Joomla!
+
  * @author
  * Name: Sigrid Suski & Radek Suski, Sigsiu.NET GmbH
  * Email: sobi[at]sigsiu.net
  * Url: http://www.Sigsiu.NET
+
  * @copyright Copyright (C) 2006 - 2015 Sigsiu.NET GmbH (http://www.sigsiu.net). All rights reserved.
  * @license GNU/GPL Version 3
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3
  * as published by the Free Software Foundation, and under the additional terms according section 7 of GPL v3.
  * See http://www.gnu.org/licenses/gpl.html and http://sobipro.sigsiu.net/licenses.
+
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
- * $Date: 2015-03-26 10:09:27 +0100 (Thu, 26 Mar 2015) $
- * $Revision: 4420 $
+
+ * $Date: 2015-02-19 13:24:35 +0100 (Thu, 19 Feb 2015) $
+ * $Revision: 4387 $
  * $Author: Radek Suski $
  */
 
@@ -31,7 +35,7 @@ defined( 'SOBIPRO' ) || exit( 'Restricted access' );
 abstract class TplFunctions
 {
 
-	public static function Cfg( $key, $def = null, $section = 'general' )
+	public static function Cfg(  $key, $def = null, $section = 'general'  )
 	{
 		return Sobi::Cfg( $key, $def, $section );
 	}
@@ -63,11 +67,10 @@ abstract class TplFunctions
 	 * Called right at the beginning of the save process
 	 * Allow for example to modify the $request data
 	 * @param $model SPEntry
-	 * @param $request array - array with the request data
+	 * @param $request string - type of the request where the data is stored
 	 * */
-//	public static function BeforeStoreEntry( SPEntry &$model, &$request )
+//	public static function BeforeStoreEntry( SPEntry &$model, $request )
 //	{
-//		$request[ 'field_name' ] = 'Something else';
 //	}
 
 	/**

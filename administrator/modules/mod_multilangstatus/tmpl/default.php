@@ -9,32 +9,19 @@
 
 defined('_JEXEC') or die;
 
-// Include jQuery
-JHtml::_('jquery.framework');
+	// Include jQuery
+	JHtml::_('jquery.framework');
+	JHtml::_('bootstrap.modal');
 
-JFactory::getDocument()->addStyleDeclaration('.navbar-fixed-bottom {z-index:1050;}');
+	JFactory::getDocument()->addStyleDeclaration('.navbar-fixed-bottom {z-index:1050;}');
 
-$link = JRoute::_('index.php?option=com_languages&view=multilangstatus&tmpl=component');
-$footer = '<button class="btn" data-dismiss="modal" aria-hidden="true">' . JText::_('JTOOLBAR_CLOSE') . '</a>';
+	$link = JRoute::_('index.php?option=com_languages&view=multilangstatus&tmpl=component');
 ?>
 <div class="btn-group multilanguage">
 	<a href="#multiLangModal" role="button" class="btn btn-link" data-toggle="modal" title="<?php echo JText::_('MOD_MULTILANGSTATUS'); ?>">
-		<span class="icon-comment"></span>
+		<i class="icon-comment"></i>
 		<?php echo JText::_('MOD_MULTILANGSTATUS'); ?>
 	</a>
 </div>
 
-<?php echo JHtml::_(
-	'bootstrap.renderModal',
-	'multiLangModal',
-	array(
-		'title' => JText::_('MOD_MULTILANGSTATUS'),
-		'backdrop' => 'static',
-		'keyboard' => true,
-		'closeButton' => true,
-		'footer' => $footer,
-		'url' => $link,
-		'height' => '300px',
-		'width' => '500px'
-		)
-	);
+<?php echo JHtmlBootstrap::renderModal('multiLangModal', array( 'url' => $link, 'title' => JText::_('MOD_MULTILANGSTATUS'),'height' => '300px', 'width' => '500px'));

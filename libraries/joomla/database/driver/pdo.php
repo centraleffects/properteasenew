@@ -450,7 +450,7 @@ abstract class JDatabaseDriverPdo extends JDatabaseDriver
 					$this->errorMsg = (string) 'SQL: ' . implode(", ", $this->connection->errorInfo());
 
 					// Throw the normal query exception.
-					JLog::add(JText::sprintf('JLIB_DATABASE_QUERY_FAILED', $this->errorNum, $this->errorMsg), JLog::ERROR, 'database-error');
+					JLog::add(JText::sprintf('JLIB_DATABASE_QUERY_FAILED', $this->errorNum, $this->errorMsg), JLog::ERROR, 'databasequery');
 					throw new RuntimeException($this->errorMsg, $this->errorNum);
 				}
 
@@ -465,7 +465,7 @@ abstract class JDatabaseDriverPdo extends JDatabaseDriver
 				$this->errorMsg = $errorMsg;
 
 				// Throw the normal query exception.
-				JLog::add(JText::sprintf('JLIB_DATABASE_QUERY_FAILED', $this->errorNum, $this->errorMsg), JLog::ERROR, 'database-error');
+				JLog::add(JText::sprintf('JLIB_DATABASE_QUERY_FAILED', $this->errorNum, $this->errorMsg), JLog::ERROR, 'databasequery');
 				throw new RuntimeException($this->errorMsg, $this->errorNum);
 			}
 		}
@@ -699,14 +699,11 @@ abstract class JDatabaseDriverPdo extends JDatabaseDriver
 			$query->setLimit($limit, $offset);
 		}
 
-		// Create a stringified version of the query (with prefixes replaced):
-		$sql = $this->replacePrefix((string) $query);
+		$query = $this->replacePrefix((string) $query);
 
-		// Use the stringified version in the prepare call:
-		$this->prepared = $this->connection->prepare($sql, $driverOptions);
+		$this->prepared = $this->connection->prepare($query, $driverOptions);
 
-		// Store reference to the original JDatabaseQuery instance within the class.
-		// This is important since binding variables depends on it within execute():
+		// Store reference to the JDatabaseQuery instance:
 		parent::setQuery($query, $offset, $limit);
 
 		return $this;

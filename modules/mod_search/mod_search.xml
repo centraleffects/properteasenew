@@ -31,6 +31,7 @@
 				<field
 					name="width"
 					type="text"
+					default="20"
 					label="MOD_SEARCH_FIELD_BOXWIDTH_LABEL"
 					description="MOD_SEARCH_FIELD_BOXWIDTH_DESC" />
 				<field

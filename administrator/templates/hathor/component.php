@@ -18,9 +18,6 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
 
-// jQuery needed by template.js
-JHtml::_('jquery.framework');
-
 // Load optional RTL Bootstrap CSS
 JHtml::_('bootstrap.loadCss', false, $this->direction);
 

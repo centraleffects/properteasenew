@@ -108,15 +108,28 @@ class MediaModelList extends JModelLegacy
 		}
 
 		// Get current path from request
-		$current = (string) $this->getState('folder');
+		$current = $this->getState('folder');
 
-		$basePath = COM_MEDIA_BASE . ((strlen($current) > 0) ? '/' . $current : '');
+		// If undefined, set to empty
+		if ($current == 'undefined')
+		{
+			$current = '';
+		}
+
+		if (strlen($current) > 0)
+		{
+			$basePath = COM_MEDIA_BASE . '/' . $current;
+		}
+		else
+		{
+			$basePath = COM_MEDIA_BASE;
+		}
 
 		$mediaBase = str_replace(DIRECTORY_SEPARATOR, '/', COM_MEDIA_BASE . '/');
 
-		$images  = array ();
-		$folders = array ();
-		$docs    = array ();
+		$images		= array ();
+		$folders	= array ();
+		$docs		= array ();
 
 		$fileList = false;
 		$folderList = false;

@@ -10,30 +10,24 @@ defined('_JEXEC') or die('Restricted access');
 
 // définit la largeur du slideshow
 $width = ($params->get('width') AND $params->get('width') != 'auto') ? ' style="width:' . $params->get('width') . 'px;"' : '';
-$needJModal = false;
 ?>
 <!-- debut Slideshow CK -->
 <div class="slideshowck<?php echo $params->get('moduleclass_sfx'); ?> camera_wrap <?php echo $params->get('skin'); ?>" id="camera_wrap_<?php echo $module->id; ?>"<?php echo $width; ?>>
 	<?php
-	// for ($i = 0; $i < count($items); ++$i) {
-	foreach ($items as $i => $item) {
+	for ($i = 0; $i < count($items); ++$i) {
 		if ($params->get('displayorder', 'normal') == 'shuffle' && $params->get('limitslides', '') && $i >= $params->get('limitslides', ''))
 			break;
-		// $item = $items[$i];
+		$item = $items[$i];
 		if ($item->imgalignment != 'default') {
 			$dataalignment = ' data-alignment="' . $item->imgalignment . '"';
 		} else {
 			$dataalignment = '';
 		}
-		$datacaptiontitle = str_replace("|dq|", "\"", $item->imgtitle);
-		$datacaptiondesc = str_replace("|dq|", "\"", $item->imgcaption);
-		$datacaptionforlightbox = $datacaptiontitle . ( $datacaptiondesc ? '::' . $datacaptiondesc : '');
 		$imgtarget = ($item->imgtarget == 'default') ? $params->get('imagetarget') : $item->imgtarget;
-		$datatitle = ($params->get('lightboxcaption', 'caption') != 'caption') ? 'data-title="' . htmlspecialchars(str_replace("\"", "&quot;", str_replace(">", "&gt;", str_replace("<", "&lt;", $datacaptionforlightbox)))) . '" ' : '';
+		$datatitle = ($params->get('lightboxcaption', 'caption') != 'caption') ? 'data-title="' . htmlspecialchars(str_replace("\"", "&quot;", str_replace(">", "&gt;", str_replace("<", "&lt;", $datacaption)))) . '" ' : '';
 		$dataalbum = ($params->get('lightboxgroupalbum', '0')) ? '[albumslideshowck' .$module->id .']' : '';
 		$datarel = ($imgtarget == 'lightbox') ? 'data-rel="lightbox' . $dataalbum . '" ' : '';
 		$datatime = ($item->imgtime) ? ' data-time="' . $item->imgtime . '"' : '';
-		if ($imgtarget == 'lightbox' && $params->get('lightboxtype', 'mediaboxck') == 'squeezebox') $needJModal = true;
 
 		if ($params->get('articlelink', 'readmore') == 'image' && $item->article->link) {
 			$item->imglink = $item->article->link;
@@ -44,7 +38,7 @@ $needJModal = false;
 				<iframe src="<?php echo $item->imgvideo; ?>" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 			<?php
 			}
-			if (($item->imgtitle || $item->imgcaption || $item->article) && (($params->get('lightboxcaption', 'caption') != 'title' || $imgtarget != 'lightbox') || !$item->imglink)) {
+			if (($item->imgcaption || $item->article) && (($params->get('lightboxcaption', 'caption') != 'title' || $imgtarget != 'lightbox') || !$item->imglink)) {
 			?>
 				<div class="camera_caption <?php echo $params->get('captioneffect', 'moveFromBottom')?>">
 					<div class="camera_caption_title">
@@ -74,9 +68,7 @@ $needJModal = false;
 			}
 			?>
 		</div>
-<?php }
-if ($needJModal) JHtml::_('behavior.modal');
-?>
+<?php } ?>
 </div>
 <div style="clear:both;"></div>
 <!-- fin Slideshow CK -->

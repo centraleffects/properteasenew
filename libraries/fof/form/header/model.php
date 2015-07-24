@@ -42,7 +42,7 @@ class FOFFormHeaderModel extends FOFFormHeaderFieldselectable
 
 		if (!empty($nonePlaceholder))
 		{
-			$options[] = JHtml::_('select.option', null, JText::_($nonePlaceholder));
+			$options[] = JHtml::_('select.option', JText::_($nonePlaceholder), null);
 		}
 
 		// Process field atrtibutes

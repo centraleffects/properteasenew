@@ -13,121 +13,132 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 JHtml::_('bootstrap.tooltip');
+JHtml::_('behavior.modal');
 
 $input = JFactory::getApplication()->input;
-if ($this->type == 'image')
-{
-	JHtml::_('script', 'system/jquery.Jcrop.min.js', false, true);
-	JHtml::_('stylesheet', 'system/jquery.Jcrop.min.css', array(), true);
-}
-JFactory::getDocument()->addScriptDeclaration("
-jQuery(document).ready(function($){
-	// Hide all the folder when the page loads
-	$('.folder ul, .component-folder ul').hide();
-	// Display the tree after loading
-	$('.directory-tree').removeClass('directory-tree');
-	// Show all the lists in the path of an open file
-	$('.show > ul').show();
-	// Stop the default action of anchor tag on a click event
-	$('.folder-url, .component-folder-url').click(function(event){
-		event.preventDefault();
-	});
-	// Prevent the click event from proliferating
-	$('.file, .component-file-url').bind('click',function(e){
-		e.stopPropagation();
-	});
-	// Toggle the child indented list on a click event
-	$('.folder, .component-folder').bind('click',function(e){
-		$(this).children('ul').toggle();
-		e.stopPropagation();
-	});
-	// New file tree
-	$('#fileModal .folder-url').bind('click',function(e){
-		$('.folder-url').removeClass('selected');
-		e.stopPropagation();
-		$('#fileModal input.address').val($(this).attr('data-id'));
-		$(this).addClass('selected');
-	});
-	// Folder manager tree
-	$('#folderModal .folder-url').bind('click',function(e){
-		$('.folder-url').removeClass('selected');
-		e.stopPropagation();
-		$('#folderModal input.address').val($(this).attr('data-id'));
-		$(this).addClass('selected');
-	});
-});");
 if($this->type == 'image')
 {
-	JFactory::getDocument()->addScriptDeclaration("
-		jQuery(document).ready(function() {
-			var jcrop_api;
-			// Configuration for image cropping
-			$('#image-crop').Jcrop({
-				onChange:   showCoords,
-				onSelect:   showCoords,
-				onRelease:  clearCoords,
-				trueSize:   " . $this->image['width'] . "," . $this->image['height'] . "]
-			},function(){
-				jcrop_api = this;
-			});
-			// Function for calculating the crop coordinates
-			function showCoords(c)
-			{
-				$('#x').val(c.x);
-				$('#y').val(c.y);
-				$('#w').val(c.w);
-				$('#h').val(c.h);
-			};
-			// Function for clearing the coordinates
-			function clearCoords()
-			{
-				$('#adminForm input').val('');
-			};
-		});");
+	$doc = JFactory::getDocument();
+	$doc->addScript(JUri::root() . 'media/system/js/jquery.Jcrop.min.js');
+	$doc->addStyleSheet(JUri::root() . 'media/system/css/jquery.Jcrop.min.css');
 }
-JFactory::getDocument()->addStyleDeclaration("
-	/* Styles for modals */
+?>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+
+		// Hide all the folder when the page loads
+		$('.folder ul, .component-folder ul').hide();
+
+		// Show all the lists in the path of an open file
+		$('.show > ul').show();
+
+		// Stop the default action of anchor tag on a click event
+		$('.folder-url, .component-folder-url').click(function(event){
+			event.preventDefault();
+		});
+
+		// Prevent the click event from proliferating
+		$('.file, .component-file-url').bind('click',function(e){
+			e.stopPropagation();
+		});
+
+		// Toggle the child indented list on a click event
+		$('.folder, .component-folder').bind('click',function(e){
+			$(this).children('ul').toggle();
+			e.stopPropagation();
+		});
+
+		// New file tree
+		$('#fileModal .folder-url').bind('click',function(e){
+			$('.folder-url').removeClass('selected');
+			e.stopPropagation();
+			$('#fileModal input.address').val($(this).attr('data-id'));
+			$(this).addClass('selected');
+		});
+
+		// Folder manager tree
+		$('#folderModal .folder-url').bind('click',function(e){
+			$('.folder-url').removeClass('selected');
+			e.stopPropagation();
+			$('#folderModal input.address').val($(this).attr('data-id'));
+			$(this).addClass('selected');
+		});
+
+		<?php if($this->type == 'image'): ?>
+		var jcrop_api;
+
+		// Configuration for image cropping
+		$('#image-crop').Jcrop({
+			onChange:   showCoords,
+			onSelect:   showCoords,
+			onRelease:  clearCoords,
+			trueSize:   [<?php echo $this->image['width']; ?>,<?php echo $this->image['height']; ?>]
+		},function(){
+			jcrop_api = this;
+		});
+
+		// Function for calculating the crop coordinates
+		function showCoords(c)
+		{
+			$('#x').val(c.x);
+			$('#y').val(c.y);
+			$('#w').val(c.w);
+			$('#h').val(c.h);
+		};
+
+		// Function for clearing the coordinates
+		function clearCoords()
+		{
+			$('#adminForm input').val('');
+		};
+
+		<?php endif; ?>
+
+	});
+</script>
+<style>
+
+		/* Styles for modals */
 	.selected{
+		display: block;
+		background: #08c ;
+		color: #fff !important;
+	}
+	.selected:hover{
+		display: block;
 		background: #08c;
 		color: #fff;
 	}
-	.selected:hover{
-		background: #08c !important;
-		color: #fff;
-	}
-	.modal-body .column {
-		width: 50%; float: left;
-	}
-	#deleteFolder{
-		margin: 0;
-	}
+
 	#image-crop{
 		max-width: 100% !important;
 		width: auto;
 		height: auto;
 	}
-	.directory-tree{
-		display: none;
+
+	#image-box, #home-box{
+		margin: 20px 10px 10px;
+		overflow: hidden;
+		border: 1px solid rgb(199, 200, 178);
+		padding: 5px;
 	}
-	.tree-holder{
-		overflow-x: auto;
+
+	<?php if($this->type == 'font'): ?>
+
+		/* Styles for font preview */
+	@font-face
+	{
+		font-family: previewFont;
+		src: url('<?php echo $this->font['address'] ?>')
 	}
-");
-if($this->type == 'font')
-{
-	JFactory::getDocument()->addStyleDeclaration(
-		"/* Styles for font preview */
-		@font-face
-		{
-			font-family: previewFont;
-			src: url('" . $this->font['address'] . "')
-		}
-		.font-preview{
-			font-family: previewFont !important;
-		}"
-	);
-}
-?>
+
+	.font-preview{
+		font-family: previewFont !important;
+	}
+
+	<?php endif; ?>
+
+</style>
 <div class="width-60 fltlft">
 
 	<?php if ($this->type != 'home'): ?>
@@ -324,10 +335,10 @@ if($this->type == 'font')
 					<?php foreach ($this->archive as $file): ?>
 						<li>
 							<?php if (substr($file, -1) === DIRECTORY_SEPARATOR): ?>
-								<span class="icon-folder"></span>&nbsp;<?php echo $file; ?>
+								<i class="icon-folder"></i>&nbsp;<?php echo $file; ?>
 							<?php endif; ?>
 							<?php if (substr($file, -1) != DIRECTORY_SEPARATOR): ?>
-								<span class="icon-file"></span>&nbsp;<?php echo $file; ?>
+								<i class="icon-file"></i>&nbsp;<?php echo $file; ?>
 							<?php endif; ?>
 						</li>
 					<?php endforeach; ?>
@@ -455,7 +466,7 @@ if($this->type == 'font')
 				<?php foreach($this->overridesList['modules'] as $module): ?>
 					<li>
 						<a href="<?php echo JRoute::_('index.php?option=com_templates&view=template&task=template.overrides&folder=' . $module->path . '&id=' . $input->getInt('id') . '&file=' . $this->file); ?>">
-							<span class="icon-copy"></span>&nbsp;<?php echo $module->name; ?>
+							<i class="icon-copy"></i>&nbsp;<?php echo $module->name; ?>
 						</a>
 					</li>
 				<?php endforeach; ?>
@@ -467,13 +478,13 @@ if($this->type == 'font')
 				<?php foreach ($this->overridesList['components'] as $key => $value): ?>
 					<li class="component-folder">
 						<a href="#" class="component-folder-url">
-							<span class="icon-folder"></span>&nbsp;<?php echo $key; ?>
+							<i class="icon-folder"></i>&nbsp;<?php echo $key; ?>
 						</a>
 						<ul class="adminformList">
 							<?php foreach ($value as $view): ?>
 								<li>
 									<a class="component-file-url" href="<?php echo JRoute::_('index.php?option=com_templates&view=template&task=template.overrides&folder=' . $view->path . '&id=' . $input->getInt('id') . '&file=' . $this->file); ?>">
-										<span class="icon-copy"></span>&nbsp;<?php echo $view->name; ?>
+										<i class="icon-copy"></i>&nbsp;<?php echo $view->name; ?>
 									</a>
 								</li>
 							<?php endforeach; ?>
@@ -488,7 +499,7 @@ if($this->type == 'font')
 				<?php foreach($this->overridesList['layouts'] as $layout): ?>
 					<li>
 						<a href="<?php echo JRoute::_('index.php?option=com_templates&view=template&task=template.overrides&folder=' . $layout->path . '&id=' . $input->getInt('id') . '&file=' . $this->file); ?>">
-							<span class="icon-copy"></span>&nbsp;<?php echo $layout->name; ?>
+							<i class="icon-copy"></i>&nbsp;<?php echo $layout->name; ?>
 						</a>
 					</li>
 				<?php endforeach; ?>

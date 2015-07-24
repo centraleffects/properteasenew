@@ -390,7 +390,7 @@ class ContentModelArticle extends JModelAdmin
 			$associations = JLanguageAssociations::getAssociations('com_content', '#__content', 'com_content.item', $id);
 
 			// Make fields read only
-			if (!empty($associations))
+			if ($associations)
 			{
 				$form->setFieldAttribute('language', 'readonly', 'true');
 				$form->setFieldAttribute('catid', 'readonly', 'true');
@@ -419,14 +419,13 @@ class ContentModelArticle extends JModelAdmin
 		{
 			$data = $this->getItem();
 
-			// Pre-select some filters (Status, Category, Language, Access) in edit form if those have been selected in Article Manager: Articles
+			// Prime some default values.
 			if ($this->getState('article.id') == 0)
 			{
 				$filters = (array) $app->getUserState('com_content.articles.filter');
-				$data->set('state', $app->input->getInt('state', (!empty($filters['published']) ? $filters['published'] : null)));
-				$data->set('catid', $app->input->getInt('catid', (!empty($filters['category_id']) ? $filters['category_id'] : null)));
-				$data->set('language', $app->input->getString('language', (!empty($filters['language']) ? $filters['language'] : null)));
-				$data->set('access', $app->input->getInt('access', (!empty($filters['access']) ? $filters['access'] : JFactory::getConfig()->get('access'))));
+				$filterCatId = isset($filters['category_id']) ? $filters['category_id'] : null;
+
+				$data->set('catid', $app->input->getInt('catid', $filterCatId));
 			}
 		}
 
@@ -505,7 +504,7 @@ class ContentModelArticle extends JModelAdmin
 		}
 
 		// Automatic handling of alias for empty fields
-		if (in_array($input->get('task'), array('apply', 'save', 'save2new')) && (!isset($data['id']) || (int) $data['id'] == 0))
+		if (in_array($input->get('task'), array('apply', 'save', 'save2new')) && (int) $input->get('id') == 0)
 		{
 			if ($data['alias'] == null)
 			{

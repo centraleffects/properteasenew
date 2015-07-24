@@ -174,12 +174,6 @@ class UsersControllerProfile extends UsersController
 
 				$redirect = $app->getUserState('com_users.edit.profile.redirect');
 
-				// Don't redirect to an external URL.
-				if (!JUri::isInternal($redirect))
-				{
-					$redirect = null;
-				}
-
 				if (!$redirect)
 				{
 					$redirect = 'index.php?option=com_users&view=profile&layout=edit&hidemainmenu=1';
@@ -200,22 +194,14 @@ class UsersControllerProfile extends UsersController
 				// Clear the profile id from the session.
 				$app->setUserState('com_users.edit.profile.id', null);
 
-				$redirect = $app->getUserState('com_users.edit.profile.redirect');
-
-				// Don't redirect to an external URL.
-				if (!JUri::isInternal($redirect))
-				{
-					$redirect = null;
-				}
-
-				if (!$redirect)
-				{
-					$redirect = 'index.php?option=com_users&view=profile&user_id=' . $return;
-				}
-
 				// Redirect to the list screen.
 				$this->setMessage(JText::_('COM_USERS_PROFILE_SAVE_SUCCESS'));
-				$this->setRedirect(JRoute::_($redirect, false));
+				$this->setRedirect(
+					JRoute::_(
+						($redirect = $app->getUserState('com_users.edit.profile.redirect')) ? $redirect : 'index.php?option=com_users&view=profile&user_id=' . $return,
+						false
+					)
+				);
 				break;
 		}
 

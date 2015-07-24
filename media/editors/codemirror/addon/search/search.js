@@ -39,7 +39,7 @@
   }
 
   function SearchState() {
-    this.posFrom = this.posTo = this.lastQuery = this.query = null;
+    this.posFrom = this.posTo = this.query = null;
     this.overlay = null;
   }
   function getSearchState(cm) {
@@ -53,7 +53,7 @@
     return cm.getSearchCursor(query, pos, queryCaseInsensitive(query));
   }
   function dialog(cm, text, shortText, deflt, f) {
-    if (cm.openDialog) cm.openDialog(text, f, {value: deflt, selectValueOnOpen: true});
+    if (cm.openDialog) cm.openDialog(text, f, {value: deflt});
     else f(prompt(shortText, deflt));
   }
   function confirmDialog(cm, text, shortText, fs) {
@@ -75,8 +75,7 @@
   function doSearch(cm, rev) {
     var state = getSearchState(cm);
     if (state.query) return findNext(cm, rev);
-    var q = cm.getSelection() || state.lastQuery;
-    dialog(cm, queryDialog, "Search for:", q, function(query) {
+    dialog(cm, queryDialog, "Search for:", cm.getSelection(), function(query) {
       cm.operation(function() {
         if (!query || state.query) return;
         state.query = parseQuery(query);
@@ -105,7 +104,6 @@
   });}
   function clearSearch(cm) {cm.operation(function() {
     var state = getSearchState(cm);
-    state.lastQuery = state.query;
     if (!state.query) return;
     state.query = null;
     cm.removeOverlay(state.overlay);
@@ -118,8 +116,7 @@
   var doReplaceConfirm = "Replace? <button>Yes</button> <button>No</button> <button>Stop</button>";
   function replace(cm, all) {
     if (cm.getOption("readOnly")) return;
-    var query = cm.getSelection() || getSearchState(cm).lastQuery;
-    dialog(cm, replaceQueryDialog, "Replace:", query, function(query) {
+    dialog(cm, replaceQueryDialog, "Replace:", cm.getSelection(), function(query) {
       if (!query) return;
       query = parseQuery(query);
       dialog(cm, replacementQueryDialog, "Replace with:", "", function(text) {

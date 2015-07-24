@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Id: view.html.php 25 2015-06-29 19:45:38Z szymon $
+ * @version $Id: view.html.php 11 2013-06-21 11:07:50Z szymon $
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -46,10 +46,6 @@ class DJImageSliderViewItems extends JViewLegacy
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
-		}
-
-		if (class_exists('JHtmlSidebar')){
-			$this->sidebar = JHtmlSidebar::render();
 		}
 		
 		foreach($this->items as $item) {

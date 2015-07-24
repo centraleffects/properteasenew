@@ -79,7 +79,7 @@ class FinderViewFilters extends JViewLegacy
 			JToolbarHelper::divider();
 		}
 
-		if ($canDo->get('core.admin') || $canDo->get('core.options'))
+		if ($canDo->get('core.admin'))
 		{
 			JToolbarHelper::preferences('com_finder');
 		}

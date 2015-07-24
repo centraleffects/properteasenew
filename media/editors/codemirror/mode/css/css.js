@@ -239,7 +239,6 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     if (type == "{" || type == "}") return popAndPass(type, stream, state);
     if (type == ")") return popContext(state);
     if (type == "(") return pushContext(state, stream, "parens");
-    if (type == "interpolation") return pushContext(state, stream, "interpolation");
     if (type == "word") wordAsValue(stream);
     return "parens";
   };
@@ -328,8 +327,7 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
   states.interpolation = function(type, stream, state) {
     if (type == "}") return popContext(state);
     if (type == "{" || type == ";") return popAndPass(type, stream, state);
-    if (type == "word") override = "variable";
-    else if (type != "variable" && type != "(" && type != ")") override = "error";
+    if (type != "variable") override = "error";
     return "interpolation";
   };
 
@@ -653,6 +651,16 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     return ["comment", "comment"];
   }
 
+  function tokenSGMLComment(stream, state) {
+    if (stream.skipTo("-->")) {
+      stream.match("-->");
+      state.tokenize = null;
+    } else {
+      stream.skipToEnd();
+    }
+    return ["comment", "comment"];
+  }
+
   CodeMirror.defineMIME("text/css", {
     documentTypes: documentTypes,
     mediaTypes: mediaTypes,
@@ -664,6 +672,11 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
     colorKeywords: colorKeywords,
     valueKeywords: valueKeywords,
     tokenHooks: {
+      "<": function(stream, state) {
+        if (!stream.match("!--")) return false;
+        state.tokenize = tokenSGMLComment;
+        return tokenSGMLComment(stream, state);
+      },
       "/": function(stream, state) {
         if (!stream.eat("*")) return false;
         state.tokenize = tokenCComment;
@@ -736,7 +749,6 @@ CodeMirror.defineMode("css", function(config, parserConfig) {
         }
       },
       "@": function(stream) {
-        if (stream.eat("{")) return [null, "interpolation"];
         if (stream.match(/^(charset|document|font-face|import|(-(moz|ms|o|webkit)-)?keyframes|media|namespace|page|supports)\b/, false)) return false;
         stream.eatWhile(/[\w\\\-]/);
         if (stream.match(/^\s*:/, false))

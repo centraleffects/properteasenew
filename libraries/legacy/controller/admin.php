@@ -135,10 +135,9 @@ class JControllerAdmin extends JControllerLegacy
 			{
 				$this->setMessage($model->getError(), 'error');
 			}
-
-			// Invoke the postDelete method to allow for the child class to access the model.
-			$this->postDeleteHook($model, $cid);
 		}
+		// Invoke the postDelete method to allow for the child class to access the model.
+		$this->postDeleteHook($model, $cid);
 
 		$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false));
 	}

@@ -1,13 +1,13 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  com_config
+ * @package     Joomla.Administrator
+ * @subpackage  Joomla.Libraries
  *
  * @copyright   Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access');
 
 /**
  * Helper class for controllers

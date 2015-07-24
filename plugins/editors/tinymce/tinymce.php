@@ -120,16 +120,7 @@ class PlgEditorTinymce extends JPlugin
 			->where('client_id=0 AND home=' . $db->quote('1'));
 
 		$db->setQuery($query);
-		try
-		{
-			$template = $db->loadResult();
-		}
-		catch (RuntimeException $e)
-		{
-			JFactory::getApplication()->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
-
-			return;
-		}
+		$template = $db->loadResult();
 
 		$content_css    = '';
 		$templates_path = JPATH_SITE . '/templates';
@@ -803,7 +794,7 @@ class PlgEditorTinymce extends JPlugin
 	 */
 	public function onGetContent($editor)
 	{
-		return 'tinyMCE.activeEditor.getContent();';
+		return 'tinyMCE.get(\'' . $editor . '\').getContent();';
 	}
 
 	/**
@@ -816,7 +807,7 @@ class PlgEditorTinymce extends JPlugin
 	 */
 	public function onSetContent($editor, $html)
 	{
-		return 'tinyMCE.activeEditor.setContent(' . $html . ');';
+		return 'tinyMCE.get(\'' . $editor . '\').setContent(' . $html . ');';
 	}
 
 	/**
@@ -828,7 +819,7 @@ class PlgEditorTinymce extends JPlugin
 	 */
 	public function onSave($editor)
 	{
-		return 'if (tinyMCE.get("' . $editor . '").isHidden()) {tinyMCE.get("' . $editor . '").show()};';
+		return 'if (tinyMCE.get("' . $editor . '").isHidden()) {tinyMCE.get("' . $editor . '").show()}; tinyMCE.get("' . $editor . '").save();';
 	}
 
 	/**
@@ -840,14 +831,32 @@ class PlgEditorTinymce extends JPlugin
 	 */
 	public function onGetInsertMethod($name)
 	{
-		JFactory::getDocument()->addScriptDeclaration(
-			"
+		$doc = JFactory::getDocument();
+
+		$js = "
+			function isBrowserIE()
+			{
+				return navigator.appName==\"Microsoft Internet Explorer\";
+			}
+
 			function jInsertEditorText( text, editor )
 			{
 				tinyMCE.execCommand('mceInsertContent', false, text);
 			}
-			"
-		);
+
+			var global_ie_bookmark = false;
+
+			function IeCursorFix()
+			{
+				if (isBrowserIE())
+				{
+					tinyMCE.execCommand('mceInsertContent', false, '');
+					global_ie_bookmark = tinyMCE.activeEditor.selection.getBookmark(false);
+				}
+				return true;
+			}";
+
+		$doc->addScriptDeclaration($js);
 
 		return true;
 	}
@@ -940,7 +949,6 @@ class PlgEditorTinymce extends JPlugin
 		if (is_array($buttons) || (is_bool($buttons) && $buttons))
 		{
 			$buttons = $this->_subject->getButtons($name, $buttons, $asset, $author);
-
 			$return .= JLayoutHelper::render('joomla.editors.buttons', $buttons);
 		}
 

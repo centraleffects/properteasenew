@@ -1,6 +1,6 @@
 <?php 
 /**
- * @version $Id: default.php 25 2015-06-29 19:45:38Z szymon $
+ * @version $Id: default.php 11 2013-06-21 11:07:50Z szymon $
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -28,10 +28,10 @@
 defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php 
-$isJoomla3 = version_compare(JVERSION, '3.0', '>=');
+
 JHTML::_('behavior.tooltip');
 JHTML::_('behavior.modal');
-if($isJoomla3) JHtml::_('formbehavior.chosen', 'select');
+if(version_compare(JVERSION, '3.0', '>=')) JHtml::_('formbehavior.chosen', 'select');
 
 $user		= JFactory::getUser();
 $userId		= $user->get('id');
@@ -39,23 +39,8 @@ $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 $canOrder	= $user->authorise('core.edit.state', 'com_djimageslider.category');
 $saveOrder	= $listOrder == 'a.ordering';
-
-if ($isJoomla3 && $saveOrder)
-{
-	$saveOrderingUrl = 'index.php?option=com_djimageslider&task=items.saveOrderAjax&tmpl=component';
-	JHtml::_('sortablelist.sortable', 'slidesList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
-}
 ?>
 
-<?php if(!empty( $this->sidebar)): ?>
-<div id="j-sidebar-container" class="span2">
-	<?php echo $this->sidebar; ?>
-</div>
-<div id="j-main-container" class="span10">
-<?php else: ?>
-<div id="j-main-container">
-<?php endif;?>
-	
 <form action="<?php echo JRoute::_('index.php?option=com_djimageslider&view=items'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar" class="btn-toolbar">
 		<div class="filter-search fltlft btn-group pull-left">
@@ -66,9 +51,7 @@ if ($isJoomla3 && $saveOrder)
 			<button type="submit" class="btn"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" class="btn" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
-		<div class="btn-group pull-right hidden-phone">
-			<?php echo $this->pagination->getLimitBox(); ?>
-		</div>
+		
 		<div class="filter-select fltrt btn-group pull-right">
 			<select name="filter_published" class="inputbox input-medium" onchange="this.form.submit()">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
@@ -84,14 +67,9 @@ if ($isJoomla3 && $saveOrder)
 	</fieldset>
 	<div class="clr"> </div>
 	
-	<table class="adminlist table table-striped" id="slidesList">
+	<table class="adminlist table table-striped">
 		<thead>
 			<tr>
-			<?php if($isJoomla3) { ?>
-				<th width="1%" class="nowrap center hidden-phone">
-					<?php echo JHtml::_('grid.sort', '<i class="icon-menu-2"></i>', 'a.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING'); ?>
-				</th>
-			<?php } ?>
 				<th width="1%">
 					<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 				</th>
@@ -104,14 +82,12 @@ if ($isJoomla3 && $saveOrder)
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'a.published', $listDirn, $listOrder); ?>
 				</th>
-			<?php if(!$isJoomla3) { ?>
 				<th width="10%">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'a.ordering', $listDirn, $listOrder); ?>
 					<?php if ($canOrder && $saveOrder) :?>
 						<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'items.saveorder'); ?>
 					<?php endif; ?>
 				</th>
-			<?php } ?>
 				<th width="10%">
 					<?php echo JHtml::_('grid.sort', 'JCATEGORY', 'category_title', $listDirn, $listOrder); ?>
 				</th>
@@ -139,28 +115,7 @@ if ($isJoomla3 && $saveOrder)
 			$canChange	= $user->authorise('core.edit.state',	'com_djimageslider.category.'.$item->catid) && $canCheckin;
 
 			?>
-			<tr class="row<?php echo $i % 2; ?>" sortable-group-id="<?php echo $item->catid?>">
-			<?php if($isJoomla3) { ?>
-				<td class="order nowrap center hidden-phone">
-							<?php
-							$iconClass = '';
-							if (!$canChange)
-							{
-								$iconClass = ' inactive';
-							}
-							elseif (!$saveOrder)
-							{
-								$iconClass = ' inactive tip-top hasTooltip" title="' . JHtml::tooltipText('JORDERINGDISABLED');
-							}
-							?>
-							<span class="sortable-handler<?php echo $iconClass ?>">
-								<i class="icon-move"></i>
-							</span>
-							<?php if ($canChange && $saveOrder) : ?>
-								<input type="text" style="display:none" name="order[]" size="5" value="<?php echo $item->ordering; ?>" class="width-20 text-area-order " />
-							<?php endif; ?>
-				</td>
-			<?php } ?>
+			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
 					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 				</td>
@@ -187,7 +142,6 @@ if ($isJoomla3 && $saveOrder)
 				<td class="center">
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'items.', true, 'cb'	); ?>
 				</td>
-			<?php if(!$isJoomla3) { ?>
 				<td class="order" nowrap="nowrap">
 					<?php if ($canChange) : ?>
 						<?php if ($saveOrder) :?>
@@ -205,7 +159,6 @@ if ($isJoomla3 && $saveOrder)
 						<?php echo $item->ordering; ?>
 					<?php endif; ?>
 				</td>
-			<?php } ?>
 				<td align="center">
 					<?php echo $item->category_title; ?>
 				</td>
@@ -224,7 +177,5 @@ if ($isJoomla3 && $saveOrder)
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>
-</div>
 
-<div class="clr" style="clear: both"></div>
 <?php echo DJIMAGESLIDERFOOTER; ?>

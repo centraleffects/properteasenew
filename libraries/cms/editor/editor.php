@@ -489,13 +489,18 @@ class JEditor extends JObject
 
 		// Build the path to the needed editor plugin
 		$name = JFilterInput::getInstance()->clean($this->_name, 'cmd');
-		$path = JPATH_PLUGINS . '/editors/' . $name . '/' . $name . '.php';
+		$path = JPATH_PLUGINS . '/editors/' . $name . '.php';
 
 		if (!is_file($path))
 		{
-			JLog::add(JText::_('JLIB_HTML_EDITOR_CANNOT_LOAD'), JLog::WARNING, 'jerror');
+			$path = JPATH_PLUGINS . '/editors/' . $name . '/' . $name . '.php';
 
-			return false;
+			if (!is_file($path))
+			{
+				JLog::add(JText::_('JLIB_HTML_EDITOR_CANNOT_LOAD'), JLog::WARNING, 'jerror');
+
+				return false;
+			}
 		}
 
 		// Require plugin file

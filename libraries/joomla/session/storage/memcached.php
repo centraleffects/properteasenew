@@ -74,7 +74,7 @@ class JSessionStorageMemcached extends JSessionStorage
 	 *
 	 * @since   12.1
 	 */
-	public static function isSupported()
+	static public function isSupported()
 	{
 		return (extension_loaded('memcached') && class_exists('Memcached'));
 	}

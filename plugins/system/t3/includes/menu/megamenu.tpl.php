@@ -184,7 +184,7 @@ class T3MenuMegamenuTpl
 		if ($item->dropdown && $item->level < 2) {
 			$vars['class']    .= ' dropdown-toggle';
 			$vars['dropdown'] .= ' data-toggle="dropdown"'; // Note: data-target for JomSocial old bootstrap lib
-			$vars['caret']     = '<em class="caret"></em>';
+			$vars['caret']     = '<b class="caret"></b>';
 		}
 
 		if($item->group){
@@ -200,7 +200,7 @@ class T3MenuMegamenuTpl
 		}
 
 		if (isset($setting['xicon']) && $setting['xicon']) {
-			$vars['icon'] = '<span class="' . $setting['xicon'] . '"></span>';
+			$vars['icon'] = '<i class="' . $setting['xicon'] . '"></i>';
 		}
 		if (isset($setting['caption']) && $setting['caption']) {
 			$vars['caption'] = '<span class="mega-caption">' . $setting['caption'] . '</span>';

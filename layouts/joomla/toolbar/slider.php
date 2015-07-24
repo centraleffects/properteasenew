@@ -18,6 +18,6 @@ $name    = $displayData['name'];
 $onClose = $displayData['onClose'];
 ?>
 <button onclick="<?php echo $doTask; ?>" class="btn btn-small" data-toggle="collapse" data-target="#collapse-<?php echo $name; ?>"<?php echo $onClose; ?>>
-	<span class="icon-cog"></span>
+	<i class="icon-cog"></i>
 	<?php echo $text; ?>
 </button>

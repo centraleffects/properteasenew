@@ -68,7 +68,8 @@ abstract class JHtmlJGrid
 			$html[] = ' href="javascript:void(0);" onclick="return listItemTask(\'' . $checkbox . $i . '\',\'' . $prefix . $task . '\')"';
 			$html[] = $tip ? ' title="' . $title . '"' : '';
 			$html[] = '>';
-			$html[] = '<span class="icon-' . $active_class . '"></span>';
+			$html[] = '<i class="icon-' . $active_class . '">';
+			$html[] = '</i>';
 			$html[] = '</a>';
 		}
 		else
@@ -79,11 +80,11 @@ abstract class JHtmlJGrid
 
 			if ($active_class == "protected")
 			{
-				$html[] = '<span class="icon-lock"></span>';
+				$html[] = '<i class="icon-lock"></i>';
 			}
 			else
 			{
-				$html[] = '<span class="icon-' . $inactive_class . '"></span>';
+				$html[] = '<i class="icon-' . $inactive_class . '"></i>';
 			}
 
 			$html[] = '</a>';

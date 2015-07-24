@@ -235,22 +235,22 @@ class JForm
 			$groups = array_map('strval', $attrs ? $attrs : array());
 			$group = implode('.', $groups);
 
-			$key = $group ? $group . '.' . $name : $name;
-
-			// Filter the value if it exists.
-			if ($input->exists($key))
+			// Get the field value from the data input.
+			if ($group)
 			{
-				$output->set($key, $this->filterField($field, $input->get($key, (string) $field['default'])));
+				// Filter the value if it exists.
+				if ($input->exists($group . '.' . $name))
+				{
+					$output->set($group . '.' . $name, $this->filterField($field, $input->get($group . '.' . $name, (string) $field['default'])));
+				}
 			}
-
-			// Get the JFormField object for this field, only it knows if it is supposed to be multiple.
-			$jfield = $this->getField($name, $group);
-
-			// Fields supporting multiple values must be stored as empty arrays when no values are selected.
-			// If not, they will appear to be unset and then revert to their default value.
-			if ($jfield && $jfield->multiple && !$output->exists($key))
+			else
 			{
-				$output->set($key, array());
+				// Filter the value if it exists.
+				if ($input->exists($name))
+				{
+					$output->set($name, $this->filterField($field, $input->get($name, (string) $field['default'])));
+				}
 			}
 		}
 
@@ -817,7 +817,7 @@ class JForm
 					{
 						$olddom = dom_import_simplexml($current);
 						$loadeddom = dom_import_simplexml($field);
-						$addeddom = $olddom->ownerDocument->importNode($loadeddom, true);
+						$addeddom = $olddom->ownerDocument->importNode($loadeddom);
 						$olddom->parentNode->replaceChild($addeddom, $olddom);
 						$loadeddom->parentNode->removeChild($loadeddom);
 					}
@@ -882,7 +882,7 @@ class JForm
 	 * @param   string  $name   The name of the form field for which remove.
 	 * @param   string  $group  The optional dot-separated form group path on which to find the field.
 	 *
-	 * @return  boolean  True on success, false otherwise.
+	 * @return  boolean  True on success.
 	 *
 	 * @since   11.1
 	 * @throws  UnexpectedValueException
@@ -903,11 +903,9 @@ class JForm
 		{
 			$dom = dom_import_simplexml($element);
 			$dom->parentNode->removeChild($dom);
-
-			return true;
 		}
 
-		return false;
+		return true;
 	}
 
 	/**
@@ -915,7 +913,7 @@ class JForm
 	 *
 	 * @param   string  $group  The dot-separated form group path for the group to remove.
 	 *
-	 * @return  boolean  True on success, false otherwise.
+	 * @return  boolean  True on success.
 	 *
 	 * @since   11.1
 	 * @throws  UnexpectedValueException
@@ -935,11 +933,9 @@ class JForm
 		{
 			$dom = dom_import_simplexml($element);
 			$dom->parentNode->removeChild($dom);
-
-			return true;
 		}
 
-		return false;
+		return true;
 	}
 
 	/**

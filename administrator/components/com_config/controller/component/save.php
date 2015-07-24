@@ -128,12 +128,6 @@ class ConfigControllerComponentSave extends JControllerBase
 					$redirect = base64_decode($returnUri);
 				}
 
-				// Don't redirect to an external URL.
-				if (!JUri::isInternal($redirect))
-				{
-					$redirect = JUri::base();
-				}
-
 				$this->app->redirect(JRoute::_($redirect, false));
 
 				break;

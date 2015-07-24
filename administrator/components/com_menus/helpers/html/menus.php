@@ -108,7 +108,7 @@ abstract class MenusHtmlMenus
 				'',
 				'COM_MENUS_HTML_UNPUBLISH_HEADING',
 				'',
-				true,
+				false,
 				'publish',
 				'publish'
 			),
@@ -117,7 +117,7 @@ abstract class MenusHtmlMenus
 				'',
 				'COM_MENUS_HTML_PUBLISH_HEADING',
 				'',
-				true,
+				false,
 				'unpublish',
 				'unpublish'
 			),
@@ -126,7 +126,7 @@ abstract class MenusHtmlMenus
 				'',
 				'COM_MENUS_HTML_UNPUBLISH_SEPARATOR',
 				'',
-				true,
+				false,
 				'publish',
 				'publish'
 			),
@@ -135,7 +135,7 @@ abstract class MenusHtmlMenus
 				'',
 				'COM_MENUS_HTML_PUBLISH_SEPARATOR',
 				'',
-				true,
+				false,
 				'unpublish',
 				'unpublish'
 			),
@@ -144,7 +144,7 @@ abstract class MenusHtmlMenus
 				'',
 				'COM_MENUS_HTML_UNPUBLISH_ALIAS',
 				'',
-				true,
+				false,
 				'publish',
 				'publish'
 			),
@@ -153,7 +153,7 @@ abstract class MenusHtmlMenus
 				'',
 				'COM_MENUS_HTML_PUBLISH_ALIAS',
 				'',
-				true,
+				false,
 				'unpublish',
 				'unpublish'
 			),
@@ -162,7 +162,7 @@ abstract class MenusHtmlMenus
 				'',
 				'COM_MENUS_HTML_UNPUBLISH_URL',
 				'',
-				true,
+				false,
 				'publish',
 				'publish'
 			),
@@ -171,7 +171,7 @@ abstract class MenusHtmlMenus
 				'',
 				'COM_MENUS_HTML_PUBLISH_URL',
 				'',
-				true,
+				false,
 				'unpublish',
 				'unpublish'
 			),
@@ -208,17 +208,8 @@ abstract class MenusHtmlMenus
 				'COM_MENUS_HTML_PUBLISH_DISABLED',
 				'COM_MENUS_EXTENSION_UNPUBLISHED_DISABLED',
 				true,
-				'trash',
-				'trash'
-			),
-			-3	=> array(
-				'publish',
-				'',
-				'COM_MENUS_HTML_PUBLISH',
-				'',
-				true,
-				'trash',
-				'trash'
+				'unpublish',
+				'unpublish'
 			),
 		);
 

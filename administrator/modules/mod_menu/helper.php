@@ -42,15 +42,7 @@ abstract class ModMenuHelper
 
 		$db->setQuery($query);
 
-		try
-		{
-			$result = $db->loadObjectList();
-		}
-		catch (RuntimeException $e)
-		{
-			$result = array();
-			JFactory::getApplication()->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
-		}
+		$result = $db->loadObjectList();
 
 		return $result;
 	}
@@ -88,15 +80,7 @@ abstract class ModMenuHelper
 		$db->setQuery($query);
 
 		// Component list
-		try
-		{
-			$components = $db->loadObjectList();
-		}
-		catch (RuntimeException $e)
-		{
-			$components = array();
-			JFactory::getApplication()->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
-		}
+		$components = $db->loadObjectList();
 
 		// Parse the list of extensions.
 		foreach ($components as &$component)

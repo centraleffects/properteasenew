@@ -12,10 +12,6 @@
 #ckslideslist select {
     display: inline-block !important;
 }
-
-#ckslideslist li {
-    list-style: none;
-}
 /* fin override */
 
 #options-styles {position:relative;}
@@ -44,7 +40,6 @@
 	background-color: #eee;
 }
 
-
 .ckslideaccordeoncontent {
     /*overflow: visible !important;*/
 }
@@ -58,14 +53,6 @@
 	min-height: 60px;
     list-style: none;
     max-width: 550px;
-	background: #fff;
-	position: relative;
-}
-
-.placeholder {
-	border: 1px dashed #3399ff;
-	min-height: 100px;
-	max-width: 550px;
 }
 
 .ckslide input, .ckslide select {
@@ -104,38 +91,6 @@
 	background: #eee;
 	height: 25px;
 	border-bottom: 1px solid #ccc;
-}
-
-.ckslidetoggle {
-	background: red;
-	bottom: 0;
-	height: 40px;
-	left: 0;
-	position: absolute;
-	width: 8%;
-	background-color: #dff0d8;
-	/*border-color: #d6e9c6;*/
-	color: #468847;
-	cursor: pointer;
-	border-radius: 0 0 0 5px;
-	border-top: 1px solid #d6e9c6;
-}
-
-.ckslidetoggler {
-	font-size: 16px;
-	font-weight: bold;
-	margin: 10px 0;
-	text-align: center;
-}
-
-.ckslidetoggle[data-state="0"] {
-	background-color: #f2dede;
-	border-top: 1px solid #eed3d7;
-	color: #b94a48;
-}
-
-.ckslidetoggle[data-state="0"] + .ckslidecontainer {
-	opacity: 0.3;
 }
 
 .cksliderow {
@@ -243,5 +198,4 @@
     background: #eee;
     color: #0080ff;
 }
-
 

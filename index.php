@@ -6,14 +6,9 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-/**
- * Define the application's minimum supported PHP version as a constant so it can be referenced within the application.
- */
-define('JOOMLA_MINIMUM_PHP', '5.3.10');
-
-if (version_compare(PHP_VERSION, JOOMLA_MINIMUM_PHP, '<'))
+if (version_compare(PHP_VERSION, '5.3.10', '<'))
 {
-	die('Your host needs to use PHP ' . JOOMLA_MINIMUM_PHP . ' or higher to run this version of Joomla!');
+	die('Your host needs to use PHP 5.3.10 or higher to run this version of Joomla!');
 }
 
 /**

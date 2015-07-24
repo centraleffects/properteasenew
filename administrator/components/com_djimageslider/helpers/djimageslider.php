@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Id: djimageslider.php 25 2015-06-29 19:45:38Z szymon $
+ * @version $Id: djimageslider.php 5 2013-01-11 10:22:28Z szymon $
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -33,50 +33,27 @@ abstract class DJImageSliderHelper
 	public static function addSubmenu($vName)
 	{
 		if($vName=='item' || $vName=='category') return;
-		$version = new JVersion;
 		
-		if (version_compare($version->getShortVersion(), '3.0.0', '<')) {
-			
-			JSubMenuHelper::addEntry(
-				JText::_('COM_DJIMAGESLIDER_SUBMENU_CPANEL'),
-				'index.php?option=com_djimageslider',
-				$vName == 'cpanel'
-			);
-			JSubMenuHelper::addEntry(
-				JText::_('COM_DJIMAGESLIDER_SUBMENU_SLIDES'),
-				'index.php?option=com_djimageslider&view=items',
-				$vName == 'items'
-			);
-			JSubMenuHelper::addEntry(
-				JText::_('COM_DJIMAGESLIDER_SUBMENU_CATEGORIES'),
-				'index.php?option=com_categories&extension=com_djimageslider',
-				$vName == 'categories'
-			);
-	
-			
-		} else {
-			
-			JHtmlSidebar::addEntry(
-				JText::_('COM_DJIMAGESLIDER_SUBMENU_CPANEL'),
-				'index.php?option=com_djimageslider',
-				$vName == 'cpanel'
-			);
-			JHtmlSidebar::addEntry(
-				JText::_('COM_DJIMAGESLIDER_SUBMENU_SLIDES'),
-				'index.php?option=com_djimageslider&view=items',
-				$vName == 'items'
-			);
-			JHtmlSidebar::addEntry(
-				JText::_('COM_DJIMAGESLIDER_SUBMENU_CATEGORIES'),
-				'index.php?option=com_categories&extension=com_djimageslider',
-				$vName == 'categories'
-			);
-		}
-		
+		JSubMenuHelper::addEntry(
+			JText::_('COM_DJIMAGESLIDER_SUBMENU_CPANEL'),
+			'index.php?option=com_djimageslider',
+			$vName == 'cpanel'
+		);
+		JSubMenuHelper::addEntry(
+			JText::_('COM_DJIMAGESLIDER_SUBMENU_SLIDES'),
+			'index.php?option=com_djimageslider&view=items',
+			$vName == 'items'
+		);
+		JSubMenuHelper::addEntry(
+			JText::_('COM_DJIMAGESLIDER_SUBMENU_CATEGORIES'),
+			'index.php?option=com_categories&extension=com_djimageslider',
+			$vName == 'categories'
+		);
+
 		if ($vName=='categories') {
 			JToolBarHelper::title(
-			JText::sprintf('COM_DJIMAGESLIDER_CATEGORIES_TITLE',JText::_('com_djimageslider')),
-			'slider-categories');
+				JText::sprintf('COM_DJIMAGESLIDER_CATEGORIES_TITLE',JText::_('com_djimageslider')),
+				'slider-categories');
 		}
 	}
 	

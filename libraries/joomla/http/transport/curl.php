@@ -75,6 +75,9 @@ class JHttpTransportCurl implements JHttpTransport
 				break;
 
 			case 'PUT':
+				$options[CURLOPT_PUT] = true;
+				break;
+
 			default:
 				$options[CURLOPT_CUSTOMREQUEST] = strtoupper($method);
 				break;

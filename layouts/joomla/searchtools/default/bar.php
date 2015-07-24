@@ -35,17 +35,14 @@ $filters = $data['view']->filterForm->getGroup('filter');
 		</label>
 		<div class="btn-wrapper input-append">
 			<?php echo $filters['filter_search']->input; ?>
-			<?php if ($filters['filter_search']->description) : ?>
-				<?php JHtmlBootstrap::tooltip('#filter_search', array('title' => JText::_($filters['filter_search']->description))); ?>
-			<?php endif; ?>
 			<button type="submit" class="btn hasTooltip" title="<?php echo JHtml::tooltipText('JSEARCH_FILTER_SUBMIT'); ?>">
-				<span class="icon-search"></span>
+				<i class="icon-search"></i>
 			</button>
 		</div>
 		<?php if ($filterButton) : ?>
 			<div class="btn-wrapper hidden-phone">
 				<button type="button" class="btn hasTooltip js-stools-btn-filter" title="<?php echo JHtml::tooltipText('JSEARCH_TOOLS_DESC'); ?>">
-					<?php echo JText::_('JSEARCH_TOOLS');?> <span class="caret"></span>
+					<?php echo JText::_('JSEARCH_TOOLS');?> <i class="caret"></i>
 				</button>
 			</div>
 		<?php endif; ?>

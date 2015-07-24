@@ -49,21 +49,21 @@ JFactory::getDocument()->addScriptDeclaration("
 				<div class="btn-group">
 					<button type="button" class="btn btn-default btn-primary"
 						onclick="Joomla.submitbutton('config.save.modules.apply')">
-						<span class="icon-apply"></span>
+						<i class="icon-apply"></i>
 						<?php echo JText::_('JAPPLY') ?>
 					</button>
 				</div>
 				<div class="btn-group">
 					<button type="button" class="btn btn-default"
 						onclick="Joomla.submitbutton('config.save.modules.save')">
-						<span class="icon-save"></span>
+						<i class="icon-save"></i>
 						<?php echo JText::_('JSAVE') ?>
 					</button>
 				</div>
 				<div class="btn-group">
 					<button type="button" class="btn btn-default"
 						onclick="Joomla.submitbutton('config.cancel.modules')">
-						<span class="icon-cancel"></span>
+						<i class="icon-cancel"></i>
 						<?php echo JText::_('JCANCEL') ?>
 					</button>
 				</div>
@@ -157,7 +157,7 @@ JFactory::getDocument()->addScriptDeclaration("
 								<?php echo $this->form->getInput('ordering'); ?>
 							</div>
 						</div>
-
+	
 						<div class="control-group">
 							<div class="control-label">
 								<?php echo $this->form->getLabel('language'); ?>

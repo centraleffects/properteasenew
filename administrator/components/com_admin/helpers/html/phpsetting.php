@@ -25,7 +25,14 @@ abstract class JHtmlPhpSetting
 	 */
 	public static function boolean($val)
 	{
-		return JText::_($val ? 'JON' : 'JOFF');
+		if ($val)
+		{
+			return JText::_('JON');
+		}
+		else
+		{
+			return JText::_('JOFF');
+		}
 	}
 
 	/**
@@ -37,7 +44,14 @@ abstract class JHtmlPhpSetting
 	 */
 	public static function set($val)
 	{
-		return JText::_($val ? 'JYES' : 'JNO');
+		if ($val)
+		{
+			return JText::_('JYES');
+		}
+		else
+		{
+			return JText::_('JNO');
+		}
 	}
 
 	/**
@@ -49,7 +63,14 @@ abstract class JHtmlPhpSetting
 	 */
 	public static function string($val)
 	{
-		return !empty($val) ? $val : JText::_('JNONE');
+		if (empty($val))
+		{
+			return JText::_('JNONE');
+		}
+		else
+		{
+			return $val;
+		}
 	}
 
 	/**
