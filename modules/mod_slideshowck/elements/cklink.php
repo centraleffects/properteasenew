@@ -26,13 +26,13 @@ class JFormFieldCktext extends JFormField
 		$icon = $this->element['icon'];
 		
 		// Build the class for the label.
-		$class = !empty($this->description) ? 'hasTip hasTooltip' : '';
+		$class = !empty($this->description) ? 'hasTip hasTooltip hasTooltip' : '';
 		
 		$label .= '<div id="'.$this->id.'-link" class="'.$class.'"';
 		
 		// If a description is specified, use it to build a tooltip.
 		if (!empty($this->description)) {
-			$label .= ' title="'.htmlspecialchars(trim($text, ':').'::' .
+			$label .= ' title="'.htmlspecialchars(trim($text, ':').'<br />' .
 				JText::_($this->description), ENT_COMPAT, 'UTF-8').'"';
 		}
 		

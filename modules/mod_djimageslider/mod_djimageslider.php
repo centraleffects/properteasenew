@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Id: mod_djimageslider.php 11 2013-06-21 11:07:50Z szymon $
+ * @version $Id: mod_djimageslider.php 27 2015-07-01 12:49:50Z szymon $
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -28,10 +28,12 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+jimport('joomla.filesystem.file');
 
 // Include the syndicate functions only once
 require_once (dirname(__FILE__).DS.'helper.php');
 $app = JFactory::getApplication();
+$document = JFactory::getDocument();
 
 // taking the slides from the source
 if($params->get('slider_source')==1) {
@@ -53,19 +55,70 @@ if($params->get('slider_source')==1) {
 	}
 }
 
-$document = JFactory::getDocument();
-JHTML::_('behavior.framework',true);
-if($params->get('link_image',1)==2) {
-	JHTML::_('behavior.modal','a.djmodal');
+$direction = $document->direction;
+// direction integration with joomla monster templates
+if ($app->input->get('direction') == 'rtl'){
+	$direction = 'rtl';
+} else if ($app->input->get('direction') == 'ltr') {
+	$direction = 'ltr';
+} else {
+	if (isset($_COOKIE['jmfdirection'])) {
+		$direction = $_COOKIE['jmfdirection'];
+	} else {
+		$direction = $app->input->get('jmfdirection', $direction);
+	}
 }
-$document->addScript('modules/mod_djimageslider/assets/powertools-1.2.0.js');
-$document->addScript('modules/mod_djimageslider/assets/slider.js');
+$params->set('direction', $direction);
+
+$theme = $params->get('theme', 'default');
+
+if($theme != '_override') {
+	$css = 'modules/mod_djimageslider/themes/'.$theme.'/css/djimageslider.css';
+} else {
+	$theme = 'override';
+	$css = 'templates/'.$app->getTemplate().'/css/djimageslider.css';
+}
+// add only if theme file exists
+if(JFile::exists(JPATH_ROOT . DS . $css)) {
+	$document->addStyleSheet(JURI::root(true).'/'.$css);
+}
+if($direction == 'rtl') { // load rtl css if exists in theme or joomla template
+	$css_rtl = JFile::stripExt($css).'_rtl.css';
+	if(JFile::exists(JPATH_ROOT . DS . $css_rtl)) {
+		$document->addStyleSheet(JURI::root(true).'/'.$css_rtl);
+	}
+}
+
+$version = new JVersion;
+$jquery = version_compare($version->getShortVersion(), '3.0.0', '>=');
+$canDefer = preg_match('/(?i)msie [6-9]/',$_SERVER['HTTP_USER_AGENT']) ? false : true;
+
+if ($jquery) {
+	JHTML::_('jquery.framework');
+	$document->addScript('//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js', 'text/javascript', $canDefer);
+	$document->addScript('modules/mod_djimageslider/assets/js/slider.js', 'text/javascript', $canDefer);
+} else {
+	JHTML::_('behavior.framework', true);
+	$document->addScript('modules/mod_djimageslider/assets/js/moo.slider.js', 'text/javascript', $canDefer);
+}
+
+if($params->get('link_image',1) > 1) {
+	if($jquery) {
+		$document->addScript(JURI::root(true).'/media/djextensions/magnific/magnific.js', 'text/javascript', $canDefer);
+		$document->addStyleSheet(JURI::root(true).'/media/djextensions/magnific/magnific.css');
+		$document->addScript(JURI::root(true).'/modules/mod_djimageslider/assets/js/magnific-init.js', 'text/javascript', $canDefer);
+	} else {
+		$document->addScript(JURI::root(true).'/modules/mod_djimageslider/assets/slimbox/js/slimbox.js', 'text/javascript', $canDefer);
+		$document->addStyleSheet(JURI::root(true).'/modules/mod_djimageslider/assets/slimbox/css/slimbox.css');
+	}
+}
 
 if(!is_numeric($width = $params->get('image_width'))) $width = 240;
 if(!is_numeric($height = $params->get('image_height'))) $height = 180;
 if(!is_numeric($max = $params->get('max_images'))) $max = 20;
 if(!is_numeric($count = $params->get('visible_images'))) $count = 3;
-if(!is_numeric($spacing = $params->get('space_between_images'))) $spacing = 3;
+if(!is_numeric($spacing = $params->get('space_between_images'))) $spacing = 10;
+if(!is_numeric($preload = $params->get('preload'))) $preload = 800;
 if($count>count($slides)) $count = count($slides);
 if($count<1) $count = 1;
 if($count>$max) $count = $max;
@@ -86,20 +139,12 @@ switch($slider_type){
 }
 
 $animationOptions = modDJImageSliderHelper::getAnimationOptions($params);
-$showB = $params->get('show_buttons',1);
-$showA = $params->get('show_arrows',1);
-if(!is_numeric($preload = $params->get('preload'))) $preload = 800;
-$moduleSettings = "{id: '$mid', slider_type: $slider_type, slide_size: $slide_size, visible_slides: $count, show_buttons: $showB, show_arrows: $showA, preload: $preload}";
-$js = "window.addEvent('domready',function(){this.Slider$mid = new DJImageSliderModule($moduleSettings,$animationOptions)});";
-$js = "(function($){ ".$js." })(document.id);";
-$document->addScriptDeclaration($js);
+$moduleSettings = json_encode(array('id' => $mid, 'slider_type' => $slider_type, 'slide_size' => $slide_size, 'visible_slides' => $count, 'direction' => $direction == 'rtl' ? 'right':'left',
+	'show_buttons' => $params->get('show_buttons',1), 'show_arrows' => $params->get('show_arrows',1), 'preload' => $preload, 'css3' => $params->get('css3', 0)
+));
 
-$css = JURI::base().'modules/mod_djimageslider/assets/style.css';
-$document->addStyleSheet($css);
-
-$css = modDJImageSliderHelper::getStyleSheet($params,$mid);
-$document->addStyleDeclaration($css);
-
+$style = modDJImageSliderHelper::getStyles($params);
 $navigation = modDJImageSliderHelper::getNavigation($params,$mid);
+$show = (object) array('arr'=>$params->get('show_arrows'), 'btn'=>$params->get('show_buttons'), 'idx'=>$params->get('show_custom_nav'));
 
 require JModuleHelper::getLayoutPath('mod_djimageslider', $params->get('layout','default'));

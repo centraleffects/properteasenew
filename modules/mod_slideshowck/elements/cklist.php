@@ -125,7 +125,7 @@ class JFormFieldCklist extends JFormField {
 		$text = $this->translateLabel ? JText::_($text) : $text;
 
 		// Build the class for the label.
-		$class = !empty($this->description) ? 'hasTip hasTooltip' : '';
+		$class = !empty($this->description) ? 'hasTip hasTooltip hasTooltip' : '';
 		$class = $this->required == true ? $class . ' required' : $class;
 		$class = !empty($this->labelClass) ? $class . ' ' . $this->labelClass : $class;
 
@@ -137,7 +137,7 @@ class JFormFieldCklist extends JFormField {
 		{
 			$label .= ' title="'
 				. htmlspecialchars(
-				trim($text, ':') . '::' . ($this->translateDescription ? JText::_($this->description) : $this->description),
+				trim($text, ':') . '<br />' . ($this->translateDescription ? JText::_($this->description) : $this->description),
 				ENT_COMPAT, 'UTF-8'
 			) . '"';
 		}

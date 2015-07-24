@@ -1,16 +1,16 @@
-/** 
+/**
  *------------------------------------------------------------------------------
  * @package       T3 Framework for Joomla!
  *------------------------------------------------------------------------------
  * @copyright     Copyright (C) 2004-2013 JoomlArt.com. All Rights Reserved.
  * @license       GNU General Public License version 2 or later; see LICENSE.txt
- * @authors       JoomlArt, JoomlaBamboo, (contribute to this project at github 
+ * @authors       JoomlArt, JoomlaBamboo, (contribute to this project at github
  *                & Google group to become co-author)
  * @Google group: https://groups.google.com/forum/#!forum/t3fw
- * @Link:         http://t3-framework.org 
+ * @Link:         http://t3-framework.org
  *------------------------------------------------------------------------------
  */
-	
+
 ;(function($){
 
 
@@ -23,7 +23,7 @@
 		this.options = $.extend({}, $.fn.t3menu.defaults, options);
 		this.child_open = [];
 		this.loaded = false;
-		
+
 		this.start();
 	};
 
@@ -41,10 +41,10 @@
 			var self = this,
 				options = this.options,
 				$menu = this.$menu;
-			
+
 			this.$items = $menu.find('li');
 			this.$items.each(function (idx, li) {
-				
+
 				var $item = $(this),
 					$child = $item.children('.dropdown-menu'),
 					$link = $item.children('a'),
@@ -110,7 +110,7 @@
                         $target.data('hide-processed', true);
                         setTimeout(function(){$target.data('hide-processed', false);}, 10);
 
-                        self.hide(item);
+                        self.hide(item, $target);
                     });
 
                     //if has child, don't goto link before open child - fix for touch screen
@@ -128,12 +128,19 @@
 				self.timer = setTimeout($.proxy(self.hide_alls, self), e.type == 'tap' ? 500 : self.options.hidedelay);
 			});
 
-            // ignore click on direct child
-            $menu.find('.mega-dropdown-menu').on('hideall.t3menu', function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                return false;
-            });
+      // ignore click on direct child
+      $menu.find('.mega-dropdown-menu').on('hideall.t3menu', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          return false;
+      });
+
+			// prevent close menu if click on form element
+			$menu.find('input, select, textarea, label').on('click tap',
+					function(e) {
+						e.stopPropagation();
+					});
+
 		},
 
 		show: function (item) {
@@ -144,7 +151,7 @@
 
 			// hide all for other instances as well
 			$(document.body).trigger('hideall.t3menu', [this]);
-			
+
 			clearTimeout(this.timer);		//hide alls
 			clearTimeout(item.timer);		//hide this item
 			clearTimeout(item.ftimer);	//on hidden
@@ -177,12 +184,17 @@
 			item.ctimer = setTimeout($.proxy(this.clickable, this, item), 300);
 		},
 
-		hide: function (item) {
+		hide: function (item, $target) {
 			clearTimeout(this.timer);		//hide alls
 			clearTimeout(item.timer);		//hide this item
 			clearTimeout(item.astimer);	//animate timer
 			clearTimeout(item.atimer);	//animate timer
 			clearTimeout(item.ftimer);	//on hidden
+
+			// cancel hide if still in menu
+			if ($target && $target.is('input', item.$item)) {
+				return ;
+			}
 
 			if(item.mega){
 				//animate out
@@ -190,7 +202,9 @@
 				item.atimer = setTimeout(function(){item.$item.removeClass('animating')}, this.options.duration);
 				item.timer = setTimeout(function(){item.$item.removeClass('open')}, 100);
 			} else {
-				item.$item.removeClass('open');
+				item.timer = setTimeout(function(){
+		                    item.$item.removeClass('open');
+		                }, 100);
 			}
 
 			item.status = 'close';
@@ -280,7 +294,7 @@
 				} else {
 					align_offset = offset.left + ((align == 'left' && this.options.rtl || align == 'right' && !this.options.rtl) ? width : 0);
 				}
-		
+
 				if (this.options.rtl) {
 
 					if(align == 'right'){
@@ -392,7 +406,7 @@
 
 			if (!data) {
 				$this.data('megamenu', (data = new T3Menu(this, options)));
-				
+
 			} else {
 				if (typeof option == 'string' && data[option]){
 					data[option]()
@@ -429,7 +443,7 @@
 		var mm_timeout = mm_duration ? 100 + mm_duration : 500,
 			mm_rtl = $(document.documentElement).attr('dir') == 'rtl',
 			mm_trigger = $(document.documentElement).hasClass('mm-hover'),
-			sb_width = (function () { 
+			sb_width = (function () {
 			var parent = $('<div style="width:50px;height:50px;overflow:auto"><div/></div>').appendTo('body'),
 				child = parent.children(),
 				width = child.innerWidth() - child.height(100).innerWidth();
@@ -443,7 +457,7 @@
 		if(!$.support.transition){
 			//it is not support animate
 			$('.t3-megamenu').removeClass('animate');
-			
+
 			mm_timeout = 100;
 		}
 
@@ -458,7 +472,7 @@
 
 
 		$(window).load(function(){
-			
+
 			//check we miss any nav
 			$('ul.nav').has('.dropdown-menu').t3menu({
 				duration: mm_duration,

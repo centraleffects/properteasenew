@@ -13,6 +13,7 @@ require_once $com_path . 'router.php';
 require_once $com_path . 'helpers/route.php';
 JModelLegacy::addIncludePath($com_path . '/models', 'ContentModel');
 jimport('joomla.filesystem.folder');
+jimport('joomla.filesystem.file');
 
 class modSlideshowckHelper {
 
@@ -35,6 +36,12 @@ class modSlideshowckHelper {
 		$items = json_decode(str_replace("|qq|", "\"", $params->get('slides')));
 		foreach ($items as $i => $item) {
 			if (!$item->imgname) {
+				unset($items[$i]);
+				continue;
+			}
+
+			// check if the slide is published
+			if (isset($item->state) && $item->state == '0') {
 				unset($items[$i]);
 				continue;
 			}
@@ -88,7 +95,7 @@ class modSlideshowckHelper {
 			
 			if (!isset($item->imgtitle)) $item->imgtitle = '';
 		}
-		//shuffle($items);
+
 		return $items;
 	}
 
@@ -601,9 +608,10 @@ class modSlideshowckHelper {
 			$y = $x * $size[1] / $size[0];
 		} else 
 		{
-			$tmpx = $x;
-			$x = $y;
-			$y = $tmpx * $size[0] / $size[1];
+//			$tmpx = $x;
+//			$x = $y;
+//			$y = $tmpx * $size[0] / $size[1];
+			$x = $y * $size[0] / $size[1];
 		}
 
 		

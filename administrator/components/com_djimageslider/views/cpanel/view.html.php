@@ -1,6 +1,6 @@
 <?php 
 /**
- * @version $Id: view.html.php 5 2013-01-11 10:22:28Z szymon $
+ * @version $Id: view.html.php 25 2015-06-29 19:45:38Z szymon $
  * @package DJ-ImageSlider
  * @subpackage DJ-ImageSlider Component
  * @copyright Copyright (C) 2012 DJ-Extensions.com, All rights reserved.
@@ -38,6 +38,10 @@ class DJImageSliderViewCpanel extends JViewLegacy
 		JToolBarHelper::title( JText::_('COM_DJIMAGESLIDER'));
 		
 		JToolBarHelper::preferences('com_djimageslider', 550, 875);
+		
+		if (class_exists('JHtmlSidebar')){
+			$this->sidebar = JHtmlSidebar::render();
+		}
 		
 		parent::display($tpl);
 	}
