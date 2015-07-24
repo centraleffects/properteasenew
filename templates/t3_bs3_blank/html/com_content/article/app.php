@@ -95,8 +95,8 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
 	/* The following line gets the application object for things like displaying the site name */
 	$app = JFactory::getApplication();
 	$tplparams	= $app->getTemplate(true)->params;
-	$hasl=($this->countModules('left')?true:false);
-	$hasr=($this->countModules('right')?true:false);
+	$hasl= ($this->countModules('left')?true:false);
+	$hasr= ($this->countModules('right')?true:false);
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
