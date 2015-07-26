@@ -2890,8 +2890,8 @@ class OSMembershipHelper
 		return $rows->id; 	
 	}
 
-	public function getAvatar(){
-		$user =& JFactory::getUser();
+	public static function getAvatar(){
+		$user =JFactory::getUser();
 
 		$userid = $user->get( 'id' );
 
