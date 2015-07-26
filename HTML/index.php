@@ -22,16 +22,8 @@ $mainURL = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'';
   <script src="js/plugins.js" type="text/javascript"></script>
   <script src="js/bootstrap.js" type="text/javascript"></script>
   <script src="js/layerslider.js" type="text/javascript"></script>
-
-
-<link href="Home_files/gtooltip.css" media="screen" rel="stylesheet" type="text/css">
-<link href="Home_files/gvalidation.css" media="screen" rel="stylesheet" type="text/css">
-<script src="Home_files/jquery_003.js" type="text/javascript"></script>
-<script src="Home_files/bootstrap_002.js" type="text/javascript"></script>
-<script src="Home_files/gtooltip.js" type="text/javascript"></script>
-<script src="Home_files/gvalidation.js" type="text/javascript"></script>
-<script src="Home_files/jquery_004.js" type="text/javascript"></script>
-
+  <script src="js/gtooltip.js" type="text/javascript"></script>
+  <script src="js/gvalidation.js" type="text/javascript"></script>
 
   <script type="text/javascript">
 jQuery(window).on('load',  function() {
@@ -200,7 +192,7 @@ BTLJ("input.btl-buttonsubmit,button.btl-buttonsubmit").css({"color":btlOpt.TEXT_
 <div class="custom_banner_content">
 	<div class="ls-container ls-glass" id="layerslider" style="width: 100%; height: 700px; visibility: visible;"><div class="ls-webkit-hack"></div>
 <div style="background-color: transparent; width: 1349px; height: 700px;" class="ls-inner"><div class="ls-layer ls-animating" style="width: 1349px; height: 700px; visibility: visible; display: none; left: auto; right: auto; top: auto; bottom: auto;">
-<img style="width: 1500px; height: 768px; margin-left: -750px; margin-top: -384px;" class="ls-bg" src="Home_files/slideshow1.png" alt=""><div class="ls-s1 heading" style="left: 230px; top: 130px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;"><span class="med">Before buying </span>that property,<span class="med"> find out</span></div><div class="ls-s1 heading" style="left: 230px; top: 170px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">what <span class="med">you can or can`t do </span>with it</div><p class="ls-s3 text" style="left: 960px; top: 130px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">A once off search is<span class="med"> just $59</span></p><p class="ls-s3 text" style="left: 838px; top: 160px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;"><em>(instant answers but some research involved)</em></p><p class="ls-s3 text" style="left: 800px; top: 190px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">with<span class="med"> monthly or<span class="med"> yearly</span> subscriptions also offered.</span></p><img class="ls-s5" style="left: 300px; top: 253px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;" src="Home_files/banner.png" alt=""><div class="ls-s6" style="left: 956px; top: 300px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">
+<img style="width: 1500px; height: 768px; margin-left: -750px; margin-top: -384px;" class="ls-bg" src="<?php echo $mainURL; ?>images/slideshow1.png" alt=""><div class="ls-s1 heading" style="left: 230px; top: 130px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;"><span class="med">Before buying </span>that property,<span class="med"> find out</span></div><div class="ls-s1 heading" style="left: 230px; top: 170px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">what <span class="med">you can or can`t do </span>with it</div><p class="ls-s3 text" style="left: 960px; top: 130px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">A once off search is<span class="med"> just $59</span></p><p class="ls-s3 text" style="left: 838px; top: 160px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;"><em>(instant answers but some research involved)</em></p><p class="ls-s3 text" style="left: 800px; top: 190px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">with<span class="med"> monthly or<span class="med"> yearly</span> subscriptions also offered.</span></p><img class="ls-s5" style="left: 300px; top: 253px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;" src="<?php echo $mainURL; ?>images/banner.png" alt=""><div class="ls-s6" style="left: 956px; top: 300px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">
 <p><a class="btn btn-default btn-warning">Take the <span class="med">Tour</span></a></p>
 <p><a class="btn btn-default btn-primary ">Try it <span class="med">NOW</span></a></p>
 </div>
@@ -217,7 +209,7 @@ BTLJ("input.btl-buttonsubmit,button.btl-buttonsubmit").css({"color":btlOpt.TEXT_
 
 <div class="custom green-bg first-custom">
 	<div style="visibility: hidden; animation-duration: 1500ms; animation-name: none;" class="container wow fadeInDown" data-wow-duration="1500ms"><center>
-<p class="heading-text">Too busy? <span class="bold">Let us do it for you.&nbsp;<img src="Home_files/arrow.png" alt="">&nbsp;<a class="s-btn">HIRE A <span class="blk">CONSCIERGE</span></a></span></p>
+<p class="heading-text">Too busy? <span class="bold">Let us do it for you.&nbsp;<img src="<?php echo $mainURL; ?>images/arrow.png" alt="">&nbsp;<a class="s-btn">HIRE A <span class="blk">CONSCIERGE</span></a></span></p>
 <p>Currently Servicinvg Queensland Councils: Brisbane, Redland, Moreton 
 Bay, Gold Coast, Ipswich, Logan, Sunshine Coast, Toowoomba, Fraser 
 Coast...</p>
@@ -242,7 +234,7 @@ Coast...</p>
 <p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when looking at a property for a prospective client.</p>
 <p style="font-size: 19px;">A month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system. <br><br></p>
 <h4 style="font-size: 23px;"><strong>PropertEASE can assist architects in many ways:</strong></h4>
-<div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="Home_files/benefits-img.png" alt=""> </a>
+<div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="<?php echo $mainURL; ?>images/benefits-img.png" alt=""> </a>
 <div class="media-body">
 <ul class="green-list">
 <li>Getting instant and accurate information making the system extremely time (and money) efficient;</li>
@@ -270,20 +262,20 @@ Coast...</p>
 <div class="arrow">arrow</div>
 <h5 class="med">Step 1</h5>
 <p><span class="med">Enter</span> the address of <br>your property.</p>
-<img src="Home_files/step1.png" alt=""></div>
+<img src="<?php echo $mainURL; ?>images/step1.png" alt=""></div>
 </div>
 <div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-4 col-sm-4 col-xs-12 wow slideInLeft" data-wow-delay="0.2s">
 <div class="panel-content">
 <div class="arrow">arrow</div>
 <h5 class="med">Step 2</h5>
 <p><span class="med">Select</span> the property <br>attributes.</p>
-<img src="Home_files/step2.png" alt=""></div>
+<img src="<?php echo $mainURL; ?>images/step2.png" alt=""></div>
 </div>
 <div style="visibility: hidden; animation-delay: 0.5s; animation-name: none;" class="col-md-4 col-sm-4 col-xs-12 last wow  slideInLeft" data-wow-delay="0.5s">
 <div class="panel-content">
 <h5 class="med">Step 3</h5>
 <p><span class="med">Review</span> your results on <br>our online app or<br> print and download a <br>report.</p>
-<img src="Home_files/step3.png" alt=""></div>
+<img src="<?php echo $mainURL; ?>images/step3.png" alt=""></div>
 </div>
 </div>
 </div>
@@ -297,7 +289,7 @@ Coast...</p>
         <div id="slider-container87" class="slider-container">
         	<ul style="position: relative; left: -2672px; width: 4011px;" id="slider87" class="djslider-in">
           		          			<li style="margin: 0 0px 0px 0 !important; height: 280px; width: 1336px;">
-          					            											<img class="dj-image" src="Home_files/arch.jpg" alt="Architect" style="width: 100%; height: auto;">
+          					            											<img class="dj-image" src="<?php echo $mainURL; ?>images/arch.jpg" alt="Architect" style="width: 100%; height: auto;">
 																									<!-- Slide description area: START -->
 						<div class="slide-desc" style="bottom: 0%; left: 0%; width: 100%;">
 						  <div class="slide-desc-in">	
@@ -317,7 +309,7 @@ Coast...</p>
 						
 					</li>
                           			<li style="margin: 0 0px 0px 0 !important; height: 280px; width: 1336px;">
-          					            											<img class="dj-image" src="Home_files/town.jpg" alt="Town Planner" style="width: 100%; height: auto;">
+          					            											<img class="dj-image" src="<?php echo $mainURL; ?>images/town.jpg" alt="Town Planner" style="width: 100%; height: auto;">
 																									<!-- Slide description area: START -->
 						<div class="slide-desc" style="bottom: 0%; left: 0%; width: 100%;">
 						  <div class="slide-desc-in">	
@@ -337,7 +329,7 @@ Coast...</p>
 						
 					</li>
                           			<li style="margin: 0 0px 0px 0 !important; height: 280px; width: 1336px;">
-          					            											<img class="dj-image" src="Home_files/dev.jpg" alt="Developer" style="width: 100%; height: auto;">
+          					            											<img class="dj-image" src="<?php echo $mainURL; ?>images/dev.jpg" alt="Developer" style="width: 100%; height: auto;">
 																									<!-- Slide description area: START -->
 						<div class="slide-desc" style="bottom: 0%; left: 0%; width: 100%;">
 						  <div class="slide-desc-in">	
@@ -359,8 +351,8 @@ Coast...</p>
                         	</ul>
         </div>
                 <div id="navigation87" class="navigation-container" style="top: 10.714285714286%; margin: 0 5px;">
-        	        	<img id="prev87" class="prev-button " src="Home_files/prev.png" alt="Previous">
-			<img id="next87" class="next-button " src="Home_files/next.png" alt="Next">
+        	        	<img id="prev87" class="prev-button " src="<?php echo $mainURL; ?>images/prev.png" alt="Previous">
+			<img id="next87" class="next-button " src="<?php echo $mainURL; ?>images/next.png" alt="Next">
 						        </div>
                     </div>
 </div>
@@ -399,7 +391,7 @@ Coast...</p>
 
 <div class="custom survey-form">
 	<div class="container">
-<div class="heading-contact wow bounceInDown center animated" style="font-size: 42px; line-height: 130%; visibility: hidden; animation-name: none;"><span class="blk"><img style="display: block; margin-left: auto; margin-right: auto;" src="Home_files/xucxac.png" alt=""></span></div>
+<div class="heading-contact wow bounceInDown center animated" style="font-size: 42px; line-height: 130%; visibility: hidden; animation-name: none;"><span class="blk"><img style="display: block; margin-left: auto; margin-right: auto;" src="<?php echo $mainURL; ?>images/xucxac.png" alt=""></span></div>
 <div class="heading-contact wow fadeInDown" style="font-size: 42px; line-height: 130%; text-align: center; visibility: hidden; animation-name: none;"><span class="blk">Complete the Survey </span>and be in the draw to <br><span class="blk" style="color: #fbc012;">WIN</span> a Month's Subscription<span class="blk" style="color: # 7bb801;">Valued at $79</span></div>
 <p style="text-align: center; font-size: 22px; line-height: 130%;">Drawn each month, winners notified by email.</p>
 <br>
@@ -415,8 +407,8 @@ Coast...</p>
 		</script>
 		
 
-<script type="text/javascript">jQuery(document).ready(function($){
-});
+<script type="text/javascript">
+jQuery(document).ready(function($){});
 jQuery(document).ready(function($){ $("#chronoform-Complete_the_Survey").gvalidate(); });
 jQuery(document).ready(function($){
 					$("#chronoform-Complete_the_Survey").find(":input[class*=validate]").each(function(){
