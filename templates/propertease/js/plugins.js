@@ -162,10 +162,10 @@ BTLJ(document).ready(function() {
 		})
 	}
 	
-	BTLJ(btlOpt.LOGIN_TAGS).addClass("btl-modal");
+/*	BTLJ(btlOpt.LOGIN_TAGS).addClass("btl-modal");
 	if(btlOpt.REGISTER_TAGS != ''){
 		BTLJ(btlOpt.REGISTER_TAGS).addClass("btl-modal");
-	}
+	}*/
 
 	// Login event
 	var elements = '#btl-panel-login';
@@ -252,7 +252,7 @@ BTLJ(document).ready(function() {
 });
 
 function setFPosition(){
-	if(btlOpt.ALIGN == "center"){
+	/*if(btlOpt.ALIGN == "center"){
 		BTLJ("#btl-content > div").each(function(){
 			var panelid = "#"+this.id.replace("content","panel");
 			var left = BTLJ(panelid).offset().left + BTLJ(panelid).width()/2 - BTLJ(this).width()/2;
@@ -266,7 +266,7 @@ function setFPosition(){
 			BTLJ("#btl-content > div").css('left',BTLJ('.btl-panel').offset().left);
 		}
 	}	
-	BTLJ("#btl-content > div").css('top',BTLJ(".btl-panel").offset().top+BTLJ(".btl-panel").height()+2);	
+	BTLJ("#btl-content > div").css('top',BTLJ(".btl-panel").offset().top+BTLJ(".btl-panel").height()+2);*/	
 }
 
 // SHOW LOGIN FORM

@@ -2872,6 +2872,64 @@ class OSMembershipHelper
 		JSubMenuHelper::addEntry(JText::_('OSM_IMPORT_SUBSCRIBERS'), 'index.php?option=com_osmembership&view=import', $vName == 'import');
 		JSubMenuHelper::addEntry(JText::_('OSM_TRANSLATION'), 'index.php?option=com_osmembership&view=language', $vName == 'language');
 	}
+
+	public function getSubscriberId(){
+		$user =& JFactory::getUser();
+
+		$userid = $user->get( 'id' );
+
+		$db     = JFactory::getDbo();
+		$query  = $db->getQuery(true);
+
+		$query->select('*')
+			->from('#__osmembership_subscribers')
+			->where('user_id=' . (int) $userid)
+			->setLimit(1);
+		$db->setQuery($query);
+		$rows = $db->loadObjectList()[0];
+		return $rows->id; 	
+	}
+
+	public static function getAvatar(){
+		$user =JFactory::getUser();
+
+		$userid = $user->get( 'id' );
+
+		$rowFields = OSMembershipHelper::getProfileFields(1, false);
+		if(!empty($rowFields)){
+			$osm_avatar = null;
+			foreach($rowFields as $r){
+				if($r->name=="osm_avatar"){
+					$osm_avatar = $r;
+					break;
+				}
+			}
+
+			$db     = JFactory::getDbo();
+			$query  = $db->getQuery(true);
+
+			$query->select("id,
+					(Select field_value from #__osmembership_field_value 
+						where field_id='".(int)$osm_avatar->id."' and subscriber_id= a.id) as avatar")
+				->from('#__osmembership_subscribers a')
+				->where('user_id=' . (int) $userid)
+				->setLimit(1);
+			$db->setQuery($query);
+			$rows = $db->loadObjectList()[0];
+			$avatar = explode("_", $rows->avatar);
+			array_shift($avatar);
+			$avatar = implode("_",$avatar);
+			if($avatar<>""){
+				return JURI::base().'media/com_osmembership/upload/'.$avatar;
+			}else{
+				return JURI::base().'media/com_osmembership/user.png';
+			}
+			
+		}
+
+		
+		return false;	
+	}
 }
 
 ?>

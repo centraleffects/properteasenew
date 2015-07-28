@@ -5406,14 +5406,16 @@ nav.tabs-top {
     padding-top: 2px;
     padding-bottom: 3px;
 }
-.nav-tabs > li {
+/*.nav-tabs > li {
     border-right: 1px solid #98dd0b;
-}
+}*/
 .nav-tabs > li > a {
     border-radius: 0;
     color: #98dd0b;
     font-size: 15px;
+    border:0;
 }
+
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
@@ -6961,5 +6963,3 @@ div.btl-buttonsubmit{
 .gvalidation-error-tip .gtooltip-arrow {
 	border-color: #ff4242 transparent transparent transparent;
 }
-
-/*------------------------------------------------------------------------------------*/
