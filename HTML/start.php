@@ -1,5 +1,6 @@
 <?php
-$mainURL = 'http://'.$_SERVER['HTTP_HOST'].'';
+//$mainURL = 'http://'.$_SERVER['HTTP_HOST'].'';
+$mainURL = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'';
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" slick-uniqueid="3" dir="ltr" class="com_content view-article itemid-227 resource j34 mm-hover no-touch" lang="en-gb"><head>
@@ -90,7 +91,7 @@ jQuery(document).ready(function(){
                             <div class="pull-left  logo">
                                 <div class="logo-image">
                                     <a href="<?php echo $mainURL; ?>" title="Propertease">
-                                        <img class="logo-img" src="<?php echo $mainURL; ?>logo.png" alt="Propertease">
+                                        <img class="logo-img" src="<?php echo $mainURL; ?>/images/logo.png" alt="Propertease">
                                         <span>Propertease</span>
                                     </a>
                                     <small class="site-slogan"></small>
