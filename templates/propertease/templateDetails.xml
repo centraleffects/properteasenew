@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE install PUBLIC "-//Joomla! 3.3//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/3.3/template-install.dtd">
 <extension version="3.3" type="template" client="site">
-	<name>propertease</name>
+	<name>propertease-new 2015 design</name>
 	<creationDate>28 January 2015</creationDate>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<version>1.0.0</version>
-	<description>This Joomla Template is designed by Hasan and can be used free of charge. The template is suitable for personal and business Joomla sites. It can be used with many popular modules and components for Joomla.</description>
-
+	<description>new 2015 design</description>
+	<author>Dusted.com.au</author>
 	<files>
 		<folder>css</folder>
 		<folder>html</folder>

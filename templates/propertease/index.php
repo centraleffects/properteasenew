@@ -1,313 +1,562 @@
 <?php
-defined('_JEXEC') or die;
-$user=JFactory::getUser();
-$userstate=(intval($user->id)>0?true:false);
-if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
-	include(dirname(__FILE__).'/profilef.php');
-	if(profilef::profileconcierge()) {
-		if(trim($_REQUEST['conciergeaddy'])!='') {
-			$to='alex@steffantownplanning.com';
-			$subject='Concierge address request from '.$user->name;
-			$message=$user->name.' ('.$user->email.') would like a search performed for '.trim($_REQUEST['conciergeaddy']);
-			$result=profilef::send_email_plain($to,$subject,$message);
-			profilef::profileexpireconciergesearch();
-			header("Location: ".JURI::base().'?concr=1');
-		} else {
-			header("Location: ".JURI::base().'?concr=0');
-		}
-	} else {
-		header("Location: ".JURI::base().'?concr=0');
-	}
-} else if(intval($_REQUEST['pgmm'])>0&&$userstate) {
-	include(dirname(__FILE__).'/profilef.php');
-	$searchid=profilef::profilesavesearch();
-	header("Location: ".JURI::base().'?sr='.intval($searchid));
-} else if($_REQUEST['pto']=='pdf'&&intval($_REQUEST['sr'])>0&&$userstate) {
-	include(dirname(__FILE__).'/profilef.php');
-	$ht=profilef::profilegetresults($_REQUEST['sr'],true);
-	require_once(dirname(__FILE__).'/tcpdf/tcpdf_import.php');
-	$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-	$pdf->SetCreator(PDF_CREATOR);
-	$pdf->SetAuthor(PDF_AUTHOR);
-	$pdf->SetTitle('PropertEASE PDF Report');
-	$pdf->setPrintHeader(false);
-	$pdf->setPrintFooter(false);
-	$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-	$pdf->SetMargins(PDF_MARGIN_LEFT, 15, PDF_MARGIN_RIGHT);
-	$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-	$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-	$pdf->SetFont('helvetica', '', 10);
-	$pdf->setFontSubsetting(false);
-	$pdf->AddPage();
-	$pdf->writeHTML($ht, true, false, true, false, '');
-	$pdf->Output('report.pdf', 'D');
-	exit();
-} else {
-	$content='<jdoc:include type="component" />';
-	$menu =& JSite::getMenu();
-	$ih=false;
-	$homeid=0;
-	$activeid=0;
-	$alias='';
-	if($menu) {
-		$home=$menu->getDefault();
-		$active=$menu->getActive();
-		if($home) {
-			$homeid=intval($home->id);
-		}
-		if($active) {
-			$alias=$active->alias;
-			$activeid=intval($active->id);
-		}
-	}
-	if($activeid>0) {
-		if($homeid==$activeid) {
-			$ih=true;
-		}
-	}
-	$isprofile=false;
-	$isuser=false;
-	if(intval($user->id)>0) {
-		$isuser=true;
-	}
-	if($isuser) {
-		include(dirname(__FILE__).'/profilef.php');
-		if($ih) {
-			$content=profilef::profilegetoutput();
-			$isprofile=true;
-		} else {
-			if($alias=='past-searches') {
-				$content=profilef::profilegetpastsearchesoutput();
-			}
-		}
-	}
-	JHTML::_('behavior.framework', true);
-	
-	/* The following line gets the application object for things like displaying the site name */
-	$app = JFactory::getApplication();
-	$tplparams	= $app->getTemplate(true)->params;
-	$hasl=($this->countModules('left')?true:false);
-	$hasr=($this->countModules('right')?true:false);
+$mainURL = $this->baseurl.'/templates/'.$this->template.'/';
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
+<html id="ls-global" dir="ltr" class="com_content view-featured itemid-101 home j34 mm-hover no-touch" lang="en-gb">
 <head>
-  <jdoc:include type="head" />
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="generator" content="Joomla! - Open Source Content Management">
+  <title>Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
-  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap.css" type="text/css" />
-  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css" />
-</head>
+  
+  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/main.minified.css" type="text/css">
+  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/font-awesome.css" type="text/css">
+  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/animate.css" type="text/css">
+  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/djimageslider.css" type="text/css">
+  <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-gbs3.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-theme-gbs3.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-gcore-gbs3.css" media="screen" rel="stylesheet" type="text/css">
+ 
+  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/jquery.js" type="text/javascript"></script>
+  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/plugins.js" type="text/javascript"></script>
+  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/bootstrap.js" type="text/javascript"></script>
+  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/layerslider.js" type="text/javascript"></script>
+  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/gtooltip.js" type="text/javascript"></script>
+  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/gvalidation.js" type="text/javascript"></script>
 
-<body class="page_bg">
-	<div class="noo-top-social"><jdoc:include type="modules" name="top-social" style="raw" /></div>
-	<div class="row header">
-		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-				<div id="logo">
-					<jdoc:include type="modules" name="logo" style="xhtml"/>
-				</div>
-			</div>
+  <script type="text/javascript">
+jQuery(window).on('load',  function() {
+				new JCaption('img.caption');
+			});
+  </script>
+  <script type="text/javascript">
+    (function() {
+      Joomla.JText.load({"REQUIRED_FILL_ALL":"Please enter data in all fields.","E_LOGIN_AUTHENTICATE":"Username and password do not match or you do not have an account yet.","REQUIRED_NAME":"Please enter your name!","REQUIRED_USERNAME":"Please enter your username!","REQUIRED_PASSWORD":"Please enter your password!","REQUIRED_VERIFY_PASSWORD":"Please re-enter your password!","PASSWORD_NOT_MATCH":"Password does not match the verify password!","REQUIRED_EMAIL":"Please enter your email!","EMAIL_INVALID":"Please enter a valid email!","REQUIRED_VERIFY_EMAIL":"Please re-enter your email!","EMAIL_NOT_MATCH":"Email does not match the verify email!","CAPTCHA_REQUIRED":"Please enter captcha key"});
+    })();
+  </script>
 
-			<div class="col-xs-12 col-sm-12 col-md-offset-5 col-md-3 col-lg-offset-5 col-lg-3">
-				<div id="headercontact">
-					<jdoc:include type="modules" name="headercontact" style="xhtml"/>
-				</div>
+	
+<!-- META FOR IOS & HANDHELD -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<style type="text/stylesheet">
+		@-webkit-viewport   { width: device-width; }
+		@-moz-viewport      { width: device-width; }
+		@-ms-viewport       { width: device-width; }
+		@-o-viewport        { width: device-width; }
+		@viewport           { width: device-width; }
+	</style>
+	<script type="text/javascript">
+		//<![CDATA[
+		if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+			var msViewportStyle = document.createElement("style");
+			msViewportStyle.appendChild(
+				document.createTextNode("@-ms-viewport{width:auto!important}")
+			);
+			document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+		}
+		//]]>
+	</script>
+<meta name="HandheldFriendly" content="true">
+<meta name="apple-mobile-web-app-capable" content="YES">
+<!-- //META FOR IOS & HANDHELD -->
+
+
+
+
+<!-- Le HTML5 shim and media query for IE8 support -->
+<!--[if lt IE 9]>
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script type="text/javascript" src="/properteasenew/plugins/system/t3/base-bs3/js/respond.min.js"></script>
+<![endif]-->
+
+<!-- You can add Google Analytics here or use T3 Injection feature -->
+<!-- 
+ <jdoc:include type="head" /> -->
+<body>
+
+<div class="t3-wrapper"> <!-- Need this wrapper for off-canvas menu. Remove if you don't use of-canvas -->
+
+  <div class="head-top">
+    <div class="container">
+      
+
+<!-- HEADER -->
+<div id="t3-header" class=" t3-header">
+	<div class="row ">
+	<div class="top-left col-md-6 ">
+		<!-- LOGO -->
+		<div class="pull-left  logo">
+			<div class="logo-image">
+				<a href="<?php echo $mainURL; ?>" title="Propertease">
+											<img class="logo-img" src="<?php echo $mainURL; ?>images/logo.png" alt="Propertease">
+															<span>Propertease</span>
+				</a>
+				<small class="site-slogan"></small>
 			</div>
 		</div>
-	</div>	
-	
-	<div class="slider">
-		<jdoc:include type="modules" name="slider" style="xhtml"/>
-		<div class="slogin"><div class="container"><div class="slogini"><jdoc:include type="modules" name="login" style="xhtml"/></div></div></div>
+		<!-- //LOGO -->
+				
+
 	</div>
-	<div class="tickerc">
-		<jdoc:include type="modules" name="ticker" style="xhtml"/>
-	</div>
-	
-	<div class="row topmenu">
-		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div id="topmenu">
-					<jdoc:include type="modules" name="<?php if($isuser){ ?>user<?php } else { ?>top<?php } ?>menu" style="xhtml"/>
-				</div>
+			<!-- HEAD SEARCH -->
+		<div class="top-right col-md-6  ">
+			<div id="btl">
+	<!-- Panel top -->	
+	<div style="float: right;" class="btl-panel">
+					<!-- Login button -->
+						<span id="btl-panel-login-y" class="btn-login" onclick="jQuery('#login-popup').modal('show');setTimeout(function(){jQuery('.modal-backdrop, .simplemodal-container .modalCloseImg:not(\'.second\')').remove();},900);jQuery('#btl-content-login-y').show();">Log in</span>
+						<!-- Registration button -->
+						
+			
 			</div>
+	<!-- content dropdown/modal box -->
+	
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+var btlOpt = 
+{
+	BT_AJAX					:'<?php echo $mainURL; ?>',
+	BT_RETURN				:'/properteasenew/my-account.html',
+	RECAPTCHA				:'none',
+	LOGIN_TAGS				:'',
+	REGISTER_TAGS			:'',
+	EFFECT					:'btl-modal',
+	ALIGN					:'right',
+	BG_COLOR				:'#6d850a',
+	MOUSE_EVENT				:'click',
+	TEXT_COLOR				:'#fff'	
+}
+if(btlOpt.ALIGN == "center"){
+	BTLJ(".btl-panel").css('textAlign','center');
+}else{
+	BTLJ(".btl-panel").css('float',btlOpt.ALIGN);
+}
+BTLJ("input.btl-buttonsubmit,button.btl-buttonsubmit").css({"color":btlOpt.TEXT_COLOR,"background":btlOpt.BG_COLOR});
+//BTLJ("#btl .btl-panel > span").css({"color":btlOpt.TEXT_COLOR,"background-color":btlOpt.BG_COLOR,"border":btlOpt.TEXT_COLOR});
+/*]]>*/
+</script>
+
+<jdoc:include type="modules" name="<?php if($isuser){ ?>user<?php } else { ?>top<?php } ?>menu" style="xhtml"/>
+
+
+                        <button>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
 		</div>
-	</div>
-		
+		<!-- //HEAD SEARCH -->
+		</div></div>
+<!-- //HEADER -->
+     <!--  <!?php $this->loadBlock('mainnav') ?> -->
+    </div>
+  </div>
+    <!-- slideshow -->
+  <div id="slideshow" class="slideshow">
+
+
+<div class="custom_banner_content">
+	<div class="ls-container ls-glass" id="layerslider" style="width: 100%; height: 700px; visibility: visible;"><div class="ls-webkit-hack"></div>
+<div style="background-color: transparent; width: 1349px; height: 700px;" class="ls-inner"><div class="ls-layer ls-animating" style="width: 1349px; height: 700px; visibility: visible; display: none; left: auto; right: auto; top: auto; bottom: auto;">
+<img style="width: 1500px; height: 768px; margin-left: -750px; margin-top: -384px;" class="ls-bg" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/slideshow1.png" alt=""><div class="ls-s1 heading" style="left: 230px; top: 130px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;"><span class="med">Before buying </span>that property,<span class="med"> find out</span></div><div class="ls-s1 heading" style="left: 230px; top: 170px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">what <span class="med">you can or can`t do </span>with it</div><p class="ls-s3 text" style="left: 960px; top: 130px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">A once off search is<span class="med"> just $59</span></p><p class="ls-s3 text" style="left: 838px; top: 160px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;"><em>(instant answers but some research involved)</em></p><p class="ls-s3 text" style="left: 800px; top: 190px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">with<span class="med"> monthly or<span class="med"> yearly</span> subscriptions also offered.</span></p><img class="ls-s5" style="left: 300px; top: 253px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;" src="<?php echo $mainURL; ?>images/banner.png" alt=""><div class="ls-s6" style="left: 956px; top: 300px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">
+<p><a class="btn btn-default btn-warning">Take the <span class="med">Tour</span></a></p>
+<p><a class="btn btn-default btn-primary ">Try it <span class="med">NOW</span></a></p>
+</div>
+</div><div class="ls-circle-timer"><div class="ls-ct-left"><div style="transform: rotate(0deg);" class="ls-ct-rotate"><div class="ls-ct-hider"><div class="ls-ct-half"></div></div></div></div><div class="ls-ct-right"><div style="transform: rotate(0deg);" class="ls-ct-rotate"><div class="ls-ct-hider"><div class="ls-ct-half"></div></div></div></div><div class="ls-ct-center"></div></div></div>
+<div class="ls-loading-container" style="z-index: -1; display: none;"><div class="ls-loading-indicator"></div></div><div class="ls-shadow"></div></div></div>
+
+  </div>
+  <!-- //slideshow -->
+  
+				<!-- HEAD SEARCH -->
+				<div class="custom-position ">
+							<div class="moduletable green-bg first-custom">
+						
+
+<div class="custom green-bg first-custom">
+	<div style="visibility: hidden; animation-duration: 1500ms; animation-name: none;" class="container wow fadeInDown" data-wow-duration="1500ms"><center>
+<p class="heading-text">Too busy? <span class="bold">Let us do it for you.&nbsp;<img src="<?php echo $mainURL; ?>images/arrow.png" alt="">&nbsp;<a class="s-btn">HIRE A <span class="blk">CONSCIERGE</span></a></span></p>
+<p>Currently Servicinvg Queensland Councils: Brisbane, Redland, Moreton 
+Bay, Gold Coast, Ipswich, Logan, Sunshine Coast, Toowoomba, Fraser 
+Coast...</p>
+</center></div></div>
+		</div>
+			<div class="moduletablebenefits">
+						
+
+<div class="custombenefits">
 	<div class="container">
-		<?php if($isprofile){
-		if(intval($_REQUEST['sr'])>0) {
-		?>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<?php if ($this->getBuffer('message')) : ?>
-						<div class="error">
-							<jdoc:include type="message" />
-						</div>
-					<?php endif; ?>
-						<div id="maincontent">
-							<?php echo $content; ?>
-						</div>	
-				</div>
-			</div>
-		<?php 
-		} else {
-		?>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-5 fr">
-							<div id="videoins"></div>
-							<div id="helpins"></div>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
-						<?php if ($this->getBuffer('message')) : ?>
-							<div class="error">
-								<jdoc:include type="message" />
-							</div>
-						<?php endif; ?>
-							<div id="maincontent">
-								<?php echo $content; ?>
-							</div>	
-						</div>
-						
-					</div>	
-				</div>
-			</div>
-			<div class="clr"></div>
-		<?php }
-		} elseif($hasl&&$hasr){ ?>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-							<jdoc:include type="modules" name="left" style="xhtml"/>
-						</div>
-						
-						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-							<?php if ($this->getBuffer('message')) : ?>
-								<div class="error">
-									<jdoc:include type="message" />
-								</div>
-							<?php endif; ?>
-							
-							<div id="maincontent">
-								<?php echo $content; ?>
-							</div>	
-						</div>
-						
-						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-							<jdoc:include type="modules" name="right" style="xhtml"/>
-						</div>
-					</div>	
-				</div>
-			</div>
-		
-		<?php } elseif(!$hasl&&$hasr){?>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-						<?php if ($this->getBuffer('message')) : ?>
-							<div class="error">
-								<jdoc:include type="message" />
-							</div>
-						<?php endif; ?>
-							<div id="maincontent">
-								<?php echo $content; ?>
-							</div>	
-						</div>
-						
-						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-							<jdoc:include type="modules" name="right" style="xhtml"/>
-						</div>
-					</div>	
-				</div>
-			</div>
-			<div class="clr"></div>
-		<?php } elseif($hasl&&!$hasr){?>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-							<jdoc:include type="modules" name="left" style="xhtml"/>
-						</div>
-						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-							<div id="contentwithleft">
-							<?php if ($this->getBuffer('message')) : ?>
-								<div class="error">
-									<jdoc:include type="message" />
-								</div>
-							<?php endif; ?>
-								<div id="maincontent">
-									<?php echo $content; ?>
-								</div>	
-							</div>	
-						</div>
-					</div>	
-				</div>
-			</div>	
-		<?php } else { ?>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<?php if ($this->getBuffer('message')) : ?>
-						<div class="error">
-							<jdoc:include type="message" />
-						</div>
-					<?php endif; ?>
-						<div id="maincontent">
-							<?php echo $content; ?>
-						</div>	
-				</div>
-			</div>
-		<?php } ?>	
-	</div>
-	
-	<div class="row contentbottom">
-		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div id="contentbottom">
-					<jdoc:include type="modules" name="contentbottom" style="xhtml"/>
-				</div>
-			</div>
-		</div>	
-	</div>	
-	
-	<div class="row footertop">
-		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div id="footermenu1">
-					<jdoc:include type="modules" name="footermenu1" style="xhtml"/>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div id="footermenu2">
-					<jdoc:include type="modules" name="footermenu2" style="xhtml"/>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div id="footermenu3">
-					<jdoc:include type="modules" name="footermenu3" style="xhtml"/>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div id="footermenu4">
-					<jdoc:include type="modules" name="footermenu4" style="xhtml"/>
-				</div>
-			</div>
-		</div>	
-	</div>		
-	
-	<div class="row footer">
-		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div id="footermenu">
-					<jdoc:include type="modules" name="footermenu" style="xhtml"/>
-				</div>
-			</div>
+<h3>Benefits For You</h3>
+<div class="row first-row">
+<div style="visibility: hidden; animation-delay: 0.1s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.1s"><a class="benefit-item " href="#"> Architects <i style="font-size: 0;">icon</i> </a></div>
+<div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.2s"><a class="benefit-item Developers" href="#"> Developers <i style="font-size: 0;">icon</i></a></div>
+<div style="visibility: hidden; animation-delay: 0.3s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.3s"><a class="benefit-item TownPlanners" href="#"> Town Planners <i style="font-size: 0;">icon</i></a></div>
+<div style="visibility: hidden; animation-delay: 0.1s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInRight" data-wow-delay="0.1s"><a class="benefit-item RealEstate" href="#"> Real Estate Agents <i style="font-size: 0;">icon</i></a></div>
+<div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInRight" data-wow-delay="0.2s"><a class="benefit-item Investors" href="#"> Investors <i style="font-size: 0;">icon</i></a></div>
+<div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInRight" data-wow-delay="0.2s"><a class="benefit-item Builders" href="#"> Builders <i style="font-size: 0;">icon</i> </a></div>
+</div>
+<div style="visibility: hidden; animation-name: none;" class="wow fadeInDown">
+<h1 style="font-size: 37px;">Benefits for Architects</h1>
+<p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when looking at a property for a prospective client.</p>
+<p style="font-size: 19px;">A month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system. <br><br></p>
+<h4 style="font-size: 23px;"><strong>PropertEASE can assist architects in many ways:</strong></h4>
+<div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="<?php echo $mainURL; ?>images/benefits-img.png" alt=""> </a>
+<div class="media-body">
+<ul class="green-list">
+<li>Getting instant and accurate information making the system extremely time (and money) efficient;</li>
+<li>Allows the user to provide a client with instant detailed advice regarding a property;</li>
+<li>Is mobile friendly (i.e. use it on site);</li>
+<li>Will allow any assistant or untrained employee to quickly obtain information;</li>
+<li>Saves hours a day waiting on hold to Council or town planners to get the same answers; and</li>
+<li>Avoid spending hours reading through planning schemes.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
 		</div>
+			<div class="moduletable  green-bg our-process">
+						
+
+<div class="custom  green-bg our-process">
+	<div class="container">
+<div class="process">
+<h3>Our Process</h3>
+<div class="row">
+<div style="visibility: hidden; animation-delay: 0.1s; animation-name: none;" class="col-md-4 col-sm-4 col-xs-12 wow slideInLeft" data-wow-delay="0.1s">
+<div class="panel-content">
+<div class="arrow">arrow</div>
+<h5 class="med">Step 1</h5>
+<p><span class="med">Enter</span> the address of <br>your property.</p>
+<img src="<?php echo $mainURL; ?>images/step1.png" alt=""></div>
+</div>
+<div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-4 col-sm-4 col-xs-12 wow slideInLeft" data-wow-delay="0.2s">
+<div class="panel-content">
+<div class="arrow">arrow</div>
+<h5 class="med">Step 2</h5>
+<p><span class="med">Select</span> the property <br>attributes.</p>
+<img src="<?php echo $mainURL; ?>images/step2.png" alt=""></div>
+</div>
+<div style="visibility: hidden; animation-delay: 0.5s; animation-name: none;" class="col-md-4 col-sm-4 col-xs-12 last wow  slideInLeft" data-wow-delay="0.5s">
+<div class="panel-content">
+<h5 class="med">Step 3</h5>
+<p><span class="med">Review</span> your results on <br>our online app or<br> print and download a <br>report.</p>
+<img src="<?php echo $mainURL; ?>images/step3.png" alt=""></div>
+</div>
+</div>
+</div>
+</div></div>
+		</div>
+			<div class="moduletabletestimonial">
+							<h3>What our subscribers say</h3>
+						<div style="border: 0px !important;">
+<div style="background: none repeat scroll 0% 0% transparent; padding-top: 0px; padding-bottom: 0px;" id="djslider-loader87" class="djslider-loader djslider-loader-default">
+    <div id="djslider87" class="djslider djslider-default" style="height: 280px; width: 1336px; max-width: 1336px; opacity: 1;">
+        <div id="slider-container87" class="slider-container">
+        	<ul style="position: relative; left: -2672px; width: 4011px;" id="slider87" class="djslider-in">
+          		          			<li style="margin: 0 0px 0px 0 !important; height: 280px; width: 1336px;">
+          					            											<img class="dj-image" src="<?php echo $mainURL; ?>images/arch.jpg" alt="Architect" style="width: 100%; height: auto;">
+																									<!-- Slide description area: START -->
+						<div class="slide-desc" style="bottom: 0%; left: 0%; width: 100%;">
+						  <div class="slide-desc-in">	
+							<div class="slide-desc-bg slide-desc-bg-default"></div>
+							<div class="slide-desc-text slide-desc-text-default">
+														
+															<div class="slide-text">
+																			<p>“I use <span style="color: #7ab700;"> Propert<span class="bold">EASE</span> </span>every day, it helps me figure out which properties I could<br>work with and which to move on from. <span class="bold">Such a time saver</span>.”</p>
+<p class="bold" style="font-size: 21px;">Carl Ryan, DEVELOPER</p>																	</div>
+														
+														<div style="clear: both"></div>
+							</div>
+						  </div>
+						</div>
+						<!-- Slide description area: END -->
+												
+						
+					</li>
+                          			<li style="margin: 0 0px 0px 0 !important; height: 280px; width: 1336px;">
+          					            											<img class="dj-image" src="<?php echo $mainURL; ?>images/town.jpg" alt="Town Planner" style="width: 100%; height: auto;">
+																									<!-- Slide description area: START -->
+						<div class="slide-desc" style="bottom: 0%; left: 0%; width: 100%;">
+						  <div class="slide-desc-in">	
+							<div class="slide-desc-bg slide-desc-bg-default"></div>
+							<div class="slide-desc-text slide-desc-text-default">
+														
+															<div class="slide-text">
+																			<p>“I use <span style="color: #7ab700;"> Propert<span class="bold">EASE</span> </span>every day, it helps me figure out which properties I could<br>work with and which to move on from. <span class="bold">Such a time saver</span>.”</p>
+<p class="bold" style="font-size: 21px;">Carl Ryan, DEVELOPER</p>																	</div>
+														
+														<div style="clear: both"></div>
+							</div>
+						  </div>
+						</div>
+						<!-- Slide description area: END -->
+												
+						
+					</li>
+                          			<li style="margin: 0 0px 0px 0 !important; height: 280px; width: 1336px;">
+          					            											<img class="dj-image" src="<?php echo $mainURL; ?>images/dev.jpg" alt="Developer" style="width: 100%; height: auto;">
+																									<!-- Slide description area: START -->
+						<div class="slide-desc" style="bottom: 0%; left: 0%; width: 100%;">
+						  <div class="slide-desc-in">	
+							<div class="slide-desc-bg slide-desc-bg-default"></div>
+							<div class="slide-desc-text slide-desc-text-default">
+														
+															<div class="slide-text">
+																			<p>“I use <span style="color: #7ab700;"> Propert<span class="bold">EASE</span> </span>every day, it helps me figure out which properties I could<br>work with and which to move on from. <span class="bold">Such a time saver</span>.”</p>
+<p class="bold" style="font-size: 21px;">Carl Ryan, DEVELOPER</p>																	</div>
+														
+														<div style="clear: both"></div>
+							</div>
+						  </div>
+						</div>
+						<!-- Slide description area: END -->
+												
+						
+					</li>
+                        	</ul>
+        </div>
+                <div id="navigation87" class="navigation-container" style="top: 10.714285714286%; margin: 0 5px;">
+        	        	<img id="prev87" class="prev-button " src="<?php echo $mainURL; ?>images/prev.png" alt="Previous">
+			<img id="next87" class="next-button " src="<?php echo $mainURL; ?>images/next.png" alt="Next">
+						        </div>
+                    </div>
+</div>
+</div>
+<div style="clear: both"></div>		</div>
+			<div class="moduletable green-bg">
+							<h3>Get started</h3>
+						
+
+<div class="custom green-bg">
+	<div style="visibility: hidden; animation-duration: 1500ms; animation-name: none;" class="container get-started wow pulse animated" data-wow-duration="1500ms">
+<div class="row ">
+<div class="col-md-7 col-xs-12 col-sm-6 left-get-started">
+<div class="block-left-started light">Get your first report for just<span class="font-l"> $59</span>, or <span class="bold" style="font-size: 36px;">subscribe</span> for<span class="font-l"> $79</span> for month one and <span class="bold" style="font-size: 45px;"> save $100</span></div>
+</div>
+<div class="col-md-5 col-sm-6 col-xs-12">
+<div class="price-start">
+<ul>
+<li>
+<p><span class="light">$</span>59</p>
+<p style="font-size: 20px;">One Report</p>
+</li>
+<li>
+<p class="award"><span class="light">$</span>79</p>
+<p style="font-size: 20px;"><span class="blk">One Month</span></p>
+<p class="green">Unlimited Searches</p>
+</li>
+</ul>
+<a href="#"><span class="blk">GET STARTED</span></a></div>
+</div>
+</div>
+</div></div>
+		</div>
+			<div class="moduletable survey-form">
+						
+
+<div class="custom survey-form">
+	<div class="container">
+<div class="heading-contact wow bounceInDown center animated" style="font-size: 42px; line-height: 130%; visibility: hidden; animation-name: none;"><span class="blk"><img style="display: block; margin-left: auto; margin-right: auto;" src="<?php echo $mainURL; ?>images/xucxac.png" alt=""></span></div>
+<div class="heading-contact wow fadeInDown" style="font-size: 42px; line-height: 130%; text-align: center; visibility: hidden; animation-name: none;"><span class="blk">Complete the Survey </span>and be in the draw to <br><span class="blk" style="color: #fbc012;">WIN</span> a Month's Subscription<span class="blk" style="color: # 7bb801;">Valued at $79</span></div>
+<p style="text-align: center; font-size: 22px; line-height: 130%;">Drawn each month, winners notified by email.</p>
+<br>
+<div style="visibility: hidden; animation-name: none;" class="wow fadeInDown "><!-- START: Modules Anywhere --><script type="text/javascript">
+		if("undefined"==typeof window.jQuery){}else{
+			var gcore_jQuery_bak = window.jQuery;
+			var gcore_$_bak = window.$;
+		}
+		if("undefined"==typeof gcore_jQuery){}else{
+			window.jQuery = gcore_jQuery;
+			window.$ = gcore_$;
+		}
+		</script>
+		
+
+<script type="text/javascript">
+$ = jQuery.noConflict();
+jQuery(document).ready(function($){ $("#chronoform-Complete_the_Survey").gvalidate(); });
+jQuery(document).ready(function($){
+					$("#chronoform-Complete_the_Survey").find(":input[class*=validate]").each(function(){
+						if($(this).attr("class").indexOf("required") >= 0 || $(this).attr("class").indexOf("group") >= 0){
+							if($(this).closest(".gcore-subinput-container").length > 0){
+								var required_parent = $(this).closest(".gcore-subinput-container");
+							}else if($(this).closest(".gcore-form-row").length > 0){
+								var required_parent = $(this).closest(".gcore-form-row");
+							}
+							if(required_parent.length > 0){
+								var required_label = required_parent.find("label");
+								if(required_label.length > 0 && !required_label.first().hasClass("required_label")){
+									required_label.first().addClass("required_label");
+									required_label.first().html(required_label.first().html() + " <i class='fa fa-asterisk' style='color:#ff0000; font-size:9px; vertical-align:top;'></i>");
+								}
+							}
+						}
+					});
+				});
+jQuery(document).ready(function($){
+				$("#chronoform-Complete_the_Survey").find(":input").each(function(){
+					if($(this).data("tooltip") && $(this).closest(".gcore-input").length > 0 && $(this).closest(".gcore-input").next(".input-tooltip").length < 1){
+						var $tip = $('<i class="fa fa-exclamation-circle input-tooltip" style="float:left; padding:7px 0px 0px 7px;"></i>').attr("title", $(this).data("tooltip"));
+						$(this).closest(".gcore-input").after($tip);
+					}
+				});
+				$("#chronoform-Complete_the_Survey .input-tooltip").gtooltip("hover");
+			});
+jQuery(document).ready(function($){
+				$("#chronoform-Complete_the_Survey").find(':input[data-load-state="disabled"]').prop("disabled", true);
+				$("#chronoform-Complete_the_Survey").find(':input[data-load-state="hidden"]').css("display", "none");
+				$("#chronoform-Complete_the_Survey").find(':input[data-load-state="hidden_parent"]').each(function(){
+					if($(this).closest(".gcore-subinput-container").length > 0){
+						$(this).closest(".gcore-subinput-container").css("display", "none");
+					}else if($(this).closest(".gcore-form-row").length > 0){
+						$(this).closest(".gcore-form-row").css("display", "none");
+					}
+				});
+			});
+jQuery(document).ready(function($){ $(":input").inputmask(); });</script>
+
+		<script type="text/javascript">
+		if("undefined"==typeof gcore_jQuery){
+			var gcore_jQuery = window.jQuery;
+			var gcore_$ = window.$;
+		}
+		if("undefined"==typeof gcore_jQuery_bak){}else{
+			window.jQuery = gcore_jQuery_bak;
+			window.$ = gcore_$_bak;
+		}
+		</script>
+		<div style="clear:both;"></div><div class="gbs3"><form action="http://localhost:1000:1000/properteasenew/?chronoform=Complete_the_Survey&amp;event=submit" enctype="multipart/form-data" method="post" name="Complete_the_Survey" id="chronoform-Complete_the_Survey" class="chronoform form-horizontal"><div class="row" id="chronoform-container-8"><div class="col-md-6" id="chronoform-container-12"><div class="form-group gcore-form-row" id="form-row-2"><label for="name" class="control-label gcore-label-top required_label">name <i class="fa fa-asterisk" style="color:#ff0000; font-size:9px; vertical-align:top;"></i></label>
+<div class="gcore-input-wide gcore-display-table" id="fin-name"><input name="name" id="name" placeholder="What is your name?" maxlength="" size="" class="validate['required'] form-control A" title="" style="" data-inputmask="" data-load-state="" data-tooltip="" type="text"></div></div></div><div class="col-md-6 col-md-12" id="chronoform-container-14"><div class="form-group gcore-form-row" id="form-row-4"><label for="email" class="control-label gcore-label-top required_label">email <i class="fa fa-asterisk" style="color:#ff0000; font-size:9px; vertical-align:top;"></i></label>
+<div class="gcore-input-wide gcore-display-table" id="fin-email"><input name="email" id="email" placeholder="Email address?" maxlength="" size="" class="validate['required','email'] form-control A" title="" style="" data-inputmask="" data-load-state="" data-tooltip="" type="text"></div></div></div></div><div class="row" id="chronoform-container-16"><div class="col-md-6 col-md-12" id="chronoform-container-17"><div class="form-group gcore-form-row" id="form-row-6"><label for="Postcode" class="control-label gcore-label-top">Postcode</label>
+<div class="gcore-input-wide gcore-display-table" id="fin-Postcode"><input name="Postcode" id="Postcode" placeholder="Enter your Postcode" maxlength="" size="" class="form-control A" title="" style="" data-inputmask="" data-load-state="" data-tooltip="" type="text"></div></div></div><div class="col-md-6 col-md-12" id="chronoform-container-21"><div class="form-group gcore-form-row" id="form-row-8"><label for="Phone" class="control-label gcore-label-top">Phone</label>
+<div class="gcore-input-wide gcore-display-table" id="fin-Phone"><input name="Phone" id="Phone" placeholder="Phone?" maxlength="" size="" class="validate['phone'] form-control A" title="" style="" data-inputmask="" data-load-state="" data-tooltip="" type="text"></div></div></div></div><div class="form-group gcore-form-row" id="form-row-9"><label for="subject" class="control-label gcore-label-top required_label">subject <i class="fa fa-asterisk" style="color:#ff0000; font-size:9px; vertical-align:top;"></i></label>
+<div class="gcore-input-wide gcore-display-table" id="fin-subject"><textarea name="subject" id="subject" placeholder="Why would you use this project? " rows="3" cols="40" class="validate['required'] form-control A" title="" style="" data-wysiwyg="0" data-load-state="" data-tooltip=""></textarea></div></div><div class="form-group gcore-form-row" id="form-row-10"><div class="gcore-input gcore-display-table" id="fin-button23"><input name="button23" id="button23" value="Take the Survey" class="form-control A" style="" data-load-state="" type="submit"></div></div></form><p class="chrono_credits"><a href="http://www.chronoengine.com/" target="_blank">Powered by ChronoForms - ChronoEngine.com</a></p></div><!-- END: Modules Anywhere --></div>
+</div></div>
+		</div>
+	
+				
+				</div>
+				<!-- //HEAD SEARCH -->
+			
+  
+<div id="t3-mainbody" class="container t3-mainbody">
+	<div class="row">
+
+		<!-- MAIN CONTENT -->
+		<div id="t3-content" class="t3-content col-xs-12">
+						<div class="blog-featured" itemscope="" itemtype="http://schema.org/Blog">
+
+
+
+
+</div>
+
+		</div>
+		<!-- //MAIN CONTENT -->
+
 	</div>
-<?php } ?>
-</body>
-</html>
+</div> 
+
+  
+
+  
+
+  
+<!-- FOOTER -->
+<footer id="t3-footer" class="wrap t3-footer">
+
+			<!-- FOOT NAVIGATION -->
+		<div class="container">
+				<!-- SPOTLIGHT -->
+	<div class="t3-spotlight t3-footnav  row">
+					<div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="t3-module module footer-menu " id="Mod103"><div class="module-inner"><div class="module-ct"><ul class="nav  nav-pills nav-stacked ">
+<li class="item-140 divider"><span class="separator">Copyright 2015</span>
+</li><li class="item-141"><a href="<?php echo $mainURL; ?>about-propertease.html">About PropertEASE</a></li><li class="item-142"><a href="<?php echo $mainURL; ?>conditions-of-use.html">Conditions of Use</a></li></ul>
+</div></div></div>
+							</div>
+					<div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="t3-module module footer-menu-right " id="Mod130"><div class="module-inner"><div class="module-ct"><ul class="nav  nav-pills nav-stacked ">
+<li class="item-101 current active"><a class="home" href="<?php echo $mainURL; ?>">Home</a></li><li class="item-113"><a href="<?php echo $mainURL; ?>subscribe.html">Plans     </a></li><li class="item-112"><a href="<?php echo $mainURL; ?>sample-reports.html">Sample Reports</a></li><li class="item-169"><a href="<?php echo $mainURL; ?>resources.html">Resources</a></li><li class="item-114"><a class="Connect bold" href="<?php echo $mainURL; ?>faq.html" title="   ">Connect        </a></li><li class="item-233"><a href="<?php echo $mainURL; ?>popup.html">Popup</a></li></ul>
+</div></div></div>
+							</div>
+			</div>
+<!-- SPOTLIGHT -->		</div>
+		<!-- //FOOT NAVIGATION -->
+	
+	
+
+</footer>
+
+<script type="text/javascript">
+	 jQuery(document).ready(function(){
+	 	new WOW().init();
+ 	 jQuery('#layerslider').layerSlider({
+					hoverPrevNext : false,
+					//responsive              : true,
+					  //responsiveUnder         : 768,
+					slideDirection :'fade',
+					
+					loops : 1,
+					forceLoopNum :true			});
+ })
+
+</script>
+
+
+</div>
+
+
+
+<div id="btl-content">
+			
+		<!-- Form login -->	
+		<div style="display: none;" id="btl-content-login-y" class="btl-content-block">
+						
+			<!-- if not integrated any component -->
+							<div id="login-popup" class="modal fade" tabindex="-1">
+				<div class="modal-dialog">
+				<div class="modal-content">
+					<a title="Close" class="modalCloseImg second simplemodal-close"></a>
+				<div class="modal-header">
+				<div class="normal-logo"> </div>
+				<button class="btn btn-register">Don`t have an <b>account?</b></button></div>
+				<div class="modal-body">
+				<h3><span class="green blk">Log in</span> to your account</h3>
+				<form>
+				<div class="btl-error" id="btl-login-error"></div>
+				<div class="form-group"><input class="form-control" id="btl-input-username" name="username" placeholder=" Enter your Username " type="text"></div>
+				<div class="form-group"><input class="form-control" id="btl-input-password" name="password" placeholder="Enter your Password" type="password"></div>
+				<div class="form-group">
+				<div class="radio"><label> <input id="btl-checkbox-remember" name="remember" value="yes" type="checkbox">
+							Remember Me </label><!-- <a href="#">Forgot?</a> -->
+					<a href="<?php echo $mainURL; ?>component/users/?view=reset">
+					Forgot?</a>
+				</div>
+				</div>
+				<div class="form-group">
+				<p>By logging in, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Use.</a></p>
+				</div>
+				<div class="form-group last-group">
+					<button class="btn btn-sbm" type="submit" onclick="return loginAjax()">Log in</button>
+					<input name="option" value="com_users" type="hidden">
+					<input name="task" value="user.login" type="hidden"> 
+					<input name="return" id="btl-return" value="aW5kZXgucGhwP0l0ZW1pZD0xODU=" type="hidden">
+					<input name="4b07c3fce39df475307a144167e2bd3f" value="1" type="hidden">				</div>
+				</form></div>
+				</div>
+				</div>
+				</div>
+			
+		<!-- if integrated with one component -->
+						
+		</div>
+		
+				
+	</div></body></html>
