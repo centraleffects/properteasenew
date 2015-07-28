@@ -49,7 +49,7 @@ defined('_JEXEC') or die('Restricted access');
 			if($params->get('enabled_login_tab', 1)){
 				/*onclick="jQuery('#login-popup').modal('show');setTimeout(function(){jQuery('.modal-backdrop, .simplemodal-container .modalCloseImg:not(\'.second\')').remove();},900);" */
 			?>
-			<span id="btl-panel-login-y" class="<?php echo $effect;?>btn-login" onclick="jQuery('#login-popup').modal('show');setTimeout(function(){jQuery('.simplemodal-container .modalCloseImg:not(\'.second\')').remove();},900);jQuery('#btl-content-login-y').show();"><?php echo JText::_('JLOGIN');?></span>
+			<span id="btl-panel-login-y" class="<?php echo $effect;?>btn-login" data-toggle="modal" data-target="#login-popup"><?php echo JText::_('JLOGIN');?></span>
 			<?php }?>
 			<!-- Registration button -->
 			<?php
