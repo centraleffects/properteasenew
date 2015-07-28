@@ -90,7 +90,7 @@ jQuery(document).ready(function(){
                             <div class="pull-left  logo">
                                 <div class="logo-image">
                                     <a href="<?php echo $mainURL; ?>" title="Propertease">
-                                        <img class="logo-img" src="<?php echo $mainURL; ?>/images/logo.png" alt="Propertease">
+                                        <img class="logo-img" src="/images/logo.png" alt="Propertease">
                                         <span>Propertease</span>
                                     </a>
                                     <small class="site-slogan"></small>
