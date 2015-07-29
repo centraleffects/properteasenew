@@ -581,6 +581,9 @@ div.btl-buttonsubmit{
 .price .t3-content .article-content .block-price .block i.one-report{color: #ff5b95;}
 /*pricing table updates */
 .price .t3-content .article-content .block-price .block{ cursor:pointer; }
+.price .t3-content .article-content .block-price .block:hover{ -moz-box-shadow:    inset 0 0 10px #CCC;
+   -webkit-box-shadow: inset 0 0 10px #CCC;
+   box-shadow:         inset 0 0 10px #CCC;}
 .price .t3-content .article-content .block-price .block.greyed{ color:#e4e4e4; }
 .price .t3-content .article-content .block-price .block.greyed h3{ color:#e4e4e4; }
 .price .t3-content .article-content .block-price .block.greyed p.pay-month span{ color:#e4e4e4; }
