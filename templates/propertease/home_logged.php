@@ -45,9 +45,6 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
 } else {
   $content='<jdoc:include type="component" />';
   $menu =& JSite::getMenu();
-  /*echo'<pre>';
-  print_r($menu);
-  echo'</pre>';*/
   $ih=false;
   $homeid=0;
   $activeid=0;
@@ -217,11 +214,9 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
  ?>
  <article itemscope="" itemtype="http://schema.org/Article">  
    <meta itemprop="inLanguage" content="en-GB">  
+   <?php if(!(JSite::getMenu()->getActive()->menutype=="usermenu")){ ?>
    <header class="article-header clearfix">  
-      
-          <!-- Need help? <meta itemprop="url" content="<?php echo $mainURL; ?>/resources.html"> -->  
-          <?php 
-          
+          <?php  
           if($heading_title<>""){
             echo '<h1 class="article-title" itemprop="name"><i></i> '.$heading_title.'</h1>';
           }else{
@@ -233,10 +228,17 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
               //Nothing to do here
             }
           }
-
-          ?>
-                 
+          ?>      
    </header>  
+   <?php }
+
+    if(JSite::getMenu()->getActive()->menutype=="usermenu"){
+      ?>
+      <div id="submenu"><jdoc:include type="modules" name="usermenu" style="none"/></div>
+      <?php
+    }
+    ?>
+
  <!-- Aside -->  
  <aside class="article-aside clearfix">  
    <?php 
@@ -254,19 +256,28 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
     }
    ?>
    
- </aside>  
- <div class="step-process">
-      <span class="ico-step"></span>
-      <ul>
-          <li class="active"><a href="#"></a></li>
-          <li class="active"><a href="#"></a></li>
-          <li class="active"><a href="#"></a></li>
-          <li ><a href="#"></a></li>
-          <li ><a href="#"></a></li>
-          <li ><a href="#"></a></li>
-          <li ><a href="#"></a></li>
-      </ul>
-  </div>
+ </aside> 
+ <?php 
+$app = JFactory::getApplication();
+$menu = $app->getMenu();
+if ($menu->getActive() == $menu->getDefault()) {
+ ?> 
+     <div class="step-process">
+          <span class="ico-step"></span>
+          <ul>
+              <li><a href="#"></a></li>
+              <li><a href="#"></a></li>
+              <li><a href="#"></a></li>
+              <li><a href="#"></a></li>
+              <li><a href="#"></a></li>
+              <li><a href="#"></a></li>
+              <li><a href="#"></a></li>
+          </ul>
+      </div>
+  <?php 
+
+   }
+  ?>
  <!-- //Aside -->       
  <section class="article-content clearfix" itemprop="articleBody">  
         <?php if($isprofile){

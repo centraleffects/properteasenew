@@ -457,8 +457,10 @@ a:hover {
     overflow: hidden;
     float: left;
     border-radius: 20px;
-    margin-right: 5px;
+    margin-right: 12px;
     border: 2px solid #ddd;
+    margin-top: -5px;
+}
 }
 #btl .btl-panel > #btl-panel-profile {
     text-transform: capitalize;
@@ -1497,6 +1499,12 @@ input[type="text"] {
 }
 .price-start a:hover {
     text-decoration: none;
+}
+#submenu{
+    margin-top: -65px;
+}
+#submenu ul li{
+    float:left;
 }
 @media screen and (min-width: 768px) {
     .head-top::after {

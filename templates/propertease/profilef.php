@@ -732,6 +732,49 @@ get_state();
 		<input name="sr" type="hidden" value="'.intval($sr).'">
 		</form>';
 	}
+	/*public function profilegetformhtml() {
+		return '<form action="" id="ptsearch" method="post" class="ptsearch" onsubmit="return execute_submit();">
+<h2>New Search</h2>
+<input name="pgmm" type="hidden" value="1">
+<p id="refw" style="display:none;">
+	<label><strong>Search reference:</strong></label>
+	<input name="reference" type="text" value="">
+</p>
+<p id="statew" style="display:none;">
+	<label><strong>Select State:</strong></label>
+	<select id="state" name="state" onchange="get_council();">
+	</select>
+</p>
+<p id="councilw" style="display:none;">
+	<label><strong>Select Local Council:</strong></label>
+	<select id="council" name="council" onchange="get_scheme();">
+	</select>
+</p>
+<p id="schemew" style="display:none;">
+	<label><strong>Select Planning Scheme:</strong></label>
+	<select id="scheme" name="scheme" onchange="get_restriction();">
+	</select>
+</p>
+<p id="zonew" style="display:none;">
+	<label><strong>Select Zone:</strong></label>
+	<select id="zone" name="zone" onchange="get_submit();">
+	</select>
+</p>
+<p id="overlaysw" style="display:none;">
+	<label><strong>Select Overlays:</strong></label>
+	<select size="8" id="overlays" name="overlays[]" multiple="multiple">
+	</select><br><span class="small">Hold the CTRL or Cmd key to select multiple options.</span>
+</p>
+<p id="planw" style="display:none;">
+	<label><strong>Select Neighbourhood Plan + Precinct:</strong></label>
+	<select id="plan" name="plan">
+	</select>
+</p>
+<p id="submitw" style="display:none;">&nbsp;</p>
+</form>';
+	}*/
+
+
 	public function profilegetformhtml() {
 		return '<form action="" id="ptsearch" method="post" class="ptsearch" onsubmit="return execute_submit();">
 <h2>New Search</h2>
@@ -773,6 +816,7 @@ get_state();
 <p id="submitw" style="display:none;">&nbsp;</p>
 </form>';
 	}
+
 	public function profileoverrideprepare(&$dbfields,&$numfields,&$textfields,&$setfields,&$clearfields) {
 		if(empty($numfields)) { $numfields=array(); }
 		if(empty($textfields)) { $textfields=array(); }
