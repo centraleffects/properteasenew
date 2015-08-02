@@ -26,3 +26,4 @@
 [28-Jul-2015 12:09:15 Europe/Berlin] PHP Fatal error:  Call to undefined method JDocumentHTML::escape() in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 243
 [28-Jul-2015 13:24:32 Europe/Berlin] PHP Fatal error:  Call to a member function get() on a non-object in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 227
 [28-Jul-2015 13:39:18 Europe/Berlin] PHP Fatal error:  Call to undefined method JDocumentHTML::baseurl() in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 224
+[01-Aug-2015 08:33:14 Europe/Berlin] PHP Fatal error:  Call to undefined function inlude_once() in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 301

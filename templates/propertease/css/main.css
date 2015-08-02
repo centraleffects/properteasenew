@@ -941,7 +941,7 @@ input[type="text"] {
 }
 .item-page-app .article-content h3 {
     font-family: "Conv_Brandon_reg";
-    font-size: 30px;
+    font-size: 30px !important;
 }
 .item-page-app .article-content #accordion {
     margin-bottom: 0;
@@ -2649,7 +2649,7 @@ body #next87 {
 }
 .step-process {
     float: right;
-    margin-top: -65px;
+    margin-top: -85.4px;
     position: absolute;
     right: 0;
     z-index: 999999;
@@ -6962,4 +6962,7 @@ div.btl-buttonsubmit{
 }
 .gvalidation-error-tip .gtooltip-arrow {
 	border-color: #ff4242 transparent transparent transparent;
+}
+.item-page-app .panel-body{
+    padding: 15px !important;
 }

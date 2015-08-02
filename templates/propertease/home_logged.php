@@ -45,6 +45,9 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
 } else {
   $content='<jdoc:include type="component" />';
   $menu =& JSite::getMenu();
+  /*echo'<pre>';
+  print_r($menu);
+  echo'</pre>';*/
   $ih=false;
   $homeid=0;
   $activeid=0;
@@ -224,7 +227,7 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
           }else{
             if ($menu->getActive() == $menu->getDefault() and $status>0 ) {
               ?>
-                <h1 class="article-title" itemprop="name"><i></i> Give this report a name </h1>
+                <h1 class="article-title" itemprop="name"><i class="fa fa-file-o"></i> Give this report a name </h1>
               <?php
             }else{
               //Nothing to do here
@@ -252,6 +255,18 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
    ?>
    
  </aside>  
+ <div class="step-process">
+      <span class="ico-step"></span>
+      <ul>
+          <li class="active"><a href="#"></a></li>
+          <li class="active"><a href="#"></a></li>
+          <li class="active"><a href="#"></a></li>
+          <li ><a href="#"></a></li>
+          <li ><a href="#"></a></li>
+          <li ><a href="#"></a></li>
+          <li ><a href="#"></a></li>
+      </ul>
+  </div>
  <!-- //Aside -->       
  <section class="article-content clearfix" itemprop="articleBody">  
         <?php if($isprofile){
@@ -272,6 +287,14 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
         <?php 
         } else {
         ?>
+        <?php if ($this->getBuffer('message')) : ?>
+                <div class="row-fluid">  
+                  <div class="error">
+                    <jdoc:include type="message" />
+                  </div>
+                </div>
+        <?php endif; ?>
+          <?php include_once('home_create_report.php'); //echo $content; ?>
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <div class="row">
@@ -280,11 +303,7 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
                   <div id="helpins"></div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
-                <?php if ($this->getBuffer('message')) : ?>
-                  <div class="error">
-                    <jdoc:include type="message" />
-                  </div>
-                <?php endif; ?>
+                
                   <div id="maincontent">
                     <?php echo $content; ?>
                   </div>  
