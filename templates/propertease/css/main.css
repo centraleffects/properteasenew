@@ -2652,7 +2652,6 @@ body #next87 {
     margin-top: -85.4px;
     position: absolute;
     right: 0;
-    z-index: 999999;
 }
 .rp-file {
     margin-top: -83px !important;
@@ -3281,6 +3280,11 @@ input.invalid {
 .dropdown-menu > li > a {
     padding: 5px 20px;
 }
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    text-decoration: none;
+    color: #262626 !important;
+    background-color: #f5f5f5 !important;
+}
 .dropdown-header {
     padding: 3px 20px;
     font-size: 14px;
@@ -3288,6 +3292,7 @@ input.invalid {
 .dropdown-header a {
     color: #999999;
 }
+
 .dropdown-submenu > a:after {
     border-left-color: #333333;
 }
