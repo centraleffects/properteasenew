@@ -166,43 +166,51 @@ BTLJ(document).ready(function() {
 	if(btlOpt.REGISTER_TAGS != ''){
 		BTLJ(btlOpt.REGISTER_TAGS).addClass("btl-modal");
 	}*/
-
-	// Login event
-	var elements = '#btl-panel-login';
-	if (btlOpt.LOGIN_TAGS) elements += ', ' + btlOpt.LOGIN_TAGS;
-	if (btlOpt.MOUSE_EVENT =='click'){ 
-		BTLJ(elements).click(function (event) {
-				showLoginForm();
-				event.preventDefault();
-		});	
-	}else{
-		BTLJ(elements).hover(function () {
-				showLoginForm();
-		},function(){});
-	}
+	if(!typeof(btlOpt)=='undefined'){// added this condition by fred: btlOpt type of error 
+   
+ 
+		// Login event
+		var elements = '#btl-panel-login';
+		if (btlOpt.LOGIN_TAGS) elements += ', ' + btlOpt.LOGIN_TAGS;
+		if (btlOpt.MOUSE_EVENT =='click'){ 
+			BTLJ(elements).click(function (event) {
+					showLoginForm();
+					event.preventDefault();
+			});	
+		}else{
+			BTLJ(elements).hover(function () {
+					showLoginForm();
+			},function(){});
+		}
+	
+	
 
 	// Registration/Profile event
-	elements = '#btl-panel-registration';
-	if (btlOpt.REGISTER_TAGS) elements += ', ' + btlOpt.REGISTER_TAGS;
-	if (btlOpt.MOUSE_EVENT =='click'){ 
-		BTLJ(elements).click(function (event) {
-			showRegistrationForm();
-			event.preventDefault();
-		});	
-		BTLJ("#btl-panel-profile").click(function(event){
-			showProfile();
-			event.preventDefault();
-		});
-	}else{
-		BTLJ(elements).hover(function () {
-				if(!BTLJ("#btl-integrated").length){
-					showRegistrationForm();
-				}
-		},function(){});
-		BTLJ("#btl-panel-profile").hover(function () {
+		elements = '#btl-panel-registration';
+		if (btlOpt.REGISTER_TAGS) elements += ', ' + btlOpt.REGISTER_TAGS;
+		if (btlOpt.MOUSE_EVENT =='click'){ 
+			BTLJ(elements).click(function (event) {
+				showRegistrationForm();
+				event.preventDefault();
+			});	
+			BTLJ("#btl-panel-profile").click(function(event){
 				showProfile();
-		},function(){});
-	}
+				event.preventDefault();
+			});
+		}else{
+			BTLJ(elements).hover(function () {
+					if(!BTLJ("#btl-integrated").length){
+						showRegistrationForm();
+					}
+			},function(){});
+			BTLJ("#btl-panel-profile").hover(function () {
+					showProfile();
+			},function(){});
+		}
+		
+	}; // end of added code
+	
+	
 	BTLJ('#register-link a').click(function (event) {
 			if(BTLJ('.btl-modal').length){
 				BTLJ.modal.close();setTimeout("showRegistrationForm();",1000);

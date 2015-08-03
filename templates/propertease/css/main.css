@@ -6966,3 +6966,17 @@ div.btl-buttonsubmit{
 .item-page-app .panel-body{
     padding: 15px !important;
 }
+.price .t3-content .article-content .block-price .block i.one-report{color: #ff5b95;}
+/*pricing table updates */
+.price .t3-content .article-content .block-price .block{ cursor:pointer; }
+.price .t3-content .article-content .block-price .block:hover{ -moz-box-shadow:    inset 0 0 10px #CCC;
+   -webkit-box-shadow: inset 0 0 10px #CCC;
+   box-shadow:         inset 0 0 10px #CCC;}
+.price .t3-content .article-content .block-price .block.greyed{ color:#e4e4e4; }
+.price .t3-content .article-content .block-price .block.greyed h3{ color:#e4e4e4; }
+.price .t3-content .article-content .block-price .block.greyed p.pay-month span{ color:#e4e4e4; }
+.price .t3-content .article-content .block-price .block.greyed i{ color:#e4e4e4; }
+.price .t3-content .article-content .block-price .block.greyed i.one-report{ color:#e4e4e4; }
+.price .t3-content .article-content .block-price .block.greyed .plus{ background: url("../images/ico-plus-grey.png") no-repeat scroll 20px 10px rgba(0, 0, 0, 0); }
+.price .t3-content .article-content .block-price .sbm-btn.has-price-selected{background-image: -moz-linear-gradient(90deg, #8bcd07 0px, #7ab700 100%); color:#ffffff;}
+.price .t3-content .article-content .block-price .block.greyed .arrow-down{background: url("../images/ico-arrow-down-grey.png") no-repeat scroll right bottom rgba(0, 0, 0, 0);} 
