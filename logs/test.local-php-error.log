@@ -27,3 +27,6 @@
 [28-Jul-2015 13:24:32 Europe/Berlin] PHP Fatal error:  Call to a member function get() on a non-object in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 227
 [28-Jul-2015 13:39:18 Europe/Berlin] PHP Fatal error:  Call to undefined method JDocumentHTML::baseurl() in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 224
 [01-Aug-2015 08:33:14 Europe/Berlin] PHP Fatal error:  Call to undefined function inlude_once() in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 301
+[02-Aug-2015 11:05:35 Europe/Berlin] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 275
+[02-Aug-2015 11:18:41 Europe/Berlin] PHP Parse error:  syntax error, unexpected '=', expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 277
+[02-Aug-2015 12:42:25 Europe/Berlin] PHP Parse error:  syntax error, unexpected '&' in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 279

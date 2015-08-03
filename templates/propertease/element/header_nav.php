@@ -48,9 +48,10 @@
               </a>
               <?php $returnURL = base64_encode(JURI::root() . ""); ?>
               <ul class="dropdown-menu">
+                <li><a href="<?php echo JURI::root(); ?>my-account.html">My Account</a>
                 <li>
                     <a href="<?php echo JURI::root(); ?>index.php?option=com_users&task=user.logout&<?php echo JSession::getFormToken(); ?>=1&return=<?php echo $returnURL; ?>">
-                    <input  type="button" name="Submit" class="button" value="Logout">
+                    Logout
                     </a>
                 </li>
 

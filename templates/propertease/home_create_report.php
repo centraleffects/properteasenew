@@ -23,7 +23,7 @@
                     <h4 class="panel-title"><a class="collapsed" href="#collapseThree" data-parent="#accordion" data-toggle="collapse"><span class="first blk">Planning Scheme</span><span class="second med">Select Scheme</span></a></h4>
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse" style="height: 0px;">
-                    <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
+                    <div class="panel-body"></div>
                 </div>
             </div>
             <div class="panel panel-default">
