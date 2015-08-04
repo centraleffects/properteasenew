@@ -1743,47 +1743,47 @@ input[type="text"] {
     .resource .t3-content .article-content .ytb-help ul li a {
         padding: 11px 10px 1px 35px;
     }
-    .price .t3-content {
+    .t3-content {
         padding: 0;
     }
-    .price .t3-content .article-content .block-price {
+    .t3-content .article-content .block-price {
         width: 90%;
         margin: 0 auto;
         padding-bottom: 30px;
     }
-    .price .t3-content .article-content .block-price .block {
+    .t3-content .article-content .block-price .block {
         width: 33.333%;
         float: left;
         border-bottom: none;
         border-top-right-radius: 0;
         border-right: none;
     }
-    .price .t3-content .article-content .block-price .block .plus {
+    .t3-content .article-content .block-price .block .plus {
         font-size: 18px;
     }
-    .price .t3-content .article-content .block-price .standard,
-    .price .t3-content .article-content .block-price .corporate {
+    .t3-content .article-content .block-price .standard,
+    .t3-content .article-content .block-price .corporate {
         margin: 0;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
-    .price .t3-content .article-content .block-price .corporate {
+    .t3-content .article-content .block-price .corporate {
         border-top-right-radius: 10px;
         border-right: 1px solid #ececec;
     }
-    .price .t3-content .article-content .block-price .standard,
-    .price .t3-content .article-content .block-price .corporate {
+    .t3-content .article-content .block-price .standard,
+    .t3-content .article-content .block-price .corporate {
         margin: 0;
     }
-    .price .t3-content .article-content .block-price .standard .pay-month,
-    .price .t3-content .article-content .block-price .corporate .pay-month {
+    .t3-content .article-content .block-price .standard .pay-month,
+    .t3-content .article-content .block-price .corporate .pay-month {
         padding-bottom: 21px;
     }
-    .price .t3-content .article-content .block-price .standard .plus,
-    .price .t3-content .article-content .block-price .corporate .plus {
+    .t3-content .article-content .block-price .standard .plus,
+    .t3-content .article-content .block-price .corporate .plus {
         padding-left: 40px;
     }
-    .price .t3-content .article-content .block-price .sbm-btn {
+    .t3-content .article-content .block-price .sbm-btn {
         clear: both;
         width: 102%;
         margin-left: -10px;
