@@ -92,62 +92,33 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
  <!DOCTYPE html>  
  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" slick-uniqueid="3" dir="ltr" class="com_content view-article itemid-227 resource j34 mm-hover no-touch" lang="en-gb">
  <head>  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
+  <meta name="HandheldFriendly" content="true">  
+  <meta name="apple-mobile-web-app-capable" content="YES">   
   <jdoc:include type="head" /> 
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap.css" type="text/css">  
-  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/main.css" type="text/css">  
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/font-awesome.css" type="text/css">  
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/animate.css" type="text/css">  
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/djimageslider.css" type="text/css">  
   <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-gbs3.css" media="screen" rel="stylesheet" type="text/css">  
   <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-theme-gbs3.css" media="screen" rel="stylesheet" type="text/css">  
   <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-gcore-gbs3.css" media="screen" rel="stylesheet" type="text/css">  
+    <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-select.min.css" type="text/css">  
+    <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/main.css" type="text/css">  
    <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css" />
-  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/jquery.js" type="text/javascript"></script>  
-  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/plugins.js" type="text/javascript"></script>  
-  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/bootstrap.js" type="text/javascript"></script>  
-  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/mootools-core.js" type="text/javascript"></script>  
-  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/mootools-more.js" type="text/javascript"></script>  
-  <script type="text/javascript">  
- jQuery(window).on('load', function() {  
-                     new JCaption('img.caption');  
-                });  
- jQuery(document).ready(function(){  
-      jQuery('.hasTooltip').tooltip({"html": true,"container": "body"});  
- });  
-  </script>  
-  <script type="text/javascript">  
-   (function() {  
-    Joomla.JText.load({"REQUIRED_FILL_ALL":"Please enter data in all fields.","E_LOGIN_AUTHENTICATE":"Username and password do not match or you do not have an account yet.","REQUIRED_NAME":"Please enter your name!","REQUIRED_USERNAME":"Please enter your username!","REQUIRED_PASSWORD":"Please enter your password!","REQUIRED_VERIFY_PASSWORD":"Please re-enter your password!","PASSWORD_NOT_MATCH":"Password does not match the verify password!","REQUIRED_EMAIL":"Please enter your email!","EMAIL_INVALID":"Please enter a valid email!","REQUIRED_VERIFY_EMAIL":"Please re-enter your email!","EMAIL_NOT_MATCH":"Email does not match the verify email!","CAPTCHA_REQUIRED":"Please enter captcha key"});  
-   })();  
-  </script>  
- <!-- META FOR IOS & HANDHELD -->  
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
-      <style type="text/stylesheet">  
-           @-webkit-viewport  { width: device-width; }  
-           @-moz-viewport   { width: device-width; }  
-           @-ms-viewport    { width: device-width; }  
-           @-o-viewport    { width: device-width; }  
-           @viewport      { width: device-width; }  
-      </style>  
-      <script type="text/javascript">  
-           //<![CDATA[  
-           if (navigator.userAgent.match(/IEMobile\/10\.0/)) {  
-                var msViewportStyle = document.createElement("style");  
-                msViewportStyle.appendChild(  
-                     document.createTextNode("@-ms-viewport{width:auto!important}")  
-                );  
-                document.getElementsByTagName("head")[0].appendChild(msViewportStyle);  
-           }  
-           //]]>  
-      </script>  
- <meta name="HandheldFriendly" content="true">  
- <meta name="apple-mobile-web-app-capable" content="YES">  
- <!-- //META FOR IOS & HANDHELD -->  
- <!-- Le HTML5 shim and media query for IE8 support -->  
- <!--[if lt IE 9]>  
+
+<!--[if lt IE 9]>  
  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>  
  <script type="text/javascript" src="/propertease/plugins/system/t3/base-bs3/js/respond.min.js"></script>  
- <![endif]-->  
+ <![endif]--> 
+
+  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/jquery.js" type="text/javascript"></script>  
+   <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/bootstrap.js" type="text/javascript"></script> 
+    <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/mootools-core.js" type="text/javascript"></script>  
+  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/mootools-more.js" type="text/javascript"></script>
+  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/bootstrap-select.min.js" type="text/javascript"></script>  
+  <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/plugins.js" type="text/javascript"></script>  
+   <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/script.js" type="text/javascript"></script>   
  </head>  
  <body class="page_bg">  
    <div class="t3-wrapper">  
@@ -218,11 +189,12 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
    <header class="article-header clearfix">  
           <?php  
           if($heading_title<>""){
-            echo '<h1 class="article-title" itemprop="name"><i></i> '.$heading_title.'</h1>';
+            echo '<h1 class="article-title" itemprop="name"><i class="sun"></i> '.$heading_title.'</h1>';
           }else{
             if ($menu->getActive() == $menu->getDefault() and $status>0 ) {
               ?>
-                <h1 class="article-title" itemprop="name"><i class="fa fa-file-o"></i> Give this report a name </h1>
+                <h1 class="article-title" itemprop="name"><i class="fa fa-file-o"></i>
+                  <input type="text" value="Give this report a name" id="report-name"></h1>
               <?php
             }else{
               //Nothing to do here

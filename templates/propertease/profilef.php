@@ -574,9 +574,20 @@ function get_state() {
 	var c=catlevels[0].length;
 	destroy_state();
 	hide_state();
+	var $ = jQuery.noConflict();
+	$('.state-n').html('')
+		 .append($('<option></option>')
+         .attr('value',' - ')
+         .text('Select State')); 
 	while(i<c) {
 		statedd.options[0] = new Option('(Select One)',0);
 		statedd.options[statedd.options.length] = new Option(catnames[0][i],catlevels[0][i]);
+
+		$('.state-n')
+         .append($('<option></option>')
+         .attr('value',catlevels[0][i])
+         .text(catnames[0][i])); 
+	
 		i++;
 	}
 	statedd.selectedIndex=0;
@@ -589,11 +600,22 @@ function get_council() {
 	c=catlevels[1].length;
 	destroy_council();
 	hide_council();
+	var $ = jQuery.noConflict();
+	$('.council-n').html('')
+		 .append($('<option></option>')
+         .attr('value',' - ')
+         .text('Select Regional Council')); 
 	if(ddval>0) {
 		councildd.options[0] = new Option('(Select One)',0);
 		while(i<c) {
 			if(catassociations[1][i]==ddval) {
 				councildd.options[councildd.options.length] = new Option(catnames[1][i],catlevels[1][i]);
+
+				$('.council-n')
+			         .append($('<option></option>')
+			         .attr('value',catlevels[1][i])
+			         .text(catnames[1][i])); 
+
 			}
 			i++;
 		}
@@ -609,6 +631,11 @@ function get_scheme() {
 	var tlinklab='';
 	destroy_scheme();
 	hide_scheme();
+	var $ = jQuery.noConflict();
+	$('.scheme-n').html('')
+		 .append($('<option></option>')
+         .attr('value',' - ')
+         .text('Select Regional Council')); 
 	if(ddval>0) {
 		c=catlevels[1].length;
 		if(videoins) {
@@ -652,6 +679,12 @@ function get_scheme() {
 		while(i<c) {
 			if(catassociations[2][i]==ddval) {
 				schemedd.options[schemedd.options.length] = new Option(catnames[2][i],catlevels[2][i]);
+
+				$('.scheme-n')
+			         .append($('<option></option>')
+			         .attr('value',catlevels[2][i])
+			         .text(catnames[2][i])); 
+
 			}
 			i++;
 		}
@@ -669,6 +702,13 @@ function get_restriction() {
 	var csa=0;
 	destroy_restriction();
 	hide_restriction();
+
+	var $ = jQuery.noConflict();
+	$('.zone-n').html('')
+		 .append($('<option></option>')
+         .attr('value',' - ')
+         .text('Select Zone')); 
+
 	if(ddval>0) {
 		zonedd.options[0] = new Option('(Select One)',0);
 		overlaysdd.options[0] = new Option('None Applicable',0);
@@ -683,6 +723,12 @@ function get_restriction() {
 					foundindex=zones.indexOf(zoneassociations[i][u]);
 					if(foundindex>=0) {
 						zonedd.options[zonedd.options.length] = new Option(zonenames[foundindex],zones[foundindex]);
+
+						$('.zone-n')
+					         .append($('<option></option>')
+					         .attr('value',zones[foundindex])
+					         .text(zonenames[foundindex])); 
+
 					}
 					u++;
 				}
