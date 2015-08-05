@@ -643,11 +643,11 @@ input[type="text"] {
     font-family: 'Conv_Brandon_med' !important;
     font-size: 17px;
 }
-.price .t3-content .article-content .block-price {
+.t3-content .article-content .block-price {
     width: 100%;
     font-size: 19px;
 }
-.price .t3-content .article-content .block-price .block {
+.t3-content .article-content .block-price .block {
     border: 1px solid #ececec;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -658,22 +658,22 @@ input[type="text"] {
     text-align: center;
     width: 100%;
 }
-.price .t3-content .article-content .block-price .block h3 {
+.t3-content .article-content .block-price .block h3 {
     font-family: "Conv_Brandon_blk";
     font-size: 28px;
     color: #7ab700;
     margin-bottom: 30px;
 }
-.price .t3-content .article-content .block-price .block .pay-month {
+.t3-content .article-content .block-price .block .pay-month {
     font-size: 44px;
     padding-top: 30px;
     color: #7ab700;
 }
-.price .t3-content .article-content .block-price .block .pay-month i {
+.t3-content .article-content .block-price .block .pay-month i {
     font-size: 20px;
     font-style: normal;
 }
-.price .t3-content .article-content .block-price .block .plus {
+.t3-content .article-content .block-price .block .plus {
     background: #f1f1f1;
     border-top: 1px solid #e4e4e4;
     border-bottom: 1px solid #e4e4e4;
@@ -683,51 +683,51 @@ input[type="text"] {
     padding-left: 15px;
     font-size: 15px;
 }
-.price .t3-content .article-content .block-price .block .through-line {
+.t3-content .article-content .block-price .block .through-line {
     text-decoration: line-through;
     color: #d9d9d9;
 }
-.price .t3-content .article-content .block-price .block .arrow-down {
+.t3-content .article-content .block-price .block .arrow-down {
     background: url('../images/ico-arrow-down-yellow.png') no-repeat bottom right;
     text-align: center;
 }
-.price .t3-content .article-content .block-price .standard {
+.t3-content .article-content .block-price .standard {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.price .t3-content .article-content .block-price .standard h3 {
+.t3-content .article-content .block-price .standard h3 {
     color: #009bb7;
 }
-.price .t3-content .article-content .block-price .standard .pay-month {
+.t3-content .article-content .block-price .standard .pay-month {
     color: #009bb7;
 }
-.price .t3-content .article-content .block-price .standard .plus {
+.t3-content .article-content .block-price .standard .plus {
     background: url('../images/ico-plus-green.png') no-repeat 20px 10px;
     padding-left: 15px;
     margin-bottom: 0;
 }
-.price .t3-content .article-content .block-price .standard .none-border {
+.t3-content .article-content .block-price .standard .none-border {
     border: none;
 }
-.price .t3-content .article-content .block-price .corporate {
+.t3-content .article-content .block-price .corporate {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.price .t3-content .article-content .block-price .corporate h3 {
+.t3-content .article-content .block-price .corporate h3 {
     color: #fbc013;
 }
-.price .t3-content .article-content .block-price .corporate .pay-month {
+.t3-content .article-content .block-price .corporate .pay-month {
     color: #fbc013;
 }
-.price .t3-content .article-content .block-price .corporate .plus {
+.t3-content .article-content .block-price .corporate .plus {
     background: url('../images/ico-plus-green.png') no-repeat 20px 10px;
     padding-left: 15px;
     margin-bottom: 0;
 }
-.price .t3-content .article-content .block-price .corporate .none-border {
+.t3-content .article-content .block-price .corporate .none-border {
     border: none;
 }
-.price .t3-content .article-content .block-price .sbm-btn {
+.t3-content .article-content .block-price .sbm-btn {
     background-image: -moz-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
     background-image: -webkit-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
     background-image: -ms-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
@@ -741,7 +741,7 @@ input[type="text"] {
     text-align: center;
     width: 100%;
 }
-.price .t3-content .article-content .block-price .sbm-btn:hover {
+.t3-content .article-content .block-price .sbm-btn:hover {
     text-decoration: none;
 }
 .reports .article-header h1 {
@@ -1749,47 +1749,47 @@ input[type="text"] {
     .resource .t3-content .article-content .ytb-help ul li a {
         padding: 11px 10px 1px 35px;
     }
-    .price .t3-content {
+    .t3-content {
         padding: 0;
     }
-    .price .t3-content .article-content .block-price {
+    .t3-content .article-content .block-price {
         width: 90%;
         margin: 0 auto;
         padding-bottom: 30px;
     }
-    .price .t3-content .article-content .block-price .block {
+    .t3-content .article-content .block-price .block {
         width: 33.333%;
         float: left;
         border-bottom: none;
         border-top-right-radius: 0;
         border-right: none;
     }
-    .price .t3-content .article-content .block-price .block .plus {
+    .t3-content .article-content .block-price .block .plus {
         font-size: 18px;
     }
-    .price .t3-content .article-content .block-price .standard,
-    .price .t3-content .article-content .block-price .corporate {
+    .t3-content .article-content .block-price .standard,
+    .t3-content .article-content .block-price .corporate {
         margin: 0;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
-    .price .t3-content .article-content .block-price .corporate {
+    .t3-content .article-content .block-price .corporate {
         border-top-right-radius: 10px;
         border-right: 1px solid #ececec;
     }
-    .price .t3-content .article-content .block-price .standard,
-    .price .t3-content .article-content .block-price .corporate {
+    .t3-content .article-content .block-price .standard,
+    .t3-content .article-content .block-price .corporate {
         margin: 0;
     }
-    .price .t3-content .article-content .block-price .standard .pay-month,
-    .price .t3-content .article-content .block-price .corporate .pay-month {
+    .t3-content .article-content .block-price .standard .pay-month,
+    .t3-content .article-content .block-price .corporate .pay-month {
         padding-bottom: 21px;
     }
-    .price .t3-content .article-content .block-price .standard .plus,
-    .price .t3-content .article-content .block-price .corporate .plus {
+    .t3-content .article-content .block-price .standard .plus,
+    .t3-content .article-content .block-price .corporate .plus {
         padding-left: 40px;
     }
-    .price .t3-content .article-content .block-price .sbm-btn {
+    .t3-content .article-content .block-price .sbm-btn {
         clear: both;
         width: 102%;
         margin-left: -10px;
@@ -6994,7 +6994,7 @@ div.btl-buttonsubmit{
 }
 .item-page-app .panel-body{
     padding: 15px !important;
-}
+
 .item-page-app #accordion {
     margin-top: -21px;
 }
@@ -7041,4 +7041,18 @@ select::-ms-expand {
 }
 .filled-step select{
     color:#535353 !important;
-}
+}}
+/*pricing table updates */
+.block-price .block i.one-report{color: #ff5b95;}
+.block-price .block{ cursor:pointer; }
+.block-price .block:hover{ -moz-box-shadow:    inset 0 0 10px #CCC;
+   -webkit-box-shadow: inset 0 0 10px #CCC;
+   box-shadow:         inset 0 0 10px #CCC;}
+.block-price .block.greyed{ color:#e4e4e4; }
+.block-price .block.greyed h3{ color:#e4e4e4; }
+.block-price .block.greyed p.pay-month span{ color:#e4e4e4; }
+.block-price .block.greyed i{ color:#e4e4e4; }
+block-price .block.greyed i.one-report{ color:#e4e4e4; }
+.block-price .block.greyed .plus{ background: url("../images/ico-plus-grey.png") no-repeat scroll 20px 10px rgba(0, 0, 0, 0); }
+.block-price .sbm-btn.has-price-selected{background-image: -moz-linear-gradient(90deg, #8bcd07 0px, #7ab700 100%); color:#ffffff;}
+.block-price .block.greyed .arrow-down{background: url("../images/ico-arrow-down-grey.png") no-repeat scroll right bottom rgba(0, 0, 0, 0);} 

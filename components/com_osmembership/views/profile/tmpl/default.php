@@ -12,8 +12,10 @@ defined( '_JEXEC' ) or die ;
 $db = JFactory::getDbo();
 OSMembershipHelperJquery::validateForm();
 $selectedState = '';
+$fields = $this->form->getFields();
+print_r($this->item);
 ?>
-
+xxxxxxxxxx
 <script type="text/javascript">
 	var siteUrl = '<?php echo OSMembershipHelper::getSiteUrl();  ?>';
 	
@@ -22,15 +24,14 @@ $selectedState = '';
 	});
 Dropzone.options.myAwesomeDropzone = {
   init: function() {
-    this.on("complete", function(file) { alert("complete."); });
+    this.on("complete", function(file) { 
+		//location.reload(true); 
+	
+	});
   }
 };
 
 </script>
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
-
 <!-- Modal -->
  <!-- pop up -->
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -51,7 +52,13 @@ Dropzone.options.myAwesomeDropzone = {
 												if (isset($fields['osm_avatar']))
 												{
 													echo $fields['osm_avatar']->input;
-												}
+												}else{
+												?>
+												<div class="avatar" style="max-height:100px;overflow:hidden;">
+												<img src="./templates/propertease/images/profile.png" style="max-width:100px;">
+												</div>
+												<?php
+											}
 												?>
                                                 </form>
                                               </div>
@@ -137,8 +144,17 @@ Dropzone.options.myAwesomeDropzone = {
                                     <?php
                                     if (isset($fields['osm_avatar']))
                                     {
-                                        echo $fields['osm_avatar']->input;
-                                    }
+                                        //echo $fields['osm_avatar']->input;
+										$str='<div class="avatar" title="Click to Change" style="max-height:100px;overflow:hidden;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><img style="max-width:100px;" src="'.JURI::base().'media/com_osmembership/upload/'.OSMembershipHelper::getOriginalFilename($fields['osm_avatar']->value).'"/></div>';
+										echo $str;
+                                    }else{
+										?>
+                                        <div class="avatar" data-target="#myModal" data-toggle="modal" style="max-height:100px;overflow:hidden;">
+                                        <img src="./templates/propertease/images/profile.png" style="max-width:100px;">
+                                        </div>
+                                        <?php
+										
+									}
                                     ?>
                                    
                                 </div>
@@ -609,4 +625,5 @@ Dropzone.options.myAwesomeDropzone = {
 		})
 	});
 </script>
+
 </div>
