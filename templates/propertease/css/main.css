@@ -5633,9 +5633,27 @@ div.avatar {
     width: 100px;
     cursor: pointer;
 }
+div#pop-up-avatar div.avatar{
+	border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+    right: auto;
+    text-align: center;
+    width: 50px;
+	
+}
+div#pop-up-avatar img{ width:50px; height:50px; margin: 0 auto 20px; border-radius: 50%; }
+div#pop-up-avatar small{ margin:0 auto; text-align:center; display:block; color:#ababab; }
 div#field_state div.control-label {
     display: none;
 }
+div#manual_upload_section{ margin:0 auto; text-align:center; display:block; }
+div#manual_upload_section form{ width:132px; margin: 0 auto 20px; }
+div#manual_upload_section form #osm_avatar2{ display:none; }
+
 div.modal {
     background-clip: none;
     background-color: transparent;
