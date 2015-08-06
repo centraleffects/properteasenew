@@ -87,11 +87,11 @@
       </div>  
 
  
-             <button>  
+             <!--<button>  
                <span class="icon-bar"></span>  
                <span class="icon-bar"></span>  
                <span class="icon-bar"></span>  
-             </button>  
+             </button>  -->
            </div>  
            <!-- //HEAD SEARCH -->  
            </div></div>  
