@@ -103,23 +103,24 @@ defined('_JEXEC') or die('Restricted access');
 					<a title="Close" class="modalCloseImg second simplemodal-close"></a>
 				<div class="modal-header">
 				<div class="normal-logo"> </div>
-				<button class="btn btn-register">Don`t have an <b>account?</b></button></div>
+				<button class="btn btn-register pull-right">Don`t have an <b>account?</b></button></div>
 				<div class="modal-body">
-				<h3><span class="green blk">Log in</span> to your account</h3>
+				<h3><span class="green blk light">Log in</span> to your account</h3>
 				<form>
 				<div class="btl-error" id="btl-login-error"></div>
-				<div class="form-group"><input class="form-control" id="btl-input-username" type="text" name="username"placeholder=" Enter your Username " /></div>
-				<div class="form-group"><input class="form-control" id="btl-input-password" type="password" name="password"  placeholder="<?php echo JText::_('MOD_BT_LOGIN_PASSWORD') ?>" /></div>
+				<div class="form-group"><input class="form-control" id="btl-input-username" type="text" name="username"placeholder=" Enter your Username " /></div><?php #echo JText::_('MOD_BT_LOGIN_PASSWORD') ?>
+				<div class="form-group"><input class="form-control" id="btl-input-password" type="password" name="password"  placeholder=" Enter your Password " /></div>
+              
 				<div class="form-group">
-				<div class="radio"><label> <input id="btl-checkbox-remember"  type="checkbox" name="remember"
-							value="yes" />
-							<?php echo JText::_('BT_REMEMBER_ME'); ?> </label><!-- <a href="#">Forgot?</a> -->
-					<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
-					<?php echo JText::_('BT_FORGOT_YOUR_PASSWORD'); ?></a>
+				<div class="radio">
+                <label style="padding-left: 0px;"> <input id="btl-checkbox-remember"  type="checkbox" name="remember"
+							value="yes" class="checkbox-circle" />Remember me</label>
+							<?php #echo JText::_('BT_REMEMBER_ME'); hide to replace the wording ?> <!-- <a href="#">Forgot?</a> -->
+					<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">Forgot?<?php #echo JText::_('BT_FORGOT_YOUR_PASSWORD'); ?></a>
 				</div>
 				</div>
 				<div class="form-group">
-				<p>By logging in, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Use.</a></p>
+				<p>By logging in, you agree to our <br/><a href="#">Privacy Policy</a> and <a href="#">Terms of Use.</a></p>
 				</div>
 				<div class="form-group last-group">
 					<button class="btn btn-sbm" type="submit" onclick="return loginAjax()" ><?php echo JText::_('JLOGIN') ?></button>

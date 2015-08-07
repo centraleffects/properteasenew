@@ -13,59 +13,78 @@ $db = JFactory::getDbo();
 OSMembershipHelperJquery::validateForm();
 $selectedState = '';
 $fields = $this->form->getFields();
-print_r($this->item);
+
 ?>
-xxxxxxxxxx
+
 <script type="text/javascript">
 	var siteUrl = '<?php echo OSMembershipHelper::getSiteUrl();  ?>';
 	
 	jQuery(document).ready(function(){
 		jQuery( "div#osm-profile-page input" ).addClass( "form-control" );
 	});
-Dropzone.options.myAwesomeDropzone = {
-  init: function() {
-    this.on("complete", function(file) { 
-		//location.reload(true); 
-	
-	});
-  }
+	Dropzone.options.myAwesomeDropzone = {
+  	init: function() {
+		this.on("complete", function(file) { 
+			location.reload(true); 
+		
+		});
+  	}
 };
 
 </script>
 <!-- Modal -->
  <!-- pop up -->
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                          <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                              <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                                              </div>
-                                              <div class="modal-body" style="height: 192px;">
-                                               <form action="index.php" method="post" name="osm_form" id="myAwesomeDropzone" autocomplete="off" enctype="multipart/form-data" class="form form-horizontal dropzone">
+                                          <div class="modal-dialog" role="document" style="width: 400px;">
+                                            <div class="modal-content" style="padding:20px;">
                                               
-                                              <input type="hidden" name="option" value="com_osmembership" />
-                <input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
-                <input type="hidden" name="task" value="update_profile" />
-                <input type="hidden" name="Itemid" value="<?php echo $this->Itemid; ?>" />
-                                              <?php
+                                                <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                              <div class="pull-right"><img src="./templates/propertease/images/snapshot.png"></div>
+                                              <div class="modal-body" style="height: auto;">
+                                               <div id="pop-up-avatar">
+											   <?php
 												if (isset($fields['osm_avatar']))
 												{
-													echo $fields['osm_avatar']->input;
+													echo '<img style="max-width:50px;" src="'.JURI::base().'media/com_osmembership/upload/'.OSMembershipHelper::getOriginalFilename($fields['osm_avatar']->value).'"/>';
+													
+													
 												}else{
 												?>
-												<div class="avatar" style="max-height:100px;overflow:hidden;">
-												<img src="./templates/propertease/images/profile.png" style="max-width:100px;">
+												<div class="avatar-popup" style="max-height:100px;overflow:hidden;">
+												<img src="./templates/propertease/images/profile.png" style="max-width:50px;">
 												</div>
 												<?php
-											}
+												}
 												?>
+                                                <small>Current Avatar</small>
+                                                </div>
+                                               <form action="index.php" method="post" name="osm_form" id="myAwesomeDropzone" autocomplete="off" enctype="multipart/form-data" class="form form-horizontal dropzone">
+                                              
+                                                <input type="hidden" name="option" value="com_osmembership" />
+                                                <input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
+                                                <input type="hidden" name="task" value="update_profile" />
+                                                <input type="hidden" name="Itemid" value="<?php echo $this->Itemid; ?>" />
+                                              		
+                                                    
                                                 </form>
+                                                <div id="manual_upload_section">
+                                                    <span>or</span>
+                                                    <form action="index.php" method="post" id="osm_form_avatar" name="osm_form" autocomplete="off" enctype="multipart/form-data" class="form form-horizontal">
+                                                  
+                                                    <input type="hidden" name="option" value="com_osmembership" />
+                                                    <input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
+                                                    <input type="hidden" name="task" value="update_profile" />
+                                                    <input type="hidden" name="Itemid" value="<?php echo $this->Itemid; ?>" />
+                                                    <div onclick="jQuery('#osm_avatar2').trigger('click');">
+                                                    <img src="./templates/propertease/images/select-avatar.png" >
+                                                    </div>
+                                            <input onchange="jQuery('#osm_form_avatar').submit()" type="file" name="osm_avatar" id="osm_avatar2" value="" />
+                                                   
+                                                    
+                                                </form>
+                                                </div>
                                               </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                              </div>
+                                              
                                             </div>
                                           </div>
                                         </div>
@@ -82,7 +101,7 @@ Dropzone.options.myAwesomeDropzone = {
                 <form action="index.php" method="post" name="osm_form" id="osm_form" autocomplete="off" enctype="multipart/form-data" class="form form-horizontal">
                 
                     <div class="page-header">
-                        <h1><span class="reg">Account</span> Basics</h1>
+                        <h1><span class="light">Account</span> Basics</h1>
                         <!--<p class="lead">Bootstrap 3 scaffolding has changed for improved display on mobile devices</p>-->
                     </div>
                     <div class="row row-eq-height">
@@ -140,16 +159,19 @@ Dropzone.options.myAwesomeDropzone = {
                         
                         <div class="col-lg-4">
                                 <div class="inner-addon right-addon">
-                                    <h1 class="change-avatar"><span class="reg">Change Avatar</span></h1>
+                                    <h1 class="change-avatar"><span class="light">Change Avatar</span></h1>
                                     <?php
                                     if (isset($fields['osm_avatar']))
                                     {
                                         //echo $fields['osm_avatar']->input;
 										$str='<div class="avatar" title="Click to Change" style="max-height:100px;overflow:hidden;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><img style="max-width:100px;" src="'.JURI::base().'media/com_osmembership/upload/'.OSMembershipHelper::getOriginalFilename($fields['osm_avatar']->value).'"/></div>';
 										echo $str;
+										?>
+                                       
+                                        <?php
                                     }else{
 										?>
-                                        <div class="avatar" data-target="#myModal" data-toggle="modal" style="max-height:100px;overflow:hidden;">
+                                         <div class="avatar" data-target="#myModal" data-toggle="modal" style="max-height:100px;overflow:hidden;">
                                         <img src="./templates/propertease/images/profile.png" style="max-width:100px;">
                                         </div>
                                         <?php
@@ -163,7 +185,7 @@ Dropzone.options.myAwesomeDropzone = {
                     
                     
                     <div class="page-header">
-                        <h1><span class="reg">Here`s your</span> Profile</h1>
+                        <h1><span class="light">Here`s your</span> Profile</h1>
                         <!--<p class="lead">Bootstrap 3 scaffolding has changed for improved display on mobile devices</p>-->
                     </div>
                     
@@ -242,7 +264,7 @@ Dropzone.options.myAwesomeDropzone = {
                     </div>
                     
                     <div class="page-header">
-                        <h1><span class="reg">More</span> Details</h1>
+                        <h1><span class="light">More</span> Details</h1>
                         <!--<p class="lead">Bootstrap 3 scaffolding has changed for improved display on mobile devices</p>-->
                     </div>
                     <div class="row row-eq-height">

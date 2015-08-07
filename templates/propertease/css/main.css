@@ -1033,10 +1033,10 @@ input[type="text"] {
 }
 #login-popup .modal-dialog .modal-content .modal-header {
     border-bottom: none;
-    padding: 25px 25px 0;
+    padding: 40px 25px 0px;
 }
 #login-popup .modal-dialog .modal-content .modal-header .normal-logo {
-    background: url('../images/ico-logo-small.png') no-repeat top left;
+    background: url('../images/ico-logo-small-green.png') no-repeat top left;
     display: inline-block;
     height: 39px;
     width: 63px;
@@ -1050,7 +1050,7 @@ input[type="text"] {
     background-image: -ms-linear-gradient(90deg, #eeeeee 0%, #f8f8f8 100%);
     color: #333;
     font-size: 16px;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 #login-popup .modal-dialog .modal-content .modal-body {
     padding: 20px 20px 0;
@@ -5650,9 +5650,27 @@ div.avatar {
     width: 100px;
     cursor: pointer;
 }
+div#pop-up-avatar div.avatar{
+	border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+    right: auto;
+    text-align: center;
+    width: 50px;
+	
+}
+div#pop-up-avatar img{ width:50px; height:50px; margin: 0 auto 20px; border-radius: 50%; }
+div#pop-up-avatar small{ margin:0 auto; text-align:center; display:block; color:#ababab; }
 div#field_state div.control-label {
     display: none;
 }
+div#manual_upload_section{ margin:0 auto; text-align:center; display:block; }
+div#manual_upload_section form{ width:132px; margin: 0 auto 20px; }
+div#manual_upload_section form #osm_avatar2{ display:none; }
+
 div.modal {
     background-clip: none;
     background-color: transparent;
@@ -6592,8 +6610,8 @@ div.modal {
     font-weight: normal;
 	line-height: 35px;
 	margin:0px;
-    padding: 3px 0px 0px 19px!important;
-	text-transform: uppercase;
+    padding: 0px!important;
+	text-transform:  none;
 	font-size:18px;
 }
 .btl-input > input[type=text],
