@@ -208,8 +208,33 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
 
     if(JSite::getMenu()->getActive()->menutype=="usermenu"){
       ?>
-      <div id="submenu"><jdoc:include type="modules" name="usermenu" style="none"/></div>
+      <div id="submenu">
+      <div class="container">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#profile-page" data-toggle="tab"><?php echo JText::_('OSM_EDIT_PROFILE');?></a></li>
+        <li><a href="#my-subscriptions-page" data-toggle="tab"><?php echo JText::_('OSM_MY_SUBSCRIPTIONS');?></a></li>
+        <li><a href="#subscription-history-page" data-toggle="tab"><?php echo JText::_('OSM_SUBSCRIPTION_HISTORY');?></a></li>
+        <li><a href="#upgrade-page" data-toggle="tab">Renew Membership</a></li>	
+        <?php 
+            if (count($this->plugins)) 
+            {
+                $count = 0 ;
+                foreach ($this->plugins as $plugin) 
+                {
+                    $title  = $plugin['title'] ;
+                    $count++ ;
+                ?>
+                    <li><a href="#<?php echo 'tab_'.$count;  ?>" data-toggle="tab"><?php echo $title;?></a></li>
+                <?php							
+                }
+            }
+        ?>
+                                
+    </ul>
+</div>
+      </div>
       <?php
+	  #<jdoc:include type="modules" name="usermenu" style="none"/> <!--- this should be dynamic
     }
     ?>
 
