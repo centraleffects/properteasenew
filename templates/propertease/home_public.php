@@ -22,7 +22,26 @@
   <script type="text/javascript">  
  jQuery(window).on('load', function() {  
                      new JCaption('img.caption');  
-                });  
+                }); 
+				
+
+jQuery(function() {
+  jQuery('ul.nav-pills li a').click(function() {
+	 
+	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+	  var target = jQuery(this.hash);
+	  target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
+	  if (target.length) {
+		jQuery('html,body').animate({
+		  scrollTop: target.offset().top
+		}, 1000);
+		return false;
+	  }
+	}
+  });
+});
+	
+	
   </script>  
   <script type="text/javascript">  
    (function() {  
@@ -126,7 +145,7 @@
                 <div class="moduletablebenefits">  
  <div class="custombenefits">  
       <div class="container">  
- <h3>Benefits For You</h3>  
+ <h3 id="benefits">Benefits For You</h3>  
  <div class="row first-row">  
  <div style="visibility: hidden; animation-delay: 0.1s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.1s"><a class="benefit-item " href="#"> Architects <i style="font-size: 0;">icon</i> </a></div>  
  <div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.2s"><a class="benefit-item Developers" href="#"> Developers <i style="font-size: 0;">icon</i></a></div>  
