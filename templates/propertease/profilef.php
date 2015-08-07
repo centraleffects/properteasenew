@@ -445,7 +445,7 @@ var precinctnames=['.implode(',',$precinctnames).'];';
 		if(intval($_REQUEST['concr'])) {
 			return '<p><strong>Your request has been sent.</strong></p>';
 		} else if(intval($_REQUEST['sr'])>0) {
-			return profilef::profilegetresults($_REQUEST['sr']).profilef::profilegetpdfbutton($_REQUEST['sr']);
+			return profilef::profilegetresults_new($_REQUEST['sr']).profilef::profilegetpdfbutton($_REQUEST['sr']);
 		} else if(profilef::profilecansearch()) {
 			if(profilef::profileconcierge()) {
 				$ret='';
@@ -738,15 +738,36 @@ function get_restriction() {
 					foundindex=overlays.indexOf(overlayassociations[i][u]);
 					if(foundindex>=0) {
 						overlaysdd.options[overlaysdd.options.length] = new Option(overlaynames[foundindex],overlays[foundindex]);
+						$('.overlays-n select')
+					         .append($('<option></option>')
+					         .attr('value',overlays[foundindex])
+					         .text(overlaynames[foundindex])); 
 					}
 					u++;
 				}
+
+				$('.precinct-n').html('')
+					 .append(
+					 	$('<option></option>')
+			         	.attr('value','0')
+			         	.text('Select Neighbourhood Plan + Precinct'),
+			         	$('<option></option>')
+			         	.attr('value','0')
+			         	.text('None Applicable')
+			         ); 
+
 				ca=precinctassociations[i].length;
 				u=0;
 				while(u<ca) {
 					foundindex=precincts.indexOf(precinctassociations[i][u]);
 					if(foundindex>=0) {
 						plandd.options[plandd.options.length] = new Option(precinctnames[foundindex],precincts[foundindex]);
+
+						$('.precinct-n')
+					         .append($('<option></option>')
+					         .attr('value',precincts[foundindex])
+					         .text(precinctnames[foundindex])); 
+
 					}
 					u++;
 				}
@@ -773,7 +794,7 @@ get_state();
 	}
 	public function profilegetpdfbutton($sr) {
 		return '<form action="" method="post">
-		<input type="submit" value="Download PDF">
+		<input type="submit" id="downloadpdf" value="Download PDF">
 		<input name="pto" type="hidden" value="pdf">
 		<input name="sr" type="hidden" value="'.intval($sr).'">
 		</form>';
@@ -1236,6 +1257,8 @@ get_state();
 	</tr>
 </table>';
 		}
+
+
 		$ht.='<table '.($simple?'cellspacing="0" width="100%" cellpadding="6" border="1" bordercolor="#B58813"':'class="ptresults"').'>
   <tr'.($simple?' align="left" valign="top"':'').'>
     <th>Local Council</th>
@@ -1252,6 +1275,8 @@ get_state();
   <tr'.($simple?' align="left" valign="top"':'').'>
     <th>Overlays</th>
     <td colspan="2">';
+
+
 		$overlaynames=array();
 		foreach($data['overlays'] as $overlay) {
 			$overlaynames[]=$overlay[0];
@@ -1356,8 +1381,281 @@ Please refer to the local planning scheme for definitions of administrative defi
 We further note the following acronyms may be used throughout this website: GFA (Gross Floor Area), MCU (Material Change Of Use), SQM (Square Metres).
 '.($simple?'</td></tr></table>':'</div>').'
 ';
+
 		return $ht;
 	}
+
+	public function profilegetresults_new($searchid,$simple=false) {
+		$app = JFactory::getApplication();
+		$searchid=intval($searchid);
+		$search=profilef::profilegetsearch($searchid);
+		$data=profilef::profilegetdata($search['state'],$search['council'],$search['scheme'],$search['zone'],$search['overlays'],$search['plan']);
+		/*$ht='';
+		if(!$simple) {
+			$ht.='<div class="ptheader">
+	<div class="ptlogo">
+		<div class="pti">';
+		} else {
+			$ht.='<table cellspacing="0" width="100%" cellpadding="6" border="0">
+	<tr align="left" valign="top">
+		<td rowspan="2">';
+		}
+		$ht.='<img src="'.JURI::base().'templates/'.$app->getTemplate().'/images/report-propertease-logo.gif" alt="Propertease">';
+		if(!$simple) {
+			$ht.='</div>
+	</div>
+	<div class="pthinfo">
+		<div class="pthaddy">
+			<div class="pti">
+				<a href="http://www.propertease.com.au/">www.PropertEASE.com.au</a><br>
+				<a href="mailto:info@propertease.com.au">info@PropertEASE.com.au</a>
+			</div>
+		</div>
+		<div class="pthinfot">';
+		} else {
+			$ht.='</td>
+		<td align="right">
+			www.PropertEASE.com.au<br>
+			info@PropertEASE.com.au
+		</td>
+	</tr>
+	<tr align="left" valign="top">
+		<td>';
+		}
+		$ht.='<table '.($simple?'cellspacing="0" cellpadding="6" border="0"':'').'>
+				<tr'.($simple?' align="left" valign="top"':'').'>
+					<th'.($simple?' align="right"':'').'>Report for:</th>
+					<td>'.(empty($search['by'])?'N/A':(profilef::hte($search['by']))).'</td>
+				</tr>
+				<tr'.($simple?' align="left" valign="top"':'').'>
+					<th'.($simple?' align="right"':'').'>Date:</th>
+					<td>'.(empty($search['date'])?'N/A':(profilef::hte($search['date']))).'</td>
+				</tr>
+				<tr'.($simple?' align="left" valign="top"':'').'>
+					<th'.($simple?' align="right"':'').'>Reference:</th>
+					<td>'.(empty($search['reference'])?'N/A':(profilef::hte($search['reference']))).'</td>
+				</tr>
+			</table>';
+		if(!$simple) {
+			$ht.='</div>
+	</div>
+</div>';
+		} else {
+			$ht.='</td>
+	</tr>
+	<tr>
+		<td bgcolor="#7AB700" colspan="2">&nbsp;</td>
+	</tr>
+</table>';
+		}
+
+
+		$ht.='<table '.($simple?'cellspacing="0" width="100%" cellpadding="6" border="1" bordercolor="#B58813"':'class="ptresults"').'>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Local Council</th>
+    <td colspan="2">'.(empty($data['council'])?'N/A':(profilef::hte($data['council']))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Planning Scheme </th>
+    <td colspan="2">'.(empty($data['scheme'])?'N/A':(profilef::hte($data['scheme']))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Zoning</th>
+    <td colspan="2">'.(empty($data['zone'])?'N/A':(profilef::hte($data['zone']))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Overlays</th>
+    <td colspan="2">';
+
+
+		$overlaynames=array();
+		foreach($data['overlays'] as $overlay) {
+			$overlaynames[]=$overlay[0];
+		}
+		
+		$ht.=profilef::hte((count($overlaynames)?implode(', ',$overlaynames):'N/A')).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Neighbourhood Plan <sup>1</sup> + Precinct</th>
+    <td colspan="2">'.(empty($data['precinct'])?'':(profilef::hte($data['precinct']))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':' class="ptresheader"').'>
+    <th colspan="3"'.($simple?' bgcolor="#F4E8AE"':'').'>RECONFIGURATION OF A LOT (e.g. Subdivision)</th>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Minimum Lot Size and Frontage Required'.($data['minfromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['min'])?(is_null($data['minfrontage'])?'N/A':$data['minfrontage'].'m frontage'):(is_null($data['minfrontage'])?$data['min'].'sqm':$data['min'].'sqm and '.$data['minfrontage'].'m frontage')).'</td>
+    <td'.(!$simple?(empty($data['lotinfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['lotinfo'])?$data['lotinfo']:'N/A'))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':' class="ptresheader"').'>
+    <th colspan="3"'.($simple?' bgcolor="#F4E8AE"':'').'>MULTIPLE DWELLING ('.(!empty($data['muddefinition'])?profilef::hte($data['muddefinition']).') '.(!empty($data['muddisclaimer'])?'<sup>3</sup>':''):'Any multiple residential development)').'</th>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Minimum Lot Size and Frontage Required for unit development'.($data['minmultiplefromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['minmultiple'])?(is_null($data['minmultiplefrontage'])?'N/A':$data['minmultiplefrontage'].'m frontage'):(is_null($data['minmultiplefrontage'])?$data['minmultiple'].'sqm':$data['minmultiple'].'sqm and '.$data['minmultiplefrontage'].'m frontage')).'</td>
+    <td'.(!$simple?(empty($data['lotmultipleinfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['lotmultipleinfo'])?$data['lotmultipleinfo']:'N/A'))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Maximum Height Prescribed'.($data['maxheightfromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['maxstorey'])?(is_null($data['maxheight'])?'N/A':$data['maxheight'].'m above Natural Ground Level'):(is_null($data['maxheight'])?$data['maxstorey'].' storeys':$data['maxstorey'].' storeys and '.$data['maxheight'].'m above Natural Ground Level')).'</td>
+    <td'.(!$simple?(empty($data['heightinfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['heightinfo'])?$data['heightinfo']:'N/A'))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Maximum Gross Floor Area/Plot Ratio Prescribed'.($data['maxgfafromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['maxgfa'])?'N/A':$data['maxgfa'].'% of the total site area').'</td>
+    <td'.(!$simple?(empty($data['gfainfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['gfainfo'])?$data['gfainfo']:'N/A'))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Maximum Site Cover Prescribed'.($data['maxcoverfromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['maxcover'])?'N/A':$data['maxcover'].'% of the total site area').'</td>
+    <td'.(!$simple?(empty($data['coverinfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['coverinfo'])?$data['coverinfo']:'N/A'))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Maximum Density Prescribed'.($data['maxdensityfromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['maxdensity'])?'N/A':$data['maxdensity'].' per hectare').'</td>
+    <td'.(!$simple?(empty($data['densityinfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['densityinfo'])?$data['densityinfo']:'N/A'))).'</td>
+  </tr>';
+  		if(count($data['overlays'])>0) {
+			$ht.='
+  <tr'.($simple?' align="left" valign="top"':' class="ptresheader"').'>
+    <th colspan="3"'.($simple?' bgcolor="#F4E8AE"':'').'>ADDITIONAL OVERLAY INFORMATION </th>
+  </tr>';
+  			foreach($data['overlays'] as $overlay) {
+				$ht.='
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>'.profilef::hte($overlay[0]).'</th>
+    <td colspan="2">'.nl2br(profilef::hte($overlay[1])).'</td>
+  </tr>';
+  			}
+  		}
+		if(!empty($data['mudsetback'])||!empty($data['housesetback'])||!empty($data['smalllotsetback'])||!empty($data['secondarysetback'])) {
+			$ht.='
+  <tr'.($simple?' align="left" valign="top"':' class="ptresheader"').'>
+    <th colspan="3"'.($simple?' bgcolor="#F4E8AE"':'').'>GENERAL INFORMATION (Note, any information following are general provisions that may be altered by the zoning, neighbourhood plan and/or overlays of a site)</th>
+  </tr>';
+			if(!empty($data['mudsetback'])) {
+				$ht.='
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Prescribed setbacks for a Multiple Unit Dwelling'.($data['mudsetbackfromplan']?' <sup>2</sup>':'').'</th>
+    <td colspan="2">'.nl2br(profilef::hte($data['mudsetback'])).'</td>
+  </tr>';
+			}
+			if(!empty($data['housesetback'])) {
+				$ht.='
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Prescribed setbacks for a House'.($data['housesetbackfromplan']?' <sup>2</sup>':'').'</th>
+    <td colspan="2">'.nl2br(profilef::hte($data['housesetback'])).'</td>
+  </tr>';
+			}
+			if(!empty($data['smalllotsetback'])) {
+				$ht.='
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Prescribed setbacks for Small Lot House (450sqm or less)'.($data['smalllotsetbackfromplan']?' <sup>2</sup>':'').'</th>
+    <td colspan="2">'.nl2br(profilef::hte($data['smalllotsetback'])).'</td>
+  </tr>';
+			}
+			if(!empty($data['secondarysetback'])) {
+				$ht.='
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Prescribed secondary Dwelling Provisions'.($data['secondarysetbackfromplan']?' <sup>2</sup>':'').'</th>
+    <td colspan="2">'.nl2br(profilef::hte($data['secondarysetback'])).'</td>
+  </tr>';
+			}
+		}
+		$ht.='
+</table>
+'.($simple?'<table width="100%" border="0" cellpadding="6" cellspacing="0" bgcolor="#008CCC"><tr><td color="#FFFFFF">':'<div class="ptextra">').'
+<sup>1</sup> Neighbourhood Plan can refer to a Local Plan, Precinct, Local Area... etc. dependent on the planning scheme.<br>
+<sup>2</sup> Provision taken from a Local or Neighbourhood Plan or Precinct.<br>
+'.(!empty($data['muddisclaimer'])?'<sup>3</sup> '.profilef::hte($data['muddisclaimer']).'<br>':'').'<br>
+Please refer to the local planning scheme for definitions of administrative definitions (e.g. Gross Floor Area, Plot Ratio, Site Cover... etc.).<br><br>
+We further note the following acronyms may be used throughout this website: GFA (Gross Floor Area), MCU (Material Change Of Use), SQM (Square Metres).
+'.($simple?'</td></tr></table>':'</div>').'
+';
+*/
+		
+		$newreport = '<div class="row">
+		<h3><i class="green">Welcome</i>, dear<i class="ico-logo-small">logo</i>member. <span class="light">General Information about the browser based app.</span></h3>
+		<div class="col-sm-12">
+		<ul class="nav nav-tabs">
+		<li class="active"><a href="#overview" data-toggle="tab">Overview </a></li>
+		<li class=""><a href="#reconfiguration" data-toggle="tab">Reconfiguration of a Lot</a></li>
+		<li class=""><a href="#multiple" data-toggle="tab">Multiple Dwelling </a></li>
+		<li class=""><a href="#additional" data-toggle="tab">Additional Overlay Information</a></li>
+		<li class=""><a href="#general" data-toggle="tab">General Information</a></li>
+		</ul>
+		<div class="tab-content">
+		<div id="overview" class="tab-pane fade active in">
+		<ul>
+		<li><a href="#"><span class="blk">Local Council</span> - '.(empty($data['council'])?'N/A':(profilef::hte($data['council']))).'</a></li>
+		<li><a href="#"><span class="blk">Planning Scheme</span> - '.(empty($data['scheme'])?'N/A':(profilef::hte($data['scheme']))).'</a></li>
+		<li><a href="#"><span class="blk">Zoning </span> - '.(empty($data['zone'])?'N/A':(profilef::hte($data['zone']))).'</a></li>
+		<li><a href="#"><span class="blk">Overlays</span> - '; 
+		$overlaynames=array();
+		foreach($data['overlays'] as $overlay) {
+			$overlaynames[]=$overlay[0];
+		}
+		$newreport.=profilef::hte((count($overlaynames)?implode(', ',$overlaynames):'N/A')).'</a></li>
+		<li><a href="#"><span class="blk">Neighbourhood Plan + Precinct </span> - '.(empty($data['precinct'])?'':(profilef::hte($data['precinct']))).' </a></li>
+		</ul>
+		<div class="info">
+		<p>Report for:<span class="blk"> '.(empty($search['by'])?'N/A':(profilef::hte($search['by']))).'</span></p>
+		<p>Date: <span class="blk">'.(empty($search['date'])?'N/A':(profilef::hte($search['date']))).'</span></p>
+		<p>Reference: <span class="blk">'.(empty($search['reference'])?'N/A':(profilef::hte($search['reference']))).'</span></p>
+		<a class="blk" id="getpdf" href="javascript:void(0);">Download .pdf</a></div>
+		</div>
+		<div id="reconfiguration" class="tab-pane fade"> <table class="table table-striped"><tr><th>Minimum Lot Size and Frontage Required'.($data['minfromplan']?' <sup>2</sup>':'').'</th></tr>
+    <tr><td>'.(is_null($data['min'])?(is_null($data['minfrontage'])?'N/A':$data['minfrontage'].'m frontage'):(is_null($data['minfrontage'])?$data['min'].'sqm':$data['min'].'sqm and '.$data['minfrontage'].'m frontage')).'</td></tr>
+    <tr><td'.(!$simple?(empty($data['lotinfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['lotinfo'])?$data['lotinfo']:'N/A'))).'</td></tr></table></div>
+		<div id="multiple" class="tab-pane fade"><table class="table table-striped"><tr'.($simple?' align="left" valign="top"':' class="ptresheader"').'>
+    <th colspan="3"'.($simple?' bgcolor="#F4E8AE"':'').'>MULTIPLE DWELLING ('.(!empty($data['muddefinition'])?profilef::hte($data['muddefinition']).') '.(!empty($data['muddisclaimer'])?'<sup>3</sup>':''):'Any multiple residential development)').'</th>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Minimum Lot Size and Frontage Required for unit development'.($data['minmultiplefromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['minmultiple'])?(is_null($data['minmultiplefrontage'])?'N/A':$data['minmultiplefrontage'].'m frontage'):(is_null($data['minmultiplefrontage'])?$data['minmultiple'].'sqm':$data['minmultiple'].'sqm and '.$data['minmultiplefrontage'].'m frontage')).'</td>
+    <td'.(!$simple?(empty($data['lotmultipleinfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['lotmultipleinfo'])?$data['lotmultipleinfo']:'N/A'))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Maximum Height Prescribed'.($data['maxheightfromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['maxstorey'])?(is_null($data['maxheight'])?'N/A':$data['maxheight'].'m above Natural Ground Level'):(is_null($data['maxheight'])?$data['maxstorey'].' storeys':$data['maxstorey'].' storeys and '.$data['maxheight'].'m above Natural Ground Level')).'</td>
+    <td'.(!$simple?(empty($data['heightinfo'])?' class="ptdeadinfo"':''):'').'>'.str_replace("\n","<br>",nl2br(profilef::hte((!empty($data['heightinfo'])?$data['heightinfo']:'N/A')))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Maximum Gross Floor Area/Plot Ratio Prescribed'.($data['maxgfafromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['maxgfa'])?'N/A':$data['maxgfa'].'% of the total site area').'</td>
+    <td'.(!$simple?(empty($data['gfainfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['gfainfo'])?$data['gfainfo']:'N/A'))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Maximum Site Cover Prescribed'.($data['maxcoverfromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['maxcover'])?'N/A':$data['maxcover'].'% of the total site area').'</td>
+    <td'.(!$simple?(empty($data['coverinfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['coverinfo'])?$data['coverinfo']:'N/A'))).'</td>
+  </tr>
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>Maximum Density Prescribed'.($data['maxdensityfromplan']?' <sup>2</sup>':'').'</th>
+    <td>'.(is_null($data['maxdensity'])?'N/A':$data['maxdensity'].' per hectare').'</td>
+    <td'.(!$simple?(empty($data['densityinfo'])?' class="ptdeadinfo"':''):'').'>'.nl2br(profilef::hte((!empty($data['densityinfo'])?$data['densityinfo']:'N/A'))).'</td>
+  </tr></table></div>
+		<div id="additional" class="tab-pane fade">'; foreach($data['overlays'] as $overlay) {
+				$newreport.='<table class="table table-striped">
+  <tr'.($simple?' align="left" valign="top"':'').'>
+    <th>'.profilef::hte($overlay[0]).'</th>
+    <td colspan="2">'.nl2br(profilef::hte($overlay[1])).'</td>
+  </tr></table>';
+  			}
+  		$newreport.='</div>
+		<div id="general" class="tab-pane fade"><sup>1</sup> Neighbourhood Plan can refer to a Local Plan, Precinct, Local Area... etc. dependent on the planning scheme.<br>
+<sup>2</sup> Provision taken from a Local or Neighbourhood Plan or Precinct.<br>
+'.(!empty($data['muddisclaimer'])?'<sup>3</sup> '.profilef::hte($data['muddisclaimer']).'<br>':'').'<br>
+Please refer to the local planning scheme for definitions of administrative definitions (e.g. Gross Floor Area, Plot Ratio, Site Cover... etc.).<br><br>
+We further note the following acronyms may be used throughout this website: GFA (Gross Floor Area), MCU (Material Change Of Use), SQM (Square Metres).</div>
+		</div>
+		</div>
+		</div>';
+
+		//return $newreport.$ht;
+		return $newreport;
+	}
+
 	public function profilegetdata($stateid=0,$councilid=0,$schemeid=0,$zoneid=0,$overlayids=array(),$precinctid=0) {
 		$stateid=intval($stateid);
 		$councilid=intval($councilid);

@@ -90,7 +90,7 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
   $hasr=($this->countModules('right')?true:false);
 ?>
  <!DOCTYPE html>  
- <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" slick-uniqueid="3" dir="ltr" class="com_content view-article itemid-227 resource j34 mm-hover no-touch" lang="en-gb">
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" slick-uniqueid="3" dir="ltr" class="com_content view-article itemid-227 resource j34 mm-hover no-touch <?php if(intval($_GET['sr'])>0){ echo "reports"; } ?>" lang="en-gb">
  <head>  
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
   <meta name="HandheldFriendly" content="true">  
@@ -191,13 +191,15 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
           if($heading_title<>""){
             echo '<h1 class="article-title" itemprop="name"><i class="sun"></i> '.$heading_title.'</h1>';
           }else{
-            if ($menu->getActive() == $menu->getDefault() and $status>0 ) {
+            if ($menu->getActive() == $menu->getDefault() and $status>0  and intval($_GET['sr'])==0) {
               ?>
-                <h1 class="article-title" itemprop="name"><i class="fa fa-file-o"></i>
+                <h1 class="article-title" itemprop="name"><i></i>
                   <input type="text" value="Give this report a name" id="report-name"></h1>
               <?php
             }else{
-              //Nothing to do here
+              ?>
+                <h1 class="article-title" itemprop="name"><i></i>More Reports</h1>
+              <?php
             }
           }
           ?>      
@@ -226,13 +228,25 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
       </dl>  
       <?php
     }
+    if(intval($_GET['sr'])>0){
+      ?>
+      <dl class="article-info muted">  
+           <dt class="article-info-term">Details</dt>  
+           <dd data-original-title="Published: <?php echo date('j F Y h:i:s'); ?>" class="published hasTooltip" title="">  
+             <i class="icon-calendar"></i>  
+             <time datetime="<?php echo date('j F Y h:i:s'); ?>" itemprop="datePublished">  
+               <?php echo date('j F Y'); ?> </time>  
+           </dd>  
+      </dl>  
+      <?php
+    }
    ?>
    
  </aside> 
  <?php 
 $app = JFactory::getApplication();
 $menu = $app->getMenu();
-if ($menu->getActive() == $menu->getDefault()) {
+if ($menu->getActive() == $menu->getDefault() and intval($_GET['sr'])==0) {
  ?> 
      <div class="step-process">
           <span class="ico-step"></span>
@@ -263,7 +277,7 @@ if ($menu->getActive() == $menu->getDefault()) {
                 </div>
               <?php endif; ?>
                 <div id="maincontent">
-                  <?php echo $content; ?>
+                  <?php /* include_once('home_myreports.php');*/ echo $content; ?>
                 </div>  
             </div>
           </div>

@@ -22,13 +22,18 @@ jQuery(document).ready(function($){
 		if(e.val()=="Give this report a name"){e.val(''); }
 	}).focusout(function(){
 		var e = $(this);
-		if(e.val()==""){e.val('Give this report a name'); $('.step-process li').removeClass('active'); }
+		if(e.val()==""){e.val('Give this report a name');/* $('.step-process li').removeClass('active');*/ }
 		else{
 			$('.step-process ul li:nth-child(1)').addClass('active');
+			$('#refw input').val(e.val());
 		}
 	});
 
 	$('.state-n').change(function(){
+		if($(this).val() == " - "){
+			$(this).parent('span').parent('a').removeClass('filled-step');
+			return false;
+		}
 		$('#state').val($(this).val());
 		get_council();
 		$('.step-process ul li:nth-child(2)').addClass('active');
@@ -45,11 +50,39 @@ jQuery(document).ready(function($){
 		get_restriction();
 		$('.step-process ul li:nth-child(4)').addClass('active');
 		$(this).parent('span').parent('a').addClass('filled-step');
+		setTimeout(function(){
+			$('#collapseFour .panel-body').empty().append(
+				$('<div class="videoins">').append($('#videoins').html()),
+				$('<div class="helpins">').append($('#helpins').html()),
+				$('<div class="clearfix">')
+			);
+		//$(this).parent('span').parent('a').trigger('click');
+	},500);
+		
 	});
 	$('.zone-n').change(function(){
 		$('#zone').val($(this).val());
 		get_submit();
 		$('.step-process ul li:nth-child(5)').addClass('active');
 		$(this).parent('span').parent('a').addClass('filled-step');
+	});
+	$('.overlays-n select').change(function(){
+		$('#overlays').find("option[selected]").removeAttr("selected");
+		$(this).find('option:selected').each(function(){
+		 	$('#overlays').find('[value="'+$(this).val()+'"]').attr('selected','selected');
+		});
+		$('.step-process ul li:nth-child(6)').addClass('active');
+	});
+	$('.precinct-n').change(function(){
+		$('#plan').val($(this).val());
+		$('.step-process ul li:nth-child(7)').addClass('active');
+		$(this).parent('span').parent('a').addClass('filled-step');
+		$('.btn-sbm').addClass('btn-active-submit');
+	});
+	$('.btn-sbm').click(function(){
+		$('#submitw input').trigger('click');
+	});
+	$('#getpdf').click(function(){
+		$('#downloadpdf').trigger('click');
 	});
 });

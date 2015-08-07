@@ -234,6 +234,7 @@ span.highlight {
    =====================   
 */
 
+
 body {
     font-family: 'Conv_Brandon_reg', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 17px;
@@ -246,6 +247,9 @@ textarea {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
+}
+select::-ms-expand {
+    display: none;
 }
 a {
     color: #428bca;
@@ -748,13 +752,14 @@ input[type="text"] {
     background: #87CB00;
     color: #fff;
     padding-left: 10px;
+    font-family: 'Conv_Brandon_reg', "Helvetica Neue", Helvetica, Arial, sans-serif !important; 
 }
 .reports .article-header h1 i {
-    background: url('../images/ico-report.png') no-repeat top left;
+    background: url('../images/ico-report.png') no-repeat 1px;
     border-right: 1px solid #92d50d;
     line-height: 43px;
     margin-right: 10px;
-    padding-right: 30px;
+    padding-right: 30px !important;
 }
 .reports .article-content ul.nav li {
     width: 100%;
@@ -792,7 +797,6 @@ input[type="text"] {
 }
 .reports .article-content .tab-content #overview ul {
     margin: 0;
-    padding: 20px;
 }
 .reports .article-content .tab-content #overview ul li {
     list-style: none;
@@ -972,7 +976,7 @@ input[type="text"] {
     background-position: 10px center, 96% center;
     background-repeat: no-repeat;
 }
-.item-page-app .article-content #accordion .panel .panel-heading a span {
+.item-page-app .article-content #accordion .panel .panel-heading  span {
     display: inline-block;
     line-height: 47px;
     /*overflow: hidden;*/
@@ -1962,11 +1966,11 @@ input[type="text"] {
     line-height: 43px;
 }
 .resource .t3-content header h1 i{
-        padding-right: 7px;
-    margin-right: 7px;
+    background: url('../images/ico-report.png') no-repeat 1px;
     border-right: 1px solid #92d50d;
     line-height: 43px;
-    font-size: 25px;
+    margin-right: 10px;
+    padding-right: 30px !important;
 }
 .resource .t3-content .article-content {
     padding-bottom: 70px;
@@ -6989,22 +6993,24 @@ div.btl-buttonsubmit{
 .gvalidation-error-tip .gtooltip-arrow {
 	border-color: #ff4242 transparent transparent transparent;
 }
+
+/* App related style */
 .item-page-app{
     margin-top: -39px;
 }
 .item-page-app .panel-body{
     padding: 15px !important;
-
+}
 .item-page-app #accordion {
     margin-top: -21px;
 }
 #report-name{
-    margin-top: -46px;
-    margin-left: 30px;
+    margin-top: -42px;
+    margin-left: 37px;
     background-color: transparent;
     border: none;
     height: 42px;
-    width: 235px;
+    width: 229px;
     margin-right: -21px;
     color: #fff;
     font-size: 19px !important;
@@ -7018,10 +7024,8 @@ div.btl-buttonsubmit{
 #report-name:focus{
     background-color: #b2d865;
 }
-select::-ms-expand {
-    display: none;
-}
-.state-n, .council-n, .scheme-n, .zone-n{
+
+.state-n, .council-n, .scheme-n, .zone-n, .precinct-n{
     background: transparent;
     border: none !important;
     word-wrap: break-word;
@@ -7032,7 +7036,7 @@ select::-ms-expand {
     cursor: pointer;
     color:#e9e9e9;
 }
-.state-n:hover, .council-n:hover, .scheme-n:hover, .zone-n:hover{
+.state-n:hover, .council-n:hover, .scheme-n:hover, .zone-n:hover, .precinct-n:hover{
     color:#535353;
 }
 .filled-step{
@@ -7041,7 +7045,30 @@ select::-ms-expand {
 }
 .filled-step select{
     color:#535353 !important;
-}}
+}
+
+.videoins{
+    width: 50%;
+    float: left;
+    padding: 20px;
+}
+.helpins{
+    width: 50%;
+    float: left;
+    padding: 20px;
+}
+.btn-active-submit{
+    background-color: #7ab700 !important;
+}
+#ptsearch, #videoins, #helpins,#downloadpdf{
+    display: none !important;
+}
+.reports .tab-pane{
+    padding: 20px;
+}
+.reports .tab-content table{
+    margin-bottom: 0px;
+}
 /*pricing table updates */
 .block-price .block i.one-report{color: #ff5b95;}
 .block-price .block{ cursor:pointer; }

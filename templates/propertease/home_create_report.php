@@ -19,26 +19,27 @@
             </div>
             <div class="panel panel-default">
                 <div id="headingFour" class="panel-heading">
-                    <h4 class="panel-title"><a class="collapsed" href="#" data-parent="#accordion" data-toggle="collapse"><span class="first blk">Zone</span><span><select class="second med zone-n"><option>Select Zone</option></select></span></a></h4>
+                    <h4 class="panel-title"><a class="collapsed" href="#collapseFour" data-parent="#accordion" data-toggle="collapse"><span class="first blk">Zone</span><span><select class="second med zone-n"><option>Select Zone</option></select></span></a></h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse" style="height: 0px;">
+                    <div class="panel-body"></div>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div id="headingFive" class="panel-heading">
-                    <h4 class="panel-title"><a class="collapsed" href="#collapseFive" data-parent="#accordion" data-toggle="collapse"><span class="first blk">Overlays</span><span class="second med overlays-n">Select Overlays</span></a></h4>
+                    <h4 class="panel-title"><a class="collapsed" href="#collapseFive" data-parent="#accordion" data-toggle="collapse"><span class="first blk">Overlays</span><span class="second med">Select Overlays</span></a></h4>
                 </div>
                 <div id="collapseFive" class="panel-collapse collapse" style="height: 0px;">
-                    <div class="panel-body"></div>
+                    <div class="panel-body overlays-n"><select multiple="multiple"></select><p class="bg-info">Hold the CTRL or Cmd key to select multiple options.</p></div>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div id="headingSix" class="panel-heading">
-                    <h4 class="panel-title"><a class="collapsed" href="#collapseSix" data-parent="#accordion" data-toggle="collapse"><span class="first blk">Neighbourhood Plan + Precinct</span><span class="second med precinct-n">Select Neighbourhood Plan + Precinct</span></a></h4>
+                    <h4 class="panel-title"><a class="collapsed"  href="#" onclick="return false;" data-parent="#accordion" data-toggle="collapse"><span class="first blk">Neighbourhood Plan + Precinct</span><span><select class="second med precinct-n"><option>Select Neighbourhood Plan + Precinct</option></select></span></a></h4>
                 </div>
-                <div id="collapseSix" class="panel-collapse collapse" style="height: 0px;">
-                    <div class="panel-body"></div>
-                </div>
+
             </div>
         </div>
-        <a class="btn-sbm blk" href="#">Submit</a>
+        <a class="btn-sbm blk" href="javascript:void(0);">Submit</a>
     </div>
 </div>
