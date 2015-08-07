@@ -393,7 +393,7 @@ jQuery(function() {
                           <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12">  
                                          <div class="t3-module module footer-menu " id="Mod103"><div class="module-inner"><div class="module-ct"><ul class="nav nav-pills nav-stacked ">  
  <li class="item-140 divider"><span class="separator">Copyright 2015</span>  
- </li><li class="item-141"><a href="<?php echo $mainURL; ?>about-propertease.html">About PropertEASE</a></li><li class="item-142"><a href="<?php echo $mainURL; ?>conditions-of-use.html">Conditions of Use</a></li></ul>  
+ </li><li class="item-141"><a href="/">About PropertEASE</a></li><li class="item-142"><a href="http://dev.dusted.com.au/propertease0724/conditions-of-use.html">Conditions of Use</a></li></ul>  
  </div></div></div>  
                                     </div>  
                           <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12">  

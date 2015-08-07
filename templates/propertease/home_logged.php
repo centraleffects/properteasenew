@@ -417,9 +417,9 @@ if ($menu->getActive() == $menu->getDefault() and intval($_GET['sr'])==0) {
            <ul class="nav nav-pills nav-stacked ">  
              <li class="item-140 divider"><span class="separator">Copyright 2015</span>  
              </li>  
-             <li class="item-141"><a href="<?php echo $mainURL; ?>/about-propertease.html">About PropertEASE</a>  
+             <li class="item-141"><a href="/">About PropertEASE</a>  
              </li>  
-             <li class="item-142"><a href="<?php echo $mainURL; ?>/conditions-of-use.html">Conditions of Use</a>  
+             <li class="item-142"><a href="http://dev.dusted.com.au/propertease0724/conditions-of-use.html">Conditions of Use</a>  
              </li>  
            </ul>  
          </div>  
