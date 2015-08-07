@@ -3,13 +3,14 @@
  if($status < 1){
  	/*public*/
  	?>
- 	<div class="pull-left"><jdoc:include type="modules" name="topmenu" style="custom"/></div>
+ 	
      <?php 
       if ($this->countModules( 'Login' )) { ?>  
-        <div class="bt_login pull-left" id="loginbtn">  
+        <div class="bt_login pull-right" id="loginbtn">  
          		<jdoc:include type="modules" name="Login"/>  
         </div>  
-     <?php } ?>  
+     <?php } ?> 
+     <div class="pull-right"><jdoc:include type="modules" name="topmenu" style="custom"/></div> 
  	<?php
 
  }else{
