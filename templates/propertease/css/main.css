@@ -7011,3 +7011,5 @@ block-price .block.greyed i.one-report{ color:#e4e4e4; }
 .block-price .block.greyed .plus{ background: url("../images/ico-plus-grey.png") no-repeat scroll 20px 10px rgba(0, 0, 0, 0); }
 .block-price .sbm-btn.has-price-selected{background-image: -moz-linear-gradient(90deg, #8bcd07 0px, #7ab700 100%); color:#ffffff;}
 .block-price .block.greyed .arrow-down{background: url("../images/ico-arrow-down-grey.png") no-repeat scroll right bottom rgba(0, 0, 0, 0);} 
+
+.t3-header .nav-pills li:first-child{ display:none; }
