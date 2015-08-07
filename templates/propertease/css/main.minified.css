@@ -597,4 +597,4 @@ block-price .block.greyed i.one-report{ color:#e4e4e4; }
 .block-price .block.greyed .arrow-down{background: url("../images/ico-arrow-down-grey.png") no-repeat scroll right bottom rgba(0, 0, 0, 0);} 
 
 
-.t3-header .nav-pills li:first-child{ display:none; }
+.t3-header .nav-pills li.first.current:first-child{ display:none; }
