@@ -48,8 +48,11 @@
                   <span class="caret"></span>
               </a>
               <?php $returnURL = base64_encode(JURI::root() . ""); ?>
-              <ul class="dropdown-menu">
-                <li><a href="<?php echo JURI::root(); ?>my-account.html" targer="_blank">My Account</a>
+              <ul class="dropdown-menu" style="text-align:right;">
+                <li><a href="<?php echo JURI::root(); ?>my-account.html" >My Account</a>
+                <li><a href="<?php echo JURI::root(); ?>" >Plans / Billing</a>
+                <li><a href="<?php echo JURI::root(); ?>" >Tickets</a>
+                <li><a href="<?php echo JURI::root(); ?>" >Resources</a>
                 <li>
                     <a href="<?php echo JURI::root(); ?>index.php?option=com_users&task=user.logout&<?php echo JSession::getFormToken(); ?>=1&return=<?php echo $returnURL; ?>">
                     Logout
