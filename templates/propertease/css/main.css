@@ -1,3 +1,9 @@
+@-webkit-viewport  { width: device-width; }  
+@-moz-viewport   { width: device-width; }  
+@-ms-viewport    { width: device-width; }  
+@-o-viewport    { width: device-width; }  
+@viewport      { width: device-width; }  
+
 @font-face {
   font-family: 'Conv_Brandon_med';
   src: url('Brandon_med.eot');
@@ -228,6 +234,7 @@ span.highlight {
    =====================   
 */
 
+
 body {
     font-family: 'Conv_Brandon_reg', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 17px;
@@ -240,6 +247,9 @@ textarea {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
+}
+select::-ms-expand {
+    display: none;
 }
 a {
     color: #428bca;
@@ -742,13 +752,14 @@ input[type="text"] {
     background: #87CB00;
     color: #fff;
     padding-left: 10px;
+    font-family: 'Conv_Brandon_reg', "Helvetica Neue", Helvetica, Arial, sans-serif !important; 
 }
 .reports .article-header h1 i {
-    background: url('../images/ico-report.png') no-repeat top left;
+    background: url('../images/ico-report.png') no-repeat 1px;
     border-right: 1px solid #92d50d;
     line-height: 43px;
     margin-right: 10px;
-    padding-right: 30px;
+    padding-right: 30px !important;
 }
 .reports .article-content ul.nav li {
     width: 100%;
@@ -786,7 +797,6 @@ input[type="text"] {
 }
 .reports .article-content .tab-content #overview ul {
     margin: 0;
-    padding: 20px;
 }
 .reports .article-content .tab-content #overview ul li {
     list-style: none;
@@ -961,15 +971,15 @@ input[type="text"] {
     height: 47px;
     background: #fdfdfd;
     padding: 0 0 0 30px;
-    background-image: url('../images/ico-check.png'), url('../images/ico-arrow-down-s.png');
+   /* background-image: url('../images/ico-check.png'), url('../images/ico-arrow-down-s.png');*/
+   background-image: url('../images/ico-check.png'), url('../images/ico-arrow-down-s.png');
     background-position: 10px center, 96% center;
     background-repeat: no-repeat;
 }
-.item-page-app .article-content #accordion .panel .panel-heading a span {
+.item-page-app .article-content #accordion .panel .panel-heading  span {
     display: inline-block;
-    height: 47px;
     line-height: 47px;
-    overflow: hidden;
+    /*overflow: hidden;*/
     width: 49%;
 }
 .item-page-app .article-content #accordion .panel .panel-heading a .first {
@@ -1821,9 +1831,9 @@ input[type="text"] {
         padding-left: 30px;
         margin-left: 10px;
     }
-    .item-page-app .article-content #accordion .panel .panel-heading a:hover .second {
+    /*.item-page-app .article-content #accordion .panel .panel-heading a:hover .second {
         background: url('../images/ico-ytb-normal.png') no-repeat center left;
-    }
+    }*/
     .item-page-app .article-content h3 {
         text-align: center;
     }
@@ -1948,12 +1958,19 @@ input[type="text"] {
     color: #fff;
     padding-left: 10px;
 }
-.resource .t3-content header h1 i {
+.resource .t3-content header h1 i.sun {
     background: url('../images/ico-eye.png') no-repeat left center;
     padding-right: 30px;
     margin-right: 10px;
     border-right: 1px solid #92d50d;
     line-height: 43px;
+}
+.resource .t3-content header h1 i{
+    background: url('../images/ico-report.png') no-repeat 1px;
+    border-right: 1px solid #92d50d;
+    line-height: 43px;
+    margin-right: 10px;
+    padding-right: 30px !important;
 }
 .resource .t3-content .article-content {
     padding-bottom: 70px;
@@ -6994,8 +7011,82 @@ div.btl-buttonsubmit{
 .gvalidation-error-tip .gtooltip-arrow {
 	border-color: #ff4242 transparent transparent transparent;
 }
+
+/* App related style */
+.item-page-app{
+    margin-top: -39px;
+}
 .item-page-app .panel-body{
     padding: 15px !important;
+}
+.item-page-app #accordion {
+    margin-top: -21px;
+}
+#report-name{
+    margin-top: -42px;
+    margin-left: 37px;
+    background-color: transparent;
+    border: none;
+    height: 42px;
+    width: 229px;
+    margin-right: -21px;
+    color: #fff;
+    font-size: 19px !important;
+    text-shadow: 0px 0px #fff;
+    font-family: 'Conv_Brandon_reg', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    background-image: url(../images/reportname.jpg);
+    padding-left: 21px;
+    border: none;
+    background-position: -1px 0px;
+}
+#report-name:focus{
+    background-color: #b2d865;
+}
+
+.state-n, .council-n, .scheme-n, .zone-n, .precinct-n{
+    background: transparent;
+    border: none !important;
+    word-wrap: break-word;
+    -webkit-appearance: none;
+    font-size: 20px;
+    box-shadow: none !important;
+    margin-left: 8px !important;
+    cursor: pointer;
+    color:#e9e9e9;
+}
+.state-n:hover, .council-n:hover, .scheme-n:hover, .zone-n:hover, .precinct-n:hover{
+    color:#535353;
+}
+.filled-step{
+    color:#535353 !important;
+    background-image: url('../images/ico-checked.png') , url('../images/ico-arrow-down-s-d.png') !important;;
+}
+.filled-step select{
+    color:#535353 !important;
+}
+
+.videoins{
+    width: 50%;
+    float: left;
+    padding: 20px;
+}
+.helpins{
+    width: 50%;
+    float: left;
+    padding: 20px;
+}
+.btn-active-submit{
+    background-color: #7ab700 !important;
+}
+#ptsearch, #videoins, #helpins,#downloadpdf{
+    display: none !important;
+}
+.reports .tab-pane{
+    padding: 20px;
+}
+.reports .tab-content table{
+    margin-bottom: 0px;
 }
 /*pricing table updates */
 .block-price .block i.one-report{color: #ff5b95;}

@@ -30,3 +30,6 @@
 [02-Aug-2015 11:05:35 Europe/Berlin] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 275
 [02-Aug-2015 11:18:41 Europe/Berlin] PHP Parse error:  syntax error, unexpected '=', expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 277
 [02-Aug-2015 12:42:25 Europe/Berlin] PHP Parse error:  syntax error, unexpected '&' in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 279
+[07-Aug-2015 00:23:22 Europe/Berlin] PHP Parse error:  syntax error, unexpected end of file in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 431
+[07-Aug-2015 00:59:02 Europe/Berlin] PHP Fatal error:  Call to undefined function l2br() in D:\xampp\htdocs\propertease0724\repo\templates\propertease\profilef.php on line 1430
+[07-Aug-2015 01:44:35 Europe/Berlin] PHP Parse error:  syntax error, unexpected '{' in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 229
