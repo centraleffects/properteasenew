@@ -7038,6 +7038,7 @@ div.btl-buttonsubmit{
     background-image: url(../images/reportname.jpg);
     padding-left: 21px;
     border: none;
+    background-position: -1px 0px;
 }
 #report-name:focus{
     background-color: #b2d865;
