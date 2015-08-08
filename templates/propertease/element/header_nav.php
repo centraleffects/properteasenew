@@ -3,13 +3,14 @@
  if($status < 1){
  	/*public*/
  	?>
- 	<div class="pull-left"><jdoc:include type="modules" name="topmenu" style="custom"/></div>
+ 	
      <?php 
       if ($this->countModules( 'Login' )) { ?>  
-        <div class="bt_login pull-left" id="loginbtn">  
+        <div class="bt_login pull-right" id="loginbtn">  
          		<jdoc:include type="modules" name="Login"/>  
         </div>  
-     <?php } ?>  
+     <?php } ?> 
+     <div class="pull-right"><jdoc:include type="modules" name="topmenu" style="custom"/></div> 
  	<?php
 
  }else{
@@ -47,8 +48,11 @@
                   <span class="caret"></span>
               </a>
               <?php $returnURL = base64_encode(JURI::root() . ""); ?>
-              <ul class="dropdown-menu">
-                <li><a href="<?php echo JURI::root(); ?>my-account.html" targer="_blank">My Account</a>
+              <ul class="dropdown-menu" style="text-align:right;">
+                <li><a href="<?php echo JURI::root(); ?>my-account.html" >My Account</a>
+                <li><a href="<?php echo JURI::root(); ?>my-account.html#upgrade-page" target="_self">Plans / Billing</a>
+                <li><a href="<?php echo JURI::root(); ?>index.php?option=com_fss&view=ticket" >Tickets</a>
+                <li><a href="<?php echo JURI::root(); ?>support.html" >Resources</a>
                 <li>
                     <a href="<?php echo JURI::root(); ?>index.php?option=com_users&task=user.logout&<?php echo JSession::getFormToken(); ?>=1&return=<?php echo $returnURL; ?>">
                     Logout

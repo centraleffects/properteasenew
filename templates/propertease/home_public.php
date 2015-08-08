@@ -22,7 +22,26 @@
   <script type="text/javascript">  
  jQuery(window).on('load', function() {  
                      new JCaption('img.caption');  
-                });  
+                }); 
+				
+
+jQuery(function() {
+  jQuery('ul.nav-pills li a').click(function() {
+	 
+	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+	  var target = jQuery(this.hash);
+	  target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
+	  if (target.length) {
+		jQuery('html,body').animate({
+		  scrollTop: target.offset().top
+		}, 1000);
+		return false;
+	  }
+	}
+  });
+});
+	
+	
   </script>  
   <script type="text/javascript">  
    (function() {  
@@ -126,7 +145,7 @@
                 <div class="moduletablebenefits">  
  <div class="custombenefits">  
       <div class="container">  
- <h3>Benefits For You</h3>  
+ <h3 id="benefits">Benefits For You</h3>  
  <div class="row first-row">  
  <div style="visibility: hidden; animation-delay: 0.1s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.1s"><a class="benefit-item " href="#"> Architects <i style="font-size: 0;">icon</i> </a></div>  
  <div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.2s"><a class="benefit-item Developers" href="#"> Developers <i style="font-size: 0;">icon</i></a></div>  
@@ -374,7 +393,7 @@
                           <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12">  
                                          <div class="t3-module module footer-menu " id="Mod103"><div class="module-inner"><div class="module-ct"><ul class="nav nav-pills nav-stacked ">  
  <li class="item-140 divider"><span class="separator">Copyright 2015</span>  
- </li><li class="item-141"><a href="<?php echo $mainURL; ?>about-propertease.html">About PropertEASE</a></li><li class="item-142"><a href="<?php echo $mainURL; ?>conditions-of-use.html">Conditions of Use</a></li></ul>  
+ </li><li class="item-141"><a href="http://dev.dusted.com.au/propertease0724/">About PropertEASE</a></li><li class="item-142"><a href="http://dev.dusted.com.au/propertease0724/conditions-of-use.html">Conditions of Use</a></li></ul>  
  </div></div></div>  
                                     </div>  
                           <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12">  

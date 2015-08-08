@@ -113,8 +113,8 @@ defined('_JEXEC') or die('Restricted access');
               
 				<div class="form-group">
 				<div class="radio">
-                <label style="padding-left: 0px;"> <input id="btl-checkbox-remember"  type="checkbox" name="remember"
-							value="yes" class="checkbox-circle" />Remember me</label>
+                <input id="btl-checkbox-remember"  type="checkbox" name="remember" value="yes" style="margin-top: -5px;" />
+                <label style="padding-left: 0px; ">Remember me</label>
 							<?php #echo JText::_('BT_REMEMBER_ME'); hide to replace the wording ?> <!-- <a href="#">Forgot?</a> -->
 					<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">Forgot?<?php #echo JText::_('BT_FORGOT_YOUR_PASSWORD'); ?></a>
 				</div>
