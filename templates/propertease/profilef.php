@@ -479,6 +479,7 @@ var precinctnames=['.implode(',',$precinctnames).'];';
 	}
 	public function profilegetformjs() {
 		return profilef::profilegetcatdata()."
+var $ = jQuery.noConflict();
 var refw=document.getElementById('refw');
 var statew=document.getElementById('statew');
 var statedd=document.getElementById('state');
@@ -495,50 +496,69 @@ var plandd=document.getElementById('plan');
 var submitw=document.getElementById('submitw');
 var videoins=document.getElementById('videoins');
 var helpins=document.getElementById('helpins');
+
+var refwj=$('#refw');
+var statewj=$('#statew');
+var stateddj=$('#state');
+var councilwj=$('#councilw');
+var councilddj=$('#council');
+var schemewj=$('#schemew');
+var schemeddj=$('#scheme');
+var zonewj=$('#zonew');
+var zoneddj=$('#zone');
+var overlayswj=$('#overlaysw');
+var overlaysddj=$('#overlays');
+var planwj=$('#planw');
+var planddj=$('#plan');
+var submitwj=$('#submitw');
+var videoinsj=$('#videoins');
+var helpinsj=$('#helpins');
+
 var cansubmit=false;
+
 function show_ref() {
-	refw.style.display='block';
+	$('#refw').css('display','block');
 }
 function hide_state() {
-	statew.style.display='none';
+	statewj.css('display','none');
 	hide_council();
 }
 function show_state() {
-	statew.style.display='block';
+	statewj.css('display','block');
 }
 function hide_council() {
-	councilw.style.display='none';
+	councilwj.css('display','none');
 	hide_scheme();
 }
 function show_council() {
-	councilw.style.display='block';
+	councilwj.css('display','block');
 }
 function hide_scheme() {
-	schemew.style.display='none';
+	schemewj.css('display','none');
 	hide_restriction();
 }
 function show_scheme() {
-	schemew.style.display='block';
+	schemewj.css('display','block');
 }
 function hide_restriction() {
-	zonew.style.display='none';
-	overlaysw.style.display='none';
-	planw.style.display='none';
+	zonewj.css('display','none');
+	overlayswj.css('display','none');
+	planwj.css('display','none');
 	hide_submit();
 }
 function show_restriction() {
-	zonew.style.display='block';
-	overlaysw.style.display='block';
-	planw.style.display='block';
+	zonewj.css('display','block');
+	overlayswj.css('display','block');
+	planw.stylej.css('display','block');
 }
 function hide_submit() {
-	submitw.style.display='none';
-	submitw.innerHTML='&nbsp;';
+	submitwj.css('display','none');
+	submitwj.html(' ');
 	cansubmit=false;
 }
 function show_submit() {
-	submitw.innerHTML='<input type=\"submit\" value=\"Submit\">';
-	submitw.style.display='block';
+	submitwj.html('<input type=\"submit\" value=\"Submit\">');
+	submitwj.css('display','block');
 	cansubmit=true;
 }
 function execute_submit() {
@@ -594,7 +614,8 @@ function get_state() {
 	show_state();
 }
 function get_council() {
-	var ddval=Number.parseInt(statedd.options[statedd.selectedIndex].value+'');
+	var ddval=jQuery('#state').val();
+	
 	var i=0;
 	var c=0;
 	c=catlevels[1].length;
@@ -624,7 +645,7 @@ function get_council() {
 	}
 }
 function get_scheme() {
-	var ddval=Number.parseInt(councildd.options[councildd.selectedIndex].value+'');
+	var ddval=jQuery('#council').val();
 	var i=0;
 	var c=0;
 	var tlink='';
@@ -636,13 +657,20 @@ function get_scheme() {
 		 .append($('<option></option>')
          .attr('value',' - ')
          .text('Select Regional Council')); 
+
+	$('#zonebody').empty().append(
+		$('<div class=\"videoins\">').append($('#videoins').html()),
+		$('<div class=\"helpins\">').append($('#helpins').html()),
+		$('<div class=\"clearfix\">')
+	);
 	if(ddval>0) {
 		c=catlevels[1].length;
 		if(videoins) {
 			while(i<c) {
 				if(catlevels[1][i]==ddval) {
 					if(councilvideos[i]) {
-						videoins.innerHTML='<h3>Need Help Finding Your Zone?</h3><div class=\"videowrapper\"><div class=\"videoheight\"></div><iframe width=\"100%\" height=\"315\" src=\"https://www.youtube.com/embed/'+councilvideos[i]+'\" frameborder=\"0\" allowfullscreen></iframe></div>';
+						/*videoins.innerHTML='<h3>Need Help Finding Your Zone?</h3><div class=\"videowrapper\"><div class=\"videoheight\"></div><iframe width=\"100%\" height=\"315\" src=\"https://www.youtube.com/embed/'+councilvideos[i]+'\" frameborder=\"0\" allowfullscreen></iframe></div>';*/
+						jQuery('.videoins').html('<h3>Need Help Finding Your Zone?</h3><div class=\"videowrapper\"><div class=\"videoheight\"></div><iframe width=\"100%\" height=\"315\" src=\"https://www.youtube.com/embed/'+councilvideos[i]+'\" frameborder=\"0\" allowfullscreen></iframe></div>');
 						i=c;
 					}
 				}
@@ -663,7 +691,8 @@ function get_scheme() {
 							tlink='http://'+tlinklab;
 						}
 						tlink+='/';
-						helpins.innerHTML='<h3>How to find your property information for '+catnames[1][i]+':</h3><ul><li>Go to <a href=\"'+tlink+'\" target=\"_blank\">'+tlinklab+'</a>;</li><li>'+councilhelp[i].split('|').join('</li><li>')+'</li><li>Enter this information into the PropertEASE dropdown box selections;</li><li>Click \\'Submit\\'</li><li>Print report.</li></ul>';
+						//helpins.innerHTML='<h3>How to find your property information for '+catnames[1][i]+':</h3><ul><li>Go to <a href=\"'+tlink+'\" target=\"_blank\">'+tlinklab+'</a>;</li><li>'+councilhelp[i].split('|').join('</li><li>')+'</li><li>Enter this information into the PropertEASE dropdown box selections;</li><li>Click \\'Submit\\'</li><li>Print report.</li></ul>';
+						jQuery('.helpins').html('<h3>How to find your property information for '+catnames[1][i]+':</h3><ul><li>Go to <a href=\"'+tlink+'\" target=\"_blank\">'+tlinklab+'</a>;</li><li>'+councilhelp[i].split('|').join('</li><li>')+'</li><li>Enter this information into the PropertEASE dropdown box selections;</li><li>Click \\'Submit\\'</li><li>Print report.</li></ul>');
 						i=c;
 					}
 				}
@@ -693,7 +722,7 @@ function get_scheme() {
 	}
 }
 function get_restriction() {
-	var ddval=Number.parseInt(schemedd.options[schemedd.selectedIndex].value+'');
+	var ddval=jQuery('#scheme').val();
 	var foundindex=0;
 	var i=0;
 	var u=0;
@@ -781,7 +810,7 @@ function get_restriction() {
 	}
 }
 function get_submit() {
-	var ddval=Number.parseInt(zonedd.options[zonedd.selectedIndex].value+'');
+	var ddval=jQuery('#zone').val();
 	if(ddval>0) {
 		show_submit();
 	} else {
@@ -790,6 +819,52 @@ function get_submit() {
 }
 show_ref();
 get_state();
+
+jQuery(document).ready(function($){
+	$('.state-n').change(function(){
+		$('#state').val($(this).val());
+		get_council();
+		$('.step-process ul li:nth-child(2)').addClass('active');
+		$(this).parent('span').parent('a').addClass('filled-step');
+	});
+	$('.council-n').change(function(){
+		$('#council').val($(this).val());
+		get_scheme();
+		$('.step-process ul li:nth-child(3)').addClass('active');
+		$(this).parent('span').parent('a').addClass('filled-step');
+	});
+	$('.scheme-n').change(function(){
+		$('#scheme').val($(this).val());
+		get_restriction();
+		$('.step-process ul li:nth-child(4)').addClass('active');
+		$('#collapsethree').addClass('filled-step');
+		console.log('scheme');
+	});
+	$('.zone-n').change(function(){
+		$('#zone').val($(this).val());
+		get_submit();
+		$('.step-process ul li:nth-child(5)').addClass('active');
+		$('#headingFour').find('a').addClass('filled-step');
+	});
+	$('.overlays-n select').change(function(){
+
+		$('#overlays').val($(this).val());
+		$('.step-process ul li:nth-child(6)').addClass('active');
+		$('#headingFive').find('a').addClass('filled-step');
+	});
+	$('.precinct-n').change(function(){
+		$('#plan').val($(this).val());
+		$('.step-process ul li:nth-child(7)').addClass('active');
+		$(this).parent('span').parent('a').addClass('filled-step');
+		$('.btn-sbm').addClass('btn-active-submit');
+	});
+	$('.btn-sbm').click(function(){
+		$('#submitw input').trigger('click');
+	});
+	$('#getpdf').click(function(){
+		$('#downloadpdf').trigger('click');
+	});
+});
 ";
 	}
 	public function profilegetpdfbutton($sr) {
@@ -799,47 +874,6 @@ get_state();
 		<input name="sr" type="hidden" value="'.intval($sr).'">
 		</form>';
 	}
-	/*public function profilegetformhtml() {
-		return '<form action="" id="ptsearch" method="post" class="ptsearch" onsubmit="return execute_submit();">
-<h2>New Search</h2>
-<input name="pgmm" type="hidden" value="1">
-<p id="refw" style="display:none;">
-	<label><strong>Search reference:</strong></label>
-	<input name="reference" type="text" value="">
-</p>
-<p id="statew" style="display:none;">
-	<label><strong>Select State:</strong></label>
-	<select id="state" name="state" onchange="get_council();">
-	</select>
-</p>
-<p id="councilw" style="display:none;">
-	<label><strong>Select Local Council:</strong></label>
-	<select id="council" name="council" onchange="get_scheme();">
-	</select>
-</p>
-<p id="schemew" style="display:none;">
-	<label><strong>Select Planning Scheme:</strong></label>
-	<select id="scheme" name="scheme" onchange="get_restriction();">
-	</select>
-</p>
-<p id="zonew" style="display:none;">
-	<label><strong>Select Zone:</strong></label>
-	<select id="zone" name="zone" onchange="get_submit();">
-	</select>
-</p>
-<p id="overlaysw" style="display:none;">
-	<label><strong>Select Overlays:</strong></label>
-	<select size="8" id="overlays" name="overlays[]" multiple="multiple">
-	</select><br><span class="small">Hold the CTRL or Cmd key to select multiple options.</span>
-</p>
-<p id="planw" style="display:none;">
-	<label><strong>Select Neighbourhood Plan + Precinct:</strong></label>
-	<select id="plan" name="plan">
-	</select>
-</p>
-<p id="submitw" style="display:none;">&nbsp;</p>
-</form>';
-	}*/
 
 
 	public function profilegetformhtml() {
