@@ -218,6 +218,7 @@ jQuery(function() {
                 </div>
              </div><!-- tab pane -->
 
+
              <div id="town-planners" class="tab-pane fade in"><!-- tab pane -->
                 <h1 style="font-size: 37px;">Benefits for Town Planners</h1>
                 <p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when discussing a property with a client.</p>
@@ -242,24 +243,30 @@ jQuery(function() {
                 <p>One of our town planning clients saves up to 2 hours a day between 3 staff by utilizing the PropertEASE service.</p>
              </div><!-- tab pane -->
              
-             
+          The PropertEASE online system can provide you with instant answers when discussing a property with a prospective seller or purchaser. A month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system. PropertEASE provides:
+
+    Easy instant information (using our online resources);
+    A simple overview of a properties development potential to give you an informed sales pitch and the upper hand in negotiations;
+    Ensures that your asking price coincides with a properties potential; I.e. get the best sales price with the correct information;
+    Saves hours a day waiting on hold to Council or town planners to get the same answers; and
+    Is mobile friendly (i.e. use it on site).
+   
              <div id="real-estate-agents" class="tab-pane fade in"><!-- tab pane -->
                 <h1 style="font-size: 37px;">Benefits for Real Estate Agents</h1>
-                <p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when looking at a property for a prospective client.</p>
+                <p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when discussing a property with a prospective seller or purchaser.</p>
                 <p style="font-size: 19px;">A month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system.
                     <br>
                     <br>
                 </p>
-                <h4 style="font-size: 23px;"><strong>PropertEASE can assist architects in many ways:</strong></h4>
+                <h4 style="font-size: 23px;"><strong>PropertEASE provides:</strong></h4>
                 <div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="<?php echo $mainURL; ?>images/real-estate-agents-ico.png" alt=""> </a>
                     <div class="media-body">
                         <ul class="green-list">
-                            <li>Getting instant and accurate information making the system extremely time (and money) efficient;</li>
-                            <li>Allows the user to provide a client with instant detailed advice regarding a property;</li>
-                            <li>Is mobile friendly (i.e. use it on site);</li>
-                            <li>Will allow any assistant or untrained employee to quickly obtain information;</li>
+                            <li>Easy instant information (using our online resources);</li>
+                            <li>A simple overview of a properties development potential to give you an informed sales pitch and the upper hand in negotiations;</li>
+                            <li>Ensures that your asking price coincides with a properties potential; I.e. get the best sales price with the correct information;</li>
                             <li>Saves hours a day waiting on hold to Council or town planners to get the same answers; and</li>
-                            <li>Avoid spending hours reading through planning schemes.</li>
+                            <li>Is mobile friendly (i.e. use it on site).</li>
                         </ul>
                     </div>
                     
