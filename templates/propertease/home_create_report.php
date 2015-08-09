@@ -14,7 +14,7 @@
             </div>
             <div class="panel panel-default">
                 <div id="headingThree" class="panel-heading">
-                    <h4 class="panel-title"><a class="collapsed" href="#" onclick="return false;" data-parent="#accordion" data-toggle="collapse"><span class="first blk">Planning Scheme</span><span><select class="second med scheme-n"><option>Select Scheme</option></select></span></a></h4>
+                    <h4 class="panel-title"><a  id="collapsethree" href="javascript:void(0)"><span class="first blk">Planning Scheme</span><span><select class="second med scheme-n"><option>Select Scheme</option></select></span></a></h4>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -22,7 +22,7 @@
                     <h4 class="panel-title"><a class="collapsed" href="#collapseFour" data-parent="#accordion" data-toggle="collapse"><span class="first blk">Zone</span><span><select class="second med zone-n"><option>Select Zone</option></select></span></a></h4>
                 </div>
                 <div id="collapseFour" class="panel-collapse collapse" style="height: 0px;">
-                    <div class="panel-body"></div>
+                    <div class="panel-body" id="zonebody"> </div>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -30,7 +30,7 @@
                     <h4 class="panel-title"><a class="collapsed" href="#collapseFive" data-parent="#accordion" data-toggle="collapse"><span class="first blk">Overlays</span><span class="second med">Select Overlays</span></a></h4>
                 </div>
                 <div id="collapseFive" class="panel-collapse collapse" style="height: 0px;">
-                    <div class="panel-body overlays-n"><select multiple="multiple"></select><p class="bg-info">Hold the CTRL or Cmd key to select multiple options.</p></div>
+                    <div class="panel-body overlays-n"><select multiple="multiple"></select><p class="overlays-help">Hold the <strong>CTRL</strong> or <strong>Cmd</strong> key to select multiple options.</p></div>
                 </div>
             </div>
             <div class="panel panel-default">
