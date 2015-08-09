@@ -861,9 +861,7 @@ jQuery(document).ready(function($){
 	$('.btn-sbm').click(function(){
 		$('#submitw input').trigger('click');
 	});
-	$('#getpdf').click(function(){
-		$('#downloadpdf').trigger('click');
-	});
+	
 });
 ";
 	}
@@ -1609,7 +1607,7 @@ We further note the following acronyms may be used throughout this website: GFA 
 */
 		
 		$newreport = '<div class="row">
-		<h3><i class="green">Welcome</i>, dear<i class="ico-logo-small">logo</i>member. <span class="light">General Information about the browser based app.</span></h3>
+		<h3 class="orange-arrow-down"><span class="light">Below, you can </span>review<span class="light">,</span> <i class="green">downlod</i> <span class="light">your</span> last report</h3>
 		<div class="col-sm-12">
 		<ul class="nav nav-tabs">
 		<li class="active"><a href="#overview" data-toggle="tab">Overview </a></li>
