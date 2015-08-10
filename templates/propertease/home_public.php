@@ -243,6 +243,8 @@ jQuery(function() {
                 <p>One of our town planning clients saves up to 2 hours a day between 3 staff by utilizing the PropertEASE service.</p>
              </div><!-- tab pane -->
              
+        
+   
              <div id="real-estate-agents" class="tab-pane fade in"><!-- tab pane -->
                 <h1 style="font-size: 37px;">Benefits for Real Estate Agents</h1>
                 <p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when discussing a property with a prospective seller or purchaser.</p>
