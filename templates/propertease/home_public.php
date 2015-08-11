@@ -26,7 +26,7 @@
 				
 
 jQuery(function() {
-  jQuery('ul.nav-pills li a').click(function() {
+  jQuery('a#take-the-tour').click(function() {
 	 
 	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 	  var target = jQuery(this.hash);
@@ -124,7 +124,7 @@ jQuery(function() {
       <div class="ls-container ls-glass" id="layerslider" style="width: 100%; height: 700px; visibility: visible;"><div class="ls-webkit-hack"></div>  
  <div style="background-color: transparent; width: 1349px; height: 700px;" class="ls-inner"><div class="ls-layer ls-animating" style="width: 1349px; height: 700px; visibility: visible; display: none; left: auto; right: auto; top: auto; bottom: auto;">  
  <img style="width: 1500px; height: 768px; margin-left: -750px; margin-top: -384px;" class="ls-bg" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/images/slideshow1.png" alt=""><div class="ls-s1 heading" style="left: 230px; top: 130px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;"><span class="med">Before buying </span>that property,<span class="med"> find out</span></div><div class="ls-s1 heading" style="left: 230px; top: 170px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">what <span class="med">you can or can`t do </span>with it</div><p class="ls-s3 text" style="left: 960px; top: 130px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">A once off search is<span class="med"> just $59</span></p><p class="ls-s3 text" style="left: 838px; top: 160px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;"><em>(instant answers but some research involved)</em></p><p class="ls-s3 text" style="left: 800px; top: 190px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">with<span class="med"> monthly or<span class="med"> yearly</span> subscriptions also offered.</span></p><img class="ls-s5" style="left: 300px; top: 253px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;" src="<?php echo $mainURL; ?>images/banner.png" alt=""><div class="ls-s6" style="left: 956px; top: 300px; opacity: 1; transform: rotate(0deg) scale(1, 1); display: block; visibility: visible; margin-left: 0px; margin-top: 0px;">  
- <p><a class="btn btn-default btn-warning">Take the <span class="med">Tour</span></a></p>  
+ <p><a class="btn btn-default btn-warning" href="#benefits" id="take-the-tour">Take the <span class="med">Tour</span></a></p>  
  <p><a class="btn btn-default btn-primary ">Try it <span class="med">NOW</span></a></p>  
  </div>  
  </div><div class="ls-circle-timer"><div class="ls-ct-left"><div style="transform: rotate(0deg);" class="ls-ct-rotate"><div class="ls-ct-hider"><div class="ls-ct-half"></div></div></div></div><div class="ls-ct-right"><div style="transform: rotate(0deg);" class="ls-ct-rotate"><div class="ls-ct-hider"><div class="ls-ct-half"></div></div></div></div><div class="ls-ct-center"></div></div></div>  
@@ -142,38 +142,184 @@ jQuery(function() {
  Coast...</p>  
  </center></div></div>  
            </div>  
+<!--  start   of tabs --> 
+
+
+
                 <div class="moduletablebenefits">  
- <div class="custombenefits">  
-      <div class="container">  
- <h3 id="benefits">Benefits For You</h3>  
- <div class="row first-row">  
- <div style="visibility: hidden; animation-delay: 0.1s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.1s"><a class="benefit-item " href="#"> Architects <i style="font-size: 0;">icon</i> </a></div>  
- <div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.2s"><a class="benefit-item Developers" href="#"> Developers <i style="font-size: 0;">icon</i></a></div>  
- <div style="visibility: hidden; animation-delay: 0.3s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.3s"><a class="benefit-item TownPlanners" href="#"> Town Planners <i style="font-size: 0;">icon</i></a></div>  
- <div style="visibility: hidden; animation-delay: 0.1s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInRight" data-wow-delay="0.1s"><a class="benefit-item RealEstate" href="#"> Real Estate Agents <i style="font-size: 0;">icon</i></a></div>  
- <div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInRight" data-wow-delay="0.2s"><a class="benefit-item Investors" href="#"> Investors <i style="font-size: 0;">icon</i></a></div>  
- <div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInRight" data-wow-delay="0.2s"><a class="benefit-item Builders" href="#"> Builders <i style="font-size: 0;">icon</i> </a></div>  
- </div>  
- <div style="visibility: hidden; animation-name: none;" class="wow fadeInDown">  
- <h1 style="font-size: 37px;">Benefits for Architects</h1>  
- <p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when looking at a property for a prospective client.</p>  
- <p style="font-size: 19px;">A month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system. <br><br></p>  
- <h4 style="font-size: 23px;"><strong>PropertEASE can assist architects in many ways:</strong></h4>  
- <div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="<?php echo $mainURL; ?>images/benefits-img.png" alt=""> </a>  
- <div class="media-body">  
- <ul class="green-list">  
- <li>Getting instant and accurate information making the system extremely time (and money) efficient;</li>  
- <li>Allows the user to provide a client with instant detailed advice regarding a property;</li>  
- <li>Is mobile friendly (i.e. use it on site);</li>  
- <li>Will allow any assistant or untrained employee to quickly obtain information;</li>  
- <li>Saves hours a day waiting on hold to Council or town planners to get the same answers; and</li>  
- <li>Avoid spending hours reading through planning schemes.</li>  
- </ul>  
- </div>  
- </div>  
- </div>  
- </div></div>  
-           </div>  
+<div class="custombenefits">
+    <div class="container">
+        <h3 id="benefits">Benefits For You</h3>
+        <div class="row first-row nav nav-tabs">
+       
+           <div style="visibility: hidden; animation-delay: 0.1s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.1s">
+           		<a data-toggle="tab" class="benefit-item active" href="#architects"> Architects <i style="font-size: 0;">icon</i> </a>
+           </div>
+           <div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.2s">
+           		<a data-toggle="tab" class="benefit-item Developers" href="#developers"> Developers <i style="font-size: 0;">icon</i></a>
+           </div>
+           <div style="visibility: hidden; animation-delay: 0.3s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInLeft" data-wow-delay="0.3s">
+           		<a data-toggle="tab" class="benefit-item TownPlanners" href="#town-planners"> Town Planners <i style="font-size: 0;">icon</i></a>
+           </div>
+           <div style="visibility: hidden; animation-delay: 0.1s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInRight" data-wow-delay="0.1s">
+           		<a data-toggle="tab" class="benefit-item RealEstate" href="#real-estate-agents"> Real Estate Agents <i style="font-size: 0;">icon</i></a>
+           </div>
+           <div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInRight" data-wow-delay="0.2s">
+           		<a data-toggle="tab" class="benefit-item Investors" href="#investors"> Investors <i style="font-size: 0;">icon</i></a>
+           </div>
+           <div style="visibility: hidden; animation-delay: 0.2s; animation-name: none;" class="col-md-2 col-xs-12 wow slideInRight" data-wow-delay="0.2s">
+           		<a data-toggle="tab" class="benefit-item Builders" href="#builders"> Builders <i style="font-size: 0;">icon</i> </a>
+           </div>
+        </div>
+        
+        <div style="visibility: hidden; animation-name: none;" class="wow fadeInDown tab-content">
+        	<div id="architects" class="tab-pane fade in active"><!-- tab pane -->
+                <h1 style="font-size: 37px;">Benefits for Architects</h1>
+                <p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when looking at a property for a prospective client.</p>
+                <p style="font-size: 19px;">A month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system.
+                    <br>
+                    <br>
+                </p>
+                <h4 style="font-size: 23px;"><strong>PropertEASE can assist architects in many ways:</strong></h4>
+                <div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="<?php echo $mainURL; ?>images/architects-ico.png" alt=""> </a>
+                    <div class="media-body">
+                        <ul class="green-list">
+                            <li>Getting instant and accurate information making the system extremely time (and money) efficient;</li>
+                            <li>Allows the user to provide a client with instant detailed advice regarding a property;</li>
+                            <li>Is mobile friendly (i.e. use it on site);</li>
+                            <li>Will allow any assistant or untrained employee to quickly obtain information;</li>
+                            <li>Saves hours a day waiting on hold to Council or town planners to get the same answers; and</li>
+                            <li>Avoid spending hours reading through planning schemes.</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+             </div><!-- tab pane -->
+             
+             <div id="developers" class="tab-pane fade in"><!-- tab pane -->
+                <h1 style="font-size: 37px;">Benefits for Developers</h1>
+                <p class="med" style="font-size: 20px;">he PropertEASE online system can provide you with instant answers when looking at a potential development site. </p>
+                <p style="font-size: 19px;">A month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system.
+                    <br>
+                    <br>
+                </p>
+                <h4 style="font-size: 23px;"><strong>PropertEASE can assist Developers in many ways:</strong></h4>
+                <div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="<?php echo $mainURL; ?>images/developers-ico.png" alt=""> </a>
+                    <div class="media-body">
+                        <ul class="green-list">
+                            <li>Easy instant answers (using our online resources);</li>
+                            <li>A simple overview of a properties development potential to give you the information to make a quick 'yes' or 'no' answer when purchasing;</li>
+                            <li>Saves hours a day waiting on hold to Council or town planners to get the same answers;</li>
+                            <li>Gives you the upper hand when negotiating with real estate agents; and</li>
+                            <li>Is mobile friendly (i.e. use it on site).</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+             </div><!-- tab pane -->
+
+
+             <div id="town-planners" class="tab-pane fade in"><!-- tab pane -->
+                <h1 style="font-size: 37px;">Benefits for Town Planners</h1>
+                <p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when discussing a property with a client.</p>
+                <p style="font-size: 19px;">A month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system.
+                    <br>
+                    <br>
+                </p>
+                <h4 style="font-size: 23px;"><strong>PropertEASE has a range of advantages for a town planner including:</strong></h4>
+                <div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="<?php echo $mainURL; ?>images/town-planners-ico.png" alt=""> </a>
+                    <div class="media-body">
+                        <ul class="green-list">
+                            <li>Getting instant and accurate information making the system extremely time (and money) efficient;</li>
+                            <li>Allows the user to provide a client with instant detailed advice regarding a property;</li>
+                            <li>Is mobile friendly (i.e. use it on site) to give instant answers to a client;</li>
+                            <li>Will allow any assistant or untrained employee to quickly obtain information;</li>
+                            <li>Avoid spending hours reading through planning schemes; and</li>
+                            <li>Removes the human element (errors) when finding property limitations.</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                <p>One of our town planning clients saves up to 2 hours a day between 3 staff by utilizing the PropertEASE service.</p>
+             </div><!-- tab pane -->
+             
+        
+   
+             <div id="real-estate-agents" class="tab-pane fade in"><!-- tab pane -->
+                <h1 style="font-size: 37px;">Benefits for Real Estate Agents</h1>
+                <p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when discussing a property with a prospective seller or purchaser.</p>
+                <p style="font-size: 19px;">A month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system.
+                    <br>
+                    <br>
+                </p>
+                <h4 style="font-size: 23px;"><strong>PropertEASE provides:</strong></h4>
+                <div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="<?php echo $mainURL; ?>images/real-estate-agents-ico.png" alt=""> </a>
+                    <div class="media-body">
+                        <ul class="green-list">
+                            <li>Easy instant information (using our online resources);</li>
+                            <li>A simple overview of a properties development potential to give you an informed sales pitch and the upper hand in negotiations;</li>
+                            <li>Ensures that your asking price coincides with a properties potential; I.e. get the best sales price with the correct information;</li>
+                            <li>Saves hours a day waiting on hold to Council or town planners to get the same answers; and</li>
+                            <li>Is mobile friendly (i.e. use it on site).</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+             </div><!-- tab pane -->
+           
+             
+             <div id="investors" class="tab-pane fade in"><!-- tab pane -->
+                <h1 style="font-size: 37px;">Benefits for Investors</h1>
+                <p class="med" style="font-size: 20px;">It can take hours to investigate the development potential of a property, PropertEASE can give you answers instantly.</p>
+                <p style="font-size: 19px;">One off reports can be purchased and a month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system.
+                    <br>
+                    <br>
+                </p>
+                <h4 style="font-size: 23px;"><strong>PropertEASE provides:</strong></h4>
+                <div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="<?php echo $mainURL; ?>images/investors-ico.png" alt=""> </a>
+                    <div class="media-body">
+                        <ul class="green-list">
+                            <li>Easy instant information (using our online resources);</li>
+<li>A simple overview of a properties development potential to give you the information to make a quick 'yes' or 'no' answer when purchasing;</li>
+<li>Gives you the current development potential of a property. Could you subdivide? Could you do units? Could you build a secondary dwelling?</li>
+<li>Saves hours a day waiting on hold to Council or town planners to get the same answers;</li>
+<li>Gives you the upper hand when negotiating with real estate agents; and</li>
+<li>Is mobile friendly (i.e. use it on site).</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+             </div><!-- tab pane -->
+
+             <div id="builders" class="tab-pane fade in"><!-- tab pane -->
+                <h1 style="font-size: 37px;">Benefits for Builders</h1>
+                <p class="med" style="font-size: 20px;">The PropertEASE online system can provide you with instant answers when looking at a property for a prospective client.</p>
+                <p style="font-size: 19px;">A month to month or yearly unlimited subscription can ensure that you get the best value for money to utilize the system.
+                    <br>
+                    <br>
+                </p>
+                <h4 style="font-size: 23px;"><strong>The PropertEASE system is:</strong></h4>
+                <div class="medias"><a class="pull-right img-c" href="#"> <img class="media-object" src="<?php echo $mainURL; ?>images/builders-ico.png" alt=""> </a>
+                    <div class="media-body">
+                        <ul class="green-list">
+                            <li>Very easy to use (with our online resources);</li>
+                            <li>Gives a quick overview of the development potential of a property before meeting with a client/owner;</li>
+                            <li>Saves hours a day waiting on hold to Council or town planners to get the same answers;</li>
+                            <li>Assists in engaging discussion regarding town planning matters with clients/owners and</li>
+                            <li>Is mobile friendly (i.e. use it on site).</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+             </div><!-- tab pane -->
+            
+        </div><!-- tab content -->
+        
+    </div>
+</div>
+</div>
+
+<!--  end o f tabs -->  
                 <div class="moduletable green-bg our-process">  
  <div class="custom green-bg our-process">  
       <div class="container">  

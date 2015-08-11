@@ -90,12 +90,11 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
   $hasr=($this->countModules('right')?true:false);
 ?>
  <!DOCTYPE html>  
- <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" slick-uniqueid="3" dir="ltr" class="com_content view-article itemid-227 resource j34 mm-hover no-touch <?php if(intval($_GET['sr'])>0){ echo "reports"; } ?>" lang="en-gb">
- <head>  
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" slick-uniqueid="3" dir="ltr" class="com_content view-article itemid-227 resource j34 mm-hover no-touch <?php if(intval($_GET['sr'])>0){ echo "reports"; } ?>" lang="en-gb"><head>  
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
   <meta name="HandheldFriendly" content="true">  
   <meta name="apple-mobile-web-app-capable" content="YES">   
-  <jdoc:include type="head" /> 
+ <!-- <jdoc:include type="head" /> -->
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap.css" type="text/css">  
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/font-awesome.css" type="text/css">  
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/animate.css" type="text/css">  

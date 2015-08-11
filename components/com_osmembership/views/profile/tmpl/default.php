@@ -19,8 +19,22 @@ $fields = $this->form->getFields();
 <script type="text/javascript">
 	var siteUrl = '<?php echo OSMembershipHelper::getSiteUrl();  ?>';
 	
-	jQuery(document).ready(function(){
+jQuery(document).ready(function(){
 		jQuery( "div#osm-profile-page input" ).addClass( "form-control" );
+		
+		
+		var hash = document.location.hash;
+		var prefix = "";
+		if (hash) {
+			jQuery('.nav-tabs a[href='+hash.replace(prefix,"")+']').tab('show');
+		} 
+		
+		// Change hash for page-reload
+		jQuery('.nav-tabs a').on('shown.bs.tab', function (e) {
+			window.location.hash = e.target.hash.replace("#", "#" + prefix);
+		});
+		
+		
 	});
 	Dropzone.options.myAwesomeDropzone = {
   	init: function() {
@@ -29,6 +43,7 @@ $fields = $this->form->getFields();
 		
 		});
   	}
+	
 };
 
 </script>
