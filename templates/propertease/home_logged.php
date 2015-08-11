@@ -126,7 +126,7 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
   <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/mootools-more.js" type="text/javascript"></script>
   <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/bootstrap-select.min.js" type="text/javascript"></script>  
   <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/plugins.js" type="text/javascript"></script>  
-    
+   <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/script.js" type="text/javascript"></script>   
  </head>  
  <body class="page_bg">  
    <div class="t3-wrapper">  
@@ -476,7 +476,6 @@ if ($menu->getActive() == $menu->getDefault() and intval($_GET['sr'])==0) {
  <!-- //FOOT NAVIGATION -->  
  </footer>  
  </div>  
- <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/script.js" type="text/javascript"></script>  
  </body>
  </html>  
 <?php } ?>

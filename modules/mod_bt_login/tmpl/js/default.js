@@ -1,4 +1,3 @@
-// default.js
 jQuery.noConflict();
 if(typeof(BTLJ)=='undefined') var BTLJ = jQuery;
 if(typeof(btTimeOut)=='undefined') var btTimeOut;
@@ -27,55 +26,47 @@ BTLJ(document).ready(function() {
 		})
 	}
 	
-/*	BTLJ(btlOpt.LOGIN_TAGS).addClass("btl-modal");
+	BTLJ(btlOpt.LOGIN_TAGS).addClass("btl-modal");
 	if(btlOpt.REGISTER_TAGS != ''){
 		BTLJ(btlOpt.REGISTER_TAGS).addClass("btl-modal");
-	}*/
-	if(!typeof(btlOpt)=='undefined'){// added this condition by fred: btlOpt type of error 
-   
- 
-		// Login event
-		var elements = '#btl-panel-login';
-		if (btlOpt.LOGIN_TAGS) elements += ', ' + btlOpt.LOGIN_TAGS;
-		if (btlOpt.MOUSE_EVENT =='click'){ 
-			BTLJ(elements).click(function (event) {
-					showLoginForm();
-					event.preventDefault();
-			});	
-		}else{
-			BTLJ(elements).hover(function () {
-					showLoginForm();
-			},function(){});
-		}
-	
-	
+	}
+
+	// Login event
+	var elements = '#btl-panel-login';
+	if (btlOpt.LOGIN_TAGS) elements += ', ' + btlOpt.LOGIN_TAGS;
+	if (btlOpt.MOUSE_EVENT =='click'){ 
+		BTLJ(elements).click(function (event) {
+				showLoginForm();
+				event.preventDefault();
+		});	
+	}else{
+		BTLJ(elements).hover(function () {
+				showLoginForm();
+		},function(){});
+	}
 
 	// Registration/Profile event
-		elements = '#btl-panel-registration';
-		if (btlOpt.REGISTER_TAGS) elements += ', ' + btlOpt.REGISTER_TAGS;
-		if (btlOpt.MOUSE_EVENT =='click'){ 
-			BTLJ(elements).click(function (event) {
-				showRegistrationForm();
-				event.preventDefault();
-			});	
-			BTLJ("#btl-panel-profile").click(function(event){
+	elements = '#btl-panel-registration';
+	if (btlOpt.REGISTER_TAGS) elements += ', ' + btlOpt.REGISTER_TAGS;
+	if (btlOpt.MOUSE_EVENT =='click'){ 
+		BTLJ(elements).click(function (event) {
+			showRegistrationForm();
+			event.preventDefault();
+		});	
+		BTLJ("#btl-panel-profile").click(function(event){
+			showProfile();
+			event.preventDefault();
+		});
+	}else{
+		BTLJ(elements).hover(function () {
+				if(!BTLJ("#btl-integrated").length){
+					showRegistrationForm();
+				}
+		},function(){});
+		BTLJ("#btl-panel-profile").hover(function () {
 				showProfile();
-				event.preventDefault();
-			});
-		}else{
-			BTLJ(elements).hover(function () {
-					if(!BTLJ("#btl-integrated").length){
-						showRegistrationForm();
-					}
-			},function(){});
-			BTLJ("#btl-panel-profile").hover(function () {
-					showProfile();
-			},function(){});
-		}
-		
-	}; // end of added code
-	
-	
+		},function(){});
+	}
 	BTLJ('#register-link a').click(function (event) {
 			if(BTLJ('.btl-modal').length){
 				BTLJ.modal.close();setTimeout("showRegistrationForm();",1000);
@@ -125,7 +116,7 @@ BTLJ(document).ready(function() {
 });
 
 function setFPosition(){
-	/*if(btlOpt.ALIGN == "center"){
+	if(btlOpt.ALIGN == "center"){
 		BTLJ("#btl-content > div").each(function(){
 			var panelid = "#"+this.id.replace("content","panel");
 			var left = BTLJ(panelid).offset().left + BTLJ(panelid).width()/2 - BTLJ(this).width()/2;
@@ -139,7 +130,7 @@ function setFPosition(){
 			BTLJ("#btl-content > div").css('left',BTLJ('.btl-panel').offset().left);
 		}
 	}	
-	BTLJ("#btl-content > div").css('top',BTLJ(".btl-panel").offset().top+BTLJ(".btl-panel").height()+2);*/	
+	BTLJ("#btl-content > div").css('top',BTLJ(".btl-panel").offset().top+BTLJ(".btl-panel").height()+2);	
 }
 
 // SHOW LOGIN FORM
@@ -147,7 +138,7 @@ function showLoginForm(){
 	BTLJ('.btl-panel span').removeClass("active");
 	var el = '#btl-panel-login';
 	if (btlOpt.LOGIN_TAGS) el += ', ' + btlOpt.LOGIN_TAGS;
-	//BTLJ.modal.close();
+	BTLJ.modal.close();
 	var containerWidth = 0;
 	var containerHeight = 0;
 	containerHeight = 371;
@@ -490,3 +481,4 @@ function showLoginError(notice,reload){
 		setTimeout(function() {window.location.reload();},5000);
 	}
 }
+

@@ -140,6 +140,499 @@ jQuery(document).ready(function(){
 !function($){var F={init:function(m){m.data();var n=m.data('djslider');var o=m.data('animation');m.removeAttr('data-djslider');m.removeAttr('data-animation');var q=$('#djslider'+n.id).css('opacity',0);var r=$('#slider'+n.id).css('position','relative');var t=n.css3=='1'?support('transition'):false;var u=r.children('li');var w=n.slide_size;var x=n.visible_slides;var y=w*u.length;var z=u.length-x;var A=0;var B=o.auto=='1'?1:0;var C=0;var D=false;if(n.slider_type==2){u.css('position','absolute');u.css('top',0);u.css('left',0);r.css('width',w);u.css('opacity',0);u.css('visibility','hidden');$(u[0]).css('opacity',1);$(u[0]).css('visibility','visible');if(t)u.css(t,'opacity '+o.duration+'ms '+o.css3transition)}else if(n.slider_type==1){r.css('top',0);r.css('height',y);if(t)r.css(t,'top '+o.duration+'ms '+o.css3transition)}else{r.css(n.direction,0);r.css('width',y);if(t)r.css(t,n.direction+' '+o.duration+'ms '+o.css3transition)}if(n.show_arrows>0){$('#next'+n.id).on('click',function(){if(n.direction=='right')prevSlide();else nextSlide()});$('#prev'+n.id).on('click',function(){if(n.direction=='right')nextSlide();else prevSlide()})}if(n.show_buttons>0){$('#play'+n.id).on('click',function(){changeNavigation();B=1});$('#pause'+n.id).on('click',function(){changeNavigation();B=0})}m.on('mouseenter',function(){C=1}).on('mouseleave',function(){C=0});m.djswipe(function(a,b){if(b.x<100||b.y>30){return}if(a.x=="left"){if(n.direction=='right')prevSlide();else nextSlide()}else if(a.x=="right"){if(n.direction=='right')nextSlide();else prevSlide()}});if($('#cust-navigation'+n.id).length){var E=$('#cust-navigation'+n.id).find('.load-button');E.each(function(a){var b=$(this);b.on('click',function(e){if(!D&&!b.hasClass('load-button-active')){loadSlide(a)}});if(a>z)b.css('display','none')})}function getSize(a){return{'x':a.width(),'y':a.height()}}function responsive(){var c=m.parent();var d=getSize(c).x;var e=parseInt(q.css('max-width'));var f=getSize(q);var g=f.x;if(g>d){g=d}else if(g<=d&&(!e||g<e)){g=(d>e?e:d)}var h=f.x/f.y;var i=g/h;q.css('width',g);q.css('height',i);if(n.slider_type==2){r.css('width',g);u.css('width',g);u.css('height',i)}else if(n.slider_type==1){var j=parseInt($(u[0]).css('margin-bottom'));w=(i+j)/x;y=u.length*w+u.length;r.css('height',y);u.css('width',g);u.css('height',w-j);r.css('top',-w*A)}else{var j=n.direction=='right'?parseInt($(u[0]).css('margin-left')):parseInt($(u[0]).css('margin-right'));var k=Math.ceil(g/(n.slide_size+j));if(k!=x){x=(k>n.visible_slides?n.visible_slides:k);z=u.length-x;if($('#cust-navigation'+n.id).length){var l=$('#cust-navigation'+n.id).find('.load-button');l.each(function(a){var b=$(this);if(a>z)b.css('display','none');else b.css('display','')})}h=(x*w-j)/f.y;i=g/h;q.css('height',i)}w=(g+j)/x;y=u.length*w+u.length;r.css('width',y);u.css('width',w-j);u.css('height',i);r.css(n.direction,-w*A);if(A>z)loadSlide(z)}if(n.show_buttons>0||n.show_arrows>0){button_pos=$('#navigation'+n.id).position().top;if(button_pos<0){m.css('padding-top',-button_pos);m.css('padding-bottom',0)}else{buttons_height=0;if(n.show_arrows>0){buttons_height=getSize($('#next'+n.id)).y;buttons_height=Math.max(buttons_height,getSize($('#prev'+n.id)).y)}if(n.show_buttons>0){buttons_height=Math.max(buttons_height,getSize($('#play'+n.id)).y);buttons_height=Math.max(buttons_height,getSize($('#pause'+n.id)).y)}padding=button_pos+buttons_height-i;if(padding>0){m.css('padding-top',0);m.css('padding-bottom',padding)}else{m.css('padding-top',0);m.css('padding-bottom',0)}}buttons_margin=parseInt($('#navigation'+n.id).css('margin-left'))+parseInt($('#navigation'+n.id).css('margin-right'));if(buttons_margin<0&&window.getSize().x<getSize($('#navigation'+n.id)).x-buttons_margin){$('#navigation'+n.id).css('margin-left',0);$('#navigation'+n.id).css('margin-right',0)}}}function updateActiveButton(c){if($('#cust-navigation'+n.id).length)E.each(function(a){var b=$(this);b.removeClass('load-button-active');if(a==c)b.addClass('load-button-active')})}function nextSlide(){if(A<z)loadSlide(A+1);else loadSlide(0)}function prevSlide(){if(A>0)loadSlide(A-1);else loadSlide(z)}function loadSlide(a){if(A==a)return;if(n.slider_type==2){if(D)return;D=true;prev_slide=A;A=a;makeFade(prev_slide)}else{A=a;if(n.slider_type==1){if(t){r.css('top',-w*A)}else{r.animate({top:-w*A},o.duration,o.transition)}}else{if(t){r.css(n.direction,-w*A)}else{if(n.direction=='right')r.animate({right:-w*A},o.duration,o.transition);else r.animate({left:-w*A},o.duration,o.transition)}}}updateActiveButton(A)}function makeFade(a){$(u[A]).css('visibility','visible');if(t){$(u[A]).css('opacity',1);$(u[a]).css('opacity',0)}else{$(u[A]).animate({opacity:1},o.duration,o.transition);$(u[a]).animate({opacity:0},o.duration,o.transition)}setTimeout(function(){$(u[a]).css('visibility','hidden');D=false},o.duration)}function changeNavigation(){if(B){$('#pause'+n.id).css('display','none');$('#play'+n.id).css('display','block')}else{$('#play'+n.id).css('display','none');$('#pause'+n.id).css('display','block')}}function slidePlay(){setTimeout(function(){if(B&&!C)nextSlide();slidePlay()},o.delay)}function sliderLoaded(){m.css('background','none');q.css('opacity',1);responsive();if(n.show_buttons>0){play_width=getSize($('#play'+n.id)).x;$('#play'+n.id).css('margin-left',-play_width/2);pause_width=getSize($('#pause'+n.id)).x;$('#pause'+n.id).css('margin-left',-pause_width/2);if(B){$('#play'+n.id).css('display','none')}else{$('#pause'+n.id).css('display','none')}}slidePlay()}function support(p){var b=document.body||document.documentElement,s=b.style;if(typeof s=='undefined')return false;if(typeof s[p]=='string')return p;v=['Moz','Webkit','Khtml','O','ms','Icab'],pu=p.charAt(0).toUpperCase()+p.substr(1);for(var i=0;i<v.length;i++){if(typeof s[v[i]+pu]=='string')return('-'+v[i].toLowerCase()+'-'+p)}return false}if(n.preload)setTimeout(sliderLoaded,n.preload);else $(window).load(sliderLoaded);$(window).on('resize',responsive)}};$.fn.djswipe=function(b){var c=false,originalPosition=null,info=null;$el=$(this);function swipeInfo(a){var x=a.originalEvent.touches[0].pageX,y=a.originalEvent.touches[0].pageY,dx,dy;dx=(x>originalPosition.x)?"right":"left";dy=(y>originalPosition.y)?"down":"up";return{direction:{x:dx,y:dy},offset:{x:Math.abs(x-originalPosition.x),y:Math.abs(originalPosition.y-y)}}}$el.on("touchstart",function(a){c=true;originalPosition={x:a.originalEvent.touches[0].pageX,y:a.originalEvent.touches[0].pageY}});$el.on("touchend",function(){c=false;if(info)b(info.direction,info.offset);originalPosition=null;info=null});$el.on("touchmove",function(a){if(!c){return}info=swipeInfo(a)});return true};$(document).ready(function(){$('[data-djslider]').each(function(){F.init($(this))})})}(jQuery);
 
 
+// default.js
+jQuery.noConflict();
+if(typeof(BTLJ)=='undefined') var BTLJ = jQuery;
+if(typeof(btTimeOut)=='undefined') var btTimeOut;
+if(typeof(requireRemove)=='undefined') var requireRemove = true;
+
+//var autoPos = !('ontouchstart' in window); 
+BTLJ(document).ready(function() {
+	
+	BTLJ('#btl-content').appendTo('body');
+	BTLJ(".btl-input #jform_profile_aboutme").attr("cols",21);
+	BTLJ('.bt-scroll .btl-buttonsubmit').click(function(){		
+		setTimeout(function(){
+			if(BTLJ("#btl-registration-error").is(':visible')){
+				BTLJ('.bt-scroll').data('jsp').scrollToY(0,true);
+			}else{
+				var position = BTLJ('.bt-scroll').find('.invalid:first').position();
+				if(position) BTLJ('.bt-scroll').data('jsp').scrollToY(position.top-15,true);
+			}
+		},20);
+	})
+	//SET POSITION
+	if(BTLJ('.btl-dropdown').length){
+		setFPosition();
+		BTLJ(window).resize(function(){
+			setFPosition();
+		})
+	}
+	
+/*	BTLJ(btlOpt.LOGIN_TAGS).addClass("btl-modal");
+	if(btlOpt.REGISTER_TAGS != ''){
+		BTLJ(btlOpt.REGISTER_TAGS).addClass("btl-modal");
+	}*/
+	if(!typeof(btlOpt)=='undefined'){// added this condition by fred: btlOpt type of error 
+   
+ 
+		// Login event
+		var elements = '#btl-panel-login';
+		if (btlOpt.LOGIN_TAGS) elements += ', ' + btlOpt.LOGIN_TAGS;
+		if (btlOpt.MOUSE_EVENT =='click'){ 
+			BTLJ(elements).click(function (event) {
+					showLoginForm();
+					event.preventDefault();
+			});	
+		}else{
+			BTLJ(elements).hover(function () {
+					showLoginForm();
+			},function(){});
+		}
+	
+	
+
+	// Registration/Profile event
+		elements = '#btl-panel-registration';
+		if (btlOpt.REGISTER_TAGS) elements += ', ' + btlOpt.REGISTER_TAGS;
+		if (btlOpt.MOUSE_EVENT =='click'){ 
+			BTLJ(elements).click(function (event) {
+				showRegistrationForm();
+				event.preventDefault();
+			});	
+			BTLJ("#btl-panel-profile").click(function(event){
+				showProfile();
+				event.preventDefault();
+			});
+		}else{
+			BTLJ(elements).hover(function () {
+					if(!BTLJ("#btl-integrated").length){
+						showRegistrationForm();
+					}
+			},function(){});
+			BTLJ("#btl-panel-profile").hover(function () {
+					showProfile();
+			},function(){});
+		}
+		
+	}; // end of added code
+	
+	
+	BTLJ('#register-link a').click(function (event) {
+			if(BTLJ('.btl-modal').length){
+				BTLJ.modal.close();setTimeout("showRegistrationForm();",1000);
+			}
+			else{
+				showRegistrationForm();
+			}
+			event.preventDefault();
+	});	
+	
+	// Close form
+	BTLJ(document).click(function(event){
+		if(requireRemove && event.which == 1) btTimeOut = setTimeout('BTLJ("#btl-content > div").slideUp();BTLJ(".btl-panel span").removeClass("active");',10);
+		requireRemove =true;
+	})
+	BTLJ(".btl-content-block").click(function(){requireRemove =false;});	
+	BTLJ(".btl-panel span").click(function(){requireRemove =false;});	
+	
+	// Modify iframe
+	BTLJ('#btl-iframe').load(function (){
+		//edit action form	
+		oldAction=BTLJ('#btl-iframe').contents().find('form').attr("action");
+		if(oldAction!=null){
+			if(oldAction.search("tmpl=component")==-1){
+				if(BTLJ('#btl-iframe').contents().find('form').attr("action").indexOf('?')!=-1){	
+					BTLJ('#btl-iframe').contents().find('form').attr("action",oldAction+"&tmpl=component");
+				}
+				else{
+					BTLJ('#btl-iframe').contents().find('form').attr("action",oldAction+"?tmpl=component");
+				}
+			}
+		}
+	});	
+	
+	//reload captcha click event
+	BTLJ('span#btl-captcha-reload').click(function(){
+		BTLJ.ajax({
+						type: "post",
+						url: btlOpt.BT_AJAX,
+						data: 'bttask=reload_captcha',
+						success: function(html){
+							BTLJ('#recaptcha img').attr('src', html);
+						}
+					});
+	});
+
+});
+
+function setFPosition(){
+	/*if(btlOpt.ALIGN == "center"){
+		BTLJ("#btl-content > div").each(function(){
+			var panelid = "#"+this.id.replace("content","panel");
+			var left = BTLJ(panelid).offset().left + BTLJ(panelid).width()/2 - BTLJ(this).width()/2;
+			if(left < 0) left = 0;
+			BTLJ(this).css('left',left);
+		});
+	}else{
+		if(btlOpt.ALIGN == "right"){
+			BTLJ("#btl-content > div").css('right',BTLJ(document).width()-BTLJ('.btl-panel').offset().left-BTLJ('.btl-panel').width());
+		}else{
+			BTLJ("#btl-content > div").css('left',BTLJ('.btl-panel').offset().left);
+		}
+	}	
+	BTLJ("#btl-content > div").css('top',BTLJ(".btl-panel").offset().top+BTLJ(".btl-panel").height()+2);*/	
+}
+
+// SHOW LOGIN FORM
+function showLoginForm(){
+	BTLJ('.btl-panel span').removeClass("active");
+	var el = '#btl-panel-login';
+	if (btlOpt.LOGIN_TAGS) el += ', ' + btlOpt.LOGIN_TAGS;
+	BTLJ.modal.close();
+	var containerWidth = 0;
+	var containerHeight = 0;
+	containerHeight = 371;
+	containerWidth = 357;
+	
+	if(containerWidth>BTLJ(window).width()){
+		containerWidth = BTLJ(window).width()-50;
+	}
+	if(BTLJ(el).hasClass("btl-modal")){
+		BTLJ(el).addClass("active");
+		BTLJ("#btl-content > div").slideUp();
+		BTLJ("#btl-content-login").modal({
+			overlayClose:true,
+			persist :true,
+			autoPosition:true,
+			fixed: BTLJ(window).width()>500,
+			onOpen: function (dialog) {
+				dialog.overlay.fadeIn();
+				dialog.container.show();
+				dialog.data.show();		
+			},
+			onClose: function (dialog) {
+				dialog.overlay.fadeOut(function () {
+					dialog.container.hide();
+					dialog.data.hide();		
+					BTLJ.modal.close();
+					BTLJ('.btl-panel span').removeClass("active");
+				});
+			},
+			containerCss:{
+				height:containerHeight,
+				width:containerWidth
+			}
+		})			 
+	}
+	else
+	{	
+		setFPosition();
+		BTLJ("#btl-content > div").each(function(){
+			if(this.id=="btl-content-login")
+			{
+				if(BTLJ(this).is(":hidden")){
+					BTLJ(el).addClass("active");
+					BTLJ(this).slideDown();
+					}
+				else{
+					BTLJ(this).slideUp();
+					BTLJ(el).removeClass("active");
+				}						
+					
+			}
+			else{
+				if(BTLJ(this).is(":visible")){						
+					BTLJ(this).slideUp();
+					BTLJ('#btl-panel-registration').removeClass("active");
+				}
+			}
+			
+		})
+	}
+}
+
+// SHOW REGISTRATION FORM
+function showRegistrationForm(){
+	if(BTLJ("#btl-integrated").length){
+		window.location.href=BTLJ("#btl-integrated").val();
+		return;
+	}
+	BTLJ('.btl-panel span').removeClass("active");
+	BTLJ.modal.close();
+	var el = '#btl-panel-registration';
+	var containerWidth = 0;
+	var containerHeight = 0;
+	containerHeight = "auto";
+	containerWidth = "auto";
+	if(containerWidth>BTLJ(window).width()){
+		containerWidth = BTLJ(window).width();
+	}
+	if(BTLJ(el).hasClass("btl-modal")){
+		BTLJ(el).addClass("active");
+		BTLJ("#btl-content > div").slideUp();
+		BTLJ("#btl-content-registration").modal({
+			overlayClose:true,
+			persist :true,
+			autoPosition:true,
+			fixed: BTLJ(window).width()>500,
+			onOpen: function (dialog) {
+				dialog.overlay.fadeIn();
+				dialog.container.show();
+				dialog.data.show();		
+			},
+			onClose: function (dialog) {
+				dialog.overlay.fadeOut(function () {
+					dialog.container.hide();
+					dialog.data.hide();		
+					BTLJ.modal.close();
+					BTLJ('.btl-panel span').removeClass("active");
+				});
+			},
+			containerCss:{
+				height:containerHeight,
+				width:containerWidth
+			}
+		})
+	}
+	else
+	{	
+		setFPosition();
+		BTLJ("#btl-content > div").each(function(){
+			if(this.id=="btl-content-registration")
+			{
+				if(BTLJ(this).is(":hidden")){
+					BTLJ(el).addClass("active");
+					BTLJ(this).slideDown();
+					}
+				else{
+					BTLJ(this).slideUp();								
+					BTLJ(el).removeClass("active");
+					}
+			}
+			else{
+				if(BTLJ(this).is(":visible")){						
+					BTLJ(this).slideUp();
+					BTLJ('#btl-panel-login').removeClass("active");
+				}
+			}
+			
+		})
+	}
+}
+
+// SHOW PROFILE (LOGGED MODULES)
+function showProfile(){
+	setFPosition();
+	var el = '#btl-panel-profile';
+	BTLJ("#btl-content > div").each(function(){
+		if(this.id=="btl-content-profile")
+		{
+			if(BTLJ(this).is(":hidden")){
+				BTLJ(el).addClass("active");
+				BTLJ(this).slideDown();
+				}
+			else{
+				BTLJ(this).slideUp();	
+				BTLJ('.btl-panel span').removeClass("active");
+			}				
+		}
+		else{
+			if(BTLJ(this).is(":visible")){						
+				BTLJ(this).slideUp();
+				BTLJ('.btl-panel span').removeClass("active");	
+			}
+		}
+		
+	})
+}
+
+// AJAX REGISTRATION
+function registerAjax(){
+	BTLJ("#btl-registration-error").hide();
+	 BTLJ(".btl-error-detail").hide();
+	if(BTLJ("#btl-input-name").val()==""){
+		BTLJ("#btl-registration-error").html(Joomla.JText._('REQUIRED_NAME')).show();
+		BTLJ("#btl-input-name").focus();
+		return false;
+	}
+	if(BTLJ("#btl-input-username1").val()==""){
+		BTLJ("#btl-registration-error").html(Joomla.JText._('REQUIRED_USERNAME')).show();
+		BTLJ("#btl-input-username1").focus();
+		return false;
+	}
+	if(BTLJ("#btl-input-password1").val()==""){
+		BTLJ("#btl-registration-error").html(Joomla.JText._('REQUIRED_PASSWORD')).show();
+		BTLJ("#btl-input-password1").focus();
+		return false;
+	}
+	if(BTLJ("#btl-input-password2").val()==""){
+		BTLJ("#btl-registration-error").html(Joomla.JText._('REQUIRED_VERIFY_PASSWORD')).show();
+		BTLJ("#btl-input-password2").focus();
+		return false;
+	}
+	if(BTLJ("#btl-input-password2").val()!=BTLJ("#btl-input-password1").val()){
+		BTLJ("#btl-registration-error").html(Joomla.JText._('PASSWORD_NOT_MATCH')).show();
+		BTLJ("#btl-input-password2").focus().select();
+		BTLJ("#btl-registration-error").show();
+		return false;
+	}
+	if(BTLJ("#btl-input-email1").val()==""){
+		BTLJ("#btl-registration-error").html(Joomla.JText._('REQUIRED_EMAIL')).show();
+		BTLJ("#btl-input-email1").focus();
+		return false;
+	}
+	var emailRegExp = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.([a-zA-Z]){2,4})$/;
+	if(!emailRegExp.test(BTLJ("#btl-input-email1").val())){		
+		BTLJ("#btl-registration-error").html(Joomla.JText._('EMAIL_INVALID')).show();
+		BTLJ("#btl-input-email1").focus().select();
+		return false;
+	}
+	if(BTLJ("#btl-input-email2").val()==""){
+		BTLJ("#btl-registration-error").html(Joomla.JText._('REQUIRED_VERIFY_EMAIL')).show();
+		BTLJ("#btl-input-email2").focus().select();
+		return false;
+	}
+	if(BTLJ("#btl-input-email1").val()!=BTLJ("#btl-input-email2").val()){
+		BTLJ("#btl-registration-error").html(Joomla.JText._('EMAIL_NOT_MATCH')).show();;
+		BTLJ("#btl-input-email2").focus().select();
+		return false;
+	}
+	if(btlOpt.RECAPTCHA =="recaptcha"){
+		if(BTLJ('#recaptcha_response_field').length && BTLJ('#recaptcha_response_field').val()==''){
+			BTLJ("#btl-registration-error").html(Joomla.JText._('CAPTCHA_REQUIRED')).show();
+			BTLJ('#recaptcha_response_field').focus();
+			return false;
+		}
+	}else if(btlOpt.RECAPTCHA =="2"){
+		if(BTLJ('#btl-captcha').length && BTLJ('#btl-captcha').val()==''){
+			BTLJ("#btl-registration-error").html(Joomla.JText._('CAPTCHA_REQUIRED')).show();
+			BTLJ('#btl-captcha').focus();
+			return false;
+		}	
+	}	
+	 
+	var token = BTLJ('.btl-buttonsubmit input:last').attr("name");
+	var value_token = encodeURIComponent(BTLJ('.btl-buttonsubmit input:last').val()); 
+	var datasubmit= "bttask=register&name="+encodeURIComponent(BTLJ("#btl-input-name").val())
+			+"&username="+encodeURIComponent(BTLJ("#btl-input-username1").val())
+			+"&passwd1=" + encodeURIComponent(BTLJ("#btl-input-password1").val())
+			+"&passwd2=" + encodeURIComponent(BTLJ("#btl-input-password2").val())
+			+"&email1=" + encodeURIComponent(BTLJ("#btl-input-email1").val())
+			+"&email2=" + encodeURIComponent(BTLJ("#btl-input-email2").val())					
+			+ "&"+token+"="+value_token;
+	if(btlOpt.RECAPTCHA =="recaptcha"){
+		datasubmit  += "&recaptcha=yes&recaptcha_response_field="+ encodeURIComponent(BTLJ("#recaptcha_response_field").val())
+					+"&recaptcha_challenge_field="+encodeURIComponent(BTLJ("#recaptcha_challenge_field").val());
+	}else if(btlOpt.RECAPTCHA =="2"){
+		datasubmit  += "&recaptcha=yes&btl_captcha="+ encodeURIComponent(BTLJ("#btl-captcha").val());
+	}
+	
+	BTLJ.ajax({
+		   type: "POST",
+		   beforeSend:function(){
+			   BTLJ("#btl-register-in-process").show();			   
+		   },
+		   url: btlOpt.BT_AJAX,
+		   data: datasubmit,
+		   success: function(html){				  
+			   //if html contain "Registration failed" is register fail
+			  BTLJ("#btl-register-in-process").hide();	
+			  if(html.indexOf('$error$')!= -1){
+				  BTLJ("#btl-registration-error").html(html.replace('$error$',''));  
+				  BTLJ("#btl-registration-error").show();
+				  if(btlOpt.RECAPTCHA =="recaptcha"){
+					  Recaptcha.reload();
+				  }else if(btlOpt.RECAPTCHA =="2"){
+					BTLJ.ajax({
+						type: "post",
+						url: btlOpt.BT_AJAX,
+						data: 'bttask=reload_captcha',
+						success: function(html){
+							BTLJ('#recaptcha img').attr('src', html);
+						}
+					});
+				  }
+				  
+			   }else{				   
+				   BTLJ(".btl-formregistration").children("div").hide();
+				   BTLJ("#btl-success").html(html);	
+				   BTLJ("#btl-success").show();	
+				   setTimeout(function() {window.location.reload();},7000);
+
+			   }
+		   },
+		   error: function (XMLHttpRequest, textStatus, errorThrown) {
+				alert(textStatus + ': Ajax request failed');
+		   }
+		});
+		return false;
+}
+
+// AJAX LOGIN
+function loginAjax(){
+	if(BTLJ("#btl-input-username").val()=="") {
+		showLoginError(Joomla.JText._('REQUIRED_USERNAME'));
+		return false;
+	}
+	if(BTLJ("#btl-input-password").val()==""){
+		showLoginError(Joomla.JText._('REQUIRED_PASSWORD'));
+		return false;
+	}
+	var token = BTLJ('.btl-buttonsubmit input:last').attr("name");
+	var value_token = encodeURIComponent(BTLJ('.btl-buttonsubmit input:last').val()); 
+	var datasubmit= "bttask=login&username="+encodeURIComponent(BTLJ("#btl-input-username").val())
+	+"&passwd=" + encodeURIComponent(BTLJ("#btl-input-password").val())
+	+ "&"+token+"="+value_token
+	+"&return="+ encodeURIComponent(BTLJ("#btl-return").val());
+	
+	if(BTLJ("#btl-checkbox-remember").is(":checked")){
+		datasubmit += '&remember=yes';
+	}
+	
+	BTLJ.ajax({
+	   type: "POST",
+	   beforeSend:function(){
+		   BTLJ("#btl-login-in-process").show();
+		   BTLJ("#btl-login-in-process").css('height',BTLJ('#btl-content-login').outerHeight()+'px');
+		   
+	   },
+	   url: btlOpt.BT_AJAX,
+	   data: datasubmit,
+	   success: function (html, textstatus, xhrReq){
+		  if(html == "1" || html == 1){
+			   window.location.href=btlOpt.BT_RETURN;
+		   }else{
+			   if(html.indexOf('</head>')==-1){		   
+				   showLoginError(Joomla.JText._('E_LOGIN_AUTHENTICATE'));
+				}
+				else
+				{
+					if(html.indexOf('btl-panel-profile')==-1){ 
+						showLoginError('Another plugin has redirected the page on login, Please check your plugins system');
+					}
+					else
+					{
+						window.location.href=btlOpt.BT_RETURN;
+					}
+				}
+		   }
+	   },
+	   error: function (XMLHttpRequest, textStatus, errorThrown) {
+			alert(textStatus + ': Ajax request failed!');
+	   }
+	});
+	return false;
+}
+function showLoginError(notice,reload){
+	BTLJ("#btl-login-in-process").hide();
+	BTLJ("#btl-login-error").html(notice);
+	BTLJ("#btl-login-error").show();
+	if(reload){
+		setTimeout(function() {window.location.reload();},5000);
+	}
+}
+
 /*
  *
  * More info at [www.dropzonejs.com](http://www.dropzonejs.com)
