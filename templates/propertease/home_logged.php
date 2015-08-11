@@ -94,7 +94,7 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
   <meta name="HandheldFriendly" content="true">  
   <meta name="apple-mobile-web-app-capable" content="YES">   
-  <jdoc:include type="head" />
+  <!--<jdoc:include type="head" />-->
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap.css" type="text/css">  
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/font-awesome.css" type="text/css">  
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/animate.css" type="text/css">  
