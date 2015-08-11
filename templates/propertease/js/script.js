@@ -48,6 +48,6 @@ jQuery(document).ready(function($){
 		setTimeout(function(){ 
 			$('#btl-panel-login-y').removeAttr('style');
 		},900);*/
-		alert();
+		alert('');
 	});
 });
