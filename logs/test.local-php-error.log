@@ -36,3 +36,7 @@
 [11-Aug-2015 18:03:14 Europe/Berlin] PHP Fatal error:  Call to undefined method JDocumentHTML::getTemplate() in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 437
 [11-Aug-2015 18:03:59 Europe/Berlin] PHP Fatal error:  Call to a member function get() on a non-object in D:\xampp\htdocs\propertease0724\repo\templates\propertease\html\com_content\article\plans.php on line 18
 [11-Aug-2015 18:04:41 Europe/Berlin] PHP Fatal error:  Call to a member function get() on a non-object in D:\xampp\htdocs\propertease0724\repo\templates\propertease\html\com_content\article\plans.php on line 18
+[11-Aug-2015 22:02:30 Europe/Berlin] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in D:\xampp\htdocs\propertease0724\repo\templates\propertease\html\mod_bt_login\default.php on line 222
+[11-Aug-2015 23:32:57 Europe/Berlin] PHP Warning:  sprintf(): Too few arguments in D:\xampp\htdocs\propertease0724\repo\libraries\joomla\language\text.php on line 280
+[11-Aug-2015 23:32:57 Europe/Berlin] PHP Warning:  sprintf(): Too few arguments in D:\xampp\htdocs\propertease0724\repo\libraries\joomla\language\text.php on line 280
+[12-Aug-2015 00:45:40 Europe/Berlin] PHP Parse error:  syntax error, unexpected '}' in D:\xampp\htdocs\propertease0724\repo\templates\propertease\html\mod_bt_login\default.php on line 228

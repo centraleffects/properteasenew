@@ -1123,6 +1123,10 @@ input[type="text"] {
 #login-popup .modal-dialog .modal-content .modal-body form .last-group {
     margin-bottom: 0;
 }
+
+
+
+
 .step .modal-dialog {
     width: 340px;
 }
@@ -7143,4 +7147,105 @@ block-price .block.greyed i.one-report{ color:#e4e4e4; }
 }
 .block-price  .sbm-btn{
     text-decoration: none;
+}
+
+#login-form-plan .modal-dialog {
+    width: 340px;
+}
+#login-form-plan .modal-dialog .modal-content {
+    background: #fbfbfb;
+    border: none;
+}
+#login-form-plan .modal-dialog .modal-content .modal-header {
+    border-bottom: none;
+    padding: 40px 25px 0px;
+}
+#login-form-plan .modal-dialog .modal-content .modal-header .normal-logo {
+    background: url('../images/ico-logo-small-green.png') no-repeat top left;
+    display: inline-block;
+    height: 39px;
+    width: 63px;
+    margin-right: 45px;
+}
+#login-form-plan.modal-dialog .modal-content .modal-header .btn {
+    border: 1px solid #e0e0e0;
+    border-radius: 7px;
+    background-image: -moz-linear-gradient(90deg, #eeeeee 0%, #f8f8f8 100%);
+    background-image: -webkit-linear-gradient(90deg, #eeeeee 0%, #f8f8f8 100%);
+    background-image: -ms-linear-gradient(90deg, #eeeeee 0%, #f8f8f8 100%);
+    color: #333;
+    font-size: 16px;
+    /*margin-top: 10px;*/
+}
+#login-form-plan .modal-dialog .modal-content .modal-body {
+    padding: 20px 20px 0;
+}
+#login-form-plan.modal-dialog .modal-content .modal-body h3 {
+    font-size: 27px;
+    font-family: "Conv_Brandon_reg";
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+#login-form-plan .modal-dialog .modal-content .modal-body h3 .green {
+    color: #7bb800;
+}
+#login-form-plan .modal-dialog .modal-content .modal-body form input.form-control {
+    width: 100%;
+    height: 45px;
+    font-size: 19px;
+    line-height:45px
+}
+#login-form-plan .modal-dialog .modal-content .modal-body form input[type="text"] {
+    background: url('../images/ico-user.png') no-repeat 94% center;
+}
+#login-form-plan .modal-dialog .modal-content .modal-body form input[type="text"]:focus {
+    box-shadow: none;
+    background: #ffffff url('../images/ico-user-active.png') no-repeat 94% center;
+    border-color: #eaeaea;
+}
+#login-form-plan .modal-dialog .modal-content .modal-body form input[type="password"] {
+    box-shadow: none;
+    background: url('../images/ico-psw.png') no-repeat 94% center;
+}
+#login-form-plan .modal-dialog .modal-content .modal-body form input[type="password"]:focus {
+    box-shadow: none;
+    background: #ffffff url('../images/ico-psw-active.png') no-repeat 94% center;
+    border-color: #eaeaea;
+}
+#login-form-plan.modal-dialog .modal-content .modal-body form .radio {
+    font-size: 16px;
+}
+#login-form-plan .modal-dialog .modal-content .modal-body form .radio a {
+    float: right;
+    color: #ff94ab;
+    font-size: 18px;
+}
+#login-form-plan.modal-dialog .modal-content .modal-body form p {
+    padding: 0 20px;
+    text-align: center;
+    font-size: 15px;
+    color: #c3c3c3;
+}
+#login-form-plan.modal-dialog .modal-content .modal-body form p a {
+    color: #03a9f4;
+}
+#login-form-plan.modal-dialog .modal-content .modal-body form .btn-sbm {
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    background-image: -moz-linear-gradient(90deg, #7ab700 0%, #8dd008 100%);
+    background-image: -webkit-linear-gradient(90deg, #7ab700 0%, #8dd008 100%);
+    background-image: -ms-linear-gradient(90deg, #7ab700 0%, #8dd008 100%);
+    height: 59px;
+    margin-left: -20px;
+    width: 113%;
+    font-size: 18px;
+    color: #fff;
+    text-transform: uppercase;
+}
+#login-form-plan .modal-dialog .modal-content .modal-body form .last-group {
+    margin-bottom: 0;
+}
+#btl-content-registration{
+    display: none;
 }

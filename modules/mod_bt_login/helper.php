@@ -442,7 +442,7 @@ class modbt_loginHelper
 			// If registration is disabled - Redirect to login page.
 			if(JComponentHelper::getParams('com_users')->get('allowUserRegistration') == 0){
 				// set message in here : Registration is disable
-				self::ajaxResponse("Registration is not allow!");
+				self::ajaxResponse("Registration is not allowed!");
 			}
 		
 			//check captcha 

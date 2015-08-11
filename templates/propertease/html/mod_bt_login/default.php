@@ -103,7 +103,7 @@ defined('_JEXEC') or die('Restricted access');
 					<a title="Close" class="modalCloseImg second simplemodal-close"></a>
 				<div class="modal-header">
 				<div class="normal-logo"> </div>
-				<button class="btn btn-register pull-right">Don`t have an <b>account?</b></button></div>
+				<a class="btn btn-register pull-right" href="<?php echo JURI::base(); ?>plans.html#register-modal">Don`t have an <b>account?</b></a></div>
 				<div class="modal-body">
 				<h3><span class="green blk light">Log in</span> to your account</h3>
 				<form>
@@ -141,7 +141,7 @@ defined('_JEXEC') or die('Restricted access');
 				<?php }?>			
 		</div>
 		
-		<?php if($enabledRegistration ){ ?>			
+		<?php //if($enabledRegistration ){ ?>			
 		<div id="btl-content-registration" class="btl-content-block">			
 			<!-- if not integrated any component -->
 			<?php if($integrated_com==''){?>	
@@ -199,7 +199,7 @@ defined('_JEXEC') or die('Restricted access');
 					</div>
 					<div class="clear"></div>			
 					<!-- add captcha-->
-					<?php if($enabledRecaptcha){?>
+					<?php /*if($enabledRecaptcha){ ?>
 					<div class="btl-field">
 						<div class="btl-label"><?php echo JText::_( 'MOD_BT_CAPTCHA' ); ?></div>
 						<div  id="recaptcha"><?php echo $reCaptcha;?></div>
@@ -207,7 +207,7 @@ defined('_JEXEC') or die('Restricted access');
 					<div id="btl-registration-captcha-error" class="btl-error-detail"></div>
 					<div class="clear"></div>
 					<!--  end add captcha -->
-					<?php }?>
+					<?php }*/ ?>
 				
 					<div class="btl-buttonsubmit">						
 						<button type="submit" class="btl-buttonsubmit" onclick="return registerAjax()" >
@@ -219,9 +219,9 @@ defined('_JEXEC') or die('Restricted access');
 					</div>
 			</form>
 			<!-- if  integrated any component -->
-			<?php }else{ ?>
+			<?php// }else{ ?>
 				<input type="hidden" name="integrated" value="<?php echo $linkOption?>" value="no" id="btl-integrated"/>		
-			<?php }?>
+			<?php //}?>
 		</div>
 						
 		<?php } ?>
