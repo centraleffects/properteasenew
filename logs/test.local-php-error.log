@@ -33,3 +33,6 @@
 [07-Aug-2015 00:23:22 Europe/Berlin] PHP Parse error:  syntax error, unexpected end of file in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 431
 [07-Aug-2015 00:59:02 Europe/Berlin] PHP Fatal error:  Call to undefined function l2br() in D:\xampp\htdocs\propertease0724\repo\templates\propertease\profilef.php on line 1430
 [07-Aug-2015 01:44:35 Europe/Berlin] PHP Parse error:  syntax error, unexpected '{' in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 229
+[11-Aug-2015 18:03:14 Europe/Berlin] PHP Fatal error:  Call to undefined method JDocumentHTML::getTemplate() in D:\xampp\htdocs\propertease0724\repo\templates\propertease\home_logged.php on line 437
+[11-Aug-2015 18:03:59 Europe/Berlin] PHP Fatal error:  Call to a member function get() on a non-object in D:\xampp\htdocs\propertease0724\repo\templates\propertease\html\com_content\article\plans.php on line 18
+[11-Aug-2015 18:04:41 Europe/Berlin] PHP Fatal error:  Call to a member function get() on a non-object in D:\xampp\htdocs\propertease0724\repo\templates\propertease\html\com_content\article\plans.php on line 18

@@ -429,13 +429,19 @@ if ($menu->getActive() == $menu->getDefault() and intval($_GET['sr'])==0) {
                 <div id="maincontent">
                   <?php 
                     /* LAYOUT OVERRIDES FOR ARTICLE  */
-                      echo $content;
-
-                     /* $doc = JFactory::getDocument(); 
-                      $page_title = $doc->getTitle();
-                      $pagename = strtolower(str_replace(" ","_",$page_title));
-                      if(file_exists(JPATH_BASE.'/templates/'.$template.'/html/mod_bt_login/js/default.js'))
-                    {*/
+                     
+                     $doc = JFactory::getDocument(); 
+                    $page_title = $doc->getTitle();
+                    $pagename = strtolower(str_replace(" ","_",$page_title));
+                    $override_path = (JPATH_BASE.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$doc->template.DIRECTORY_SEPARATOR.'html'.DIRECTORY_SEPARATOR.'com_content'.DIRECTORY_SEPARATOR.'article'.DIRECTORY_SEPARATOR.$pagename.'.php');
+     
+                    if(file_exists($override_path))
+                    {
+                      include_once($override_path);
+                    }else{
+                       echo $content;
+                    }
+           
                   ?>
                 </div>  
             </div>
