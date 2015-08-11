@@ -427,7 +427,16 @@ if ($menu->getActive() == $menu->getDefault() and intval($_GET['sr'])==0) {
                 </div>
               <?php endif; ?>
                 <div id="maincontent">
-                  <?php echo $content; ?>
+                  <?php 
+                    /* LAYOUT OVERRIDES FOR ARTICLE  */
+                      echo $content;
+
+                     /* $doc = JFactory::getDocument(); 
+                      $page_title = $doc->getTitle();
+                      $pagename = strtolower(str_replace(" ","_",$page_title));
+                      if(file_exists(JPATH_BASE.'/templates/'.$template.'/html/mod_bt_login/js/default.js'))
+                    {*/
+                  ?>
                 </div>  
             </div>
           </div>
@@ -478,4 +487,6 @@ if ($menu->getActive() == $menu->getDefault() and intval($_GET['sr'])==0) {
  </div>  
  </body>
  </html>  
+
 <?php } ?>
+

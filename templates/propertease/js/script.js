@@ -52,7 +52,8 @@ jQuery(document).ready(function($){
 				
 			},1000);*/	
 	
-		jQuery('#login-popup').modal('show');
+	//jQuery('#btl-content-registration').modal('show');
+	//	jQuery('#login-popup').modal('show');
 			var y = $(document.body).find('#btl-content').find('.btl-content-block').show();
 				console.log(y.length);	
 	});

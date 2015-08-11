@@ -53,7 +53,7 @@ defined('_JEXEC') or die('Restricted access');
 		<?php endif; ?>
 	</div>
 	<!-- content dropdown/modal box -->
-	<div id="btl-content">
+	<div id="btl-content" class="dm">
 		<?php if($type == 'logout') { ?>
 		<!-- Profile module -->
 		<div id="btl-content-profile" class="btl-content-block">
