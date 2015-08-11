@@ -94,7 +94,7 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
   <meta name="HandheldFriendly" content="true">  
   <meta name="apple-mobile-web-app-capable" content="YES">   
- <!-- <jdoc:include type="head" /> -->
+  <jdoc:include type="head" />
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap.css" type="text/css">  
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/font-awesome.css" type="text/css">  
   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/animate.css" type="text/css">  
@@ -102,9 +102,9 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
   <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-gbs3.css" media="screen" rel="stylesheet" type="text/css">  
   <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-theme-gbs3.css" media="screen" rel="stylesheet" type="text/css">  
   <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-gcore-gbs3.css" media="screen" rel="stylesheet" type="text/css">  
-    <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-select.min.css" type="text/css">  
-    <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/main.css" type="text/css">  
-   <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-select.min.css" type="text/css">  
+  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/main.css" type="text/css">  
+  <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css" />
 
 <!--[if lt IE 9]>  
  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>  
@@ -126,7 +126,7 @@ if(isset($_REQUEST['conciergeaddy'])&&$userstate) {
   <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/mootools-more.js" type="text/javascript"></script>
   <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/bootstrap-select.min.js" type="text/javascript"></script>  
   <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/plugins.js" type="text/javascript"></script>  
-   <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/script.js" type="text/javascript"></script>   
+    
  </head>  
  <body class="page_bg">  
    <div class="t3-wrapper">  
@@ -476,6 +476,7 @@ if ($menu->getActive() == $menu->getDefault() and intval($_GET['sr'])==0) {
  <!-- //FOOT NAVIGATION -->  
  </footer>  
  </div>  
+ <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/script.js" type="text/javascript"></script>  
  </body>
  </html>  
 <?php } ?>

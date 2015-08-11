@@ -10,7 +10,7 @@
     border-radius: 4px;
 	border:1px solid #dadada;
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.4);
-    display: none;
+    /*display: none;*/
     height: auto;
     overflow: hidden;
     text-align: left;	
@@ -66,7 +66,7 @@
 	
 }
 #btl .btl-panel > #btl-panel-profile{
-	background:url(../images/btl-panel-bg.png) top right no-repeat;
+	background:url(../images/btl-panel-bg-grey.png) top right no-repeat;
 	padding-right:30px;
 }
 button::-moz-focus-inner {
@@ -82,8 +82,8 @@ padding:0; border: none;
 	width: auto;	
 }
 #btl .btl-panel > span{
-	margin:2px 0px;
-	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+	margin: 3px 0px;
+	z-index: 9999;
 }
 #btl .btl-panel > span,button.btl-buttonsubmit,input.btl-buttonsubmit{
 	border-radius:3px;
@@ -295,3 +295,14 @@ div.btl-buttonsubmit{
 	padding-bottom: 20px;
 	padding-top: 10px;
 }
+/*#btl-panel-login-y{
+  background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #8ccf07 0%, #83c304 47%, #7bb801 100%) repeat scroll 0 0 !important;
+    border: 1px solid #7cba01 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    font-size: 11px;
+    height: auto !important;
+    margin: 2px 0;
+    padding: 0 8px !important;
+    text-transform: uppercase;
+}*/

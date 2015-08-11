@@ -199,7 +199,7 @@ class modbt_loginHelper
 			//$document->addStyleSheet(  JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/css/style2.0.css');
 		}
 		else{
-			//$document->addStyleSheet(JURI::root(true).'/modules/mod_bt_login/tmpl/css/style2.0.css');
+			$document->addStyleSheet(JURI::root(true).'/modules/mod_bt_login/tmpl/css/style2.0.css');
 		}
 		
 		//bind JText to JS:
