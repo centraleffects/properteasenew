@@ -36,4 +36,18 @@ jQuery(document).ready(function($){
 	$('#getpdf').click(function(){
 		$('#downloadpdf').trigger('click');
 	});
+	$('.block-price .block').click(function(){
+		$('.block-price .block').addClass('greyed');
+		$(this).removeClass('greyed');
+		$('.block-price  .sbm-btn').addClass('btn-green');
+	});
+	$('.block-price  .sbm-btn').click(function(e){
+		e.preventDefault();
+		//jQuery('#login-popup').modal('show');
+		/*$('#btl-panel-login-y').trigger('click');
+		setTimeout(function(){ 
+			$('#btl-panel-login-y').removeAttr('style');
+		},900);*/
+		alert();
+	});
 });

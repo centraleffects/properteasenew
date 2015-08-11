@@ -179,27 +179,27 @@ class modbt_loginHelper
 		{	
 			if($loadJquery)
 			{ 
-				$document->addScript(JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/js/jquery.min.js');
+			//	$document->addScript(JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/js/jquery.min.js');
 			}
-			$document->addScript(JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/js/jquery.simplemodal.js');
-			$document->addScript(JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/js/default.js');	
+			//$document->addScript(JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/js/jquery.simplemodal.js');
+			//$document->addScript(JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/js/default.js');	
 		}
 		else{
 			if($loadJquery)
 			{ 
-				$document->addScript(JURI::root(true).'/modules/mod_bt_login/tmpl/js/jquery.min.js');
+			//	$document->addScript(JURI::root(true).'/modules/mod_bt_login/tmpl/js/jquery.min.js');
 			}
-			$document->addScript(JURI::root(true).'/modules/mod_bt_login/tmpl/js/jquery.simplemodal.js');	
-			$document->addScript(JURI::root(true).'/modules/mod_bt_login/tmpl/js/default.js');	
+			//$document->addScript(JURI::root(true).'/modules/mod_bt_login/tmpl/js/jquery.simplemodal.js');	
+			//$document->addScript(JURI::root(true).'/modules/mod_bt_login/tmpl/js/default.js');	
 		}
 		
 		// load css
 		if(file_exists(JPATH_BASE.'/templates/'.$template.'/html/mod_bt_login/css/style2.0.css'))
 		{
-			$document->addStyleSheet(  JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/css/style2.0.css');
+			//$document->addStyleSheet(  JURI::root(true).'/templates/'.$template.'/html/mod_bt_login/css/style2.0.css');
 		}
 		else{
-			$document->addStyleSheet(JURI::root(true).'/modules/mod_bt_login/tmpl/css/style2.0.css');
+			//$document->addStyleSheet(JURI::root(true).'/modules/mod_bt_login/tmpl/css/style2.0.css');
 		}
 		
 		//bind JText to JS:
