@@ -7254,3 +7254,34 @@ block-price .block.greyed i.one-report{ color:#e4e4e4; }
 #btl-content-registration{
     display: none;
 }
+.article-about {
+text-align:center;
+width: 70%;
+margin:0 auto;
+}
+.article-about .item-lg {
+	background:url('../images/logo-xl.png') no-repeat 0 0;
+	width:133px;
+	display: inline-block;
+	height:86px;
+	margin-bottom: 10px;
+}
+.article-about h3 {
+	font-family: 'Conv_Brandon_reg' !important;
+	font-size:36px !important;
+}
+
+.article-about span {
+	color:#7ab700;
+}
+
+.article-about p { 
+	color:#737373;
+	font-family: 'Conv_Brandon_light';
+	font-size:18px;
+}
+
+.article-about p.text { 
+	color:#2c2c2c;
+	font-size:31px;
+}
